@@ -1,1 +1,342 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#087443">
+<meta name="description" content="مول البركة أولاد الجارحي">
+<title>مول البركة | أولاد الجارحي</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+
+<div class="top">
+  🛵 توصيل سريع داخل المنطقة
+  <a href="tel:01119511185">📞 01119511185</a>
+</div>
+
+<header>
+<div class="nav wrap">
+
+<a class="brand" href="#">
+  <b>ب</b>
+  <span>
+    <strong>مول البركة</strong>
+    <small>أولاد الجارحي</small>
+  </span>
+</a>
+
+<nav>
+<a href="#home">الرئيسية</a>
+<a href="#cats">الأقسام</a>
+<a href="#products">المنتجات</a>
+<a href="#offers">العروض</a>
+<a href="#contact">تواصل معنا</a>
+</nav>
+
+<div class="actions">
+<button id="searchBtn">⌕</button>
+<button class="cart" id="cartBtn">
+🛒 السلة <i id="count">0</i>
+</button>
+<button id="menuBtn">☰</button>
+</div>
+
+</div>
+
+<div id="mobile" class="mobile">
+<a href="#home">الرئيسية</a>
+<a href="#cats">الأقسام</a>
+<a href="#products">المنتجات</a>
+<a href="#offers">العروض</a>
+<a href="#contact">تواصل معنا</a>
+</div>
+
+</header>
+
+<main id="home">
+
+<section class="hero">
+<div class="wrap heroGrid">
+
+<div>
+
+<label>كل احتياجات البيت في مكان واحد</label>
+
+<h1>
+طازة، موثوقة،
+<em>وعلى مزاجك.</em>
+</h1>
+
+<p>
+خضروات وفاكهة يومية، لحوم وطيور، جزارة وماركت —
+اطلب بسهولة واستلم طلبك جاهزًا.
+</p>
+
+<div class="heroBtns">
+<a class="btn primary" href="#products">تسوق الآن ←</a>
+
+<a class="btn"
+href="https://wa.me/201119511185"
+target="_blank">
+اطلب واتساب
+</a>
+</div>
+
+<div class="trust">
+✓ منتجات يومية　
+✓ تجهيز حسب الطلب　
+✓ خدمة محلية
+</div>
+
+</div>
+
+<div class="heroCard">
+
+<div class="orb">🥬</div>
+
+<span class="float one">🍎 فاكهة طازة</span>
+
+<span class="float two">🥩 لحوم مختارة</span>
+
+<h2>سلة البيت</h2>
+
+<p>اختياراتك اليومية في مكان واحد</p>
+
+</div>
+
+</div>
+</section>
+
+
+<section class="section" id="cats">
+
+<div class="wrap">
+
+<div class="head">
+
+<div>
+<label>اختار القسم</label>
+<h2>كل اللي محتاجه موجود</h2>
+</div>
+
+</div>
+
+<div class="cats">
+
+<button data-cat="all" class="active">
+🛒
+<b>كل المنتجات</b>
+<small>تشكيلة كاملة</small>
+</button>
+
+<button data-cat="produce">
+🥬
+<b>خضروات وفاكهة</b>
+<small>طازة يوميًا</small>
+</button>
+
+<button data-cat="meat">
+🥩
+<b>اللحوم</b>
+<small>تجهيز حسب الطلب</small>
+</button>
+
+<button data-cat="poultry">
+🍗
+<b>الطيور</b>
+<small>نظافة وجودة</small>
+</button>
+
+<button data-cat="market">
+🧺
+<b>الماركت</b>
+<small>أساسيات البيت</small>
+</button>
+
+<button data-cat="butcher">
+🔪
+<b>الجزارة</b>
+<small>تقطيع وتجهيز</small>
+</button>
+
+</div>
+</div>
+</section>
+
+
+<section class="offer" id="offers">
+
+<div class="wrap offerIn">
+
+<div>
+<label>عروض مول البركة</label>
+<h2>وفّر أكتر مع اختياراتنا اليومية</h2>
+<p>العروض والأسعار تتحدث باستمرار.</p>
+</div>
+
+<a class="btn dark" href="#products">
+شوف المنتجات
+</a>
+
+</div>
+
+</section>
+
+
+<section class="section" id="products">
+
+<div class="wrap">
+
+<div class="head">
+
+<div>
+<label>منتجات مختارة</label>
+<h2>تسوق بسهولة</h2>
+</div>
+
+<div class="search">
+<input id="search" placeholder="ابحث عن منتج...">
+⌕
+</div>
+
+</div>
+
+<div id="grid" class="grid"></div>
+
+</div>
+
+</section>
+
+
+<section class="features">
+
+<div class="wrap feats">
+
+<div>
+⚡
+<b>خدمة سريعة</b>
+<small>نجهز طلبك بعناية.</small>
+</div>
+
+<div>
+🌿
+<b>اختيارات طازة</b>
+<small>منتجات يومية.</small>
+</div>
+
+<div>
+⚖️
+<b>وزن وتجهيز</b>
+<small>حسب طلبك.</small>
+</div>
+
+<div>
+🤝
+<b>ثقة محلية</b>
+<small>اهتمام بكل طلب.</small>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="contact" id="contact">
+
+<div class="wrap contactCard">
+
+<div>
+
+<label>جاهزين لخدمتك</label>
+
+<h2>اطلب من مول البركة دلوقتي</h2>
+
+<p>اتصل بنا أو ابعت طلبك على واتساب.</p>
+
+</div>
+
+<div class="contactBtns">
+
+<a class="btn primary"
+href="tel:01119511185">
+📞 01119511185
+</a>
+
+<a class="btn wa"
+href="https://wa.me/201119511185"
+target="_blank">
+واتساب
+</a>
+
+</div>
+
+<p>
+📍 شارع الشيخ عبدالرحمن تاج البنفسج ٩
+</p>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+<div class="wrap foot">
+
+<div class="brand">
+
+<b>ب</b>
+
+<span>
+<strong>مول البركة</strong>
+<small>أولاد الجارحي</small>
+</span>
+
+</div>
+
+<small>
+© 2026 جميع الحقوق محفوظة
+</small>
+
+</div>
+
+</footer>
+
+
+<div id="shade" class="shade"></div>
+
+<aside id="drawer">
+
+<div class="drawerHead">
+<h3>سلة المشتريات</h3>
+<button id="close">×</button>
+</div>
+
+<div id="items"></div>
+
+<div class="cartFoot">
+
+<strong id="total">0 ج.م</strong>
+
+<button id="order" class="btn primary full">
+إتمام الطلب عبر واتساب
+</button>
+
+</div>
+
+</aside>
+
+
+<script src="assets/app.js"></script>
+
+</body>
+</html>
