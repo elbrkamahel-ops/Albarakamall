@@ -1,4 +1,6 @@
-7*{
+/* ===== إعدادات عامة ===== */
+
+*{
 margin:0;
 padding:0;
 box-sizing:border-box;
@@ -6,123 +8,269 @@ font-family:'Cairo',sans-serif;
 }
 
 body{
-background:#f5f5f5;
+background:#f7f7f7;
 color:#222;
 }
 
-.header{
+/* ===== الهيدر ===== */
+
+header{
+
 display:flex;
+
 justify-content:space-between;
+
 align-items:center;
-padding:15px 40px;
-background:#0a7d38;
-color:#fff;
+
+padding:18px 7%;
+
+background:#0b7a33;
+
+color:white;
+
 position:sticky;
+
 top:0;
+
+z-index:1000;
+
+box-shadow:0 3px 15px rgba(0,0,0,.15);
+
 }
 
-.logo{
+.logo h1{
+
+font-size:30px;
+
+font-weight:900;
+
+}
+
+.logo p{
+
+font-size:14px;
+
+opacity:.9;
+
+}
+
+nav{
+
 display:flex;
-align-items:center;
-gap:15px;
-}
 
-.logo img{
-width:70px;
-height:70px;
-border-radius:50%;
-background:#fff;
-padding:5px;
+gap:18px;
+
 }
 
 nav a{
-color:#fff;
+
 text-decoration:none;
-margin:0 12px;
+
+color:white;
+
 font-weight:bold;
+
+transition:.3s;
+
 }
+
+nav a:hover{
+
+color:#FFD700;
+
+}
+
+.icons{
+
+display:flex;
+
+gap:20px;
+
+font-size:22px;
+
+cursor:pointer;
+
+}
+
+.icons i:hover{
+
+color:#FFD700;
+
+}
+
+/* ===== بانر البداية ===== */
 
 .hero{
-height:420px;
-background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),url("IMG-20250807-WA0007.jpg") center/contain no-repeat,#1d8f45;
+
+height:85vh;
+
 display:flex;
+
+flex-direction:column;
+
 justify-content:center;
+
 align-items:center;
+
 text-align:center;
-color:#fff;
+
+background:linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
+url("assets/images/banner.jpg");
+
+background-size:cover;
+
+background-position:center;
+
+color:white;
+
 }
 
-.overlay h2{
-font-size:42px;
-margin-bottom:15px;
-}
+.hero h2{
 
-.overlay p{
-font-size:20px;
+font-size:55px;
+
 margin-bottom:20px;
+
 }
 
-.overlay input{
-width:320px;
-padding:12px;
-border:none;
-border-radius:8px;
+.hero p{
+
+font-size:24px;
+
+margin-bottom:35px;
+
 }
 
-.overlay button{
-padding:12px 25px;
-background:#ff9800;
-color:#fff;
-border:none;
-border-radius:8px;
-cursor:pointer;
-margin-right:10px;
+.btn{
+
+padding:16px 45px;
+
+background:#FFD700;
+
+color:#000;
+
+font-weight:bold;
+
+text-decoration:none;
+
+border-radius:40px;
+
+transition:.3s;
+
 }
+
+.btn:hover{
+
+background:white;
+
+transform:scale(1.08);
+
+}
+
+/* ===== الأقسام ===== */
 
 .categories{
-padding:60px 20px;
+
+padding:70px 8%;
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:25px;
+
+}
+
+.card{
+
+background:white;
+
+padding:25px;
+
+border-radius:15px;
+
+box-shadow:0 8px 25px rgba(0,0,0,.08);
+
 text-align:center;
+
+transition:.3s;
+
 }
 
-.categories h2{
-margin
-.products{
-padding:60px 20px;
-text-align:center;
+.card:hover{
+
+transform:translateY(-10px);
+
 }
 
-.products h2{
-font-size:32px;
-color:#0a7d38;
-margin-bottom:30px;
-}
+.card img{
 
-.products button{
-background:#0a7d38;
-color:white;
-border:none;
-padding:12px 20px;
-border-radius:8px;
-cursor:pointer;
-font-size:16px;
-}
+width:100%;
 
-.products button:hover{
-background:#08652d;
-}
-.cart{
-background:#ff9800;
-color:#fff;
-padding:10px 20px;
+height:180px;
+
+object-fit:cover;
+
 border-radius:10px;
-font-weight:bold;
-cursor:pointer;
+
 }
 
-.cart span{
-background:#fff;
-color:#0a7d38;
-padding:3px 8px;
-border-radius:50%;
-margin-right:5px;
+.card h3{
+
+margin-top:15px;
+
+font-size:22px;
+
+color:#0b7a33;
+
+}
+
+/* ===== الفوتر ===== */
+
+footer{
+
+background:#0b7a33;
+
+color:white;
+
+padding:30px;
+
+text-align:center;
+
+margin-top:60px;
+
+}
+
+/* ===== الهاتف ===== */
+
+@media(max-width:768px){
+
+header{
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+nav{
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+}
+
+.hero h2{
+
+font-size:35px;
+
+}
+
+.hero p{
+
+font-size:18px;
+
+}
+
 }
