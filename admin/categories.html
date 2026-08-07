@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>إدارة الأقسام | مول البركة</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Tahoma, Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        .topbar {
+            height: 70px;
+            background: #fff;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 42px;
+            height: 42px;
+            background: #198754;
+            color: #fff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .brand h2 {
+            font-size: 18px;
+        }
+
+        .brand span {
+            color: #777;
+            font-size: 12px;
+        }
+
+        .admin {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e9f7ef;
+            color: #198754;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .layout {
+            display: flex;
+            min-height: calc(100vh - 70px);
+        }
+
+        .sidebar {
+            width: 240px;
+            background: #fff;
+            border-left: 1px solid #e5e7eb;
+            padding: 20px 12px;
+        }
+
+        .sidebar-title {
+            color: #999;
+            font-size: 12px;
+            padding: 10px 12px;
+        }
+
+        .menu-item {
+            display: block;
+            text-decoration: none;
+            color: #444;
+            padding: 13px 14px;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .menu-item:hover,
+        .menu-item.active {
+            background: #e9f7ef;
+            color: #198754;
+            font-weight: bold;
+        }
+
+        .main {
+            flex: 1;
+            padding: 25px;
+        }
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            gap: 15px;
+        }
+
+        .page-header h1 {
+            font-size: 26px;
+            margin-bottom: 6px;
+        }
+
+        .page-header p {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 9px;
+            padding: 12px 18px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: #198754;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #157347;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat {
+            background: #fff;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .stat span {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 25px;
+            margin-top: 8px;
+        }
+
+        .toolbar {
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search {
+            flex: 1;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 11px 13px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #198754;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .category-card {
+            background: #fff;
+            border: 1px solid #e9ecef;
+            border-radius: 14px;
+            padding: 20px;
+            transition: .2s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,.05);
+        }
+
+        .category-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background: #e9f7ef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+
+        .category-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .category-description {
+            color: #777;
+            font-size: 12px;
+            margin-top: 7px;
+            min-height: 32px;
+        }
+
+        .category-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 18px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            font-size: 12px;
+        }
+
+        .status {
+            padding: 5px 9px;
+            border-radius: 20px;
+        }
+
+        .active-status {
+            background: #e9f7ef;
+            color: #198754;
+        }
+
+        .inactive-status {
+            background: #fdecec;
+            color: #dc3545;
+        }
+
+        .category-actions {
+            display: flex;
+            gap: 7px;
+            margin-top: 15px;
+        }
+
+        .action {
+            flex: 1;
+            border: none;
+            border-radius: 7px;
+            padding: 9px;
+            cursor: pointer;
+        }
+
+        .edit {
+            background: #e7f1ff;
+            color: #0d6efd;
+        }
+
+        .delete {
+            background: #fdecec;
+            color: #dc3545;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.5);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 999;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-box {
+            background: #fff;
+            width: 100%;
+            max-width: 550px;
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close {
+            width: 35px;
+            height: 35px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            background: #eee;
+            font-size: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .secondary {
+            background: #eee;
+            color: #333;
+        }
+
+        @media(max-width: 1000px) {
+
+            .categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media(max-width: 700px) {
+
+            .layout {
+                display: block;
+            }
+
+            .sidebar {
+                width: 100%;
+                overflow-x: auto;
+            }
+
+            .sidebar nav {
+                display: flex;
+                gap: 5px;
+            }
+
+            .menu-item {
+                white-space: nowrap;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .categories {
+                grid-template-columns: 1fr;
+            }
+
+            .main {
+                padding: 15px;
+            }
+
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="brand">
+
+        <div class="logo">
+            ب
+        </div>
+
+        <div>
+            <h2>مول البركة</h2>
+            <span>لوحة التحكم</span>
+        </div>
+
+    </div>
+
+    <div class="admin">
+
+        <strong>المدير</strong>
+
+        <div class="avatar">
+            م
+        </div>
+
+    </div>
+
+</header>
+
+<div class="layout">
+
+    <aside class="sidebar">
+
+        <div class="sidebar-title">
+            الإدارة
+        </div>
+
+        <nav>
+
+            <a
+                href="index.html"
+                class="menu-item"
+            >
+                📊 الرئيسية
+            </a>
+
+            <a
+                href="products.html"
+                class="menu-item"
+            >
+                🛒 المنتجات
+            </a>
+
+            <a
+                href="categories.html"
+                class="menu-item active"
+            >
+                📁 الأقسام
+            </a>
+
+            <a
+                href="orders.html"
+                class="menu-item"
+            >
+                📦 الطلبات
+            </a>
+
+            <a
+                href="customers.html"
+                class="menu-item"
+            >
+                👥 العملاء
+            </a>
+
+            <a
+                href="inventory.html"
+                class="menu-item"
+            >
+                📋 المخزون
+            </a>
+
+            <a
+                href="settings.html"
+                class="menu-item"
+            >
+                ⚙️ الإعدادات
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <main class="main">
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>
+                    إدارة الأقسام
+                </h1>
+
+                <p>
+                    إدارة أقسام ومنتجات مول البركة
+                </p>
+
+            </div>
+
+            <button
+                class="btn btn-primary"
+                onclick="openModal()"
+            >
+                + إضافة قسم
+            </button>
+
+        </div>
+
+        <section class="stats">
+
+            <div class="stat">
+
+                <span>
+                    إجمالي الأقسام
+                </span>
+
+                <strong id="totalCategories">
+                    6
+                </strong>
+
+            </div>
+
+            <div class="stat">
+
+                <span>
+                    الأقسام النشطة
+                </span>
+
+                <strong id="activeCategories">
+                    6
+                </strong>
+
+            </div>
+
+            <div class="stat">
+
+                <span>
+                    إجمالي المنتجات
+                </span>
+
+                <strong>
+                    6
+                </strong>
+
+            </div>
+
+        </section>
+
+        <section class="toolbar">
+
+            <div class="search">
+
+                <input
+                    type="text"
+                    id="search"
+                    placeholder="ابحث عن قسم..."
+                    onkeyup="searchCategories()"
+                >
+
+            </div>
+
+        </section>
+
+        <section
+            class="categories"
+            id="categories"
+        >
+
+            <div
+                class="category-card"
+                data-name="خضروات"
+            >
+
+                <div class="category-top">
+
+                    <div class="category-icon">
+                        🥬
+                    </div>
+
+                    <span class="status active-status">
+                        نشط
+                    </span>
+
+                </div>
+
+                <div class="category-name">
+                    خضروات
+                </div>
+
+                <div class="category-description">
+                    الخضروات الطازجة اليومية
+                </div>
+
+                <div class="category-info">
+
+                    <span>
+                        المنتجات
+                    </span>
+
+                    <strong>
+                        1
+                    </strong>
+
+                </div>
+
+                <div class="category-actions">
+
+                    <button
+                        class="action edit"
+                        onclick="editCategory('خضروات')"
+                    >
+                        ✏️ تعديل
+                    </button>
+
+                    <button
+                        class="action delete"
+                        onclick="deleteCategory(this)"
+                    >
+                        🗑️ حذف
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div
+                class="category-card"
+                data-name="فواكه"
+            >
+
+                <div class="category-top">
+
+                    <div class="category-icon">
+                        🍎
+                    </div>
+
+                    <span class="status active-status">
+                        نشط
+                    </span>
+
+                </div>
+
+                <div class="category-name">
+                    فواكه
+                </div>
+
+                <div class="category-description">
+                    الفواكه الطازجة والموسمية
+                </div>
+
+                <div class="category-info">
+
+                    <span>
+                        المنتجات
+                    </span>
+
+                    <strong>
+                        1
+                    </strong>
+
+                </div>
+
+                <div class="category-actions">
+
+                    <button
+                        class="action edit"
+                        onclick="editCategory('فواكه')"
+                    >
+                        ✏️ تعديل
+                    </button>
+
+                    <button
+                        class="action delete"
+                        onclick="deleteCategory(this)"
+                    >
+                        🗑️ حذف
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div
+                class="category-card"
+                data-name="لحوم"
+            >
+
+                <div class="category-top">
+
+                    <div class="category-icon">
+                        🥩
+                    </div>
+
+                    <span class="status active-status">
+                        نشط
+                    </span>
+
+                </div>
+
+                <div class="category-name">
+                    لحوم
+                </div>
+
+                <div class="category-description">
+                    اللحوم الطازجة
+                </div>
+
+                <div class="category-info">
+
+                    <span>
+                        المنتجات
+                    </span>
+
+                    <strong>
+                        1
+                    </strong>
+
+                </div>
+
+                <div class="category-actions">
+
+                    <button
+                        class="action edit"
+                        onclick="editCategory('لحوم')"
+                    >
+                        ✏️ تعديل
+                    </button>
+
+                    <button
+                        class="action delete"
+                        onclick="deleteCategory(this)"
+                    >
+                        🗑️ حذف
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div
+                class="category-card"
+                data-name="طيور"
+            >
+
+                <div class="category-top">
+
+                    <div class="category-icon">
+                        🍗
+                    </div>
+
+                    <span class="status active-status">
+                        نشط
+                    </span>
+
+                </div>
+
+                <div class="category-name">
+                    طيور
+                </div>
+
+                <div class="category-description">
+                    الدواجن والطيور الطازجة
+                </div>
+
+                <div class="category-info">
+
+                    <span>
+                        المنتجات
+                    </span>
+
+                    <strong>
+                        1
+                    </strong>
+
+                </div>
+
+                <div class="category-actions">
+
+                    <button
+                        class="action edit"
+                        onclick="editCategory('طيور')"
+                    >
+                        ✏️ تعديل
+                    </button>
+
+                    <button
+                        class="action delete"
+                        onclick="deleteCategory(this)"
+                    >
+                        🗑️ حذف
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div
+                class="category-card"
+                data-name="ماركت"
+            >
+
+                <div class="category-top">
+
+                    <div class="category-icon">
+                        🛒
+                    </div>
+
+                    <span class="status active-status">
+                        نشط
+                    </span>
+
+                </div>
+
+                <div class="category-name">
+                    ماركت
+                </div>
+
+                <div class="category-description">
+                    جميع المنتجات الغذائية والاستهلاكية
+                </div>
+
+                <div class="category-info">
+
+                    <span>
+                        المنتجات
+                    </span>
+
+                    <strong>
+                        1
+                    </strong>
+
+                </div>
+
+                <div class="category-actions">
+
+                    <button
+                        class="action edit"
+                        onclick="editCategory('ماركت')"
+                    >
+                        ✏️ تعديل
+                    </button>
+
+                    <button
+                        class="action delete"
+                        onclick="deleteCategory(this)"
+                    >
+                        🗑️ حذف
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div
+                class="category-card"
+                data-name="جزارة"
+            >
+
+                <div class="category-top">
+
+                    <div class="category-icon">
+                        🔪
+                    </div>
+
+                    <span class="status active-status">
+                        نشط
+                    </span>
+
+                </div>
+
+                <div class="category-name">
+                    جزارة
+                </div>
+
+                <div class="category-description">
+                    منتجات الجزارة والتجهيز
+                </div>
+
+                <div class="category-info">
+
+                    <span>
+                        المنتجات
+                    </span>
+
+                    <strong>
+                        1
+                    </strong>
+
+                </div>
+
+                <div class="category-actions">
+
+                    <button
+                        class="action edit"
+                        onclick="editCategory('جزارة')"
+                    >
+                        ✏️ تعديل
+                    </button>
+
+                    <button
+                        class="action delete"
+                        onclick="deleteCategory(this)"
+                    >
+                        🗑️ حذف
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<div
+    class="modal"
+    id="categoryModal"
+>
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2>
+                إضافة قسم جديد
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <form id="categoryForm">
+
+            <div class="form-group">
+
+                <label>
+                    اسم القسم
+                </label>
+
+                <input
+                    type="text"
+                    id="categoryName"
+                    placeholder="مثال: مخبوزات"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    الأيقونة
+                </label>
+
+                <input
+                    type="text"
+                    id="categoryIcon"
+                    placeholder="مثال: 🍞"
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    وصف القسم
+                </label>
+
+                <textarea
+                    id="categoryDescription"
+                    placeholder="اكتب وصف القسم..."
+                ></textarea>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    الحالة
+                </label>
+
+                <select id="categoryStatus">
+
+                    <option value="نشط">
+                        نشط
+                    </option>
+
+                    <option value="غير نشط">
+                        غير نشط
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    حفظ القسم
+                </button>
+
+                <button
+                    type="button"
+                    class="btn secondary"
+                    onclick="closeModal()"
+                >
+                    إلغاء
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+
+    function openModal() {
+
+        document
+            .getElementById("categoryModal")
+            .classList.add("show");
+
+    }
+
+    function closeModal() {
+
+        document
+            .getElementById("categoryModal")
+            .classList.remove("show");
+
+        document
+            .getElementById("categoryForm")
+            .reset();
+
+    }
+
+    function searchCategories() {
+
+        const value =
+            document
+                .getElementById("search")
+                .value
+                .toLowerCase();
+
+        const cards =
+            document.querySelectorAll(
+                ".category-card"
+            );
+
+        cards.forEach(card => {
+
+            const name =
+                card
+                    .dataset
+                    .name
+                    .toLowerCase();
+
+            card.style.display =
+                name.includes(value)
+                    ? ""
+                    : "none";
+
+        });
+
+    }
+
+    function deleteCategory(button) {
+
+        const card =
+            button.closest(
+                ".category-card"
+            );
+
+        const name =
+            card
+                .querySelector(
+                    ".category-name"
+                )
+                .textContent
+                .trim();
+
+        const confirmed =
+            confirm(
+                "هل أنت متأكد من حذف قسم " +
+                name +
+                "؟"
+            );
+
+        if (confirmed) {
+
+            card.remove();
+
+            updateStats();
+
+        }
+
+    }
+
+    function editCategory(name) {
+
+        alert(
+            "سيتم ربط التعديل بقاعدة البيانات لاحقًا.\n\n" +
+            "القسم: " +
+            name
+        );
+
+    }
+
+    function updateStats() {
+
+        const cards =
+            document.querySelectorAll(
+                ".category-card"
+            );
+
+        document
+            .getElementById(
+                "totalCategories"
+            )
+            .textContent = cards.length;
+
+        document
+            .getElementById(
+                "activeCategories"
+            )
+            .textContent = cards.length;
+
+    }
+
+    document
+        .getElementById("categoryForm")
+        .addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+                const name =
+                    document
+                        .getElementById(
+                            "categoryName"
+                        )
+                        .value;
+
+                const icon =
+                    document
+                        .getElementById(
+                            "categoryIcon"
+                        )
+                        .value || "📁";
+
+                const description =
+                    document
+                        .getElementById(
+                            "categoryDescription"
+                        )
+                        .value;
+
+                const status =
+                    document
+                        .getElementById(
+                            "categoryStatus"
+                        )
+                        .value;
+
+                const container =
+                    document.getElementById(
+                        "categories"
+                    );
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+                card.className =
+                    "category-card";
+
+                card.dataset.name =
+                    name;
+
+                const statusClass =
+                    status === "نشط"
+                        ? "active-status"
+                        : "inactive-status";
+
+                card.innerHTML = `
+
+                    <div class="category-top">
+
+                        <div class="category-icon">
+                            ${icon}
+                        </div>
+
+                        <span class="status ${statusClass}">
+                            ${status}
+                        </span>
+
+                    </div>
+
+                    <div class="category-name">
+                        ${name}
+                    </div>
+
+                    <div class="category-description">
+                        ${description}
+                    </div>
+
+                    <div class="category-info">
+
+                        <span>
+                            المنتجات
+                        </span>
+
+                        <strong>
+                            0
+                        </strong>
+
+                    </div>
+
+                    <div class="category-actions">
+
+                        <button
+                            class="action edit"
+                            onclick="editCategory('${name}')"
+                        >
+                            ✏️ تعديل
+                        </button>
+
+                        <button
+                            class="action delete"
+                            onclick="deleteCategory(this)"
+                        >
+                            🗑️ حذف
+                        </button>
+
+                    </div>
+
+                `;
+
+                container.appendChild(card);
+
+                updateStats();
+
+                closeModal();
+
+                alert(
+                    "تمت إضافة القسم بنجاح."
+                );
+
+            }
+        );
+
+</script>
+
+</body>
+
+                  </html>
