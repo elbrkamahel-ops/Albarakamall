@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>إدارة الطلبات | لوحة تحكم مول البركة</title>
+
+    <meta name="description"
+          content="إدارة ومتابعة طلبات العملاء في مول البركة">
+
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+
+<body>
+
+    <!-- ============================= -->
+    <!-- Sidebar -->
+    <!-- ============================= -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-header">
+
+            <div class="logo">
+                البركة
+            </div>
+
+            <h2>
+                لوحة التحكم
+            </h2>
+
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <a href="../index.html">
+                <span>🏠</span>
+                الرئيسية
+            </a>
+
+            <a href="products.html">
+                <span>📦</span>
+                المنتجات
+            </a>
+
+            <a href="categories.html">
+                <span>🗂️</span>
+                الأقسام
+            </a>
+
+            <a href="orders.html" class="active">
+                <span>🛒</span>
+                الطلبات
+            </a>
+
+            <a href="customers.html">
+                <span>👥</span>
+                العملاء
+            </a>
+
+            <a href="offers.html">
+                <span>🏷️</span>
+                العروض
+            </a>
+
+            <a href="settings.html">
+                <span>⚙️</span>
+                الإعدادات
+            </a>
+
+            <a href="../../index.html">
+                <span>🌐</span>
+                الموقع الرئيسي
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- ============================= -->
+    <!-- Main Content -->
+    <!-- ============================= -->
+
+    <main class="main-content">
+
+
+        <!-- Topbar -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+                    إدارة الطلبات
+                </h1>
+
+                <p>
+                    متابعة جميع طلبات العملاء وإدارة حالتها
+                </p>
+
+            </div>
+
+
+            <div class="admin-user">
+
+                <span>
+                    👤
+                </span>
+
+                <strong>
+                    المدير
+                </strong>
+
+            </div>
+
+        </header>
+
+
+        <!-- ============================= -->
+        <!-- Statistics -->
+        <!-- ============================= -->
+
+        <section class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🛒
+                </div>
+
+                <div>
+
+                    <span>
+                        إجمالي الطلبات
+                    </span>
+
+                    <strong id="totalOrders">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ⏳
+                </div>
+
+                <div>
+
+                    <span>
+                        قيد الانتظار
+                    </span>
+
+                    <strong id="pendingOrders">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🚚
+                </div>
+
+                <div>
+
+                    <span>
+                        قيد التوصيل
+                    </span>
+
+                    <strong id="shippingOrders">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ✅
+                </div>
+
+                <div>
+
+                    <span>
+                        مكتملة
+                    </span>
+
+                    <strong id="completedOrders">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ============================= -->
+        <!-- Orders Management -->
+        <!-- ============================= -->
+
+        <section class="admin-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        الطلبات
+                    </h2>
+
+                    <p>
+                        جميع الطلبات المسجلة في النظام
+                    </p>
+
+                </div>
+
+
+                <div class="table-tools">
+
+                    <input
+                        type="search"
+                        id="orderSearch"
+                        placeholder="بحث برقم الطلب أو اسم العميل..."
+                    >
+
+
+                    <select id="statusFilter">
+
+                        <option value="all">
+                            جميع الحالات
+                        </option>
+
+                        <option value="pending">
+                            قيد الانتظار
+                        </option>
+
+                        <option value="confirmed">
+                            تم التأكيد
+                        </option>
+
+                        <option value="preparing">
+                            جاري التجهيز
+                        </option>
+
+                        <option value="shipping">
+                            قيد التوصيل
+                        </option>
+
+                        <option value="completed">
+                            مكتمل
+                        </option>
+
+                        <option value="cancelled">
+                            ملغي
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- ============================= -->
+            <!-- Orders Table -->
+            <!-- ============================= -->
+
+            <div class="table-responsive">
+
+                <table class="admin-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                رقم الطلب
+                            </th>
+
+                            <th>
+                                العميل
+                            </th>
+
+                            <th>
+                                الهاتف
+                            </th>
+
+                            <th>
+                                الإجمالي
+                            </th>
+
+                            <th>
+                                التاريخ
+                            </th>
+
+                            <th>
+                                الحالة
+                            </th>
+
+                            <th>
+                                الإجراءات
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="ordersTableBody">
+
+                        <!--
+                            سيتم عرض الطلبات هنا
+                            عند ربط الموقع بقاعدة البيانات
+                        -->
+
+                        <tr id="emptyOrders">
+
+                            <td colspan="7"
+                                style="text-align:center; padding:40px;">
+
+                                <div style="font-size:40px;">
+                                    🛒
+                                </div>
+
+                                <p>
+                                    لا توجد طلبات حتى الآن
+                                </p>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ============================= -->
+        <!-- Order Details Modal -->
+        <!-- ============================= -->
+
+        <div
+            id="orderModal"
+            class="modal"
+            style="display:none;"
+        >
+
+            <div class="modal-content">
+
+
+                <div class="modal-header">
+
+                    <h2>
+                        تفاصيل الطلب
+                    </h2>
+
+                    <button
+                        type="button"
+                        onclick="closeOrderModal()"
+                        class="modal-close"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="orderDetails"
+                    class="modal-body"
+                >
+
+                    <!-- تفاصيل الطلب -->
+
+                </div>
+
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        onclick="closeOrderModal()"
+                    >
+                        إغلاق
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+    <!-- ============================= -->
+    <!-- JavaScript -->
+    <!-- ============================= -->
+
+    <script>
+
+        /*
+        ==========================================
+        بيانات الطلبات
+        ==========================================
+
+        هذه البيانات مؤقتة للتجربة.
+
+        لاحقًا سيتم استبدالها بقاعدة البيانات
+        ونظام الطلبات الحقيقي.
+        */
+
+
+        let orders = [
+
+            /*
+            مثال:
+
+            {
+                id: "ORD-1001",
+                customer: "أحمد محمد",
+                phone: "01000000000",
+                total: 450,
+                date: "2026-08-08",
+                status: "pending",
+                items: [
+                    {
+                        name: "طماطم",
+                        quantity: 2,
+                        price: 30
+                    }
+                ]
+            }
+            */
+
+        ];
+
+
+        const ordersTableBody =
+            document.getElementById(
+                "ordersTableBody"
+            );
+
+
+        const orderSearch =
+            document.getElementById(
+                "orderSearch"
+            );
+
+
+        const statusFilter =
+            document.getElementById(
+                "statusFilter"
+            );
+
+
+        /*
+        ==========================================
+        أسماء الحالات
+        ==========================================
+        */
+
+
+        const statusNames = {
+
+            pending:
+                "قيد الانتظار",
+
+            confirmed:
+                "تم التأكيد",
+
+            preparing:
+                "جاري التجهيز",
+
+            shipping:
+                "قيد التوصيل",
+
+            completed:
+                "مكتمل",
+
+            cancelled:
+                "ملغي"
+
+        };
+
+
+        /*
+        ==========================================
+        عرض الطلبات
+        ==========================================
+        */
+
+
+        function renderOrders() {
+
+            ordersTableBody.innerHTML = "";
+
+
+            const searchValue =
+                orderSearch.value
+                    .toLowerCase()
+                    .trim();
+
+
+            const selectedStatus =
+                statusFilter.value;
+
+
+            const filteredOrders =
+                orders.filter(function(order) {
+
+
+                    const matchesSearch =
+
+                        order.id
+                            .toLowerCase()
+                            .includes(searchValue)
+
+                        ||
+
+                        order.customer
+                            .toLowerCase()
+                            .includes(searchValue)
+
+                        ||
+
+                        order.phone
+                            .includes(searchValue);
+
+
+                    const matchesStatus =
+
+                        selectedStatus === "all"
+
+                        ||
+
+                        order.status === selectedStatus;
+
+
+                    return (
+                        matchesSearch &&
+                        matchesStatus
+                    );
+
+                });
+
+
+            if (filteredOrders.length === 0) {
+
+                ordersTableBody.innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="7"
+                            style="
+                                text-align:center;
+                                padding:40px;
+                            "
+                        >
+
+                            <div style="font-size:40px;">
+                                🛒
+                            </div>
+
+                            <p>
+                                لا توجد طلبات مطابقة
+                            </p>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+                updateStatistics();
+
+                return;
+            }
+
+
+            filteredOrders.forEach(function(order) {
+
+                const row =
+                    document.createElement("tr");
+
+
+                row.innerHTML = `
+
+                    <td>
+                        <strong>
+                            ${order.id}
+                        </strong>
+                    </td>
+
+
+                    <td>
+                        ${order.customer}
+                    </td>
+
+
+                    <td>
+                        ${order.phone}
+                    </td>
+
+
+                    <td>
+                        ${Number(order.total).toLocaleString("ar-EG")}
+                        جنيه
+                    </td>
+
+
+                    <td>
+                        ${order.date}
+                    </td>
+
+
+                    <td>
+
+                        <span
+                            class="status ${order.status}"
+                        >
+                            ${statusNames[order.status]}
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <button
+                            class="btn btn-small btn-edit"
+                            onclick="viewOrder('${order.id}')"
+                        >
+                            التفاصيل
+                        </button>
+
+
+                        <button
+                            class="btn btn-small btn-primary"
+                            onclick="changeOrderStatus('${order.id}')"
+                        >
+                            الحالة
+                        </button>
+
+
+                        <button
+                            class="btn btn-small btn-delete"
+                            onclick="deleteOrder('${order.id}')"
+                        >
+                            حذف
+                        </button>
+
+                    </td>
+
+                `;
+
+
+                ordersTableBody.appendChild(row);
+
+            });
+
+
+            updateStatistics();
+
+        }
+
+
+        /*
+        ==========================================
+        تحديث الإحصائيات
+        ==========================================
+        */
+
+
+        function updateStatistics() {
+
+            document.getElementById(
+                "totalOrders"
+            ).textContent =
+                orders.length;
+
+
+            document.getElementById(
+                "pendingOrders"
+            ).textContent =
+
+                orders.filter(function(order) {
+
+                    return order.status === "pending";
+
+                }).length;
+
+
+            document.getElementById(
+                "shippingOrders"
+            ).textContent =
+
+                orders.filter(function(order) {
+
+                    return order.status === "shipping";
+
+                }).length;
+
+
+            document.getElementById(
+                "completedOrders"
+            ).textContent =
+
+                orders.filter(function(order) {
+
+                    return order.status === "completed";
+
+                }).length;
+
+        }
+
+
+        /*
+        ==========================================
+        عرض تفاصيل الطلب
+        ==========================================
+        */
+
+
+        function viewOrder(orderId) {
+
+            const order =
+                orders.find(function(item) {
+
+                    return item.id === orderId;
+
+                });
+
+
+            if (!order) {
+
+                alert("لم يتم العثور على الطلب");
+
+                return;
+
+            }
+
+
+            let itemsHTML = "";
+
+
+            if (
+                order.items &&
+                order.items.length > 0
+            ) {
+
+                itemsHTML = `
+
+                    <h3>
+                        المنتجات
+                    </h3>
+
+                    <ul>
+
+                        ${order.items.map(function(item) {
+
+                            return `
+
+                                <li>
+
+                                    ${item.name}
+
+                                    -
+                                    ${item.quantity}
+
+                                    ×
+
+                                    ${item.price}
+
+                                    جنيه
+
+                                </li>
+
+                            `;
+
+                        }).join("")}
+
+                    </ul>
+
+                `;
+
+            } else {
+
+                itemsHTML = `
+
+                    <p>
+                        لا توجد تفاصيل منتجات متاحة.
+                    </p>
+
+                `;
+
+            }
+
+
+            document.getElementById(
+                "orderDetails"
+            ).innerHTML = `
+
+                <div>
+
+                    <p>
+                        <strong>
+                            رقم الطلب:
+                        </strong>
+
+                        ${order.id}
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            العميل:
+                        </strong>
+
+                        ${order.customer}
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            الهاتف:
+                        </strong>
+
+                        ${order.phone}
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            التاريخ:
+                        </strong>
+
+                        ${order.date}
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            الحالة:
+                        </strong>
+
+                        ${statusNames[order.status]}
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            الإجمالي:
+                        </strong>
+
+                        ${Number(order.total).toLocaleString("ar-EG")}
+                        جنيه
+                    </p>
+
+
+                    ${itemsHTML}
+
+                </div>
+
+            `;
+
+
+            document.getElementById(
+                "orderModal"
+            ).style.display = "flex";
+
+        }
+
+
+        /*
+        ==========================================
+        إغلاق نافذة التفاصيل
+        ==========================================
+        */
+
+
+        function closeOrderModal() {
+
+            document.getElementById(
+                "orderModal"
+            ).style.display = "none";
+
+        }
+
+
+        /*
+        ==========================================
+        تغيير حالة الطلب
+        ==========================================
+        */
+
+
+        function changeOrderStatus(orderId) {
+
+            const order =
+                orders.find(function(item) {
+
+                    return item.id === orderId;
+
+                });
+
+
+            if (!order) {
+
+                return;
+
+            }
+
+
+            const newStatus =
+                prompt(
+
+                    `الحالة الحالية: ${statusNames[order.status]}
+
+اكتب الحالة الجديدة:
+pending
+confirmed
+preparing
+shipping
+completed
+cancelled`
+
+                );
+
+
+            if (
+                !newStatus ||
+                !statusNames[newStatus]
+            ) {
+
+                alert(
+                    "الحالة غير صحيحة"
+                );
+
+                return;
+
+            }
+
+
+            order.status =
+                newStatus;
+
+
+            renderOrders();
+
+
+            alert(
+                "تم تحديث حالة الطلب"
+            );
+
+        }
+
+
+        /*
+        ==========================================
+        حذف الطلب
+        ==========================================
+        */
+
+
+        function deleteOrder(orderId) {
+
+            const confirmed =
+                confirm(
+                    "هل أنت متأكد من حذف هذا الطلب؟"
+                );
+
+
+            if (!confirmed) {
+
+                return;
+
+            }
+
+
+            orders =
+                orders.filter(function(order) {
+
+                    return order.id !== orderId;
+
+                });
+
+
+            renderOrders();
+
+
+            alert(
+                "تم حذف الطلب"
+            );
+
+        }
+
+
+        /*
+        ==========================================
+        البحث
+        ==========================================
+        */
+
+
+        orderSearch.addEventListener(
+            "input",
+            renderOrders
+        );
+
+
+        /*
+        ==========================================
+        فلترة الحالة
+        ==========================================
+        */
+
+
+        statusFilter.addEventListener(
+            "change",
+            renderOrders
+        );
+
+
+        /*
+        ==========================================
+        إغلاق النافذة عند الضغط خارجها
+        ==========================================
+        */
+
+
+        document
+            .getElementById("orderModal")
+            .addEventListener(
+                "click",
+                function(event) {
+
+                    if (
+                        event.target === this
+                    ) {
+
+                        closeOrderModal();
+
+                    }
+
+                }
+            );
+
+
+        /*
+        ==========================================
+        التشغيل الأول
+        ==========================================
+        */
+
+
+        renderOrders();
+
+    </script>
+
+</body>
+
+                                  </html>
