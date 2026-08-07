@@ -1,108 +1,88 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>مول البركة أولاد الجارحي</title>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Cairo',sans-serif;
+}
 
-<link rel="stylesheet" href="style.css">
+body{
+background:#f5f5f5;
+color:#222;
+}
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 40px;
+background:#0a7d38;
+color:#fff;
+position:sticky;
+top:0;
+}
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+.logo{
+display:flex;
+align-items:center;
+gap:15px;
+}
 
-</head>
+.logo img{
+width:70px;
+height:70px;
+border-radius:50%;
+background:#fff;
+padding:5px;
+}
 
-<body>
+nav a{
+color:#fff;
+text-decoration:none;
+margin:0 12px;
+font-weight:bold;
+}
 
-<header>
+.hero{
+height:420px;
+background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),url("IMG-20250807-WA0007.jpg") center/contain no-repeat,#1d8f45;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:#fff;
+}
 
-<div class="logo">
+.overlay h2{
+font-size:42px;
+margin-bottom:15px;
+}
 
-<img src="logo.png" alt="البركة مول">
+.overlay p{
+font-size:20px;
+margin-bottom:20px;
+}
 
-<h2>مول البركة أولاد الجارحي</h2>
+.overlay input{
+width:320px;
+padding:12px;
+border:none;
+border-radius:8px;
+}
 
-</div>
+.overlay button{
+padding:12px 25px;
+background:#ff9800;
+color:#fff;
+border:none;
+border-radius:8px;
+cursor:pointer;
+margin-right:10px;
+}
 
-<nav>
+.categories{
+padding:60px 20px;
+text-align:center;
+}
 
-<a href="#">الرئيسية</a>
-
-<a href="#">الأقسام</a>
-
-<a href="#">العروض</a>
-
-<a href="#">تواصل معنا</a>
-
-</nav>
-
-</header>
-
-<section class="hero">
-
-<div class="overlay">
-
-<h1>أهلاً بكم في مول البركة</h1>
-
-<p>كل احتياجات منزلك في مكان واحد</p>
-
-<input type="text" placeholder="ابحث عن أي منتج...">
-
-<button>بحث</button>
-
-</div>
-
-</section>
-
-<section class="categories">
-
-<h2>أقسام المول</h2>
-
-<div class="grid">
-
-<div class="card">
-<i class="fa-solid fa-carrot"></i>
-<h3>الخضروات</h3>
-</div>
-
-<div class="card">
-<i class="fa-solid fa-apple-whole"></i>
-<h3>الفواكه</h3>
-</div>
-
-<div class="card">
-<i class="fa-solid fa-drumstick-bite"></i>
-<h3>الطيور</h3>
-</div>
-
-<div class="card">
-<i class="fa-solid fa-bacon"></i>
-<h3>اللحوم</h3>
-</div>
-
-<div class="card">
-<i class="fa-solid fa-leaf"></i>
-<h3>العطارة</h3>
-</div>
-
-<div class="card">
-<i class="fa-solid fa-cart-shopping"></i>
-<h3>الماركت</h3>
-</div>
-
-</div>
-
-</section>
-
-<footer>
-
-<p>© جميع الحقوق محفوظة لمول البركة أولاد الجارحي 2026</p>
-
-</footer>
-
-<script src="script.js"></script>
-
-</body>
-</html>
+.categories h2{
+margin
