@@ -1,0 +1,2314 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="إدارة منتجات مول البركة أولاد الجارحي"
+    >
+
+    <title>
+        المنتجات | لوحة تحكم مول البركة
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../css/admin.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="admin-app">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="admin-sidebar">
+
+
+        <div class="sidebar-brand">
+
+            <div class="brand-logo">
+                البركة
+            </div>
+
+            <div class="brand-info">
+
+                <h2>
+                    مول البركة
+                </h2>
+
+                <span>
+                    أولاد الجارحي
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="admin-navigation">
+
+
+            <a
+                href="dashboard.html"
+                class="nav-item"
+            >
+                <span class="nav-icon">⌂</span>
+                <span>الرئيسية</span>
+            </a>
+
+
+            <a
+                href="products.html"
+                class="nav-item active"
+            >
+                <span class="nav-icon">▣</span>
+                <span>المنتجات</span>
+            </a>
+
+
+            <a
+                href="categories.html"
+                class="nav-item"
+            >
+                <span class="nav-icon">☷</span>
+                <span>الأقسام</span>
+            </a>
+
+
+            <a
+                href="orders.html"
+                class="nav-item"
+            >
+                <span class="nav-icon">▤</span>
+                <span>الطلبات</span>
+            </a>
+
+
+            <a
+                href="customers.html"
+                class="nav-item"
+            >
+                <span class="nav-icon">♙</span>
+                <span>العملاء</span>
+            </a>
+
+
+            <a
+                href="inventory.html"
+                class="nav-item"
+            >
+                <span class="nav-icon">▦</span>
+                <span>المخزون</span>
+            </a>
+
+
+            <a
+                href="offers.html"
+                class="nav-item"
+            >
+                <span class="nav-icon">%</span>
+                <span>العروض</span>
+            </a>
+
+
+            <a
+                href="reports.html"
+                class="nav-item"
+            >
+                <span class="nav-icon">◩</span>
+                <span>التقارير</span>
+            </a>
+
+
+            <div class="nav-divider"></div>
+
+
+            <a
+                href="settings.html"
+                class="nav-item"
+            >
+                <span class="nav-icon">⚙</span>
+                <span>الإعدادات</span>
+            </a>
+
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <button
+                type="button"
+                id="logoutButton"
+                class="logout-button"
+            >
+                <span>↪</span>
+                تسجيل الخروج
+            </button>
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="admin-main">
+
+
+        <!-- HEADER -->
+
+        <header class="admin-header">
+
+
+            <div class="header-right">
+
+                <button
+                    type="button"
+                    id="sidebarToggle"
+                    class="sidebar-toggle"
+                >
+                    ☰
+                </button>
+
+
+                <div class="page-heading">
+
+                    <span class="page-label">
+                        إدارة المتجر
+                    </span>
+
+                    <h1>
+                        المنتجات
+                    </h1>
+
+                </div>
+
+            </div>
+
+
+            <div class="header-left">
+
+
+                <button
+                    type="button"
+                    class="header-icon-button"
+                    id="notificationsButton"
+                >
+                    🔔
+
+                    <span
+                        class="notification-dot"
+                        id="notificationDot"
+                    ></span>
+
+                </button>
+
+
+                <div class="admin-profile">
+
+                    <div class="profile-avatar">
+                        A
+                    </div>
+
+                    <div class="profile-details">
+
+                        <strong id="adminName">
+                            المدير
+                        </strong>
+
+                        <span>
+                            مدير النظام
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </header>
+
+
+        <!-- =================================================
+             CONTENT
+        ================================================== -->
+
+        <section class="admin-content">
+
+
+            <!-- PAGE TOP -->
+
+            <div class="page-top">
+
+
+                <div>
+
+                    <span class="welcome-label">
+                        الكتالوج
+                    </span>
+
+                    <h2>
+                        إدارة المنتجات
+                    </h2>
+
+                    <p>
+                        أضف وعدّل ونظّم منتجات مول البركة
+                        وأسعارها ومخزونها.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="addProductButton"
+                    class="primary-button"
+                >
+                    + إضافة منتج
+                </button>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 PRODUCT STATISTICS
+            ================================================== -->
+
+            <div class="stats-grid">
+
+
+                <article class="stat-card">
+
+                    <div class="stat-icon">
+                        📦
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            إجمالي المنتجات
+                        </span>
+
+                        <strong id="productsTotal">
+                            0
+                        </strong>
+
+                        <small>
+                            جميع المنتجات
+                        </small>
+
+                    </div>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <div class="stat-icon">
+                        ✓
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            منتجات نشطة
+                        </span>
+
+                        <strong id="productsActive">
+                            0
+                        </strong>
+
+                        <small>
+                            ظاهرة في المتجر
+                        </small>
+
+                    </div>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <div class="stat-icon">
+                        ⚠
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            مخزون منخفض
+                        </span>
+
+                        <strong id="productsLowStock">
+                            0
+                        </strong>
+
+                        <small>
+                            تحتاج مراجعة
+                        </small>
+
+                    </div>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <div class="stat-icon">
+                        ⛔
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            غير متاحة
+                        </span>
+
+                        <strong id="productsInactive">
+                            0
+                        </strong>
+
+                        <small>
+                            مخفية من المتجر
+                        </small>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 TOOLBAR
+            ================================================== -->
+
+            <section class="dashboard-card">
+
+
+                <div class="products-toolbar">
+
+
+                    <div class="search-box">
+
+                        <span>
+                            🔍
+                        </span>
+
+                        <input
+                            type="search"
+                            id="productSearch"
+                            placeholder="ابحث باسم المنتج أو الكود..."
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+
+                    <select
+                        id="categoryFilter"
+                        class="admin-select"
+                    >
+
+                        <option value="">
+                            كل الأقسام
+                        </option>
+
+                        <option value="vegetables">
+                            الخضروات
+                        </option>
+
+                        <option value="fruits">
+                            الفواكه
+                        </option>
+
+                        <option value="meat">
+                            اللحوم
+                        </option>
+
+                        <option value="poultry">
+                            الطيور
+                        </option>
+
+                        <option value="grocery">
+                            الماركت
+                        </option>
+
+                        <option value="butchery">
+                            الجزارة
+                        </option>
+
+                    </select>
+
+
+                    <select
+                        id="statusFilter"
+                        class="admin-select"
+                    >
+
+                        <option value="">
+                            كل الحالات
+                        </option>
+
+                        <option value="active">
+                            نشط
+                        </option>
+
+                        <option value="inactive">
+                            غير نشط
+                        </option>
+
+                        <option value="low-stock">
+                            مخزون منخفض
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        type="button"
+                        id="resetFilters"
+                        class="secondary-button"
+                    >
+                        إعادة ضبط
+                    </button>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     PRODUCTS TABLE
+                ================================================== -->
+
+                <div class="table-wrapper">
+
+
+                    <table class="admin-table products-table">
+
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    المنتج
+                                </th>
+
+                                <th>
+                                    الكود
+                                </th>
+
+                                <th>
+                                    القسم
+                                </th>
+
+                                <th>
+                                    السعر
+                                </th>
+
+                                <th>
+                                    المخزون
+                                </th>
+
+                                <th>
+                                    الحالة
+                                </th>
+
+                                <th>
+                                    الإجراءات
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody
+                            id="productsTableBody"
+                        >
+
+                            <tr>
+
+                                <td colspan="7">
+
+                                    <div class="table-empty">
+
+                                        جاري تحميل المنتجات...
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+
+                    </table>
+
+
+                </div>
+
+
+                <!-- PAGINATION -->
+
+                <div class="pagination-container">
+
+
+                    <div
+                        id="productsPaginationInfo"
+                        class="pagination-info"
+                    >
+                        0 منتج
+                    </div>
+
+
+                    <div
+                        id="productsPagination"
+                        class="pagination"
+                    ></div>
+
+
+                </div>
+
+
+            </section>
+
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="admin-footer">
+
+            <span>
+                © 2026 مول البركة أولاد الجارحي
+            </span>
+
+            <span>
+                إدارة المنتجات
+            </span>
+
+        </footer>
+
+
+    </main>
+
+
+</div>
+
+
+<!-- =========================================================
+     PRODUCT MODAL
+========================================================== -->
+
+<div
+    id="productModal"
+    class="admin-modal"
+    hidden
+>
+
+
+    <div class="modal-overlay"></div>
+
+
+    <div class="modal-container">
+
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="card-label">
+                    الكتالوج
+                </span>
+
+                <h3 id="productModalTitle">
+                    إضافة منتج
+                </h3>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="closeProductModal"
+                class="modal-close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <form
+            id="productForm"
+            class="admin-form"
+        >
+
+
+            <input
+                type="hidden"
+                id="productId"
+            >
+
+
+            <!-- NAME -->
+
+            <div class="form-group">
+
+                <label for="productName">
+                    اسم المنتج
+                </label>
+
+                <input
+                    type="text"
+                    id="productName"
+                    name="productName"
+                    placeholder="مثال: طماطم بلدي"
+                    required
+                >
+
+            </div>
+
+
+            <!-- SKU -->
+
+            <div class="form-group">
+
+                <label for="productSku">
+                    كود المنتج
+                </label>
+
+                <input
+                    type="text"
+                    id="productSku"
+                    name="productSku"
+                    placeholder="مثال: VEG-001"
+                >
+
+            </div>
+
+
+            <!-- CATEGORY -->
+
+            <div class="form-group">
+
+                <label for="productCategory">
+                    القسم
+                </label>
+
+                <select
+                    id="productCategory"
+                    name="productCategory"
+                    required
+                >
+
+                    <option value="">
+                        اختر القسم
+                    </option>
+
+                    <option value="vegetables">
+                        الخضروات
+                    </option>
+
+                    <option value="fruits">
+                        الفواكه
+                    </option>
+
+                    <option value="meat">
+                        اللحوم
+                    </option>
+
+                    <option value="poultry">
+                        الطيور
+                    </option>
+
+                    <option value="grocery">
+                        الماركت
+                    </option>
+
+                    <option value="butchery">
+                        الجزارة
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- PRICE / UNIT -->
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label for="productPrice">
+                        السعر
+                    </label>
+
+                    <input
+                        type="number"
+                        id="productPrice"
+                        name="productPrice"
+                        min="0"
+                        step="0.01"
+                        placeholder="0.00"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="productUnit">
+                        الوحدة
+                    </label>
+
+                    <select
+                        id="productUnit"
+                        name="productUnit"
+                    >
+
+                        <option value="piece">
+                            قطعة
+                        </option>
+
+                        <option value="kg">
+                            كيلو
+                        </option>
+
+                        <option value="500g">
+                            نصف كيلو
+                        </option>
+
+                        <option value="box">
+                            كرتونة
+                        </option>
+
+                        <option value="pack">
+                            عبوة
+                        </option>
+
+                        <option value="liter">
+                            لتر
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- STOCK -->
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label for="productStock">
+                        كمية المخزون
+                    </label>
+
+                    <input
+                        type="number"
+                        id="productStock"
+                        name="productStock"
+                        min="0"
+                        step="0.01"
+                        value="0"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="productLowStock">
+                        حد المخزون المنخفض
+                    </label>
+
+                    <input
+                        type="number"
+                        id="productLowStock"
+                        name="productLowStock"
+                        min="0"
+                        step="0.01"
+                        value="5"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <!-- IMAGE -->
+
+            <div class="form-group">
+
+                <label for="productImage">
+                    رابط صورة المنتج
+                </label>
+
+                <input
+                    type="url"
+                    id="productImage"
+                    name="productImage"
+                    placeholder="https://..."
+                >
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+
+            <div class="form-group">
+
+                <label for="productDescription">
+                    وصف المنتج
+                </label>
+
+                <textarea
+                    id="productDescription"
+                    name="productDescription"
+                    rows="4"
+                    placeholder="اكتب وصف المنتج..."
+                ></textarea>
+
+            </div>
+
+
+            <!-- ACTIVE -->
+
+            <div class="form-checkbox">
+
+                <input
+                    type="checkbox"
+                    id="productActive"
+                    name="productActive"
+                    checked
+                >
+
+                <label for="productActive">
+                    عرض المنتج في المتجر
+                </label>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    id="cancelProduct"
+                    class="secondary-button"
+                >
+                    إلغاء
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    حفظ المنتج
+                </button>
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     NOTIFICATION PANEL
+========================================================== -->
+
+<div
+    id="notificationPanel"
+    class="notification-panel"
+    hidden
+>
+
+    <div class="notification-header">
+
+        <h3>
+            الإشعارات
+        </h3>
+
+        <button
+            type="button"
+            id="closeNotifications"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div
+        id="notificationList"
+        class="notification-list"
+    ></div>
+
+</div>
+
+
+<!-- =========================================================
+     SCRIPTS
+========================================================== -->
+
+<script src="../js/auth.js"></script>
+
+<script src="../js/admin.js"></script>
+
+
+<script>
+
+"use strict";
+
+
+/* =========================================================
+   PRODUCT MANAGEMENT
+========================================================= */
+
+
+/*
+   بيانات تجريبية.
+
+   سيتم نقلها لاحقاً إلى قاعدة البيانات.
+*/
+
+let products = [
+
+    {
+        id: "1",
+        name: "طماطم بلدي",
+        sku: "VEG-001",
+        category: "vegetables",
+        price: 18,
+        unit: "kg",
+        stock: 45,
+        lowStock: 10,
+        image: "",
+        description: "طماطم طازجة",
+        active: true
+    },
+
+    {
+        id: "2",
+        name: "بطاطس",
+        sku: "VEG-002",
+        category: "vegetables",
+        price: 22,
+        unit: "kg",
+        stock: 32,
+        lowStock: 10,
+        image: "",
+        description: "بطاطس طازجة",
+        active: true
+    },
+
+    {
+        id: "3",
+        name: "موز",
+        sku: "FRU-001",
+        category: "fruits",
+        price: 35,
+        unit: "kg",
+        stock: 18,
+        lowStock: 5,
+        image: "",
+        description: "موز طازج",
+        active: true
+    },
+
+    {
+        id: "4",
+        name: "فراخ كاملة",
+        sku: "POU-001",
+        category: "poultry",
+        price: 145,
+        unit: "kg",
+        stock: 6,
+        lowStock: 8,
+        image: "",
+        description: "فراخ طازجة",
+        active: true
+    },
+
+    {
+        id: "5",
+        name: "لحمة بقري",
+        sku: "MEA-001",
+        category: "meat",
+        price: 420,
+        unit: "kg",
+        stock: 0,
+        lowStock: 5,
+        image: "",
+        description: "لحمة بقري طازجة",
+        active: false
+    }
+
+];
+
+
+let filteredProducts = [...products];
+
+let currentPage = 1;
+
+const productsPerPage = 10;
+
+
+/* =========================================================
+   CATEGORY NAMES
+========================================================= */
+
+const categoryNames = {
+
+    vegetables: "الخضروات",
+
+    fruits: "الفواكه",
+
+    meat: "اللحوم",
+
+    poultry: "الطيور",
+
+    grocery: "الماركت",
+
+    butchery: "الجزارة"
+
+};
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const tableBody =
+    document.getElementById(
+        "productsTableBody"
+    );
+
+
+const searchInput =
+    document.getElementById(
+        "productSearch"
+    );
+
+
+const categoryFilter =
+    document.getElementById(
+        "categoryFilter"
+    );
+
+
+const statusFilter =
+    document.getElementById(
+        "statusFilter"
+    );
+
+
+const resetFilters =
+    document.getElementById(
+        "resetFilters"
+    );
+
+
+const modal =
+    document.getElementById(
+        "productModal"
+    );
+
+
+const productForm =
+    document.getElementById(
+        "productForm"
+    );
+
+
+/* =========================================================
+   RENDER PRODUCTS
+========================================================= */
+
+function renderProducts() {
+
+    const start =
+        (currentPage - 1) *
+        productsPerPage;
+
+
+    const end =
+        start +
+        productsPerPage;
+
+
+    const pageProducts =
+        filteredProducts.slice(
+            start,
+            end
+        );
+
+
+    if (!pageProducts.length) {
+
+        tableBody.innerHTML = `
+
+            <tr>
+
+                <td colspan="7">
+
+                    <div class="table-empty">
+
+                        لا توجد منتجات مطابقة للبحث.
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    } else {
+
+        tableBody.innerHTML =
+            pageProducts.map(
+                product => `
+
+                    <tr>
+
+                        <td>
+
+                            <div
+                                style="
+                                    display:flex;
+                                    align-items:center;
+                                    gap:10px;
+                                "
+                            >
+
+                                <div
+                                    style="
+                                        width:42px;
+                                        height:42px;
+                                        border-radius:9px;
+                                        background:#f1f5f2;
+                                        display:flex;
+                                        align-items:center;
+                                        justify-content:center;
+                                        overflow:hidden;
+                                        flex-shrink:0;
+                                    "
+                                >
+
+                                    ${
+                                        product.image
+
+                                        ?
+
+                                        `<img
+                                            src="${escapeHtml(product.image)}"
+                                            alt="${escapeHtml(product.name)}"
+                                            style="
+                                                width:100%;
+                                                height:100%;
+                                                object-fit:cover;
+                                            "
+                                        >`
+
+                                        :
+
+                                        "📦"
+                                    }
+
+                                </div>
+
+
+                                <div>
+
+                                    <strong>
+                                        ${escapeHtml(product.name)}
+                                    </strong>
+
+                                    <small
+                                        style="
+                                            display:block;
+                                            color:#7b8880;
+                                            margin-top:3px;
+                                        "
+                                    >
+                                        ${escapeHtml(product.unit)}
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            ${escapeHtml(product.sku || "-")}
+                        </td>
+
+
+                        <td>
+                            ${categoryNames[product.category] || "-"}
+                        </td>
+
+
+                        <td>
+
+                            <strong>
+                                ${formatMoney(product.price)}
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="${getStockClass(product)}"
+                            >
+                                ${formatNumber(product.stock)}
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="status ${
+                                    product.active
+                                    ? "status-completed"
+                                    : "status-cancelled"
+                                }"
+                            >
+
+                                ${
+                                    product.active
+                                    ? "نشط"
+                                    : "غير نشط"
+                                }
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div
+                                style="
+                                    display:flex;
+                                    gap:5px;
+                                "
+                            >
+
+                                <button
+                                    type="button"
+                                    class="table-action"
+                                    onclick="editProduct('${product.id}')"
+                                    title="تعديل"
+                                >
+                                    ✎
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="table-action"
+                                    onclick="toggleProduct('${product.id}')"
+                                    title="تفعيل / تعطيل"
+                                >
+                                    ${
+                                        product.active
+                                        ? "◉"
+                                        : "○"
+                                    }
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="table-action"
+                                    onclick="deleteProduct('${product.id}')"
+                                    title="حذف"
+                                >
+                                    ×
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                `
+            ).join("");
+
+    }
+
+
+    updatePagination();
+
+    updateProductStats();
+
+}
+
+
+/* =========================================================
+   STOCK CLASS
+========================================================= */
+
+function getStockClass(product) {
+
+    if (
+        Number(product.stock) <= 0
+    ) {
+
+        return "stock-danger";
+
+    }
+
+
+    if (
+        Number(product.stock) <=
+        Number(product.lowStock)
+    ) {
+
+        return "stock-warning";
+
+    }
+
+
+    return "stock-good";
+
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+function filterProducts() {
+
+    const search =
+        searchInput.value
+            .trim()
+            .toLowerCase();
+
+
+    const category =
+        categoryFilter.value;
+
+
+    const status =
+        statusFilter.value;
+
+
+    filteredProducts =
+        products.filter(
+            product => {
+
+
+                const matchesSearch =
+                    !search ||
+
+                    product.name
+                        .toLowerCase()
+                        .includes(search) ||
+
+                    String(
+                        product.sku || ""
+                    )
+                        .toLowerCase()
+                        .includes(search);
+
+
+                const matchesCategory =
+                    !category ||
+                    product.category ===
+                    category;
+
+
+                let matchesStatus = true;
+
+
+                if (
+                    status === "active"
+                ) {
+
+                    matchesStatus =
+                        product.active;
+
+                }
+
+
+                if (
+                    status === "inactive"
+                ) {
+
+                    matchesStatus =
+                        !product.active;
+
+                }
+
+
+                if (
+                    status === "low-stock"
+                ) {
+
+                    matchesStatus =
+                        Number(
+                            product.stock
+                        ) <=
+                        Number(
+                            product.lowStock
+                        );
+
+                }
+
+
+                return (
+                    matchesSearch &&
+                    matchesCategory &&
+                    matchesStatus
+                );
+
+            }
+        );
+
+
+    currentPage = 1;
+
+    renderProducts();
+
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function updateProductStats() {
+
+    const total =
+        products.length;
+
+
+    const active =
+        products.filter(
+            product =>
+                product.active
+        ).length;
+
+
+    const inactive =
+        products.filter(
+            product =>
+                !product.active
+        ).length;
+
+
+    const lowStock =
+        products.filter(
+            product =>
+                Number(product.stock) <=
+                Number(product.lowStock)
+        ).length;
+
+
+    document.getElementById(
+        "productsTotal"
+    ).textContent =
+        formatNumber(total);
+
+
+    document.getElementById(
+        "productsActive"
+    ).textContent =
+        formatNumber(active);
+
+
+    document.getElementById(
+        "productsInactive"
+    ).textContent =
+        formatNumber(inactive);
+
+
+    document.getElementById(
+        "productsLowStock"
+    ).textContent =
+        formatNumber(lowStock);
+
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+function updatePagination() {
+
+    const totalPages =
+        Math.ceil(
+            filteredProducts.length /
+            productsPerPage
+        );
+
+
+    const container =
+        document.getElementById(
+            "productsPagination"
+        );
+
+
+    const info =
+        document.getElementById(
+            "productsPaginationInfo"
+        );
+
+
+    info.textContent =
+        `${formatNumber(filteredProducts.length)} منتج`;
+
+
+    container.innerHTML = "";
+
+
+    if (
+        totalPages <= 1
+    ) {
+
+        return;
+
+    }
+
+
+    for (
+        let page = 1;
+        page <= totalPages;
+        page++
+    ) {
+
+        const button =
+            document.createElement(
+                "button"
+            );
+
+
+        button.type =
+            "button";
+
+
+        button.textContent =
+            page;
+
+
+        button.className =
+            "pagination-button";
+
+
+        if (
+            page === currentPage
+        ) {
+
+            button.classList.add(
+                "active"
+            );
+
+        }
+
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                currentPage =
+                    page;
+
+                renderProducts();
+
+            }
+        );
+
+
+        container.appendChild(
+            button
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   ADD PRODUCT
+========================================================= */
+
+document.getElementById(
+    "addProductButton"
+).addEventListener(
+    "click",
+    function () {
+
+        openProductModal();
+
+    }
+);
+
+
+/* =========================================================
+   OPEN MODAL
+========================================================= */
+
+function openProductModal(product = null) {
+
+    modal.hidden =
+        false;
+
+
+    document.body.style.overflow =
+        "hidden";
+
+
+    productForm.reset();
+
+
+    document.getElementById(
+        "productId"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "productActive"
+    ).checked =
+        true;
+
+
+    document.getElementById(
+        "productModalTitle"
+    ).textContent =
+        product
+        ? "تعديل المنتج"
+        : "إضافة منتج";
+
+
+    if (product) {
+
+        document.getElementById(
+            "productId"
+        ).value =
+            product.id;
+
+
+        document.getElementById(
+            "productName"
+        ).value =
+            product.name;
+
+
+        document.getElementById(
+            "productSku"
+        ).value =
+            product.sku;
+
+
+        document.getElementById(
+            "productCategory"
+        ).value =
+            product.category;
+
+
+        document.getElementById(
+            "productPrice"
+        ).value =
+            product.price;
+
+
+        document.getElementById(
+            "productUnit"
+        ).value =
+            product.unit;
+
+
+        document.getElementById(
+            "productStock"
+        ).value =
+            product.stock;
+
+
+        document.getElementById(
+            "productLowStock"
+        ).value =
+            product.lowStock;
+
+
+        document.getElementById(
+            "productImage"
+        ).value =
+            product.image;
+
+
+        document.getElementById(
+            "productDescription"
+        ).value =
+            product.description;
+
+
+        document.getElementById(
+            "productActive"
+        ).checked =
+            product.active;
+
+    }
+
+}
+
+
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
+
+function closeProductModal() {
+
+    modal.hidden =
+        true;
+
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+document.getElementById(
+    "closeProductModal"
+).addEventListener(
+    "click",
+    closeProductModal
+);
+
+
+document.getElementById(
+    "cancelProduct"
+).addEventListener(
+    "click",
+    closeProductModal
+);
+
+
+modal
+    .querySelector(
+        ".modal-overlay"
+    )
+    .addEventListener(
+        "click",
+        closeProductModal
+);
+
+
+/* =========================================================
+   EDIT PRODUCT
+========================================================= */
+
+window.editProduct =
+    function (id) {
+
+        const product =
+            products.find(
+                item =>
+                    item.id === id
+            );
+
+
+        if (!product) {
+            return;
+        }
+
+
+        openProductModal(
+            product
+        );
+
+    };
+
+
+/* =========================================================
+   SAVE PRODUCT
+========================================================= */
+
+productForm.addEventListener(
+    "submit",
+    function (event) {
+
+        event.preventDefault();
+
+
+        const id =
+            document.getElementById(
+                "productId"
+            ).value;
+
+
+        const productData = {
+
+            id:
+                id ||
+                Date.now().toString(),
+
+            name:
+                document.getElementById(
+                    "productName"
+                ).value.trim(),
+
+            sku:
+                document.getElementById(
+                    "productSku"
+                ).value.trim(),
+
+            category:
+                document.getElementById(
+                    "productCategory"
+                ).value,
+
+            price:
+                Number(
+                    document.getElementById(
+                        "productPrice"
+                    ).value
+                ),
+
+            unit:
+                document.getElementById(
+                    "productUnit"
+                ).value,
+
+            stock:
+                Number(
+                    document.getElementById(
+                        "productStock"
+                    ).value
+                ),
+
+            lowStock:
+                Number(
+                    document.getElementById(
+                        "productLowStock"
+                    ).value
+                ),
+
+            image:
+                document.getElementById(
+                    "productImage"
+                ).value.trim(),
+
+            description:
+                document.getElementById(
+                    "productDescription"
+                ).value.trim(),
+
+            active:
+                document.getElementById(
+                    "productActive"
+                ).checked
+
+        };
+
+
+        if (
+            !productData.name ||
+            !productData.category
+        ) {
+
+            alert(
+                "يرجى إدخال اسم المنتج والقسم."
+            );
+
+            return;
+
+        }
+
+
+        const existingIndex =
+            products.findIndex(
+                product =>
+                    product.id === id
+            );
+
+
+        if (
+            existingIndex >= 0
+        ) {
+
+            products[
+                existingIndex
+            ] =
+                productData;
+
+        } else {
+
+            products.push(
+                productData
+            );
+
+        }
+
+
+        filteredProducts =
+            [...products];
+
+
+        closeProductModal();
+
+        filterProducts();
+
+        showToast(
+            "تم حفظ المنتج بنجاح."
+        );
+
+    }
+);
+
+
+/* =========================================================
+   TOGGLE PRODUCT
+========================================================= */
+
+window.toggleProduct =
+    function (id) {
+
+        const product =
+            products.find(
+                item =>
+                    item.id === id
+            );
+
+
+        if (!product) {
+            return;
+        }
+
+
+        product.active =
+            !product.active;
+
+
+        renderProducts();
+
+
+        showToast(
+            product.active
+            ? "تم تفعيل المنتج."
+            : "تم إخفاء المنتج."
+        );
+
+    };
+
+
+/* =========================================================
+   DELETE PRODUCT
+========================================================= */
+
+window.deleteProduct =
+    function (id) {
+
+        const product =
+            products.find(
+                item =>
+                    item.id === id
+            );
+
+
+        if (!product) {
+            return;
+        }
+
+
+        const confirmed =
+            window.confirm(
+                `هل تريد حذف المنتج "${product.name}"؟`
+            );
+
+
+        if (!confirmed) {
+            return;
+        }
+
+
+        products =
+            products.filter(
+                item =>
+                    item.id !== id
+            );
+
+
+        filterProducts();
+
+
+        showToast(
+            "تم حذف المنتج."
+        );
+
+    };
+
+
+/* =========================================================
+   FILTER EVENTS
+========================================================= */
+
+searchInput.addEventListener(
+    "input",
+    filterProducts
+);
+
+
+categoryFilter.addEventListener(
+    "change",
+    filterProducts
+);
+
+
+statusFilter.addEventListener(
+    "change",
+    filterProducts
+);
+
+
+resetFilters.addEventListener(
+    "click",
+    function () {
+
+        searchInput.value =
+            "";
+
+        categoryFilter.value =
+            "";
+
+        statusFilter.value =
+            "";
+
+        filterProducts();
+
+    }
+);
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function formatMoney(value) {
+
+    return new Intl.NumberFormat(
+        "ar-EG",
+        {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }
+    ).format(
+        Number(value) || 0
+    ) + " ج.م";
+
+}
+
+
+function formatNumber(value) {
+
+    return new Intl.NumberFormat(
+        "ar-EG"
+    ).format(
+        Number(value) || 0
+    );
+
+}
+
+
+function escapeHtml(value) {
+
+    return String(
+        value ?? ""
+    )
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(message) {
+
+    const oldToast =
+        document.querySelector(
+            ".admin-toast"
+        );
+
+
+    if (oldToast) {
+        oldToast.remove();
+    }
+
+
+    const toast =
+        document.createElement(
+            "div"
+        );
+
+
+    toast.className =
+        "admin-toast";
+
+
+    toast.textContent =
+        message;
+
+
+    document.body.appendChild(
+        toast
+    );
+
+
+    setTimeout(
+        function () {
+
+            toast.classList.add(
+                "show"
+            );
+
+        },
+        20
+    );
+
+
+    setTimeout(
+        function () {
+
+            toast.classList.remove(
+                "show"
+            );
+
+
+            setTimeout(
+                function () {
+
+                    toast.remove();
+
+                },
+                300
+            );
+
+        },
+        2500
+    );
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        filterProducts();
+
+        /*
+           إذا كان الرابط يحتوي:
+           ?action=add
+
+           يتم فتح نافذة إضافة منتج تلقائياً.
+        */
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        if (
+            params.get("action") ===
+            "add"
+        ) {
+
+            openProductModal();
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+                  </html>
