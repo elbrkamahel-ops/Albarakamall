@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>إدارة الأقسام | لوحة تحكم مول البركة</title>
+
+    <meta name="description" content="إدارة أقسام مول البركة للخضروات والفواكه واللحوم والطيور والماركت والجزارة">
+
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="sidebar-header">
+            <div class="logo">البركة</div>
+            <h2>لوحة التحكم</h2>
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="../index.html">
+                <span>🏠</span>
+                الرئيسية
+            </a>
+
+            <a href="products.html">
+                <span>📦</span>
+                المنتجات
+            </a>
+
+            <a href="categories.html" class="active">
+                <span>🗂️</span>
+                الأقسام
+            </a>
+
+            <a href="orders.html">
+                <span>🛒</span>
+                الطلبات
+            </a>
+
+            <a href="customers.html">
+                <span>👥</span>
+                العملاء
+            </a>
+
+            <a href="offers.html">
+                <span>🏷️</span>
+                العروض
+            </a>
+
+            <a href="settings.html">
+                <span>⚙️</span>
+                الإعدادات
+            </a>
+
+            <a href="../../index.html">
+                <span>🌐</span>
+                الموقع الرئيسي
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Topbar -->
+        <header class="topbar">
+
+            <div>
+                <h1>إدارة الأقسام</h1>
+                <p>إضافة وتعديل وتنظيم أقسام المتجر</p>
+            </div>
+
+            <div class="admin-user">
+                <span>👤</span>
+                <strong>المدير</strong>
+            </div>
+
+        </header>
+
+
+        <!-- Statistics -->
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-icon">🗂️</div>
+                <div>
+                    <span>إجمالي الأقسام</span>
+                    <strong id="totalCategories">6</strong>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <div>
+                    <span>الأقسام النشطة</span>
+                    <strong id="activeCategories">6</strong>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">📦</div>
+                <div>
+                    <span>إجمالي المنتجات</span>
+                    <strong id="totalProducts">0</strong>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- Add Category -->
+        <section class="admin-card">
+
+            <div class="card-header">
+                <div>
+                    <h2>إضافة قسم جديد</h2>
+                    <p>أضف قسمًا جديدًا للمتجر</p>
+                </div>
+            </div>
+
+            <form id="categoryForm" class="admin-form">
+
+                <div class="form-group">
+                    <label for="categoryName">
+                        اسم القسم
+                    </label>
+
+                    <input
+                        type="text"
+                        id="categoryName"
+                        name="categoryName"
+                        placeholder="مثال: الخضروات"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="categoryDescription">
+                        وصف القسم
+                    </label>
+
+                    <textarea
+                        id="categoryDescription"
+                        name="categoryDescription"
+                        rows="4"
+                        placeholder="اكتب وصفًا مختصرًا للقسم"
+                    ></textarea>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="categoryIcon">
+                        أيقونة القسم
+                    </label>
+
+                    <input
+                        type="text"
+                        id="categoryIcon"
+                        name="categoryIcon"
+                        placeholder="🥦"
+                        maxlength="4"
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="categoryStatus">
+                        حالة القسم
+                    </label>
+
+                    <select id="categoryStatus" name="categoryStatus">
+
+                        <option value="active">
+                            نشط
+                        </option>
+
+                        <option value="inactive">
+                            غير نشط
+                        </option>
+
+                    </select>
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        إضافة القسم
+                    </button>
+
+                    <button
+                        type="reset"
+                        class="btn btn-secondary"
+                    >
+                        مسح
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- Categories Table -->
+        <section class="admin-card">
+
+            <div class="card-header">
+
+                <div>
+                    <h2>الأقسام الحالية</h2>
+                    <p>إدارة جميع أقسام المتجر</p>
+                </div>
+
+                <div class="table-tools">
+
+                    <input
+                        type="search"
+                        id="categorySearch"
+                        placeholder="بحث عن قسم..."
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="table-responsive">
+
+                <table class="admin-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>#</th>
+
+                            <th>القسم</th>
+
+                            <th>الوصف</th>
+
+                            <th>عدد المنتجات</th>
+
+                            <th>الحالة</th>
+
+                            <th>الإجراءات</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="categoriesTableBody">
+
+                        <tr>
+
+                            <td>1</td>
+
+                            <td>
+                                <div class="category-name">
+                                    <span>🥦</span>
+                                    الخضروات
+                                </div>
+                            </td>
+
+                            <td>
+                                خضروات طازجة يوميًا
+                            </td>
+
+                            <td>
+                                0
+                            </td>
+
+                            <td>
+                                <span class="status active">
+                                    نشط
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="btn btn-small btn-edit"
+                                    onclick="editCategory(1)"
+                                >
+                                    تعديل
+                                </button>
+
+                                <button
+                                    class="btn btn-small btn-delete"
+                                    onclick="deleteCategory(1)"
+                                >
+                                    حذف
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>2</td>
+
+                            <td>
+                                <div class="category-name">
+                                    <span>🍎</span>
+                                    الفواكه
+                                </div>
+                            </td>
+
+                            <td>
+                                فواكه طازجة ومختارة
+                            </td>
+
+                            <td>
+                                0
+                            </td>
+
+                            <td>
+                                <span class="status active">
+                                    نشط
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="btn btn-small btn-edit"
+                                    onclick="editCategory(2)"
+                                >
+                                    تعديل
+                                </button>
+
+                                <button
+                                    class="btn btn-small btn-delete"
+                                    onclick="deleteCategory(2)"
+                                >
+                                    حذف
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>3</td>
+
+                            <td>
+                                <div class="category-name">
+                                    <span>🥩</span>
+                                    اللحوم
+                                </div>
+                            </td>
+
+                            <td>
+                                لحوم طازجة عالية الجودة
+                            </td>
+
+                            <td>
+                                0
+                            </td>
+
+                            <td>
+                                <span class="status active">
+                                    نشط
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="btn btn-small btn-edit"
+                                    onclick="editCategory(3)"
+                                >
+                                    تعديل
+                                </button>
+
+                                <button
+                                    class="btn btn-small btn-delete"
+                                    onclick="deleteCategory(3)"
+                                >
+                                    حذف
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>4</td>
+
+                            <td>
+                                <div class="category-name">
+                                    <span>🐔</span>
+                                    الطيور
+                                </div>
+                            </td>
+
+                            <td>
+                                دواجن وطيور طازجة
+                            </td>
+
+                            <td>
+                                0
+                            </td>
+
+                            <td>
+                                <span class="status active">
+                                    نشط
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="btn btn-small btn-edit"
+                                    onclick="editCategory(4)"
+                                >
+                                    تعديل
+                                </button>
+
+                                <button
+                                    class="btn btn-small btn-delete"
+                                    onclick="deleteCategory(4)"
+                                >
+                                    حذف
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>5</td>
+
+                            <td>
+                                <div class="category-name">
+                                    <span>🛒</span>
+                                    الماركت
+                                </div>
+                            </td>
+
+                            <td>
+                                جميع منتجات السوبر ماركت
+                            </td>
+
+                            <td>
+                                0
+                            </td>
+
+                            <td>
+                                <span class="status active">
+                                    نشط
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="btn btn-small btn-edit"
+                                    onclick="editCategory(5)"
+                                >
+                                    تعديل
+                                </button>
+
+                                <button
+                                    class="btn btn-small btn-delete"
+                                    onclick="deleteCategory(5)"
+                                >
+                                    حذف
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>6</td>
+
+                            <td>
+                                <div class="category-name">
+                                    <span>🔪</span>
+                                    الجزارة
+                                </div>
+                            </td>
+
+                            <td>
+                                منتجات وتجهيزات الجزارة
+                            </td>
+
+                            <td>
+                                0
+                            </td>
+
+                            <td>
+                                <span class="status active">
+                                    نشط
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="btn btn-small btn-edit"
+                                    onclick="editCategory(6)"
+                                >
+                                    تعديل
+                                </button>
+
+                                <button
+                                    class="btn btn-small btn-delete"
+                                    onclick="deleteCategory(6)"
+                                >
+                                    حذف
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- JavaScript -->
+    <script>
+
+        const categoryForm =
+            document.getElementById("categoryForm");
+
+        const categorySearch =
+            document.getElementById("categorySearch");
+
+        const tableBody =
+            document.getElementById("categoriesTableBody");
+
+
+        categoryForm.addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const name =
+                document.getElementById("categoryName").value.trim();
+
+            const description =
+                document.getElementById("categoryDescription").value.trim();
+
+            const icon =
+                document.getElementById("categoryIcon").value.trim() || "🗂️";
+
+            const status =
+                document.getElementById("categoryStatus").value;
+
+
+            if (!name) {
+
+                alert("من فضلك اكتب اسم القسم");
+
+                return;
+
+            }
+
+
+            const row =
+                document.createElement("tr");
+
+
+            const rowNumber =
+                tableBody.children.length + 1;
+
+
+            row.innerHTML = `
+
+                <td>${rowNumber}</td>
+
+                <td>
+
+                    <div class="category-name">
+
+                        <span>${icon}</span>
+
+                        ${name}
+
+                    </div>
+
+                </td>
+
+                <td>
+                    ${description || "بدون وصف"}
+                </td>
+
+                <td>
+                    0
+                </td>
+
+                <td>
+
+                    <span class="status ${status}">
+                        ${status === "active" ? "نشط" : "غير نشط"}
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <button
+                        class="btn btn-small btn-edit"
+                        onclick="editCategory(${rowNumber})"
+                    >
+                        تعديل
+                    </button>
+
+                    <button
+                        class="btn btn-small btn-delete"
+                        onclick="deleteCategory(${rowNumber})"
+                    >
+                        حذف
+                    </button>
+
+                </td>
+
+            `;
+
+
+            tableBody.appendChild(row);
+
+
+            categoryForm.reset();
+
+
+            updateStatistics();
+
+
+            alert("تمت إضافة القسم بنجاح");
+
+        });
+
+
+        function deleteCategory(id) {
+
+            const confirmed =
+                confirm("هل أنت متأكد من حذف هذا القسم؟");
+
+
+            if (!confirmed) {
+
+                return;
+
+            }
+
+
+            const rows =
+                tableBody.querySelectorAll("tr");
+
+
+            if (rows[id - 1]) {
+
+                rows[id - 1].remove();
+
+            }
+
+
+            updateStatistics();
+
+        }
+
+
+        function editCategory(id) {
+
+            const rows =
+                tableBody.querySelectorAll("tr");
+
+
+            const row =
+                rows[id - 1];
+
+
+            if (!row) {
+
+                alert("لم يتم العثور على القسم");
+
+                return;
+
+            }
+
+
+            const name =
+                row.cells[1].innerText.trim();
+
+
+            const newName =
+                prompt("تعديل اسم القسم:", name);
+
+
+            if (
+                newName &&
+                newName.trim() !== ""
+            ) {
+
+                row.cells[1].innerHTML = `
+
+                    <div class="category-name">
+
+                        <span>🗂️</span>
+
+                        ${newName.trim()}
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        categorySearch.addEventListener("input", function() {
+
+            const search =
+                this.value.toLowerCase().trim();
+
+
+            const rows =
+                tableBody.querySelectorAll("tr");
+
+
+            rows.forEach(function(row) {
+
+                const text =
+                    row.innerText.toLowerCase();
+
+
+                row.style.display =
+                    text.includes(search)
+                        ? ""
+                        : "none";
+
+            });
+
+        });
+
+
+        function updateStatistics() {
+
+            const rows =
+                tableBody.querySelectorAll("tr");
+
+
+            document.getElementById(
+                "totalCategories"
+            ).textContent = rows.length;
+
+
+            let active = 0;
+
+
+            rows.forEach(function(row) {
+
+                if (
+                    row.innerText.includes("نشط")
+                ) {
+
+                    active++;
+
+                }
+
+            });
+
+
+            document.getElementById(
+                "activeCategories"
+            ).textContent = active;
+
+        }
+
+    </script>
+
+</body>
+  </html>
