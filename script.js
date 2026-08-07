@@ -1,111 +1,615 @@
-/* =====================================================
-   مول البركة - متجر إلكتروني
-   Albaraka Mall
-===================================================== */
+/* =========================================================
+   ALBARAKA MALL - متجر مول البركة
+   ملف: script.js
+   ========================================================= */
 
-const WHATSAPP = "201119511185";
+document.addEventListener("DOMContentLoaded", () => {
 
-const products = [
+  /* =========================
+     بيانات المتجر
+  ========================= */
 
-  {
-    id: 1,
-    name: "طماطم بلدي",
-    category: "produce",
-    categoryName: "خضروات وفاكهة",
-    price: 25,
-    unit: "كيلو",
-    emoji: "🍅",
-    description: "طماطم طازة مختارة يوميًا",
-    badge: "طازة"
-  },
+  const WHATSAPP = "201119511185";
 
-  {
-    id: 2,
-    name: "بطاطس",
-    category: "produce",
-    categoryName: "خضروات وفاكهة",
-    price: 22,
-    unit: "كيلو",
-    emoji: "🥔",
-    description: "بطاطس مختارة بجودة ممتازة",
-    badge: ""
-  },
+  const products = [
+    {
+      id: 1,
+      name: "طماطم طازجة",
+      category: "produce",
+      price: 25,
+      unit: "كجم",
+      emoji: "🍅",
+      description: "طماطم طازجة مختارة يوميًا"
+    },
+    {
+      id: 2,
+      name: "خيار طازج",
+      category: "produce",
+      price: 30,
+      unit: "كجم",
+      emoji: "🥒",
+      description: "خيار طازج عالي الجودة"
+    },
+    {
+      id: 3,
+      name: "بطاطس",
+      category: "produce",
+      price: 22,
+      unit: "كجم",
+      emoji: "🥔",
+      description: "بطاطس مناسبة للقلي والطبخ"
+    },
+    {
+      id: 4,
+      name: "تفاح",
+      category: "produce",
+      price: 65,
+      unit: "كجم",
+      emoji: "🍎",
+      description: "تفاح طازج ومختار"
+    },
+    {
+      id: 5,
+      name: "موز",
+      category: "produce",
+      price: 35,
+      unit: "كجم",
+      emoji: "🍌",
+      description: "موز طازج"
+    },
+    {
+      id: 6,
+      name: "برتقال",
+      category: "produce",
+      price: 30,
+      unit: "كجم",
+      emoji: "🍊",
+      description: "برتقال طازج"
+    },
 
-  {
-    id: 3,
-    name: "موز",
-    category: "produce",
-    categoryName: "خضروات وفاكهة",
-    price: 35,
-    unit: "كيلو",
-    emoji: "🍌",
-    description: "موز طازج مناسب للبيت",
-    badge: "عرض"
-  },
+    {
+      id: 7,
+      name: "لحم بقري",
+      category: "butcher",
+      price: 420,
+      unit: "كجم",
+      emoji: "🥩",
+      description: "لحم بقري طازج مجهز حسب الطلب"
+    },
+    {
+      id: 8,
+      name: "كبدة",
+      category: "butcher",
+      price: 350,
+      unit: "كجم",
+      emoji: "🥩",
+      description: "كبدة طازجة"
+    },
+    {
+      id: 9,
+      name: "مفروم بقري",
+      category: "butcher",
+      price: 390,
+      unit: "كجم",
+      emoji: "🥩",
+      description: "مفروم طازج"
+    },
 
-  {
-    id: 4,
-    name: "تفاح",
-    category: "produce",
-    categoryName: "خضروات وفاكهة",
-    price: 65,
-    unit: "كيلو",
-    emoji: "🍎",
-    description: "تفاح طازج مختار",
-    badge: ""
-  },
+    {
+      id: 10,
+      name: "دجاج كامل",
+      category: "poultry",
+      price: 120,
+      unit: "كجم",
+      emoji: "🍗",
+      description: "دجاج طازج"
+    },
+    {
+      id: 11,
+      name: "صدور دجاج",
+      category: "poultry",
+      price: 180,
+      unit: "كجم",
+      emoji: "🍗",
+      description: "صدور دجاج طازجة"
+    },
 
-  {
-    id: 5,
-    name: "برتقال",
-    category: "produce",
-    categoryName: "خضروات وفاكهة",
-    price: 30,
-    unit: "كيلو",
-    emoji: "🍊",
-    description: "برتقال طازج وعصير",
-    badge: "جديد"
-  },
+    {
+      id: 12,
+      name: "أرز",
+      category: "market",
+      price: 40,
+      unit: "كجم",
+      emoji: "🍚",
+      description: "أرز عالي الجودة"
+    },
+    {
+      id: 13,
+      name: "سكر",
+      category: "market",
+      price: 35,
+      unit: "كجم",
+      emoji: "🛍️",
+      description: "سكر أبيض"
+    },
+    {
+      id: 14,
+      name: "زيت طعام",
+      category: "market",
+      price: 90,
+      unit: "زجاجة",
+      emoji: "🫗",
+      description: "زيت طعام"
+    },
+    {
+      id: 15,
+      name: "مكرونة",
+      category: "market",
+      price: 20,
+      unit: "عبوة",
+      emoji: "🍝",
+      description: "مكرونة"
+    }
+  ];
 
-  {
-    id: 6,
-    name: "خيار",
-    category: "produce",
-    categoryName: "خضروات وفاكهة",
-    price: 28,
-    unit: "كيلو",
-    emoji: "🥒",
-    description: "خيار طازج يوميًا",
-    badge: ""
-  },
+
+  /* =========================
+     السلة
+  ========================= */
+
+  let cart = JSON.parse(localStorage.getItem("albarakaCart")) || [];
 
 
-  /* ================= اللحوم ================= */
+  /* =========================
+     العناصر
+  ========================= */
 
-  {
-    id: 7,
-    name: "لحمة كندوز",
-    category: "meat",
-    categoryName: "اللحوم",
-    price: 420,
-    unit: "كيلو",
-    emoji: "🥩",
-    description: "لحوم مختارة وتجهيز حسب الطلب",
-    badge: "مميز"
-  },
+  const productGrid =
+    document.querySelector("#productGrid") ||
+    document.querySelector(".product-grid") ||
+    document.querySelector(".products");
 
-  {
-    id: 8,
-    name: "لحم مفروم",
-    category: "meat",
-    categoryName: "اللحوم",
-    price: 390,
-    unit: "كيلو",
-    emoji: "🥩",
-    description: "مفروم طازج وتجهيز يومي",
-    badge: ""
-  },
+  const searchInput =
+    document.querySelector("#search") ||
+    document.querySelector("#searchInput");
 
+  const cartButton =
+    document.querySelector("#cartBtn") ||
+    document.querySelector(".cart-btn");
+
+  const cartCount =
+    document.querySelector("#cartCount") ||
+    document.querySelector(".cart-count");
+
+
+  /* =========================
+     حفظ السلة
+  ========================= */
+
+  function saveCart() {
+    localStorage.setItem(
+      "albarakaCart",
+      JSON.stringify(cart)
+    );
+  }
+
+
+  /* =========================
+     عدد المنتجات
+  ========================= */
+
+  function updateCartCount() {
+
+    const totalItems = cart.reduce(
+      (total, item) => total + item.quantity,
+      0
+    );
+
+    if (cartCount) {
+      cartCount.textContent = totalItems;
+    }
+  }
+
+
+  /* =========================
+     عرض المنتجات
+  ========================= */
+
+  function renderProducts(list = products) {
+
+    if (!productGrid) return;
+
+    if (!list.length) {
+
+      productGrid.innerHTML = `
+        <div class="empty-products">
+          <div>🔎</div>
+          <h3>لم نجد هذا المنتج</h3>
+          <p>جرب البحث باسم منتج آخر</p>
+        </div>
+      `;
+
+      return;
+    }
+
+    productGrid.innerHTML = list.map(product => {
+
+      const cartItem = cart.find(
+        item => item.id === product.id
+      );
+
+      const quantity = cartItem ? cartItem.quantity : 0;
+
+      return `
+        <article class="product-card">
+
+          <div class="product-image">
+            <span>${product.emoji}</span>
+          </div>
+
+          <div class="product-info">
+
+            <span class="product-category">
+              ${getCategoryName(product.category)}
+            </span>
+
+            <h3>${product.name}</h3>
+
+            <p>${product.description}</p>
+
+            <div class="product-bottom">
+
+              <div class="product-price">
+                <strong>${product.price}</strong>
+                <small>جنيه / ${product.unit}</small>
+              </div>
+
+              <button
+                class="add-to-cart"
+                data-id="${product.id}"
+              >
+                ${
+                  quantity > 0
+                    ? `🛒 ${quantity}`
+                    : "أضف للسلة"
+                }
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+      `;
+
+    }).join("");
+
+  }
+
+
+  /* =========================
+     اسم القسم
+  ========================= */
+
+  function getCategoryName(category) {
+
+    const names = {
+      produce: "خضروات وفاكهة",
+      butcher: "الجزارة",
+      poultry: "طيور ودواجن",
+      market: "الماركت"
+    };
+
+    return names[category] || "منتجات";
+  }
+
+
+  /* =========================
+     إضافة للسلة
+  ========================= */
+
+  function addToCart(productId) {
+
+    const product = products.find(
+      item => item.id === productId
+    );
+
+    if (!product) return;
+
+    const existing = cart.find(
+      item => item.id === productId
+    );
+
+    if (existing) {
+
+      existing.quantity += 1;
+
+    } else {
+
+      cart.push({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        unit: product.unit,
+        emoji: product.emoji,
+        quantity: 1
+      });
+
+    }
+
+    saveCart();
+    updateCartCount();
+    renderProducts();
+
+    showToast("تمت إضافة المنتج إلى السلة 🛒");
+  }
+
+
+  /* =========================
+     حذف من السلة
+  ========================= */
+
+  function removeFromCart(productId) {
+
+    cart = cart.filter(
+      item => item.id !== productId
+    );
+
+    saveCart();
+    updateCartCount();
+    renderProducts();
+    renderCart();
+
+  }
+
+
+  /* =========================
+     تغيير الكمية
+  ========================= */
+
+  function changeQuantity(productId, amount) {
+
+    const item = cart.find(
+      item => item.id === productId
+    );
+
+    if (!item) return;
+
+    item.quantity += amount;
+
+    if (item.quantity <= 0) {
+      removeFromCart(productId);
+      return;
+    }
+
+    saveCart();
+    updateCartCount();
+    renderProducts();
+    renderCart();
+
+  }
+
+
+  /* =========================
+     نافذة السلة
+  ========================= */
+
+  function createCartModal() {
+
+    if (document.querySelector("#cartModal")) return;
+
+    const modal = document.createElement("div");
+
+    modal.id = "cartModal";
+
+    modal.innerHTML = `
+      <div class="cart-overlay"></div>
+
+      <div class="cart-panel">
+
+        <button
+          class="cart-close"
+          id="closeCart"
+        >
+          ×
+        </button>
+
+        <div class="cart-header">
+          <span>🛒</span>
+          <div>
+            <h2>سلة المشتريات</h2>
+            <p>راجع طلبك قبل الإرسال</p>
+          </div>
+        </div>
+
+        <div id="cartItems"></div>
+
+        <div class="cart-footer">
+
+          <div class="cart-total">
+            <span>الإجمالي</span>
+            <strong id="cartTotal">0 جنيه</strong>
+          </div>
+
+          <button
+            class="checkout-btn"
+            id="checkoutWhatsApp"
+          >
+            إتمام الطلب عبر واتساب
+          </button>
+
+          <button
+            class="clear-cart"
+            id="clearCart"
+          >
+            إفراغ السلة
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    document
+      .querySelector("#closeCart")
+      ?.addEventListener("click", closeCart);
+
+    document
+      .querySelector(".cart-overlay")
+      ?.addEventListener("click", closeCart);
+
+    document
+      .querySelector("#clearCart")
+      ?.addEventListener("click", clearCart);
+
+    document
+      .querySelector("#checkoutWhatsApp")
+      ?.addEventListener(
+        "click",
+        sendWhatsAppOrder
+      );
+
+  }
+
+
+  /* =========================
+     فتح السلة
+  ========================= */
+
+  function openCart() {
+
+    createCartModal();
+
+    renderCart();
+
+    const modal =
+      document.querySelector("#cartModal");
+
+    if (modal) {
+      modal.classList.add("show");
+      document.body.classList.add("cart-open");
+    }
+
+  }
+
+
+  /* =========================
+     إغلاق السلة
+  ========================= */
+
+  function closeCart() {
+
+    const modal =
+      document.querySelector("#cartModal");
+
+    if (modal) {
+      modal.classList.remove("show");
+    }
+
+    document.body.classList.remove("cart-open");
+
+  }
+
+
+  /* =========================
+     عرض محتويات السلة
+  ========================= */
+
+  function renderCart() {
+
+    const container =
+      document.querySelector("#cartItems");
+
+    const totalElement =
+      document.querySelector("#cartTotal");
+
+    if (!container) return;
+
+    if (!cart.length) {
+
+      container.innerHTML = `
+        <div class="empty-cart">
+          <div>🛒</div>
+          <h3>السلة فارغة</h3>
+          <p>أضف المنتجات التي تحتاجها إلى السلة</p>
+        </div>
+      `;
+
+      if (totalElement) {
+        totalElement.textContent = "0 جنيه";
+      }
+
+      return;
+    }
+
+
+    let total = 0;
+
+    container.innerHTML = cart.map(item => {
+
+      const itemTotal =
+        item.price * item.quantity;
+
+      total += itemTotal;
+
+      return `
+        <div class="cart-item">
+
+          <div class="cart-item-icon">
+            ${item.emoji}
+          </div>
+
+          <div class="cart-item-info">
+
+            <h4>${item.name}</h4>
+
+            <span>
+              ${item.price} جنيه / ${item.unit}
+            </span>
+
+            <strong>
+              ${itemTotal} جنيه
+            </strong>
+
+          </div>
+
+          <div class="quantity-controls">
+
+            <button
+              data-action="increase"
+              data-id="${item.id}"
+            >
+              +
+            </button>
+
+            <span>${item.quantity}</span>
+
+            <button
+              data-action="decrease"
+              data-id="${item.id}"
+            >
+              −
+            </button>
+
+          </div>
+
+          <button
+            class="remove-item"
+            data-action="remove"
+            data-id="${item.id}"
+          >
+            🗑️
+          </button>
+
+        </div>
+      `;
+
+    }).join("");
+
+
+    if (totalElement)
   {
     id: 9,
     name: "ستيك لحمة",
