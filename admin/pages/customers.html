@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>إدارة العملاء | لوحة تحكم مول البركة</title>
+
+    <meta name="description"
+          content="إدارة بيانات العملاء في مول البركة">
+
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+
+<body>
+
+    <!-- ============================= -->
+    <!-- Sidebar -->
+    <!-- ============================= -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-header">
+
+            <div class="logo">
+                البركة
+            </div>
+
+            <h2>
+                لوحة التحكم
+            </h2>
+
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <a href="../index.html">
+                <span>🏠</span>
+                الرئيسية
+            </a>
+
+            <a href="products.html">
+                <span>📦</span>
+                المنتجات
+            </a>
+
+            <a href="categories.html">
+                <span>🗂️</span>
+                الأقسام
+            </a>
+
+            <a href="orders.html">
+                <span>🛒</span>
+                الطلبات
+            </a>
+
+            <a href="customers.html" class="active">
+                <span>👥</span>
+                العملاء
+            </a>
+
+            <a href="offers.html">
+                <span>🏷️</span>
+                العروض
+            </a>
+
+            <a href="settings.html">
+                <span>⚙️</span>
+                الإعدادات
+            </a>
+
+            <a href="../../index.html">
+                <span>🌐</span>
+                الموقع الرئيسي
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- ============================= -->
+    <!-- Main Content -->
+    <!-- ============================= -->
+
+    <main class="main-content">
+
+
+        <!-- Topbar -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+                    إدارة العملاء
+                </h1>
+
+                <p>
+                    متابعة العملاء وبياناتهم وطلبات الشراء
+                </p>
+
+            </div>
+
+
+            <div class="admin-user">
+
+                <span>
+                    👤
+                </span>
+
+                <strong>
+                    المدير
+                </strong>
+
+            </div>
+
+        </header>
+
+
+        <!-- ============================= -->
+        <!-- Statistics -->
+        <!-- ============================= -->
+
+        <section class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    👥
+                </div>
+
+                <div>
+
+                    <span>
+                        إجمالي العملاء
+                    </span>
+
+                    <strong id="totalCustomers">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🟢
+                </div>
+
+                <div>
+
+                    <span>
+                        العملاء النشطون
+                    </span>
+
+                    <strong id="activeCustomers">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🛒
+                </div>
+
+                <div>
+
+                    <span>
+                        إجمالي الطلبات
+                    </span>
+
+                    <strong id="customerOrders">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    💰
+                </div>
+
+                <div>
+
+                    <span>
+                        إجمالي المبيعات
+                    </span>
+
+                    <strong id="customerSales">
+                        0 جنيه
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ============================= -->
+        <!-- Customers -->
+        <!-- ============================= -->
+
+        <section class="admin-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        قائمة العملاء
+                    </h2>
+
+                    <p>
+                        جميع العملاء المسجلين في النظام
+                    </p>
+
+                </div>
+
+
+                <div class="table-tools">
+
+                    <input
+                        type="search"
+                        id="customerSearch"
+                        placeholder="بحث بالاسم أو الهاتف..."
+                    >
+
+
+                    <select id="customerStatusFilter">
+
+                        <option value="all">
+                            جميع العملاء
+                        </option>
+
+                        <option value="active">
+                            نشط
+                        </option>
+
+                        <option value="inactive">
+                            غير نشط
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- ============================= -->
+            <!-- Customers Table -->
+            <!-- ============================= -->
+
+            <div class="table-responsive">
+
+                <table class="admin-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                #
+                            </th>
+
+                            <th>
+                                العميل
+                            </th>
+
+                            <th>
+                                الهاتف
+                            </th>
+
+                            <th>
+                                عدد الطلبات
+                            </th>
+
+                            <th>
+                                إجمالي المشتريات
+                            </th>
+
+                            <th>
+                                آخر طلب
+                            </th>
+
+                            <th>
+                                الحالة
+                            </th>
+
+                            <th>
+                                الإجراءات
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="customersTableBody">
+
+                        <tr>
+
+                            <td
+                                colspan="8"
+                                style="
+                                    text-align:center;
+                                    padding:40px;
+                                "
+                            >
+
+                                <div style="font-size:40px;">
+                                    👥
+                                </div>
+
+                                <p>
+                                    لا يوجد عملاء حتى الآن
+                                </p>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ============================= -->
+        <!-- Customer Modal -->
+        <!-- ============================= -->
+
+        <div
+            id="customerModal"
+            class="modal"
+            style="display:none;"
+        >
+
+            <div class="modal-content">
+
+
+                <div class="modal-header">
+
+                    <h2>
+                        بيانات العميل
+                    </h2>
+
+                    <button
+                        type="button"
+                        class="modal-close"
+                        onclick="closeCustomerModal()"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="customerDetails"
+                    class="modal-body"
+                >
+                </div>
+
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        onclick="closeCustomerModal()"
+                    >
+                        إغلاق
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ============================= -->
+    <!-- JavaScript -->
+    <!-- ============================= -->
+
+    <script>
+
+        /*
+        ==========================================
+        بيانات العملاء
+        ==========================================
+
+        البيانات هنا تجريبية.
+
+        عند ربط المشروع بقاعدة البيانات
+        سيتم تحميل العملاء تلقائيًا.
+        */
+
+
+        let customers = [
+
+            /*
+            مثال:
+
+            {
+                id: 1,
+                name: "أحمد محمد",
+                phone: "01000000000",
+                address: "القاهرة",
+                orders: 5,
+                totalSpent: 1250,
+                lastOrder: "2026-08-08",
+                status: "active"
+            }
+            */
+
+        ];
+
+
+        const tableBody =
+            document.getElementById(
+                "customersTableBody"
+            );
+
+
+        const searchInput =
+            document.getElementById(
+                "customerSearch"
+            );
+
+
+        const statusFilter =
+            document.getElementById(
+                "customerStatusFilter"
+            );
+
+
+        /*
+        ==========================================
+        عرض العملاء
+        ==========================================
+        */
+
+
+        function renderCustomers() {
+
+            tableBody.innerHTML = "";
+
+
+            const searchValue =
+                searchInput.value
+                    .toLowerCase()
+                    .trim();
+
+
+            const selectedStatus =
+                statusFilter.value;
+
+
+            const filteredCustomers =
+                customers.filter(function(customer) {
+
+
+                    const matchesSearch =
+
+                        customer.name
+                            .toLowerCase()
+                            .includes(searchValue)
+
+                        ||
+
+                        customer.phone
+                            .includes(searchValue);
+
+
+                    const matchesStatus =
+
+                        selectedStatus === "all"
+
+                        ||
+
+                        customer.status === selectedStatus;
+
+
+                    return (
+                        matchesSearch &&
+                        matchesStatus
+                    );
+
+                });
+
+
+            if (
+                filteredCustomers.length === 0
+            ) {
+
+                tableBody.innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="8"
+                            style="
+                                text-align:center;
+                                padding:40px;
+                            "
+                        >
+
+                            <div style="font-size:40px;">
+                                👥
+                            </div>
+
+                            <p>
+                                لا توجد بيانات عملاء
+                            </p>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+                updateStatistics();
+
+                return;
+            }
+
+
+            filteredCustomers.forEach(
+                function(customer, index) {
+
+
+                    const row =
+                        document.createElement("tr");
+
+
+                    row.innerHTML = `
+
+                        <td>
+                            ${index + 1}
+                        </td>
+
+
+                        <td>
+
+                            <div class="category-name">
+
+                                <span>
+                                    👤
+                                </span>
+
+                                <strong>
+                                    ${customer.name}
+                                </strong>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            ${customer.phone}
+                        </td>
+
+
+                        <td>
+                            ${customer.orders}
+                        </td>
+
+
+                        <td>
+                            ${Number(
+                                customer.totalSpent
+                            ).toLocaleString("ar-EG")}
+                            جنيه
+                        </td>
+
+
+                        <td>
+                            ${customer.lastOrder || "لا يوجد"}
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="status ${
+                                    customer.status
+                                }"
+                            >
+
+                                ${
+                                    customer.status === "active"
+                                    ? "نشط"
+                                    : "غير نشط"
+                                }
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="btn btn-small btn-edit"
+                                onclick="viewCustomer(${customer.id})"
+                            >
+                                التفاصيل
+                            </button>
+
+
+                            <button
+                                class="btn btn-small btn-primary"
+                                onclick="toggleCustomerStatus(${customer.id})"
+                            >
+                                الحالة
+                            </button>
+
+
+                            <button
+                                class="btn btn-small btn-delete"
+                                onclick="deleteCustomer(${customer.id})"
+                            >
+                                حذف
+                            </button>
+
+                        </td>
+
+                    `;
+
+
+                    tableBody.appendChild(row);
+
+                }
+            );
+
+
+            updateStatistics();
+
+        }
+
+
+        /*
+        ==========================================
+        الإحصائيات
+        ==========================================
+        */
+
+
+        function updateStatistics() {
+
+
+            const total =
+                customers.length;
+
+
+            const active =
+                customers.filter(
+                    function(customer) {
+
+                        return (
+                            customer.status ===
+                            "active"
+                        );
+
+                    }
+                ).length;
+
+
+            const totalOrders =
+                customers.reduce(
+                    function(sum, customer) {
+
+                        return (
+                            sum +
+                            Number(customer.orders || 0)
+                        );
+
+                    },
+                    0
+                );
+
+
+            const totalSales =
+                customers.reduce(
+                    function(sum, customer) {
+
+                        return (
+                            sum +
+                            Number(
+                                customer.totalSpent || 0
+                            )
+                        );
+
+                    },
+                    0
+                );
+
+
+            document.getElementById(
+                "totalCustomers"
+            ).textContent = total;
+
+
+            document.getElementById(
+                "activeCustomers"
+            ).textContent = active;
+
+
+            document.getElementById(
+                "customerOrders"
+            ).textContent = totalOrders;
+
+
+            document.getElementById(
+                "customerSales"
+            ).textContent =
+
+                totalSales.toLocaleString(
+                    "ar-EG"
+                ) + " جنيه";
+
+        }
+
+
+        /*
+        ==========================================
+        عرض تفاصيل العميل
+        ==========================================
+        */
+
+
+        function viewCustomer(customerId) {
+
+
+            const customer =
+                customers.find(
+                    function(item) {
+
+                        return (
+                            item.id ===
+                            customerId
+                        );
+
+                    }
+                );
+
+
+            if (!customer) {
+
+                alert(
+                    "لم يتم العثور على العميل"
+                );
+
+                return;
+
+            }
+
+
+            document.getElementById(
+                "customerDetails"
+            ).innerHTML = `
+
+                <div>
+
+                    <p>
+                        <strong>
+                            الاسم:
+                        </strong>
+
+                        ${customer.name}
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            الهاتف:
+                        </strong>
+
+                        ${customer.phone}
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            العنوان:
+                        </strong>
+
+                        ${customer.address || "غير مسجل"}
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            عدد الطلبات:
+                        </strong>
+
+                        ${customer.orders}
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            إجمالي المشتريات:
+                        </strong>
+
+                        ${Number(
+                            customer.totalSpent
+                        ).toLocaleString("ar-EG")}
+
+                        جنيه
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            آخر طلب:
+                        </strong>
+
+                        ${customer.lastOrder || "لا يوجد"}
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            الحالة:
+                        </strong>
+
+                        ${
+                            customer.status === "active"
+                            ? "نشط"
+                            : "غير نشط"
+                        }
+
+                    </p>
+
+                </div>
+
+            `;
+
+
+            document.getElementById(
+                "customerModal"
+            ).style.display = "flex";
+
+        }
+
+
+        /*
+        ==========================================
+        إغلاق النافذة
+        ==========================================
+        */
+
+
+        function closeCustomerModal() {
+
+            document.getElementById(
+                "customerModal"
+            ).style.display = "none";
+
+        }
+
+
+        /*
+        ==========================================
+        تغيير حالة العميل
+        ==========================================
+        */
+
+
+        function toggleCustomerStatus(
+            customerId
+        ) {
+
+
+            const customer =
+                customers.find(
+                    function(item) {
+
+                        return (
+                            item.id ===
+                            customerId
+                        );
+
+                    }
+                );
+
+
+            if (!customer) {
+
+                return;
+
+            }
+
+
+            customer.status =
+
+                customer.status === "active"
+                ? "inactive"
+                : "active";
+
+
+            renderCustomers();
+
+        }
+
+
+        /*
+        ==========================================
+        حذف العميل
+        ==========================================
+        */
+
+
+        function deleteCustomer(
+            customerId
+        ) {
+
+
+            const confirmed =
+                confirm(
+                    "هل أنت متأكد من حذف هذا العميل؟"
+                );
+
+
+            if (!confirmed) {
+
+                return;
+
+            }
+
+
+            customers =
+                customers.filter(
+                    function(customer) {
+
+                        return (
+                            customer.id !==
+                            customerId
+                        );
+
+                    }
+                );
+
+
+            renderCustomers();
+
+
+            alert(
+                "تم حذف العميل"
+            );
+
+        }
+
+
+        /*
+        ==========================================
+        البحث
+        ==========================================
+        */
+
+
+        searchInput.addEventListener(
+            "input",
+            renderCustomers
+        );
+
+
+        /*
+        ==========================================
+        فلترة الحالة
+        ==========================================
+        */
+
+
+        statusFilter.addEventListener(
+            "change",
+            renderCustomers
+        );
+
+
+        /*
+        ==========================================
+        إغلاق النافذة عند الضغط خارجها
+        ==========================================
+        */
+
+
+        document
+            .getElementById("customerModal")
+            .addEventListener(
+                "click",
+                function(event) {
+
+                    if (
+                        event.target === this
+                    ) {
+
+                        closeCustomerModal();
+
+                    }
+
+                }
+            );
+
+
+        /*
+        ==========================================
+        التشغيل الأول
+        ==========================================
+        */
+
+
+        renderCustomers();
+
+    </script>
+
+</body>
+
+  </html>
