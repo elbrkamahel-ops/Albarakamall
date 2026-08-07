@@ -1,111 +1,814 @@
 /* =========================================================
-   مول البركة - أولاد الجارحي
-   app.js
-   ========================================================= */
+   مول البركة - app.js
+   متجر إلكتروني
+========================================================= */
+
+const API_BASE = "api";
+
+let products = [];
+let cart = JSON.parse(localStorage.getItem("albaraka_cart") || "[]");
+
+let currentCategory = "all";
+let currentSearch = "";
+
+
+/* =========================================================
+   منتجات تجريبية
+   سيتم استبدالها بقاعدة البيانات عند المرحلة القادمة
+========================================================= */
+
+const demoProducts = [
+    {
+        id: 1,
+        name: "طماطم بلدي",
+        category: "خضروات وفاكهة",
+        price: 25,
+        unit: "كيلو",
+        image: "",
+        emoji: "🍅"
+    },
+
+    {
+        id: 2,
+        name: "بطاطس",
+        category: "خضروات وفاكهة",
+        price: 28,
+        unit: "كيلو",
+        image: "",
+        emoji: "🥔"
+    },
+
+    {
+        id: 3,
+        name: "بصل",
+        category: "خضروات وفاكهة",
+        price: 30,
+        unit: "كيلو",
+        image: "",
+        emoji: "🧅"
+    },
+
+    {
+        id: 4,
+        name: "موز",
+        category: "خضروات وفاكهة",
+        price: 35,
+        unit: "كيلو",
+        image: "",
+        emoji: "🍌"
+    },
+
+    {
+        id: 5,
+        name: "تفاح",
+        category: "خضروات وفاكهة",
+        price: 65,
+        unit: "كيلو",
+        image: "",
+        emoji: "🍎"
+    },
+
+    {
+        id: 6,
+        name: "لحمة بلدي",
+        category: "لحوم",
+        price: 420,
+        unit: "كيلو",
+        image: "",
+        emoji: "🥩"
+    },
+
+    {
+        id: 7,
+        name: "كبدة بلدي",
+        category: "جزارة",
+        price: 390,
+        unit: "كيلو",
+        image: "",
+        emoji: "🥩"
+    },
+
+    {
+        id: 8,
+        name: "فراخ كاملة",
+        category: "دواجن",
+        price: 115,
+        unit: "كيلو",
+        image: "",
+        emoji: "🍗"
+    },
+
+    {
+        id: 9,
+        name: "صدور فراخ",
+        category: "دواجن",
+        price: 180,
+        unit: "كيلو",
+        image: "",
+        emoji: "🍗"
+    },
+
+    {
+        id: 10,
+        name: "أرز فاخر",
+        category: "ماركت",
+        price: 45,
+        unit: "كيلو",
+        image: "",
+        emoji: "🍚"
+    },
+
+    {
+        id: 11,
+        name: "زيت طعام",
+        category: "ماركت",
+        price: 85,
+        unit: "عبوة",
+        image: "",
+        emoji: "🫗"
+    },
+
+    {
+        id: 12,
+        name: "لبن كامل الدسم",
+        category: "ماركت",
+        price: 42,
+        unit: "عبوة",
+        image: "",
+        emoji: "🥛"
+    },
+
+    {
+        id: 13,
+        name: "بيض أبيض",
+        category: "ماركت",
+        price: 75,
+        unit: "كرتونة",
+        image: "",
+        emoji: "🥚"
+    },
+
+    {
+        id: 14,
+        name: "خبز طازج",
+        category: "ماركت",
+        price: 25,
+        unit: "كيس",
+        image: "",
+        emoji: "🍞"
+    },
+
+    {
+        id: 15,
+        name: "منظف أرضيات",
+        category: "منظفات",
+        price: 75,
+        unit: "عبوة",
+        image: "",
+        emoji: "🧴"
+    },
+
+    {
+        id: 16,
+        name: "مناديل ورقية",
+        category: "منظفات",
+        price: 55,
+        unit: "عبوة",
+        image: "",
+        emoji: "🧻"
+    }
+];
+
+
+/* =========================================================
+   بدء الموقع
+========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* =========================
-     إعدادات المتجر
-  ========================= */
+    loadProducts();
 
-  const WHATSAPP_NUMBER = "201119511185";
+    updateCartCount();
 
-  const products = [
+    renderCart();
 
-    {
-      id: 1,
-      name: "طماطم طازجة",
-      category: "vegetables",
-      categoryName: "خضروات",
-      price: 25,
-      unit: "كجم",
-      emoji: "🍅",
-      description: "طماطم طازجة مختارة يوميًا"
-    },
+    setupSearch();
 
-    {
-      id: 2,
-      name: "خيار طازج",
-      category: "vegetables",
-      categoryName: "خضروات",
-      price: 30,
-      unit: "كجم",
-      emoji: "🥒",
-      description: "خيار طازج عالي الجودة"
-    },
+});
 
-    {
-      id: 3,
-      name: "بطاطس",
-      category: "vegetables",
-      categoryName: "خضروات",
-      price: 22,
-      unit: "كجم",
-      emoji: "🥔",
-      description: "بطاطس طازجة للطبخ والقلي"
-    },
 
-    {
-      id: 4,
-      name: "جزر",
-      category: "vegetables",
-      categoryName: "خضروات",
-      price: 25,
-      unit: "كجم",
-      emoji: "🥕",
-      description: "جزر طازج"
-    },
+/* =========================================================
+   تحميل المنتجات
+========================================================= */
 
-    {
-      id: 5,
-      name: "تفاح",
-      category: "fruits",
-      categoryName: "فاكهة",
-      price: 65,
-      unit: "كجم",
-      emoji: "🍎",
-      description: "تفاح طازج ومختار"
-    },
+async function loadProducts() {
 
-    {
-      id: 6,
-      name: "موز",
-      category: "fruits",
-      categoryName: "فاكهة",
-      price: 35,
-      unit: "كجم",
-      emoji: "🍌",
-      description: "موز طازج"
-    },
+    try {
 
-    {
-      id: 7,
-      name: "برتقال",
-      category: "fruits",
-      categoryName: "فاكهة",
-      price: 30,
-      unit: "كجم",
-      emoji: "🍊",
-      description: "برتقال طازج"
-    },
+        const response = await fetch(
+            `${API_BASE}/products.php`
+        );
 
-    {
-      id: 8,
-      name: "فراولة",
-      category: "fruits",
-      categoryName: "فاكهة",
-      price: 60,
-      unit: "كجم",
-      emoji: "🍓",
-      description: "فراولة طازجة"
-    },
+        if (!response.ok) {
+            throw new Error("API unavailable");
+        }
 
-    {
-      id: 9,
-      name: "لحم بقري",
-      category: "meat",
-      categoryName: "لحوم",
+        const data = await response.json();
+
+        if (Array.isArray(data) && data.length) {
+
+            products = data.map(item => ({
+                id: Number(item.id),
+
+                name: item.name,
+
+                category: item.c,
+
+                price: Number(item.p),
+
+                unit: item.u || "قطعة",
+
+                image: item.img || "",
+
+                emoji: "🛒"
+            }));
+
+        } else {
+
+            products = demoProducts;
+
+        }
+
+    } catch (error) {
+
+        console.log(
+            "Using demo products:",
+            error
+        );
+
+        products = demoProducts;
+
+    }
+
+    renderProducts();
+
+}
+
+
+/* =========================================================
+   عرض المنتجات
+========================================================= */
+
+function renderProducts() {
+
+    const grid =
+        document.getElementById("productsGrid");
+
+    const noProducts =
+        document.getElementById("noProducts");
+
+    if (!grid) return;
+
+    let filtered = [...products];
+
+
+    /* فلترة القسم */
+
+    if (currentCategory !== "all") {
+
+        filtered =
+            filtered.filter(product =>
+                product.category === currentCategory
+            );
+
+    }
+
+
+    /* البحث */
+
+    if (currentSearch.trim()) {
+
+        const search =
+            currentSearch.trim().toLowerCase();
+
+        filtered =
+            filtered.filter(product =>
+                product.name
+                    .toLowerCase()
+                    .includes(search)
+            );
+
+    }
+
+
+    if (!filtered.length) {
+
+        grid.innerHTML = "";
+
+        if (noProducts) {
+            noProducts.style.display = "block";
+        }
+
+        return;
+
+    }
+
+
+    if (noProducts) {
+        noProducts.style.display = "none";
+    }
+
+
+    grid.innerHTML =
+        filtered
+            .map(product => createProductCard(product))
+            .join("");
+
+}
+
+
+/* =========================================================
+   بطاقة المنتج
+========================================================= */
+
+function createProductCard(product) {
+
+    const image = product.image
+        ? `
+            <img
+                src="${escapeHtml(product.image)}"
+                alt="${escapeHtml(product.name)}"
+                loading="lazy"
+            >
+        `
+        : `
+            <span class="product-emoji">
+                ${product.emoji || "🛒"}
+            </span>
+        `;
+
+
+    return `
+        <article
+            class="product-card"
+            data-product-id="${product.id}"
+        >
+
+            <div class="product-image">
+
+                ${image}
+
+                ${
+                    product.category === "عروض"
+                    ? `
+                        <span class="product-badge">
+                            عرض
+                        </span>
+                    `
+                    : ""
+                }
+
+            </div>
+
+
+            <div class="product-body">
+
+                <div class="product-category">
+                    ${escapeHtml(product.category)}
+                </div>
+
+
+                <h3 class="product-name">
+                    ${escapeHtml(product.name)}
+                </h3>
+
+
+                <div class="product-meta">
+
+                    <strong class="product-price">
+                        ${formatPrice(product.price)}
+                        جنيه
+                    </strong>
+
+                    <span class="product-unit">
+                        / ${escapeHtml(product.unit)}
+                    </span>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="product-add"
+                    onclick="addToCart(${product.id})"
+                >
+                    🛒 أضف إلى السلة
+                </button>
+
+            </div>
+
+        </article>
+    `;
+
+}
+
+
+/* =========================================================
+   البحث
+========================================================= */
+
+function setupSearch() {
+
+    const input =
+        document.getElementById("searchInput");
+
+    if (!input) return;
+
+
+    input.addEventListener(
+        "input",
+        function () {
+
+            currentSearch = this.value;
+
+            renderProducts();
+
+        }
+    );
+
+
+    input.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Enter") {
+
+                searchProducts();
+
+            }
+
+        }
+    );
+
+}
+
+
+function searchProducts() {
+
+    const input =
+        document.getElementById("searchInput");
+
+    if (input) {
+
+        currentSearch =
+            input.value;
+
+    }
+
+    renderProducts();
+
+    const productsSection =
+        document.getElementById("products");
+
+    if (productsSection) {
+
+        productsSection.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }
+
+}
+
+
+/* =========================================================
+   فلترة الأقسام
+========================================================= */
+
+function filterCategory(category) {
+
+    currentCategory = category;
+
+    document
+        .querySelectorAll(".filter-btn")
+        .forEach(button => {
+
+            button.classList.remove("active");
+
+        });
+
+
+    document
+        .querySelectorAll(".filter-btn")
+        .forEach(button => {
+
+            const text =
+                button.textContent.trim();
+
+            if (
+                category === "all" &&
+                text === "الكل"
+            ) {
+
+                button.classList.add("active");
+
+            }
+
+            if (
+                category !== "all" &&
+                text === category
+            ) {
+
+                button.classList.add("active");
+
+            }
+
+        });
+
+
+    renderProducts();
+
+
+    const productsSection =
+        document.getElementById("products");
+
+    if (productsSection) {
+
+        productsSection.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }
+
+}
+
+
+/* =========================================================
+   إضافة منتج للسلة
+========================================================= */
+
+function addToCart(productId) {
+
+    const product =
+        products.find(
+            item => Number(item.id) === Number(productId)
+        );
+
+
+    if (!product) {
+
+        showMessage(
+            "المنتج غير موجود"
+        );
+
+        return;
+
+    }
+
+
+    const existing =
+        cart.find(
+            item => Number(item.id) === Number(productId)
+        );
+
+
+    if (existing) {
+
+        existing.qty += 1;
+
+    } else {
+
+        cart.push({
+
+            id: product.id,
+
+            name: product.name,
+
+            price: Number(product.price),
+
+            unit: product.unit,
+
+            image: product.image || "",
+
+            emoji: product.emoji || "🛒",
+
+            qty: 1
+
+        });
+
+    }
+
+
+    saveCart();
+
+    updateCartCount();
+
+    renderCart();
+
+    showMessage(
+        "تمت إضافة المنتج إلى السلة ✓"
+    );
+
+}
+
+
+/* =========================================================
+   زيادة الكمية
+========================================================= */
+
+function increaseQuantity(productId) {
+
+    const item =
+        cart.find(
+            product =>
+                Number(product.id) === Number(productId)
+        );
+
+
+    if (!item) return;
+
+
+    item.qty += 1;
+
+    saveCart();
+
+    updateCartCount();
+
+    renderCart();
+
+}
+
+
+/* =========================================================
+   تقليل الكمية
+========================================================= */
+
+function decreaseQuantity(productId) {
+
+    const item =
+        cart.find(
+            product =>
+                Number(product.id) === Number(productId)
+        );
+
+
+    if (!item) return;
+
+
+    item.qty -= 1;
+
+
+    if (item.qty <= 0) {
+
+        cart =
+            cart.filter(
+                product =>
+                    Number(product.id) !== Number(productId)
+            );
+
+    }
+
+
+    saveCart();
+
+    updateCartCount();
+
+    renderCart();
+
+}
+
+
+/* =========================================================
+   حذف منتج
+========================================================= */
+
+function removeFromCart(productId) {
+
+    cart =
+        cart.filter(
+            product =>
+                Number(product.id) !== Number(productId)
+        );
+
+
+    saveCart();
+
+    updateCartCount();
+
+    renderCart();
+
+}
+
+
+/* =========================================================
+   حفظ السلة
+========================================================= */
+
+function saveCart() {
+
+    localStorage.setItem(
+        "albaraka_cart",
+        JSON.stringify(cart)
+    );
+
+}
+
+
+/* =========================================================
+   عدد المنتجات
+========================================================= */
+
+function updateCartCount() {
+
+    const count =
+        document.getElementById("cartCount");
+
+    if (!count) return;
+
+
+    const totalQuantity =
+        cart.reduce(
+            (sum, item) =>
+                sum + Number(item.qty),
+            0
+        );
+
+
+    count.textContent =
+        totalQuantity;
+
+}
+
+
+/* =========================================================
+   إجمالي السلة
+========================================================= */
+
+function getCartTotal() {
+
+    return cart.reduce(
+        (total, item) =>
+            total +
+            (
+                Number(item.price) *
+                Number(item.qty)
+            ),
+        0
+    );
+
+}
+
+
+/* =========================================================
+   عرض السلة
+========================================================= */
+
+function renderCart() {
+
+    const container =
+        document.getElementById("cartItems");
+
+    const totalElement =
+        document.getElementById("cartTotal");
+
+    if (!container) return;
+
+
+    if (!cart.length) {
+
+        container.innerHTML = `
+
+            <div class="empty-cart">
+
+                <div class="empty-cart-icon">
+                    🛒
+                </div>
+
+                <h3>
+                    السلة فارغة
+                </h3>
+
+                <p>
+                    أضف المنتجات التي تريد شراءها.
+                </p>
+
+            </div>
+
+        `;
+
+    } else {
+
+        container.innerHTML =
+            cart
+                .map(item => createCartItem(item))
+                .join("");
+
+    }
+
+
+    if (totalElement) {
+
+        totalElement.textContent =      categoryName: "لحوم",
       price: 420,
       unit: "كجم",
       emoji: "🥩",
