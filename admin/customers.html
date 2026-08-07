@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>إدارة العملاء | مول البركة</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Tahoma, Arial, sans-serif;
+}
+
+body {
+    background: #f4f6f8;
+    color: #222;
+}
+
+.topbar {
+    height: 70px;
+    background: #fff;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    width: 42px;
+    height: 42px;
+    background: #198754;
+    color: #fff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.brand h2 {
+    font-size: 18px;
+}
+
+.brand span {
+    color: #777;
+    font-size: 12px;
+}
+
+.admin {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e9f7ef;
+    color: #198754;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.layout {
+    display: flex;
+    min-height: calc(100vh - 70px);
+}
+
+.sidebar {
+    width: 240px;
+    background: #fff;
+    border-left: 1px solid #e5e7eb;
+    padding: 20px 12px;
+}
+
+.sidebar-title {
+    color: #999;
+    font-size: 12px;
+    padding: 10px 12px;
+}
+
+.menu-item {
+    display: block;
+    text-decoration: none;
+    color: #444;
+    padding: 13px 14px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.menu-item:hover,
+.menu-item.active {
+    background: #e9f7ef;
+    color: #198754;
+    font-weight: bold;
+}
+
+.main {
+    flex: 1;
+    padding: 25px;
+    overflow-x: auto;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.page-header h1 {
+    font-size: 26px;
+    margin-bottom: 6px;
+}
+
+.page-header p {
+    color: #777;
+    font-size: 13px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat {
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.stat span {
+    color: #777;
+    font-size: 12px;
+}
+
+.stat strong {
+    display: block;
+    margin-top: 8px;
+    font-size: 24px;
+}
+
+.toolbar {
+    background: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.search {
+    flex: 1;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 11px 13px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    border-color: #198754;
+}
+
+.table-container {
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    min-width: 1000px;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 14px;
+    text-align: right;
+    border-bottom: 1px solid #eee;
+    font-size: 12px;
+}
+
+th {
+    background: #f8f9fa;
+    color: #555;
+}
+
+.customer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.customer-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e9f7ef;
+    color: #198754;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.customer-name {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.phone {
+    direction: ltr;
+    display: inline-block;
+    color: #777;
+}
+
+.status {
+    padding: 6px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.active {
+    background: #e9f7ef;
+    color: #198754;
+}
+
+.inactive {
+    background: #fdecec;
+    color: #dc3545;
+}
+
+.price {
+    font-weight: bold;
+}
+
+.actions {
+    display: flex;
+    gap: 6px;
+}
+
+.action {
+    border: none;
+    border-radius: 7px;
+    padding: 8px 10px;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+.view {
+    background: #e7f1ff;
+    color: #0d6efd;
+}
+
+.delete {
+    background: #fdecec;
+    color: #dc3545;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.5);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-box {
+    background: #fff;
+    width: 100%;
+    max-width: 650px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.close {
+    width: 35px;
+    height: 35px;
+    border: none;
+    border-radius: 50%;
+    background: #eee;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #f8f9fa;
+    padding: 18px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+}
+
+.profile-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #198754;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.profile h3 {
+    margin-bottom: 5px;
+}
+
+.profile span {
+    color: #777;
+    font-size: 12px;
+}
+
+.details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.detail {
+    background: #f8f9fa;
+    padding: 14px;
+    border-radius: 9px;
+}
+
+.detail span {
+    display: block;
+    color: #777;
+    font-size: 11px;
+    margin-bottom: 6px;
+}
+
+.detail strong {
+    font-size: 13px;
+}
+
+.orders {
+    margin-top: 20px;
+}
+
+.orders h3 {
+    margin-bottom: 12px;
+}
+
+.order-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+@media(max-width: 1000px) {
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media(max-width: 700px) {
+
+    .layout {
+        display: block;
+    }
+
+    .sidebar {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .sidebar nav {
+        display: flex;
+        gap: 5px;
+    }
+
+    .menu-item {
+        white-space: nowrap;
+    }
+
+    .main {
+        padding: 15px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .details {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="brand">
+
+        <div class="logo">
+            ب
+        </div>
+
+        <div>
+            <h2>مول البركة</h2>
+            <span>لوحة التحكم</span>
+        </div>
+
+    </div>
+
+    <div class="admin">
+
+        <strong>المدير</strong>
+
+        <div class="avatar">
+            م
+        </div>
+
+    </div>
+
+</header>
+
+<div class="layout">
+
+<aside class="sidebar">
+
+    <div class="sidebar-title">
+        الإدارة
+    </div>
+
+    <nav>
+
+        <a href="index.html" class="menu-item">
+            📊 الرئيسية
+        </a>
+
+        <a href="products.html" class="menu-item">
+            🛒 المنتجات
+        </a>
+
+        <a href="categories.html" class="menu-item">
+            📁 الأقسام
+        </a>
+
+        <a href="orders.html" class="menu-item">
+            📦 الطلبات
+        </a>
+
+        <a href="customers.html" class="menu-item active">
+            👥 العملاء
+        </a>
+
+        <a href="inventory.html" class="menu-item">
+            📋 المخزون
+        </a>
+
+        <a href="settings.html" class="menu-item">
+            ⚙️ الإعدادات
+        </a>
+
+    </nav>
+
+</aside>
+
+<main class="main">
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>
+                إدارة العملاء
+            </h1>
+
+            <p>
+                إدارة بيانات العملاء ومتابعة مشترياتهم
+            </p>
+
+        </div>
+
+    </div>
+
+    <section class="stats">
+
+        <div class="stat">
+
+            <span>
+                إجمالي العملاء
+            </span>
+
+            <strong id="totalCustomers">
+                6
+            </strong>
+
+        </div>
+
+        <div class="stat">
+
+            <span>
+                العملاء النشطون
+            </span>
+
+            <strong id="activeCustomers">
+                5
+            </strong>
+
+        </div>
+
+        <div class="stat">
+
+            <span>
+                عملاء جدد
+            </span>
+
+            <strong>
+                2
+            </strong>
+
+        </div>
+
+        <div class="stat">
+
+            <span>
+                إجمالي المبيعات
+            </span>
+
+            <strong>
+                12,450 ج.م
+            </strong>
+
+        </div>
+
+    </section>
+
+    <section class="toolbar">
+
+        <div class="search">
+
+            <input
+                type="text"
+                id="search"
+                placeholder="ابحث باسم العميل أو رقم الهاتف..."
+                onkeyup="filterCustomers()"
+            >
+
+        </div>
+
+        <select
+            id="statusFilter"
+            onchange="filterCustomers()"
+            style="width:190px"
+        >
+
+            <option value="">
+                كل العملاء
+            </option>
+
+            <option value="نشط">
+                نشط
+            </option>
+
+            <option value="غير نشط">
+                غير نشط
+            </option>
+
+        </select>
+
+    </section>
+
+    <section class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        العميل
+                    </th>
+
+                    <th>
+                        الهاتف
+                    </th>
+
+                    <th>
+                        المنطقة
+                    </th>
+
+                    <th>
+                        الطلبات
+                    </th>
+
+                    <th>
+                        إجمالي المشتريات
+                    </th>
+
+                    <th>
+                        آخر طلب
+                    </th>
+
+                    <th>
+                        الحالة
+                    </th>
+
+                    <th>
+                        الإجراءات
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="customersTable">
+
+                <tr data-status="نشط">
+
+                    <td>
+
+                        <div class="customer">
+
+                            <div class="customer-avatar">
+                                أ
+                            </div>
+
+                            <div>
+
+                                <div class="customer-name">
+                                    أحمد محمد
+                                </div>
+
+                                <small>
+                                    عميل منذ 2026
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+                    <td>
+                        <span class="phone">
+                            01100000001
+                        </span>
+                    </td>
+
+                    <td>
+                        تاج البنفسج
+                    </td>
+
+                    <td>
+                        8
+                    </td>
+
+                    <td class="price">
+                        3,450 ج.م
+                    </td>
+
+                    <td>
+                        08/08/2026
+                    </td>
+
+                    <td>
+                        <span class="status active">
+                            نشط
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="action view"
+                                onclick="viewCustomer(this)"
+                            >
+                                👁 عرض
+                            </button>
+
+                            <button
+                                class="action delete"
+                                onclick="deleteCustomer(this)"
+                            >
+                                🗑 حذف
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                <tr data-status="نشط">
+
+                    <td>
+
+                        <div class="customer">
+
+                            <div class="customer-avatar">
+                                م
+                            </div>
+
+                            <div>
+
+                                <div class="customer-name">
+                                    محمود علي
+                                </div>
+
+                                <small>
+                                    عميل منذ 2026
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+                    <td>
+                        <span class="phone">
+                            01100000002
+                        </span>
+                    </td>
+
+                    <td>
+                        مدينة نصر
+                    </td>
+
+                    <td>
+                        6
+                    </td>
+
+                    <td class="price">
+                        2,780 ج.م
+                    </td>
+
+                    <td>
+                        08/08/2026
+                    </td>
+
+                    <td>
+                        <span class="status active">
+                            نشط
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="action view"
+                                onclick="viewCustomer(this)"
+                            >
+                                👁 عرض
+                            </button>
+
+                            <button
+                                class="action delete"
+                                onclick="deleteCustomer(this)"
+                            >
+                                🗑 حذف
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                <tr data-status="نشط">
+
+                    <td>
+
+                        <div class="customer">
+
+                            <div class="customer-avatar">
+                                م
+                            </div>
+
+                            <div>
+
+                                <div class="customer-name">
+                                    محمد إبراهيم
+                                </div>
+
+                                <small>
+                                    عميل منذ 2026
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+                    <td>
+                        <span class="phone">
+                            01100000003
+                        </span>
+                    </td>
+
+                    <td>
+                        القاهرة
+                    </td>
+
+                    <td>
+                        4
+                    </td>
+
+                    <td class="price">
+                        1,920 ج.م
+                    </td>
+
+                    <td>
+                        08/08/2026
+                    </td>
+
+                    <td>
+                        <span class="status active">
+                            نشط
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="action view"
+                                onclick="viewCustomer(this)"
+                            >
+                                👁 عرض
+                            </button>
+
+                            <button
+                                class="action delete"
+                                onclick="deleteCustomer(this)"
+                            >
+                                🗑 حذف
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                <tr data-status="نشط">
+
+                    <td>
+
+                        <div class="customer">
+
+                            <div class="customer-avatar">
+                                خ
+                            </div>
+
+                            <div>
+
+                                <div class="customer-name">
+                                    خالد حسن
+                                </div>
+
+                                <small>
+                                    عميل منذ 2026
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+                    <td>
+                        <span class="phone">
+                            01100000004
+                        </span>
+                    </td>
+
+                    <td>
+                        البنفسج
+                    </td>
+
+                    <td>
+                        10
+                    </td>
+
+                    <td class="price">
+                        4,100 ج.م
+                    </td>
+
+                    <td>
+                        07/08/2026
+                    </td>
+
+                    <td>
+                        <span class="status active">
+                            نشط
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="action view"
+                                onclick="viewCustomer(this)"
+                            >
+                                👁 عرض
+                            </button>
+
+                            <button
+                                class="action delete"
+                                onclick="deleteCustomer(this)"
+                            >
+                                🗑 حذف
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                <tr data-status="غير نشط">
+
+                    <td>
+
+                        <div class="customer">
+
+                            <div class="customer-avatar">
+                                س
+                            </div>
+
+                            <div>
+
+                                <div class="customer-name">
+                                    سامح أحمد
+                                </div>
+
+                                <small>
+                                    عميل منذ 2026
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+                    <td>
+                        <span class="phone">
+                            01100000005
+                        </span>
+                    </td>
+
+                    <td>
+                        القاهرة
+                    </td>
+
+                    <td>
+                        2
+                    </td>
+
+                    <td class="price">
+                        650 ج.م
+                    </td>
+
+                    <td>
+                        07/08/2026
+                    </td>
+
+                    <td>
+                        <span class="status inactive">
+                            غير نشط
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="action view"
+                                onclick="viewCustomer(this)"
+                            >
+                                👁 عرض
+                            </button>
+
+                            <button
+                                class="action delete"
+                                onclick="deleteCustomer(this)"
+                            >
+                                🗑 حذف
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                <tr data-status="نشط">
+
+                    <td>
+
+                        <div class="customer">
+
+                            <div class="customer-avatar">
+                                ع
+                            </div>
+
+                            <div>
+
+                                <div class="customer-name">
+                                    عمرو حسن
+                                </div>
+
+                                <small>
+                                    عميل منذ 2026
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+                    <td>
+                        <span class="phone">
+                            01100000006
+                        </span>
+                    </td>
+
+                    <td>
+                        التجمع
+                    </td>
+
+                    <td>
+                        3
+                    </td>
+
+                    <td class="price">
+                        1,350 ج.م
+                    </td>
+
+                    <td>
+                        06/08/2026
+                    </td>
+
+                    <td>
+                        <span class="status active">
+                            نشط
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="action view"
+                                onclick="viewCustomer(this)"
+                            >
+                                👁 عرض
+                            </button>
+
+                            <button
+                                class="action delete"
+                                onclick="deleteCustomer(this)"
+                            >
+                                🗑 حذف
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+</main>
+
+</div>
+
+<div
+    class="modal"
+    id="customerModal"
+>
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2>
+                بيانات العميل
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div class="profile">
+
+            <div
+                class="profile-avatar"
+                id="profileAvatar"
+            >
+                أ
+            </div>
+
+            <div>
+
+                <h3 id="profileName">
+                    أحمد محمد
+                </h3>
+
+                <span id="profilePhone">
+                    01100000001
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="details">
+
+            <div class="detail">
+
+                <span>
+                    المنطقة
+                </span>
+
+                <strong id="profileArea">
+                    تاج البنفسج
+                </strong>
+
+            </div>
+
+            <div class="detail">
+
+                <span>
+                    عدد الطلبات
+                </span>
+
+                <strong id="profileOrders">
+                    8 طلبات
+                </strong>
+
+            </div>
+
+            <div class="detail">
+
+                <span>
+                    إجمالي المشتريات
+                </span>
+
+                <strong id="profileTotal">
+                    3,450 ج.م
+                </strong>
+
+            </div>
+
+            <div class="detail">
+
+                <span>
+                    آخر طلب
+                </span>
+
+                <strong id="profileLastOrder">
+                    08/08/2026
+                </strong>
+
+            </div>
+
+        </div>
+
+        <div class="orders">
+
+            <h3>
+                آخر الطلبات
+            </h3>
+
+            <div class="order-row">
+
+                <span>
+                    #1001
+                </span>
+
+                <strong>
+                    485 ج.م
+                </strong>
+
+            </div>
+
+            <div class="order-row">
+
+                <span>
+                    #998
+                </span>
+
+                <strong>
+                    620 ج.م
+                </strong>
+
+            </div>
+
+            <div class="order-row">
+
+                <span>
+                    #991
+                </span>
+
+                <strong>
+                    350 ج.م
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function filterCustomers() {
+
+    const search =
+        document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+    const status =
+        document
+        .getElementById("statusFilter")
+        .value;
+
+    const rows =
+        document.querySelectorAll(
+            "#customersTable tr"
+        );
+
+    rows.forEach(row => {
+
+        const name =
+            row
+            .querySelector(".customer-name")
+            ?.textContent
+            .toLowerCase() || "";
+
+        const phone =
+            row
+            .querySelector(".phone")
+            ?.textContent
+            .toLowerCase() || "";
+
+        const rowStatus =
+            row.dataset.status || "";
+
+        const matchSearch =
+            name.includes(search) ||
+            phone.includes(search);
+
+        const matchStatus =
+            !status ||
+            rowStatus === status;
+
+        row.style.display =
+            matchSearch && matchStatus
+                ? ""
+                : "none";
+
+    });
+
+}
+
+function viewCustomer(button) {
+
+    const row =
+        button.closest("tr");
+
+    const name =
+        row
+        .querySelector(".customer-name")
+        .textContent
+        .trim();
+
+    const phone =
+        row
+        .querySelector(".phone")
+        .textContent
+        .trim();
+
+    const area =
+        row
+        .children[2]
+        .textContent
+        .trim();
+
+    const orders =
+        row
+        .children[3]
+        .textContent
+        .trim();
+
+    const total =
+        row
+        .children[4]
+        .textContent
+        .trim();
+
+    const lastOrder =
+        row
+        .children[5]
+        .textContent
+        .trim();
+
+    document
+    .getElementById("profileName")
+    .textContent = name;
+
+    document
+    .getElementById("profilePhone")
+    .textContent = phone;
+
+    document
+    .getElementById("profileAvatar")
+    .textContent =
+        name.charAt(0);
+
+    document
+    .getElementById("profileArea")
+    .textContent = area;
+
+    document
+    .getElementById("profileOrders")
+    .textContent =
+        orders + " طلبات";
+
+    document
+    .getElementById("profileTotal")
+    .textContent = total;
+
+    document
+    .getElementById("profileLastOrder")
+    .textContent = lastOrder;
+
+    document
+    .getElementById("customerModal")
+    .classList.add("show");
+
+}
+
+function closeModal() {
+
+    document
+    .getElementById("customerModal")
+    .classList.remove("show");
+
+}
+
+function deleteCustomer(button) {
+
+    const row =
+        button.closest("tr");
+
+    const name =
+        row
+        .querySelector(".customer-name")
+        .textContent
+        .trim();
+
+    const confirmed =
+        confirm(
+            "هل أنت متأكد من حذف العميل " +
+            name +
+            "؟"
+        );
+
+    if (!confirmed) {
+        return;
+    }
+
+    row.remove();
+
+    updateCustomerStats();
+
+    alert(
+        "تم حذف العميل بنجاح."
+    );
+
+}
+
+function updateCustomerStats() {
+
+    const rows =
+        document.querySelectorAll(
+            "#customersTable tr"
+        );
+
+    let active = 0;
+
+    rows.forEach(row => {
+
+        if (row.dataset.status === "نشط") {
+            active++;
+        }
+
+    });
+
+    document
+    .getElementById("totalCustomers")
+    .textContent = rows.length;
+
+    document
+    .getElementById("activeCustomers")
+    .textContent = active;
+
+}
+
+</script>
+
+</body>
+
+  </html>
