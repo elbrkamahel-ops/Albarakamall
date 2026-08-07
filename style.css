@@ -253,3 +253,148 @@ nav a:hover{
     font-size:38px;
     margin-bottom:35px;
 }
+/*==========================
+        FOOTER
+==========================*/
+
+footer{
+    background:#0b7a33;
+    color:#fff;
+    text-align:center;
+    padding:50px 20px;
+    margin-top:60px;
+}
+
+footer h2{
+    font-size:32px;
+    margin-bottom:15px;
+}
+
+footer p{
+    font-size:18px;
+    margin:10px 0;
+}
+
+/*==========================
+      تأثيرات الحركة
+==========================*/
+
+.card,
+.product,
+.btn{
+    transition:all .35s ease;
+}
+
+.product:hover img{
+    transform:scale(1.08);
+}
+
+.product img{
+    transition:.4s;
+}
+
+.btn:hover{
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
+
+/*==========================
+      Scroll Bar
+==========================*/
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#0b7a33;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-track{
+    background:#ececec;
+}
+
+/*==========================
+     تصميم الهاتف
+==========================*/
+
+@media(max-width:992px){
+
+.header{
+flex-direction:column;
+padding:20px;
+}
+
+nav{
+flex-wrap:wrap;
+justify-content:center;
+margin-top:15px;
+gap:15px;
+}
+
+.overlay h1{
+font-size:38px;
+}
+
+.overlay p{
+font-size:18px;
+}
+
+.categories h2,
+.offers h2{
+font-size:30px;
+}
+
+}
+
+@media(max-width:768px){
+
+.products{
+grid-template-columns:1fr;
+}
+
+.grid{
+grid-template-columns:1fr;
+}
+
+.product img{
+height:220px;
+}
+
+.logo h1{
+font-size:24px;
+}
+
+nav a{
+font-size:15px;
+}
+
+.btn{
+width:90%;
+}
+
+}
+
+@media(max-width:480px){
+
+.overlay h1{
+font-size:30px;
+}
+
+.overlay p{
+font-size:16px;
+}
+
+.header-icons{
+font-size:18px;
+}
+
+footer h2{
+font-size:24px;
+}
+
+footer p{
+font-size:15px;
+}
+
+   }
