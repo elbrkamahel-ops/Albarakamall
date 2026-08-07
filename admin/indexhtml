@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        لوحة التحكم | مول البركة أولاد الجارحي
+    </title>
+
+    <meta
+        name="description"
+        content="لوحة التحكم الرئيسية لمول البركة أولاد الجارحي"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/admin.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+     ===================================================== -->
+
+<aside class="sidebar">
+
+
+    <div class="sidebar-header">
+
+        <div class="logo">
+            البركة
+        </div>
+
+        <h2>
+            لوحة التحكم
+        </h2>
+
+    </div>
+
+
+    <nav class="sidebar-menu">
+
+
+        <a
+            href="index.html"
+            class="active"
+        >
+
+            <span>🏠</span>
+
+            الرئيسية
+
+        </a>
+
+
+        <a href="pages/products.html">
+
+            <span>📦</span>
+
+            المنتجات
+
+        </a>
+
+
+        <a href="pages/categories.html">
+
+            <span>🗂️</span>
+
+            الأقسام
+
+        </a>
+
+
+        <a href="pages/orders.html">
+
+            <span>🛒</span>
+
+            الطلبات
+
+        </a>
+
+
+        <a href="pages/customers.html">
+
+            <span>👥</span>
+
+            العملاء
+
+        </a>
+
+
+        <a href="pages/offers.html">
+
+            <span>🏷️</span>
+
+            العروض
+
+        </a>
+
+
+        <a href="pages/settings.html">
+
+            <span>⚙️</span>
+
+            الإعدادات
+
+        </a>
+
+
+        <a href="../index.html">
+
+            <span>🌐</span>
+
+            الموقع الرئيسي
+
+        </a>
+
+
+    </nav>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+     ===================================================== -->
+
+<main class="main-content">
+
+
+    <!-- =================================================
+         TOPBAR
+         ================================================= -->
+
+    <header class="topbar">
+
+
+        <div>
+
+            <h1>
+                لوحة التحكم
+            </h1>
+
+            <p>
+                مرحبًا بك في إدارة مول البركة أولاد الجارحي
+            </p>
+
+        </div>
+
+
+        <div class="admin-user">
+
+            <span>
+                👤
+            </span>
+
+            <strong>
+                المدير
+            </strong>
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- =================================================
+         WELCOME
+         ================================================= -->
+
+    <section class="dashboard-welcome">
+
+        <h2>
+            أهلاً بك في لوحة إدارة مول البركة 👋
+        </h2>
+
+        <p>
+            من هنا يمكنك إدارة المنتجات والطلبات والعملاء
+            والأقسام والعروض وإعدادات المتجر.
+        </p>
+
+    </section>
+
+
+
+    <!-- =================================================
+         STATISTICS
+         ================================================= -->
+
+    <section class="stats-grid">
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🛒
+            </div>
+
+            <div>
+
+                <span>
+                    إجمالي الطلبات
+                </span>
+
+                <strong id="totalOrders">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                📦
+            </div>
+
+            <div>
+
+                <span>
+                    المنتجات
+                </span>
+
+                <strong id="totalProducts">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                👥
+            </div>
+
+            <div>
+
+                <span>
+                    العملاء
+                </span>
+
+                <strong id="totalCustomers">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                💰
+            </div>
+
+            <div>
+
+                <span>
+                    إجمالي المبيعات
+                </span>
+
+                <strong id="totalSales">
+                    0 جنيه
+                </strong>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         QUICK ACTIONS
+         ================================================= -->
+
+    <section class="admin-card">
+
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    الإجراءات السريعة
+                </h2>
+
+                <p>
+                    الوصول السريع لأهم وظائف الإدارة
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-actions">
+
+
+            <a
+                href="pages/products.html"
+                class="btn btn-primary"
+            >
+                ➕ إضافة منتج
+            </a>
+
+
+            <a
+                href="pages/categories.html"
+                class="btn btn-secondary"
+            >
+                🗂️ إدارة الأقسام
+            </a>
+
+
+            <a
+                href="pages/offers.html"
+                class="btn btn-secondary"
+            >
+                🏷️ إضافة عرض
+            </a>
+
+
+            <a
+                href="pages/orders.html"
+                class="btn btn-secondary"
+            >
+                🛒 عرض الطلبات
+            </a>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         RECENT ORDERS
+         ================================================= -->
+
+    <section class="admin-card">
+
+
+        <div class="card-header">
+
+
+            <div>
+
+                <h2>
+                    أحدث الطلبات
+                </h2>
+
+                <p>
+                    آخر الطلبات المسجلة في المتجر
+                </p>
+
+            </div>
+
+
+            <a
+                href="pages/orders.html"
+                class="btn btn-primary btn-small"
+            >
+                عرض الكل
+            </a>
+
+
+        </div>
+
+
+
+        <div class="table-responsive">
+
+
+            <table class="admin-table">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            رقم الطلب
+                        </th>
+
+                        <th>
+                            العميل
+                        </th>
+
+                        <th>
+                            الإجمالي
+                        </th>
+
+                        <th>
+                            الحالة
+                        </th>
+
+                        <th>
+                            التاريخ
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="recentOrders">
+
+
+                    <tr>
+
+                        <td colspan="5">
+
+                            <div class="empty-state">
+
+                                <div class="empty-state-icon">
+                                    🛒
+                                </div>
+
+                                <h3>
+                                    لا توجد طلبات حتى الآن
+                                </h3>
+
+                                <p>
+                                    ستظهر الطلبات الجديدة هنا.
+                                </p>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         LOW STOCK
+         ================================================= -->
+
+    <section class="admin-card">
+
+
+        <div class="card-header">
+
+
+            <div>
+
+                <h2>
+                    المنتجات منخفضة المخزون
+                </h2>
+
+                <p>
+                    المنتجات التي تحتاج إلى إعادة تخزين
+                </p>
+
+            </div>
+
+
+            <a
+                href="pages/products.html"
+                class="btn btn-primary btn-small"
+            >
+                إدارة المنتجات
+            </a>
+
+
+        </div>
+
+
+
+        <div class="table-responsive">
+
+
+            <table class="admin-table">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            المنتج
+                        </th>
+
+                        <th>
+                            القسم
+                        </th>
+
+                        <th>
+                            السعر
+                        </th>
+
+                        <th>
+                            المخزون
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="lowStockProducts">
+
+
+                    <tr>
+
+                        <td colspan="4">
+
+                            <div class="empty-state">
+
+                                <div class="empty-state-icon">
+                                    📦
+                                </div>
+
+                                <h3>
+                                    لا توجد بيانات
+                                </h3>
+
+                                <p>
+                                    ستظهر المنتجات منخفضة المخزون هنا.
+                                </p>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         QUICK INFORMATION
+         ================================================= -->
+
+    <section class="admin-card">
+
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    معلومات المتجر
+                </h2>
+
+                <p>
+                    البيانات الأساسية
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="admin-form">
+
+
+            <div class="form-group">
+
+                <label>
+                    اسم المتجر
+                </label>
+
+                <input
+                    type="text"
+                    value="مول البركة أولاد الجارحي"
+                    readonly
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    الهاتف
+                </label>
+
+                <input
+                    type="text"
+                    value="01119511185"
+                    readonly
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    العنوان
+                </label>
+
+                <input
+                    type="text"
+                    value="شارع الشيخ عبدالرحمن تاج البنفسج ٩"
+                    readonly
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    الموقع
+                </label>
+
+                <input
+                    type="text"
+                    value="albaraka.io"
+                    readonly
+                >
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+     ===================================================== -->
+
+<script src="assets/js/admin.js"></script>
+
+
+<script>
+
+
+/* =====================================================
+   DASHBOARD DATA
+   ===================================================== */
+
+function loadDashboardData() {
+
+
+    /*
+     * في النسخة الحالية نستخدم LocalStorage
+     * كطبقة مؤقتة للبيانات.
+     *
+     * لاحقًا سيتم ربطها بقاعدة البيانات و API.
+     */
+
+
+    const products =
+        JSON.parse(
+            localStorage.getItem(
+                "albaraka_products"
+            )
+        ) || [];
+
+
+    const orders =
+        JSON.parse(
+            localStorage.getItem(
+                "albaraka_orders"
+            )
+        ) || [];
+
+
+    const customers =
+        JSON.parse(
+            localStorage.getItem(
+                "albaraka_customers"
+            )
+        ) || [];
+
+
+
+    /* =================================================
+       PRODUCTS
+       ================================================= */
+
+    document
+        .getElementById(
+            "totalProducts"
+        )
+        .textContent =
+        products.length;
+
+
+
+    /* =================================================
+       ORDERS
+       ================================================= */
+
+    document
+        .getElementById(
+            "totalOrders"
+        )
+        .textContent =
+        orders.length;
+
+
+
+    /* =================================================
+       CUSTOMERS
+       ================================================= */
+
+    document
+        .getElementById(
+            "totalCustomers"
+        )
+        .textContent =
+        customers.length;
+
+
+
+    /* =================================================
+       SALES
+       ================================================= */
+
+    const totalSales =
+        orders.reduce(
+            function (
+                total,
+                order
+            ) {
+
+                return (
+                    total +
+                    Number(
+                        order.total || 0
+                    )
+                );
+
+            },
+            0
+        );
+
+
+    document
+        .getElementById(
+            "totalSales"
+        )
+        .textContent =
+        formatCurrency(
+            totalSales
+        );
+
+
+
+    /* =================================================
+       RECENT ORDERS
+       ================================================= */
+
+    loadRecentOrders(
+        orders
+    );
+
+
+
+    /* =================================================
+       LOW STOCK
+       ================================================= */
+
+    loadLowStockProducts(
+        products
+    );
+
+}
+
+
+
+/* =====================================================
+   RECENT ORDERS
+   ===================================================== */
+
+function loadRecentOrders(
+    orders
+) {
+
+
+    const container =
+        document.getElementById(
+            "recentOrders"
+        );
+
+
+    if (!container) {
+
+        return;
+
+    }
+
+
+    if (!orders.length) {
+
+        return;
+
+    }
+
+
+    const recent =
+        [...orders]
+            .sort(
+                function (
+                    a,
+                    b
+                ) {
+
+                    return (
+                        new Date(
+                            b.createdAt || 0
+                        ) -
+                        new Date(
+                            a.createdAt || 0
+                        )
+                    );
+
+                }
+            )
+            .slice(
+                0,
+                5
+            );
+
+
+    container.innerHTML =
+        recent
+            .map(
+                function (
+                    order
+                ) {
+
+                    const status =
+                        order.status ||
+                        "pending";
+
+
+                    return `
+
+                        <tr>
+
+                            <td>
+                                ${
+                                    escapeHTML(
+                                        order.id ||
+                                        "-"
+                                    )
+                                }
+                            </td>
+
+                            <td>
+                                ${
+                                    escapeHTML(
+                                        order.customerName ||
+                                        "عميل"
+                                    )
+                                }
+                            </td>
+
+                            <td>
+
+                                <span class="price">
+
+                                    ${
+                                        formatCurrency(
+                                            order.total || 0
+                                        )
+                                    }
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <span
+                                    class="status ${escapeHTML(status)}"
+                                >
+
+                                    ${
+                                        getOrderStatusText(
+                                            status
+                                        )
+                                    }
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                ${
+                                    formatDate(
+                                        order.createdAt
+                                    )
+                                }
+
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                }
+            )
+            .join("");
+
+}
+
+
+
+/* =====================================================
+   LOW STOCK PRODUCTS
+   ===================================================== */
+
+function loadLowStockProducts(
+    products
+) {
+
+
+    const container =
+        document.getElementById(
+            "lowStockProducts"
+        );
+
+
+    if (!container) {
+
+        return;
+
+    }
+
+
+    const lowStock =
+        products
+            .filter(
+                function (
+                    product
+                ) {
+
+                    return (
+                        Number(
+                            product.stock || 0
+                        ) <= 5
+                    );
+
+                }
+            )
+            .slice(
+                0,
+                5
+            );
+
+
+    if (!lowStock.length) {
+
+        container.innerHTML = `
+
+            <tr>
+
+                <td colspan="4">
+
+                    <div class="empty-state">
+
+                        <div class="empty-state-icon">
+                            ✅
+                        </div>
+
+                        <h3>
+                            المخزون جيد
+                        </h3>
+
+                        <p>
+                            لا توجد منتجات منخفضة المخزون حاليًا.
+                        </p>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        lowStock
+            .map(
+                function (
+                    product
+                ) {
+
+                    return `
+
+                        <tr>
+
+                            <td>
+
+                                <strong>
+                                    ${
+                                        escapeHTML(
+                                            product.name ||
+                                            "-"
+                                        )
+                                    }
+                                </strong>
+
+                            </td>
+
+                            <td>
+
+                                ${
+                                    escapeHTML(
+                                        product.category ||
+                                        "-"
+                                    )
+                                }
+
+                            </td>
+
+                            <td>
+
+                                <span class="price">
+
+                                    ${
+                                        formatCurrency(
+                                            product.price || 0
+                                        )
+                                    }
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <span
+                                    class="status ${
+                                        Number(
+                                            product.stock || 0
+                                        ) === 0
+                                            ? "cancelled"
+                                            : "pending"
+                                    }"
+                                >
+
+                                    ${
+                                        formatNumber(
+                                            product.stock || 0
+                                        )
+                                    }
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                }
+            )
+            .join("");
+
+}
+
+
+
+/* =====================================================
+   INITIALIZE
+   ===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        loadDashboardData();
+
+    }
+);
+
+
+</script>
+
+
+</body>
+
+</html>
