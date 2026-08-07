@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        الإعدادات | لوحة تحكم مول البركة
+    </title>
+
+    <meta
+        name="description"
+        content="إعدادات وإدارة موقع مول البركة"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../assets/css/admin.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ========================================= -->
+    <!-- Sidebar -->
+    <!-- ========================================= -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-header">
+
+            <div class="logo">
+                البركة
+            </div>
+
+            <h2>
+                لوحة التحكم
+            </h2>
+
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+
+            <a href="../index.html">
+
+                <span>
+                    🏠
+                </span>
+
+                الرئيسية
+
+            </a>
+
+
+            <a href="products.html">
+
+                <span>
+                    📦
+                </span>
+
+                المنتجات
+
+            </a>
+
+
+            <a href="categories.html">
+
+                <span>
+                    🗂️
+                </span>
+
+                الأقسام
+
+            </a>
+
+
+            <a href="orders.html">
+
+                <span>
+                    🛒
+                </span>
+
+                الطلبات
+
+            </a>
+
+
+            <a href="customers.html">
+
+                <span>
+                    👥
+                </span>
+
+                العملاء
+
+            </a>
+
+
+            <a href="offers.html">
+
+                <span>
+                    🏷️
+                </span>
+
+                العروض
+
+            </a>
+
+
+            <a
+                href="settings.html"
+                class="active"
+            >
+
+                <span>
+                    ⚙️
+                </span>
+
+                الإعدادات
+
+            </a>
+
+
+            <a href="../../index.html">
+
+                <span>
+                    🌐
+                </span>
+
+                الموقع الرئيسي
+
+            </a>
+
+
+        </nav>
+
+    </aside>
+
+
+
+    <!-- ========================================= -->
+    <!-- Main Content -->
+    <!-- ========================================= -->
+
+    <main class="main-content">
+
+
+        <!-- ========================================= -->
+        <!-- Topbar -->
+        <!-- ========================================= -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+                    إعدادات الموقع
+                </h1>
+
+                <p>
+                    إدارة إعدادات مول البركة والبيانات الأساسية
+                </p>
+
+            </div>
+
+
+            <div class="admin-user">
+
+                <span>
+                    👤
+                </span>
+
+                <strong>
+                    المدير
+                </strong>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- ========================================= -->
+        <!-- General Settings -->
+        <!-- ========================================= -->
+
+        <section class="admin-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        البيانات الأساسية
+                    </h2>
+
+                    <p>
+                        معلومات المتجر التي تظهر للعملاء
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form
+                id="generalSettingsForm"
+                class="admin-form"
+            >
+
+
+                <div class="form-group">
+
+                    <label for="storeName">
+                        اسم المتجر
+                    </label>
+
+                    <input
+                        type="text"
+                        id="storeName"
+                        value="مول البركة أولاد الجارحي"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="storePhone">
+                        رقم الهاتف
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="storePhone"
+                        value="01119511185"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="storeAddress">
+                        العنوان
+                    </label>
+
+                    <textarea
+                        id="storeAddress"
+                        rows="3"
+                    >شارع الشيخ عبدالرحمن تاج البنفسج ٩</textarea>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="storeEmail">
+                        البريد الإلكتروني
+                    </label>
+
+                    <input
+                        type="email"
+                        id="storeEmail"
+                        placeholder="info@example.com"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="storeDescription">
+                        وصف المتجر
+                    </label>
+
+                    <textarea
+                        id="storeDescription"
+                        rows="4"
+                    >مول البركة للخضروات والفواكه واللحوم والطيور والماركت والجزارة.</textarea>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        حفظ البيانات
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+
+
+        <!-- ========================================= -->
+        <!-- Delivery Settings -->
+        <!-- ========================================= -->
+
+        <section class="admin-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        إعدادات التوصيل
+                    </h2>
+
+                    <p>
+                        تحديد رسوم وشروط توصيل الطلبات
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form
+                id="deliverySettingsForm"
+                class="admin-form"
+            >
+
+
+                <div class="form-group">
+
+                    <label for="deliveryFee">
+                        رسوم التوصيل
+                    </label>
+
+                    <input
+                        type="number"
+                        id="deliveryFee"
+                        value="30"
+                        min="0"
+                        step="1"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="freeDeliveryLimit">
+                        الحد الأدنى للتوصيل المجاني
+                    </label>
+
+                    <input
+                        type="number"
+                        id="freeDeliveryLimit"
+                        value="500"
+                        min="0"
+                        step="1"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="minimumOrder">
+                        الحد الأدنى للطلب
+                    </label>
+
+                    <input
+                        type="number"
+                        id="minimumOrder"
+                        value="100"
+                        min="0"
+                        step="1"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="deliveryEnabled">
+                        حالة التوصيل
+                    </label>
+
+                    <select id="deliveryEnabled">
+
+                        <option value="enabled">
+                            التوصيل متاح
+                        </option>
+
+                        <option value="disabled">
+                            التوصيل متوقف
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        حفظ إعدادات التوصيل
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+
+
+        <!-- ========================================= -->
+        <!-- Working Hours -->
+        <!-- ========================================= -->
+
+        <section class="admin-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        مواعيد العمل
+                    </h2>
+
+                    <p>
+                        تحديد أوقات استقبال الطلبات
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form
+                id="workingHoursForm"
+                class="admin-form"
+            >
+
+
+                <div class="form-group">
+
+                    <label for="openingTime">
+                        وقت الفتح
+                    </label>
+
+                    <input
+                        type="time"
+                        id="openingTime"
+                        value="08:00"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="closingTime">
+                        وقت الإغلاق
+                    </label>
+
+                    <input
+                        type="time"
+                        id="closingTime"
+                        value="23:00"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="workingStatus">
+                        حالة استقبال الطلبات
+                    </label>
+
+                    <select id="workingStatus">
+
+                        <option value="open">
+                            استقبال الطلبات مفتوح
+                        </option>
+
+                        <option value="closed">
+                            استقبال الطلبات مغلق
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        حفظ مواعيد العمل
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+
+
+        <!-- ========================================= -->
+        <!-- Social Media -->
+        <!-- ========================================= -->
+
+        <section class="admin-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        وسائل التواصل
+                    </h2>
+
+                    <p>
+                        روابط حسابات التواصل الاجتماعي
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form
+                id="socialSettingsForm"
+                class="admin-form"
+            >
+
+
+                <div class="form-group">
+
+                    <label for="facebook">
+                        Facebook
+                    </label>
+
+                    <input
+                        type="url"
+                        id="facebook"
+                        placeholder="https://facebook.com/"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="instagram">
+                        Instagram
+                    </label>
+
+                    <input
+                        type="url"
+                        id="instagram"
+                        placeholder="https://instagram.com/"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="whatsapp">
+                        WhatsApp
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="whatsapp"
+                        placeholder="01119511185"
+                    >
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        حفظ وسائل التواصل
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+
+
+        <!-- ========================================= -->
+        <!-- Security -->
+        <!-- ========================================= -->
+
+        <section class="admin-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        الأمان
+                    </h2>
+
+                    <p>
+                        إعدادات حساب المدير
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form
+                id="securityForm"
+                class="admin-form"
+            >
+
+
+                <div class="form-group">
+
+                    <label for="adminUsername">
+                        اسم المستخدم
+                    </label>
+
+                    <input
+                        type="text"
+                        id="adminUsername"
+                        value="admin"
+                        autocomplete="username"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="currentPassword">
+                        كلمة المرور الحالية
+                    </label>
+
+                    <input
+                        type="password"
+                        id="currentPassword"
+                        autocomplete="current-password"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="newPassword">
+                        كلمة المرور الجديدة
+                    </label>
+
+                    <input
+                        type="password"
+                        id="newPassword"
+                        autocomplete="new-password"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="confirmPassword">
+                        تأكيد كلمة المرور الجديدة
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        autocomplete="new-password"
+                    >
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        تحديث بيانات الدخول
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+
+
+        <!-- ========================================= -->
+        <!-- Danger Zone -->
+        <!-- ========================================= -->
+
+        <section class="admin-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        منطقة الخطر
+                    </h2>
+
+                    <p>
+                        إجراءات يجب استخدامها بحذر
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-actions">
+
+
+                <button
+                    type="button"
+                    class="btn btn-delete"
+                    onclick="clearLocalData()"
+                >
+                    حذف البيانات المحلية
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="resetSettings()"
+                >
+                    إعادة الإعدادات الافتراضية
+                </button>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ========================================= -->
+    <!-- JavaScript -->
+    <!-- ========================================= -->
+
+    <script>
+
+
+        /*
+        ==========================================
+        حفظ الإعدادات العامة
+        ==========================================
+        */
+
+        document
+            .getElementById(
+                "generalSettingsForm"
+            )
+            .addEventListener(
+                "submit",
+                function(event) {
+
+                    event.preventDefault();
+
+
+                    const settings = {
+
+                        storeName:
+                            document
+                                .getElementById(
+                                    "storeName"
+                                )
+                                .value
+                                .trim(),
+
+                        storePhone:
+                            document
+                                .getElementById(
+                                    "storePhone"
+                                )
+                                .value
+                                .trim(),
+
+                        storeAddress:
+                            document
+                                .getElementById(
+                                    "storeAddress"
+                                )
+                                .value
+                                .trim(),
+
+                        storeEmail:
+                            document
+                                .getElementById(
+                                    "storeEmail"
+                                )
+                                .value
+                                .trim(),
+
+                        storeDescription:
+                            document
+                                .getElementById(
+                                    "storeDescription"
+                                )
+                                .value
+                                .trim()
+
+                    };
+
+
+                    localStorage.setItem(
+                        "albaraka_general_settings",
+                        JSON.stringify(settings)
+                    );
+
+
+                    alert(
+                        "تم حفظ البيانات الأساسية بنجاح"
+                    );
+
+                }
+            );
+
+
+
+        /*
+        ==========================================
+        حفظ إعدادات التوصيل
+        ==========================================
+        */
+
+        document
+            .getElementById(
+                "deliverySettingsForm"
+            )
+            .addEventListener(
+                "submit",
+                function(event) {
+
+                    event.preventDefault();
+
+
+                    const settings = {
+
+                        deliveryFee:
+                            Number(
+                                document
+                                    .getElementById(
+                                        "deliveryFee"
+                                    )
+                                    .value
+                            ),
+
+                        freeDeliveryLimit:
+                            Number(
+                                document
+                                    .getElementById(
+                                        "freeDeliveryLimit"
+                                    )
+                                    .value
+                            ),
+
+                        minimumOrder:
+                            Number(
+                                document
+                                    .getElementById(
+                                        "minimumOrder"
+                                    )
+                                    .value
+                            ),
+
+                        deliveryEnabled:
+                            document
+                                .getElementById(
+                                    "deliveryEnabled"
+                                )
+                                .value
+
+                    };
+
+
+                    localStorage.setItem(
+                        "albaraka_delivery_settings",
+                        JSON.stringify(settings)
+                    );
+
+
+                    alert(
+                        "تم حفظ إعدادات التوصيل"
+                    );
+
+                }
+            );
+
+
+
+        /*
+        ==========================================
+        حفظ مواعيد العمل
+        ==========================================
+        */
+
+        document
+            .getElementById(
+                "workingHoursForm"
+            )
+            .addEventListener(
+                "submit",
+                function(event) {
+
+                    event.preventDefault();
+
+
+                    const settings = {
+
+                        openingTime:
+                            document
+                                .getElementById(
+                                    "openingTime"
+                                )
+                                .value,
+
+                        closingTime:
+                            document
+                                .getElementById(
+                                    "closingTime"
+                                )
+                                .value,
+
+                        workingStatus:
+                            document
+                                .getElementById(
+                                    "workingStatus"
+                                )
+                                .value
+
+                    };
+
+
+                    localStorage.setItem(
+                        "albaraka_working_hours",
+                        JSON.stringify(settings)
+                    );
+
+
+                    alert(
+                        "تم حفظ مواعيد العمل"
+                    );
+
+                }
+            );
+
+
+
+        /*
+        ==========================================
+        حفظ وسائل التواصل
+        ==========================================
+        */
+
+        document
+            .getElementById(
+                "socialSettingsForm"
+            )
+            .addEventListener(
+                "submit",
+                function(event) {
+
+                    event.preventDefault();
+
+
+                    const settings = {
+
+                        facebook:
+                            document
+                                .getElementById(
+                                    "facebook"
+                                )
+                                .value
+                                .trim(),
+
+                        instagram:
+                            document
+                                .getElementById(
+                                    "instagram"
+                                )
+                                .value
+                                .trim(),
+
+                        whatsapp:
+                            document
+                                .getElementById(
+                                    "whatsapp"
+                                )
+                                .value
+                                .trim()
+
+                    };
+
+
+                    localStorage.setItem(
+                        "albaraka_social_settings",
+                        JSON.stringify(settings)
+                    );
+
+
+                    alert(
+                        "تم حفظ وسائل التواصل"
+                    );
+
+                }
+            );
+
+
+
+        /*
+        ==========================================
+        تحديث بيانات الدخول
+        ==========================================
+        */
+
+        document
+            .getElementById(
+                "securityForm"
+            )
+            .addEventListener(
+                "submit",
+                function(event) {
+
+                    event.preventDefault();
+
+
+                    const username =
+                        document
+                            .getElementById(
+                                "adminUsername"
+                            )
+                            .value
+                            .trim();
+
+
+                    const currentPassword =
+                        document
+                            .getElementById(
+                                "currentPassword"
+                            )
+                            .value;
+
+
+                    const newPassword =
+                        document
+                            .getElementById(
+                                "newPassword"
+                            )
+                            .value;
+
+
+                    const confirmPassword =
+                        document
+                            .getElementById(
+                                "confirmPassword"
+                            )
+                            .value;
+
+
+
+                    if (!username) {
+
+                        alert(
+                            "يرجى إدخال اسم المستخدم"
+                        );
+
+                        return;
+
+                    }
+
+
+                    if (
+                        newPassword &&
+                        newPassword !==
+                        confirmPassword
+                    ) {
+
+                        alert(
+                            "كلمتا المرور غير متطابقتين"
+                        );
+
+                        return;
+
+                    }
+
+
+                    /*
+                    ملاحظة:
+
+                    نظام تسجيل الدخول الحقيقي
+                    يجب أن يتم على الخادم
+                    وليس باستخدام localStorage.
+                    */
+
+
+                    const account = {
+
+                        username:
+                            username
+
+                    };
+
+
+                    localStorage.setItem(
+                        "albaraka_admin_account",
+                        JSON.stringify(account)
+                    );
+
+
+                    alert(
+                        "تم تحديث بيانات الحساب"
+                    );
+
+
+                    document
+                        .getElementById(
+                            "currentPassword"
+                        )
+                        .value = "";
+
+
+                    document
+                        .getElementById(
+                            "newPassword"
+                        )
+                        .value = "";
+
+
+                    document
+                        .getElementById(
+                            "confirmPassword"
+                        )
+                        .value = "";
+
+                }
+            );
+
+
+
+        /*
+        ==========================================
+        تحميل الإعدادات المحفوظة
+        ==========================================
+        */
+
+        function loadSettings() {
+
+
+            const general =
+                localStorage.getItem(
+                    "albaraka_general_settings"
+                );
+
+
+            if (general) {
+
+                const settings =
+                    JSON.parse(general);
+
+
+                document
+                    .getElementById(
+                        "storeName"
+                    )
+                    .value =
+                    settings.storeName || "";
+
+
+                document
+                    .getElementById(
+                        "storePhone"
+                    )
+                    .value =
+                    settings.storePhone || "";
+
+
+                document
+                    .getElementById(
+                        "storeAddress"
+                    )
+                    .value =
+                    settings.storeAddress || "";
+
+
+                document
+                    .getElementById(
+                        "storeEmail"
+                    )
+                    .value =
+                    settings.storeEmail || "";
+
+
+                document
+                    .getElementById(
+                        "storeDescription"
+                    )
+                    .value =
+                    settings.storeDescription || "";
+
+            }
+
+
+
+            const delivery =
+                localStorage.getItem(
+                    "albaraka_delivery_settings"
+                );
+
+
+            if (delivery) {
+
+                const settings =
+                    JSON.parse(delivery);
+
+
+                document
+                    .getElementById(
+                        "deliveryFee"
+                    )
+                    .value =
+                    settings.deliveryFee ?? 30;
+
+
+                document
+                    .getElementById(
+                        "freeDeliveryLimit"
+                    )
+                    .value =
+                    settings.freeDeliveryLimit ?? 500;
+
+
+                document
+                    .getElementById(
+                        "minimumOrder"
+                    )
+                    .value =
+                    settings.minimumOrder ?? 100;
+
+
+                document
+                    .getElementById(
+                        "deliveryEnabled"
+                    )
+                    .value =
+                    settings.deliveryEnabled ||
+                    "enabled";
+
+            }
+
+
+
+            const hours =
+                localStorage.getItem(
+                    "albaraka_working_hours"
+                );
+
+
+            if (hours) {
+
+                const settings =
+                    JSON.parse(hours);
+
+
+                document
+                    .getElementById(
+                        "openingTime"
+                    )
+                    .value =
+                    settings.openingTime ||
+                    "08:00";
+
+
+                document
+                    .getElementById(
+                        "closingTime"
+                    )
+                    .value =
+                    settings.closingTime ||
+                    "23:00";
+
+
+                document
+                    .getElementById(
+                        "workingStatus"
+                    )
+                    .value =
+                    settings.workingStatus ||
+                    "open";
+
+            }
+
+
+
+            const social =
+                localStorage.getItem(
+                    "albaraka_social_settings"
+                );
+
+
+            if (social) {
+
+                const settings =
+                    JSON.parse(social);
+
+
+                document
+                    .getElementById(
+                        "facebook"
+                    )
+                    .value =
+                    settings.facebook || "";
+
+
+                document
+                    .getElementById(
+                        "instagram"
+                    )
+                    .value =
+                    settings.instagram || "";
+
+
+                document
+                    .getElementById(
+                        "whatsapp"
+                    )
+                    .value =
+                    settings.whatsapp || "";
+
+            }
+
+
+
+            const account =
+                localStorage.getItem(
+                    "albaraka_admin_account"
+                );
+
+
+            if (account) {
+
+                const settings =
+                    JSON.parse(account);
+
+
+                document
+                    .getElementById(
+                        "adminUsername"
+                    )
+                    .value =
+                    settings.username ||
+                    "admin";
+
+            }
+
+        }
+
+
+
+        /*
+        ==========================================
+        حذف البيانات المحلية
+        ==========================================
+        */
+
+        function clearLocalData() {
+
+
+            const confirmed =
+                confirm(
+                    "سيتم حذف الإعدادات المحفوظة محليًا. هل تريد المتابعة؟"
+                );
+
+
+            if (!confirmed) {
+
+                return;
+
+            }
+
+
+            localStorage.removeItem(
+                "albaraka_general_settings"
+            );
+
+
+            localStorage.removeItem(
+                "albaraka_delivery_settings"
+            );
+
+
+            localStorage.removeItem(
+                "albaraka_working_hours"
+            );
+
+
+            localStorage.removeItem(
+                "albaraka_social_settings"
+            );
+
+
+            localStorage.removeItem(
+                "albaraka_admin_account"
+            );
+
+
+            alert(
+                "تم حذف البيانات المحلية"
+            );
+
+
+            location.reload();
+
+        }
+
+
+
+        /*
+        ==========================================
+        إعادة الإعدادات الافتراضية
+        ==========================================
+        */
+
+        function resetSettings() {
+
+
+            const confirmed =
+                confirm(
+                    "هل تريد إعادة جميع الإعدادات إلى الوضع الافتراضي؟"
+                );
+
+
+            if (!confirmed) {
+
+                return;
+
+            }
+
+
+            localStorage.removeItem(
+                "albaraka_general_settings"
+            );
+
+
+            localStorage.removeItem(
+                "albaraka_delivery_settings"
+            );
+
+
+            localStorage.removeItem(
+                "albaraka_working_hours"
+            );
+
+
+            localStorage.removeItem(
+                "albaraka_social_settings"
+            );
+
+
+            location.reload();
+
+        }
+
+
+
+        /*
+        ==========================================
+        تشغيل الصفحة
+        ==========================================
+        */
+
+        loadSettings();
+
+
+    </script>
+
+
+</body>
+
+  </html>
