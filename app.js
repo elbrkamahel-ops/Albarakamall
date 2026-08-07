@@ -1,114 +1,510 @@
-const P = [
-  ['طماطم بلدي', 'produce', 25, '🍅'],
-  ['بطاطس', 'produce', 22, '🥔'],
-  ['موز', 'produce', 35, '🍌'],
-  ['تفاح', 'produce', 65, '🍎'],
+/* =====================================================
+   مول البركة - متجر إلكتروني
+   Albaraka Mall
+===================================================== */
 
-  ['لحمة كندوز', 'meat', 420, '🥩'],
-  ['لحم مفروم', 'butcher', 390, '🥩'],
+const WHATSAPP = "201119511185";
 
-  ['فراخ كاملة', 'poultry', 145, '🍗'],
-  ['وراك فراخ', 'poultry', 165, '🍗'],
+const products = [
 
-  ['أرز مصري', 'market', 38, '🍚'],
-  ['زيت طعام', 'market', 78, '🫗'],
-  ['بيض أبيض', 'market', 185, '🥚'],
-  ['جبنة بيضاء', 'market', 95, '🧀']
-].map((x, i) => ({
-  id: i + 1,
-  n: x[0],
-  c: x[1],
-  p: x[2],
-  e: x[3]
-}));
+  {
+    id: 1,
+    name: "طماطم بلدي",
+    category: "produce",
+    categoryName: "خضروات وفاكهة",
+    price: 25,
+    unit: "كيلو",
+    emoji: "🍅",
+    description: "طماطم طازة مختارة يوميًا",
+    badge: "طازة"
+  },
+
+  {
+    id: 2,
+    name: "بطاطس",
+    category: "produce",
+    categoryName: "خضروات وفاكهة",
+    price: 22,
+    unit: "كيلو",
+    emoji: "🥔",
+    description: "بطاطس مختارة بجودة ممتازة",
+    badge: ""
+  },
+
+  {
+    id: 3,
+    name: "موز",
+    category: "produce",
+    categoryName: "خضروات وفاكهة",
+    price: 35,
+    unit: "كيلو",
+    emoji: "🍌",
+    description: "موز طازج مناسب للبيت",
+    badge: "عرض"
+  },
+
+  {
+    id: 4,
+    name: "تفاح",
+    category: "produce",
+    categoryName: "خضروات وفاكهة",
+    price: 65,
+    unit: "كيلو",
+    emoji: "🍎",
+    description: "تفاح طازج مختار",
+    badge: ""
+  },
+
+  {
+    id: 5,
+    name: "برتقال",
+    category: "produce",
+    categoryName: "خضروات وفاكهة",
+    price: 30,
+    unit: "كيلو",
+    emoji: "🍊",
+    description: "برتقال طازج وعصير",
+    badge: "جديد"
+  },
+
+  {
+    id: 6,
+    name: "خيار",
+    category: "produce",
+    categoryName: "خضروات وفاكهة",
+    price: 28,
+    unit: "كيلو",
+    emoji: "🥒",
+    description: "خيار طازج يوميًا",
+    badge: ""
+  },
 
 
-const L = {
-  produce: 'خضروات وفاكهة',
-  meat: 'اللحوم',
-  poultry: 'الطيور',
-  market: 'الماركت',
-  butcher: 'الجزارة'
-};
+  /* ================= اللحوم ================= */
 
+  {
+    id: 7,
+    name: "لحمة كندوز",
+    category: "meat",
+    categoryName: "اللحوم",
+    price: 420,
+    unit: "كيلو",
+    emoji: "🥩",
+    description: "لحوم مختارة وتجهيز حسب الطلب",
+    badge: "مميز"
+  },
+
+  {
+    id: 8,
+    name: "لحم مفروم",
+    category: "meat",
+    categoryName: "اللحوم",
+    price: 390,
+    unit: "كيلو",
+    emoji: "🥩",
+    description: "مفروم طازج وتجهيز يومي",
+    badge: ""
+  },
+
+  {
+    id: 9,
+    name: "ستيك لحمة",
+    category: "meat",
+    categoryName: "اللحوم",
+    price: 480,
+    unit: "كيلو",
+    emoji: "🥩",
+    description: "قطع مختارة للتسوية",
+    badge: "مميز"
+  },
+
+
+  /* ================= الطيور ================= */
+
+  {
+    id: 10,
+    name: "فراخ كاملة",
+    category: "poultry",
+    categoryName: "الطيور",
+    price: 145,
+    unit: "كيلو",
+    emoji: "🍗",
+    description: "فراخ طازة وتجهيز حسب الطلب",
+    badge: "طازة"
+  },
+
+  {
+    id: 11,
+    name: "وراك فراخ",
+    category: "poultry",
+    categoryName: "الطيور",
+    price: 165,
+    unit: "كيلو",
+    emoji: "🍗",
+    description: "وراك طازة جاهزة للتجهيز",
+    badge: ""
+  },
+
+  {
+    id: 12,
+    name: "صدور فراخ",
+    category: "poultry",
+    categoryName: "الطيور",
+    price: 210,
+    unit: "كيلو",
+    emoji: "🍗",
+    description: "صدور فراخ بدون عظم",
+    badge: "عرض"
+  },
+
+
+  /* ================= الماركت ================= */
+
+  {
+    id: 13,
+    name: "أرز مصري",
+    category: "market",
+    categoryName: "الماركت",
+    price: 38,
+    unit: "كيلو",
+    emoji: "🍚",
+    description: "أرز مصري للاستخدام اليومي",
+    badge: ""
+  },
+
+  {
+    id: 14,
+    name: "زيت طعام",
+    category: "market",
+    categoryName: "الماركت",
+    price: 78,
+    unit: "عبوة",
+    emoji: "🫗",
+    description: "زيت طعام عالي الجودة",
+    badge: "عرض"
+  },
+
+  {
+    id: 15,
+    name: "بيض أبيض",
+    category: "market",
+    categoryName: "الماركت",
+    price: 185,
+    unit: "كرتونة",
+    emoji: "🥚",
+    description: "بيض طازج",
+    badge: "طازة"
+  },
+
+  {
+    id: 16,
+    name: "جبنة بيضاء",
+    category: "market",
+    categoryName: "الماركت",
+    price: 95,
+    unit: "كيلو",
+    emoji: "🧀",
+    description: "جبنة بيضاء مناسبة للفطور",
+    badge: ""
+  },
+
+  {
+    id: 17,
+    name: "سكر",
+    category: "market",
+    categoryName: "الماركت",
+    price: 32,
+    unit: "كيلو",
+    emoji: "🍚",
+    description: "سكر للاستخدام اليومي",
+    badge: ""
+  },
+
+
+  /* ================= الجزارة ================= */
+
+  {
+    id: 18,
+    name: "كفتة جاهزة",
+    category: "butcher",
+    categoryName: "الجزارة",
+    price: 430,
+    unit: "كيلو",
+    emoji: "🥩",
+    description: "كفتة مجهزة وجاهزة للتسوية",
+    badge: "مميز"
+  },
+
+  {
+    id: 19,
+    name: "برجر لحمة",
+    category: "butcher",
+    categoryName: "الجزارة",
+    price: 410,
+    unit: "كيلو",
+    emoji: "🍔",
+    description: "برجر لحمة مجهز",
+    badge: ""
+  },
+
+  {
+    id: 20,
+    name: "شيش طاووق",
+    category: "butcher",
+    categoryName: "الجزارة",
+    price: 290,
+    unit: "كيلو",
+    emoji: "🍢",
+    description: "تجهيز جاهز للشوي",
+    badge: "عرض"
+  }
+
+];
+
+
+/* =====================================================
+   حالة المتجر
+===================================================== */
+
+let currentCategory = "all";
+let searchTerm = "";
 
 let cart = JSON.parse(
-  localStorage.getItem('albaraka_cart') || '[]'
+  localStorage.getItem("albaraka_cart") || "[]"
 );
 
-let cat = 'all';
+let favorites = JSON.parse(
+  localStorage.getItem("albaraka_favorites") || "[]"
+);
 
 
-const grid = document.querySelector('#grid');
-const search = document.querySelector('#search');
-const count = document.querySelector('#count');
-const items = document.querySelector('#items');
-const total = document.querySelector('#total');
+/* =====================================================
+   العناصر
+===================================================== */
+
+const productsGrid =
+  document.getElementById("productsGrid");
+
+const productSearch =
+  document.getElementById("productSearch");
+
+const searchInput =
+  document.getElementById("searchInput");
+
+const searchArea =
+  document.getElementById("searchArea");
+
+const searchToggle =
+  document.getElementById("searchToggle");
+
+const searchClose =
+  document.getElementById("searchClose");
+
+const noResults =
+  document.getElementById("noResults");
+
+const cartDrawer =
+  document.getElementById("cartDrawer");
+
+const cartOverlay =
+  document.getElementById("cartOverlay");
+
+const cartItems =
+  document.getElementById("cartItems");
+
+const cartTotal =
+  document.getElementById("cartTotal");
+
+const cartCount =
+  document.getElementById("cartCount");
+
+const cartOpen =
+  document.getElementById("cartOpen");
+
+const cartClose =
+  document.getElementById("cartClose");
+
+const checkoutBtn =
+  document.getElementById("checkoutBtn");
+
+const continueShopping =
+  document.getElementById("continueShopping");
+
+const mobileMenuBtn =
+  document.getElementById("mobileMenuBtn");
+
+const mobileMenu =
+  document.getElementById("mobileMenu");
+
+const toast =
+  document.getElementById("toast");
+
+const toastMessage =
+  document.getElementById("toastMessage");
 
 
-/* =========================
-   عرض المنتجات
-========================= */
+/* =====================================================
+   تنسيق السعر
+===================================================== */
 
-function render() {
+function money(value) {
 
-  let q = search.value.trim();
+  return Number(value).toLocaleString("ar-EG") + " ج.م";
 
-  let a = P.filter(x =>
-    (cat === 'all' || x.c === cat) &&
-    (!q || x.n.includes(q))
+}
+
+
+/* =====================================================
+   حفظ البيانات
+===================================================== */
+
+function saveCart() {
+
+  localStorage.setItem(
+    "albaraka_cart",
+    JSON.stringify(cart)
   );
 
-  if (!a.length) {
+}
 
-    grid.innerHTML = `
-      <div style="
-        grid-column:1/-1;
-        text-align:center;
-        padding:40px;
-        color:#7b8b83
-      ">
-        لا توجد منتجات مطابقة للبحث.
-      </div>
-    `;
+
+function saveFavorites() {
+
+  localStorage.setItem(
+    "albaraka_favorites",
+    JSON.stringify(favorites)
+  );
+
+}
+
+
+/* =====================================================
+   عرض المنتجات
+===================================================== */
+
+function renderProducts() {
+
+  if (!productsGrid) return;
+
+
+  const filtered = products.filter(product => {
+
+    const categoryMatch =
+      currentCategory === "all" ||
+      product.category === currentCategory;
+
+
+    const text =
+      `${product.name} ${product.categoryName}`
+        .toLowerCase();
+
+
+    const searchMatch =
+      !searchTerm ||
+      text.includes(searchTerm.toLowerCase());
+
+
+    return categoryMatch && searchMatch;
+
+  });
+
+
+  if (!filtered.length) {
+
+    productsGrid.innerHTML = "";
+
+    noResults.classList.add("show");
 
     return;
+
   }
 
 
-  grid.innerHTML = a.map(x => `
+  noResults.classList.remove("show");
 
-    <article class="product">
 
-      <div class="pic">
-        ${x.e}
+  productsGrid.innerHTML =
+    filtered.map(product => productHTML(product)).join("");
+
+}
+
+
+/* =====================================================
+   HTML المنتج
+===================================================== */
+
+function productHTML(product) {
+
+  const isFavorite =
+    favorites.includes(product.id);
+
+
+  return `
+
+    <article class="product-card">
+
+      <div class="product-image">
+
+        ${
+          product.badge
+            ? `<span class="product-badge">
+                 ${product.badge}
+               </span>`
+            : ""
+        }
+
+        <button
+          type="button"
+          class="favorite-btn"
+          onclick="toggleFavorite(${product.id})"
+          aria-label="المفضلة"
+        >
+          ${isFavorite ? "❤️" : "♡"}
+        </button>
+
+        <div class="product-emoji">
+          ${product.emoji}
+        </div>
+
       </div>
 
-      <div class="body">
 
-        <label>
-          ${L[x.c]}
-        </label>
+      <div class="product-body">
 
-        <h3>
-          ${x.n}
+        <span class="product-category">
+          ${product.categoryName}
+        </span>
+
+        <h3 class="product-name">
+          ${product.name}
         </h3>
 
-        <p>
-          جودة مختارة وتجهيز بعناية
+        <p class="product-description">
+          ${product.description}
         </p>
 
-        <div class="bottom">
 
-          <span class="price">
-            ${x.p} ج.م
-          </span>
+        <div class="product-footer">
+
+          <div class="product-price">
+
+            <strong>
+              ${money(product.price)}
+            </strong>
+
+            <small>
+              / ${product.unit}
+            </small>
+
+          </div>
+
 
           <button
-            class="add"
-            onclick="add(${x.id})"
+            type="button"
+            class="add-product"
+            onclick="addToCart(${product.id})"
           >
-            + أضف
+            + أضف للسلة
           </button>
 
         </div>
@@ -117,318 +513,341 @@ function render() {
 
     </article>
 
-  `).join('');
+  `;
+
 }
 
 
-/* =========================
-   إضافة منتج للسلة
-========================= */
+/* =====================================================
+   إضافة للسلة
+===================================================== */
 
-function add(id) {
+function addToCart(id) {
 
-  let x = cart.find(a => a.id === id);
+  const product =
+    products.find(item => item.id === id);
 
-  if (x) {
 
-    x.q++;
+  if (!product) return;
+
+
+  const existing =
+    cart.find(item => item.id === id);
+
+
+  if (existing) {
+
+    existing.quantity += 1;
 
   } else {
 
     cart.push({
-      id,
-      q: 1
+      id: id,
+      quantity: 1
     });
 
   }
 
-  save();
 
-  openCart();
-}
-
-
-/* =========================
-   حفظ السلة
-========================= */
-
-function save() {
-
-  localStorage.setItem(
-    'albaraka_cart',
-    JSON.stringify(cart)
-  );
+  saveCart();
 
   renderCart();
+
+  showToast(
+    `تمت إضافة ${product.name} للسلة`
+  );
+
 }
 
 
-/* =========================
+/* =====================================================
+   تعديل الكمية
+===================================================== */
+
+function changeQuantity(id, amount) {
+
+  const item =
+    cart.find(product => product.id === id);
+
+
+  if (!item) return;
+
+
+  item.quantity += amount;
+
+
+  if (item.quantity <= 0) {
+
+    cart =
+      cart.filter(product => product.id !== id);
+
+  }
+
+
+  saveCart();
+
+  renderCart();
+
+}
+
+
+/* =====================================================
+   حذف من السلة
+===================================================== */
+
+function removeFromCart(id) {
+
+  const product =
+    products.find(item => item.id === id);
+
+
+  cart =
+    cart.filter(item => item.id !== id);
+
+
+  saveCart();
+
+  renderCart();
+
+
+  if (product) {
+
+    showToast(
+      `تم حذف ${product.name} من السلة`
+    );
+
+  }
+
+}
+
+
+/* =====================================================
    عرض السلة
-========================= */
+===================================================== */
 
 function renderCart() {
 
-  let n = 0;
-  let t = 0;
+  if (!cartItems) return;
 
 
   if (!cart.length) {
 
-    items.innerHTML = `
-      <div class="empty">
-        السلة فارغة حاليًا 🛒
+    cartItems.innerHTML = `
+
+      <div class="cart-empty">
+
+        <div>
+          🛒
+        </div>
+
+        <h3>
+          السلة فاضية
+        </h3>
+
+        <p>
+          أضف المنتجات اللي محتاجها.
+        </p>
+
       </div>
+
     `;
 
-  } else {
+    cartCount.textContent = "0";
 
-    items.innerHTML = '';
+    cartTotal.textContent = "0 ج.م";
+
+    return;
 
   }
 
 
-  cart.forEach(c => {
-
-    let x = P.find(
-      p => p.id === c.id
-    );
-
-    if (!x) return;
+  let total = 0;
+  let quantityTotal = 0;
 
 
-    n += c.q;
+  cartItems.innerHTML =
+    cart.map(item => {
 
-    t += x.p * c.q;
+      const product =
+        products.find(
+          product => product.id === item.id
+        );
 
 
-    items.innerHTML += `
+      if (!product) return "";
 
-      <div class="cartItem">
 
-        <span class="e">
-          ${x.e}
-        </span>
+      const itemTotal =
+        product.price * item.quantity;
 
-        <div>
 
-          <b>
-            ${x.n}
-          </b>
+      total += itemTotal;
 
-          <small>
-            ${c.q} × ${x.p} ج.م
-          </small>
+      quantityTotal += item.quantity;
+
+
+      return `
+
+        <div class="cart-item">
+
+          <div class="cart-item-image">
+            ${product.emoji}
+          </div>
+
+
+          <div class="cart-item-info">
+
+            <strong>
+              ${product.name}
+            </strong>
+
+            <small>
+              ${money(product.price)}
+              / ${product.unit}
+            </small>
+
+
+            <div class="cart-controls">
+
+              <button
+                type="button"
+                onclick="changeQuantity(${product.id}, -1)"
+              >
+                −
+              </button>
+
+              <span>
+                ${item.quantity}
+              </span>
+
+              <button
+                type="button"
+                onclick="changeQuantity(${product.id}, 1)"
+              >
+                +
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div>
+
+            <strong>
+              ${money(itemTotal)}
+            </strong>
+
+            <br>
+
+            <button
+              type="button"
+              class="cart-item-remove"
+              onclick="removeFromCart(${product.id})"
+            >
+              حذف
+            </button>
+
+          </div>
 
         </div>
 
-        <button
-          onclick="del(${x.id})"
-        >
-          حذف
-        </button>
+      `;
 
-      </div>
-
-    `;
-
-  });
+    }).join("");
 
 
-  count.textContent = n;
+  cartCount.textContent =
+    quantityTotal;
 
-  total.textContent =
-    t + ' ج.م';
+
+  cartTotal.textContent =
+    money(total);
+
 }
 
 
-/* =========================
-   حذف منتج من السلة
-========================= */
+/* =====================================================
+   المفضلة
+===================================================== */
 
-function del(id) {
+function toggleFavorite(id) {
 
-  cart = cart.filter(
-    x => x.id !== id
-  );
+  const index =
+    favorites.indexOf(id);
 
-  save();
+
+  if (index === -1) {
+
+    favorites.push(id);
+
+    showToast("تمت إضافة المنتج للمفضلة");
+
+  } else {
+
+    favorites.splice(index, 1);
+
+    showToast("تم حذف المنتج من المفضلة");
+
+  }
+
+
+  saveFavorites();
+
+  renderProducts();
+
 }
 
 
-/* =========================
-   فتح السلة
-========================= */
-
-function openCart() {
-
-  document
-    .querySelector('#drawer')
-    .classList.add('open');
-
-  document
-    .querySelector('#shade')
-    .style.display = 'block';
-}
-
-
-/* =========================
-   إغلاق السلة
-========================= */
-
-function closeCart() {
-
-  document
-    .querySelector('#drawer')
-    .classList.remove('open');
-
-  document
-    .querySelector('#shade')
-    .style.display = 'none';
-}
-
-
-/* =========================
-   اختيار الأقسام
-========================= */
+/* =====================================================
+   الفلاتر
+===================================================== */
 
 document
-  .querySelectorAll('.cats button')
-  .forEach(b => {
+  .querySelectorAll(".filter-btn")
+  .forEach(button => {
 
-    b.onclick = () => {
+    button.addEventListener(
+      "click",
+      () => {
 
-      document
-        .querySelectorAll('.cats button')
-        .forEach(x =>
-          x.classList.remove('active')
-        );
-
-      b.classList.add('active');
-
-      cat = b.dataset.cat;
-
-      render();
-    };
-
-  });
+        document
+          .querySelectorAll(".filter-btn")
+          .forEach(item =>
+            item.classList.remove("active")
+          );
 
 
-/* =========================
-   البحث
-========================= */
-
-search.oninput = render;
+        button.classList.add("active");
 
 
-/* =========================
-   فتح السلة
-========================= */
-
-document
-  .querySelector('#cartBtn')
-  .onclick = openCart;
+        currentCategory =
+          button.dataset.filter;
 
 
-/* =========================
-   إغلاق السلة
-========================= */
-
-document
-  .querySelector('#close')
-  .onclick = closeCart;
+        renderProducts();
 
 
-document
-  .querySelector('#shade')
-  .onclick = closeCart;
+        document
+          .getElementById("products")
+          .scrollIntoView({
+            behavior: "smooth"
+          });
 
-
-/* =========================
-   قائمة الموبايل
-========================= */
-
-document
-  .querySelector('#menuBtn')
-  .onclick = () => {
-
-    document
-      .querySelector('#mobile')
-      .classList.toggle('open');
-
-  };
-
-
-/* =========================
-   زر البحث
-========================= */
-
-document
-  .querySelector('#searchBtn')
-  .onclick = () => {
-
-    search.focus();
-
-    document
-      .querySelector('#products')
-      .scrollIntoView({
-        behavior: 'smooth'
-      });
-
-  };
-
-
-/* =========================
-   إرسال الطلب واتساب
-========================= */
-
-document
-  .querySelector('#order')
-  .onclick = () => {
-
-    if (!cart.length) {
-
-      alert('السلة فارغة');
-
-      return;
-    }
-
-
-    let s =
-      'طلب جديد من مول البركة:%0A';
-
-
-    cart.forEach(c => {
-
-      let x = P.find(
-        p => p.id === c.id
-      );
-
-      if (!x) return;
-
-
-      s +=
-        `- ${x.n} × ${c.q}%0A`;
-
-    });
-
-
-    s +=
-      `الإجمالي: ${total.textContent}`;
-
-
-    window.open(
-      'https://wa.me/201119511185?text=' + s,
-      '_blank'
+      }
     );
 
-  };
+  });
 
 
-/* =========================
-   تشغيل الموقع
-========================= */
+/* =====================================================
+   أقسام المتجر
+===================================================== */
 
-render();
+document
+  .querySelectorAll(".category-card")
+  .forEach(button => {
 
-renderCart();
+    button.addEventListener(
+      "click",
+      () => {
