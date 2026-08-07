@@ -1,286 +1,93 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>مول البركة أولاد الجارحي</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-</head><input type="text" id="search"
-placeholder="ابحث عن منتج...">
-
-<body>⁸
-<a href="https://wa.me/201119511185"
-
-class="whatsapp"
-
-target="_blank">
-
-<i class="fa-brands fa-whatsapp"></i>
-
-</a>
-<header class="header">
-
-<div class="logo">
-<h1>مول البركة</h1>
-<span>أولاد الجارحي</span>
-</div>
-
-<nav>
-
-<a href="#">الرئيسية</a>
-
-<a href="#offers">العروض</a>
-
-<a href="#categories">الأقسام</a>
-
-<a href="#products">المنتجات</a>
-
-<a href="#contact">اتصل بنا</a>
-
-</nav>
-
-<div class="header-icons">
-
-<i class="fa-solid fa-magnifying-glass"></i>
-
-<div class="cart">
-
-<i class="fa-solid fa-cart-shopping"></i>
-
-<span id="cart-count">0</span>
-
-</div>
-
-</div>
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="مول البركة أولاد الجارحي - خضروات وفواكه ولحوم وطيور وماركت">
+  <title>مول البركة أولاد الجارحي</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="container topbar-inner">
+    <div>📍 شارع الشيخ عبدالرحمن تاج البنفسج ٩</div>
+    <a href="tel:01119511185">📞 01119511185</a>
+  </div>
 </header>
 
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#"><span class="brand-mark">ب</span><span><strong>مول البركة</strong><small>أولاد الجارحي</small></span></a>
+    <div class="nav-links">
+      <a href="#categories">الأقسام</a><a href="#offers">العروض</a><a href="#products">المنتجات</a><a href="#contact">تواصل معنا</a>
+    </div>
+    <button class="cart-btn" id="cartBtn">🛒 السلة <b id="cartCount">0</b></button>
+  </div>
+</nav>
+
+<main>
 <section class="hero">
-
-<div class="overlay">
-
-<h1>مرحبًا بكم في مول البركة أولاد الجارحي</h1>
-
-<p>
-أفضل الخضروات والفواكه واللحوم والدجاج والعطارة والماركات
-بأفضل الأسعار.
-</p>
-
-<a href="#products" class="btn">
-
-ابدأ التسوق
-
-</a>
-
-</div>
-
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">جودة • طزاجة • خدمة</span>
+      <h1>كل احتياجات بيتك<br><span>في مكان واحد</span></h1>
+      <p>خضروات وفواكه طازة، لحوم، طيور، جزارة وماركت — اختار طلبك بسهولة وتواصل معنا مباشرة.</p>
+      <div class="hero-actions"><a class="btn primary" href="#products">تسوق الآن</a><a class="btn ghost" href="tel:01119511185">اتصل بنا</a></div>
+      <div class="trust"><span>✓ منتجات يومية</span><span>✓ خدمة سريعة</span><span>✓ أسعار منافسة</span></div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-emoji">🛒</div>
+      <div><span>مول البركة</span><strong>اختيارات أكتر.. راحة أكتر</strong></div>
+      <div class="hero-badge">VIP</div>
+    </div>
+  </div>
 </section>
 
-<section id="categories" class="categories">
-
-<h2>الأقسام الرئيسية</h2>
-
-<div class="grid">
-
-<div class="card">
-
-<i class="fa-solid fa-carrot"></i>
-
-<h3>الخضروات</h3>
-
-</div>
-
-<div class="card">
-
-<i class="fa-solid fa-apple-whole"></i>
-
-<h3>الفواكه</h3>
-
-</div>
-
-<div class="card">
-
-<i class="fa-solid fa-drumstick-bite"></i>
-
-<h3>الدجاج</h3>
-
-</div>
-
-<div class="card">
-
-<i class="fa-solid fa-cow"></i>
-
-<h3>اللحوم</h3>
-
-</div>
-
-<div class="card">
-
-<i class="fa-solid fa-basket-shopping"></i>
-
-<h3>الماركات</h3>
-
-</div>
-
-<div class="card">
-
-<i class="fa-solid fa-seedling"></i>
-
-<h3>العطارة</h3>
-
-</div>
-
-</div>
-
-</section>
-<!-- قسم العروض -->
-
-<section id="offers" class="offers">
-
-<h2>🔥 عروض اليوم</h2>
-
-<div class="products">
-
-<div class="product">
-
-<img src="assets/images/tomato.jpg" alt="طماطم">
-
-<h3>طماطم</h3>
-
-<p class="price">15 جنيه / كجم</p>
-
-<button class="btn add-cart">أضف إلى السلة</button>
-
-</div>
-
-<div class="product">
-
-<img src="assets/images/apple.jpg" alt="تفاح">
-
-<h3>تفاح</h3>
-
-<p class="price">65 جنيه / كجم</p>
-
-<button class="btn add-cart">أضف إلى السلة</button>
-
-</div>
-
-<div class="product">
-
-<img src="assets/images/meat.jpg" alt="لحوم">
-
-<h3>لحم بقري</h3>
-
-<p class="price">420 جنيه / كجم</p>
-
-<button class="btn add-cart">أضف إلى السلة</button>
-
-</div>
-
-<div class="product">
-
-<img src="assets/images/chicken.jpg" alt="دجاج">
-
-<h3>دجاج طازج</h3>
-
-<p class="price">135 جنيه</p>
-
-<button class="btn add-cart">أضف إلى السلة</button>
-
-</div>
-
-</div>
-
+<section id="categories" class="section">
+  <div class="container">
+    <div class="section-head"><div><span class="eyebrow">تصفح</span><h2>أقسام المول</h2></div><a href="#products">عرض المنتجات ←</a></div>
+    <div class="categories">
+      <button class="category active" data-filter="all"><span>🛍️</span><strong>الكل</strong><small>كل المنتجات</small></button>
+      <button class="category" data-filter="produce"><span>🥬</span><strong>خضار وفاكهة</strong><small>طازة يوميًا</small></button>
+      <button class="category" data-filter="meat"><span>🥩</span><strong>اللحوم</strong><small>اختيارات ممتازة</small></button>
+      <button class="category" data-filter="poultry"><span>🍗</span><strong>الطيور</strong><small>طازة ونظيفة</small></button>
+      <button class="category" data-filter="market"><span>🛒</span><strong>الماركت</strong><small>كل الأساسيات</small></button>
+      <button class="category" data-filter="butcher"><span>🔪</span><strong>الجزارة</strong><small>تجهيز حسب الطلب</small></button>
+    </div>
+  </div>
 </section>
 
-<!-- المنتجات -->
-
-<section id="products">
-
-<h2>جميع المنتجات</h2>
-
-<div class="products">
-
-<div class="product">
-
-<img src="assets/images/vegetables.jpg">
-
-<h3>الخضروات الطازجة</h3>
-
-<p>أفضل جودة يوميًا.</p>
-
-<button class="btn add-cart">شراء</button>
-
-</div>
-
-<div class="product">
-
-<img src="assets/images/fruits.jpg">
-
-<h3>الفواكه الطازجة</h3>
-
-<p>فاكهة محلية ومستورد.</p>
-
-<button class="btn add-cart">شراء</button>
-
-</div>
-
-<div class="product">
-
-<img src="assets/images/spices.jpg">
-
-<h3>العطارة</h3>
-
-<p>توابل وأعشاب طبيعية.</p>
-
-<button class="btn add-cart">شراء</button>
-
-</div>
-
-<div class="product">
-
-<img src="assets/images/brands.jpg">
-
-<h3>الماركات</h3>
-
-<p>جميع المنتجات الغذائية.</p>
-
-<button class="btn add-cart">شراء</button>
-
-</div>
-
-</div>
-
+<section id="offers" class="offer-section">
+  <div class="container offer">
+    <div><span class="eyebrow">عرض الأسبوع</span><h2>اختيارات البيت اليومية</h2><p>اختار منتجاتك من الأقسام وابدأ طلبك مباشرة.</p></div>
+    <a class="btn light" href="#products">شوف المنتجات</a>
+  </div>
 </section>
 
-<footer id="contact">
+<section id="products" class="section">
+  <div class="container">
+    <div class="section-head"><div><span class="eyebrow">منتجاتنا</span><h2>اختار اللي محتاجه</h2></div><input id="search" class="search" placeholder="ابحث عن منتج..."></div>
+    <div id="productGrid" class="products"></div>
+  </div>
+</section>
 
-<h2>مول البركة أولاد الجارحي</h2>
+<section id="contact" class="contact-section">
+  <div class="container contact-grid">
+    <div><span class="eyebrow">مول البركة أولاد الجارحي</span><h2>جاهزين لطلبك</h2><p>اتصل بنا أو جهز سلتك وأرسل الطلب عبر واتساب.</p></div>
+    <div class="contact-card"><div>📞 <strong>01119511185</strong></div><div>📍 شارع الشيخ عبدالرحمن تاج البنفسج ٩</div><a class="btn primary" target="_blank" href="https://wa.me/201119511185">اطلب عبر واتساب</a></div>
+  </div>
+</section>
+</main>
 
-<p>📍 أفضل مكان للخضروات والفواكه واللحوم والدجاج والعطارة.</p>
+<footer><div class="container footer-inner"><div>© 2026 مول البركة أولاد الجارحي</div><div>طزاجة تستاهلها كل يوم</div></div></footer>
 
-<p>📞 أضف رقم الهاتف هنا</p>
-
-<p>📱 أضف رقم واتساب هنا</p>
-
-<p>© 2026 جميع الحقوق محفوظة.</p>
-
-</footer>
-
-<script src="script.js"></script>
-
+<div id="cartPanel" class="cart-panel">
+  <div class="cart-head"><h3>سلة الطلب</h3><button id="closeCart">×</button></div>
+  <div id="cartItems" class="cart-items"></div>
+  <div class="cart-total">الإجمالي: <strong id="cartTotal">0</strong> جنيه</div>
+  <button id="whatsappOrder" class="btn primary full">إرسال الطلب عبر واتساب</button>
+</div>
+<div id="overlay" class="overlay"></div>
+<script src="assets/js/app.js"></script>
 </body>
-
 </html>
