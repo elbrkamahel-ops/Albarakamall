@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="لوحة تحكم مول البركة أولاد الجارحي"
+    >
+
+    <title>لوحة تحكم | مول البركة أولاد الجارحي</title>
+
+    <link
+        rel="stylesheet"
+        href="css/admin.css"
+    >
+</head>
+
+<body>
+
+    <!-- ================================
+         ADMIN APP
+    ================================= -->
+
+    <div id="adminApp" class="admin-app">
+
+        <!-- ================================
+             SIDEBAR
+        ================================= -->
+
+        <aside class="admin-sidebar">
+
+            <div class="sidebar-brand">
+
+                <div class="brand-logo">
+                    البركة
+                </div>
+
+                <div class="brand-info">
+                    <h2>مول البركة</h2>
+                    <span>أولاد الجارحي</span>
+                </div>
+
+            </div>
+
+
+            <nav class="admin-navigation">
+
+                <a
+                    href="pages/dashboard.html"
+                    class="nav-item active"
+                    data-page="dashboard"
+                >
+                    <span class="nav-icon">⌂</span>
+                    <span>الرئيسية</span>
+                </a>
+
+
+                <a
+                    href="pages/products.html"
+                    class="nav-item"
+                    data-page="products"
+                >
+                    <span class="nav-icon">▣</span>
+                    <span>المنتجات</span>
+                </a>
+
+
+                <a
+                    href="pages/categories.html"
+                    class="nav-item"
+                    data-page="categories"
+                >
+                    <span class="nav-icon">☷</span>
+                    <span>الأقسام</span>
+                </a>
+
+
+                <a
+                    href="pages/orders.html"
+                    class="nav-item"
+                    data-page="orders"
+                >
+                    <span class="nav-icon">▤</span>
+                    <span>الطلبات</span>
+                    <span
+                        class="nav-badge"
+                        id="newOrdersCount"
+                    >
+                        0
+                    </span>
+                </a>
+
+
+                <a
+                    href="pages/customers.html"
+                    class="nav-item"
+                    data-page="customers"
+                >
+                    <span class="nav-icon">♙</span>
+                    <span>العملاء</span>
+                </a>
+
+
+                <a
+                    href="pages/inventory.html"
+                    class="nav-item"
+                    data-page="inventory"
+                >
+                    <span class="nav-icon">▦</span>
+                    <span>المخزون</span>
+                </a>
+
+
+                <a
+                    href="pages/offers.html"
+                    class="nav-item"
+                    data-page="offers"
+                >
+                    <span class="nav-icon">%</span>
+                    <span>العروض</span>
+                </a>
+
+
+                <a
+                    href="pages/reports.html"
+                    class="nav-item"
+                    data-page="reports"
+                >
+                    <span class="nav-icon">◩</span>
+                    <span>التقارير</span>
+                </a>
+
+
+                <div class="nav-divider"></div>
+
+
+                <a
+                    href="pages/settings.html"
+                    class="nav-item"
+                    data-page="settings"
+                >
+                    <span class="nav-icon">⚙</span>
+                    <span>الإعدادات</span>
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar-footer">
+
+                <button
+                    type="button"
+                    id="logoutButton"
+                    class="logout-button"
+                >
+                    <span>↪</span>
+                    تسجيل الخروج
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- ================================
+             MAIN CONTENT
+        ================================= -->
+
+        <main class="admin-main">
+
+            <!-- HEADER -->
+
+            <header class="admin-header">
+
+                <div class="header-right">
+
+                    <button
+                        type="button"
+                        id="sidebarToggle"
+                        class="sidebar-toggle"
+                        aria-label="فتح القائمة"
+                    >
+                        ☰
+                    </button>
+
+                    <div class="page-heading">
+
+                        <span class="page-label">
+                            الإدارة
+                        </span>
+
+                        <h1>
+                            لوحة التحكم
+                        </h1>
+
+                    </div>
+
+                </div>
+
+
+                <div class="header-left">
+
+                    <button
+                        type="button"
+                        class="header-icon-button"
+                        id="notificationsButton"
+                        aria-label="الإشعارات"
+                    >
+                        🔔
+                        <span
+                            class="notification-dot"
+                            id="notificationDot"
+                        ></span>
+                    </button>
+
+
+                    <div class="admin-profile">
+
+                        <div class="profile-avatar">
+                            A
+                        </div>
+
+                        <div class="profile-details">
+                            <strong id="adminName">
+                                المدير
+                            </strong>
+
+                            <span>
+                                مدير النظام
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- ================================
+                 CONTENT
+            ================================= -->
+
+            <section class="admin-content">
+
+
+                <!-- WELCOME -->
+
+                <div class="welcome-section">
+
+                    <div>
+
+                        <span class="welcome-label">
+                            لوحة الإدارة
+                        </span>
+
+                        <h2>
+                            أهلاً بك في مول البركة 👋
+                        </h2>
+
+                        <p>
+                            تابع المبيعات والطلبات والمخزون
+                            من مكان واحد.
+                        </p>
+
+                    </div>
+
+                    <div class="current-date" id="currentDate">
+                        --
+                    </div>
+
+                </div>
+
+
+                <!-- ================================
+                     STATISTICS
+                ================================= -->
+
+                <div class="stats-grid">
+
+
+                    <article class="stat-card sales-card">
+
+                        <div class="stat-icon">
+                            ج.م
+                        </div>
+
+                        <div class="stat-content">
+
+                            <span>
+                                إجمالي المبيعات
+                            </span>
+
+                            <strong id="totalSales">
+                                0 ج.م
+                            </strong>
+
+                            <small class="positive">
+                                ↑ 0% عن الفترة السابقة
+                            </small>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="stat-card orders-card">
+
+                        <div class="stat-icon">
+                            🛒
+                        </div>
+
+                        <div class="stat-content">
+
+                            <span>
+                                طلبات اليوم
+                            </span>
+
+                            <strong id="todayOrders">
+                                0
+                            </strong>
+
+                            <small>
+                                طلب جديد اليوم
+                            </small>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="stat-card customers-card">
+
+                        <div class="stat-icon">
+                            👥
+                        </div>
+
+                        <div class="stat-content">
+
+                            <span>
+                                العملاء
+                            </span>
+
+                            <strong id="totalCustomers">
+                                0
+                            </strong>
+
+                            <small>
+                                عميل مسجل
+                            </small>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="stat-card products-card">
+
+                        <div class="stat-icon">
+                            📦
+                        </div>
+
+                        <div class="stat-content">
+
+                            <span>
+                                المنتجات
+                            </span>
+
+                            <strong id="totalProducts">
+                                0
+                            </strong>
+
+                            <small>
+                                منتج متاح
+                            </small>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <!-- ================================
+                     DASHBOARD GRID
+                ================================= -->
+
+                <div class="dashboard-grid">
+
+
+                    <!-- SALES CHART -->
+
+                    <section class="dashboard-card sales-chart-card">
+
+                        <div class="card-header">
+
+                            <div>
+                                <span class="card-label">
+                                    الأداء
+                                </span>
+
+                                <h3>
+                                    المبيعات
+                                </h3>
+                            </div>
+
+                            <select
+                                id="salesPeriod"
+                                class="period-select"
+                            >
+                                <option value="7">
+                                    آخر 7 أيام
+                                </option>
+
+                                <option value="30">
+                                    آخر 30 يوم
+                                </option>
+
+                                <option value="90">
+                                    آخر 90 يوم
+                                </option>
+                            </select>
+
+                        </div>
+
+
+                        <div
+                            class="sales-chart"
+                            id="salesChart"
+                        >
+                            <div class="chart-placeholder">
+                                سيتم تحميل بيانات المبيعات...
+                            </div>
+                        </div>
+
+                    </section>
+
+
+                    <!-- LOW STOCK -->
+
+                    <section class="dashboard-card">
+
+                        <div class="card-header">
+
+                            <div>
+                                <span class="card-label">
+                                    المخزون
+                                </span>
+
+                                <h3>
+                                    منتجات منخفضة المخزون
+                                </h3>
+                            </div>
+
+                            <a
+                                href="pages/inventory.html"
+                                class="view-all"
+                            >
+                                عرض الكل
+                            </a>
+
+                        </div>
+
+
+                        <div
+                            class="low-stock-list"
+                            id="lowStockList"
+                        >
+
+                            <div class="empty-state">
+                                لا توجد بيانات حالياً
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                </div>
+
+
+                <!-- ================================
+                     RECENT ORDERS
+                ================================= -->
+
+                <section class="dashboard-card recent-orders-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span class="card-label">
+                                المبيعات
+                            </span>
+
+                            <h3>
+                                أحدث الطلبات
+                            </h3>
+
+                        </div>
+
+                        <a
+                            href="pages/orders.html"
+                            class="view-all"
+                        >
+                            جميع الطلبات
+                        </a>
+
+                    </div>
+
+
+                    <div class="table-wrapper">
+
+                        <table class="admin-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        رقم الطلب
+                                    </th>
+
+                                    <th>
+                                        العميل
+                                    </th>
+
+                                    <th>
+                                        المنتجات
+                                    </th>
+
+                                    <th>
+                                        الإجمالي
+                                    </th>
+
+                                    <th>
+                                        الحالة
+                                    </th>
+
+                                    <th>
+                                        التاريخ
+                                    </th>
+
+                                    <th>
+                                        إجراء
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="recentOrdersTable">
+
+                                <tr>
+
+                                    <td colspan="7">
+
+                                        <div class="table-empty">
+                                            لا توجد طلبات حالياً
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================================
+                     QUICK ACTIONS
+                ================================= -->
+
+                <section class="quick-actions-section">
+
+                    <div class="section-heading">
+
+                        <div>
+
+                            <span>
+                                أدوات سريعة
+                            </span>
+
+                            <h3>
+                                إجراءات الإدارة
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="quick-actions-grid">
+
+
+                        <a
+                            href="pages/products.html?action=add"
+                            class="quick-action"
+                        >
+
+                            <span class="quick-action-icon">
+                                +
+                            </span>
+
+                            <div>
+                                <strong>
+                                    إضافة منتج
+                                </strong>
+
+                                <small>
+                                    أضف منتجاً جديداً
+                                </small>
+                            </div>
+
+                        </a>
+
+
+                        <a
+                            href="pages/orders.html"
+                            class="quick-action"
+                        >
+
+                            <span class="quick-action-icon">
+                                🛒
+                            </span>
+
+                            <div>
+                                <strong>
+                                    متابعة الطلبات
+                                </strong>
+
+                                <small>
+                                    إدارة الطلبات الجديدة
+                                </small>
+                            </div>
+
+                        </a>
+
+
+                        <a
+                            href="pages/inventory.html"
+                            class="quick-action"
+                        >
+
+                            <span class="quick-action-icon">
+                                📦
+                            </span>
+
+                            <div>
+                                <strong>
+                                    تحديث المخزون
+                                </strong>
+
+                                <small>
+                                    متابعة الكميات
+                                </small>
+                            </div>
+
+                        </a>
+
+
+                        <a
+                            href="pages/offers.html"
+                            class="quick-action"
+                        >
+
+                            <span class="quick-action-icon">
+                                %
+                            </span>
+
+                            <div>
+                                <strong>
+                                    إنشاء عرض
+                                </strong>
+
+                                <small>
+                                    أضف عرضاً جديداً
+                                </small>
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                </section>
+
+
+            </section>
+
+
+            <!-- ================================
+                 FOOTER
+            ================================= -->
+
+            <footer class="admin-footer">
+
+                <span>
+                    © 2026 مول البركة أولاد الجارحي
+                </span>
+
+                <span>
+                    لوحة الإدارة
+                </span>
+
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <!-- ================================
+         NOTIFICATION PANEL
+    ================================= -->
+
+    <div
+        id="notificationPanel"
+        class="notification-panel"
+        hidden
+    >
+
+        <div class="notification-header">
+
+            <h3>
+                الإشعارات
+            </h3>
+
+            <button
+                type="button"
+                id="closeNotifications"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div
+            class="notification-list"
+            id="notificationList"
+        >
+
+            <div class="empty-state">
+                لا توجد إشعارات جديدة
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================
+         SCRIPTS
+    ================================= -->
+
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+
+</body>
+  </html>
