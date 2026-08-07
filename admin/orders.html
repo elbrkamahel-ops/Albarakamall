@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>إدارة الطلبات | مول البركة</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Tahoma, Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        .topbar {
+            height: 70px;
+            background: #fff;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 42px;
+            height: 42px;
+            background: #198754;
+            color: #fff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .brand h2 {
+            font-size: 18px;
+        }
+
+        .brand span {
+            color: #777;
+            font-size: 12px;
+        }
+
+        .admin {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e9f7ef;
+            color: #198754;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .layout {
+            display: flex;
+            min-height: calc(100vh - 70px);
+        }
+
+        .sidebar {
+            width: 240px;
+            background: #fff;
+            border-left: 1px solid #e5e7eb;
+            padding: 20px 12px;
+        }
+
+        .sidebar-title {
+            color: #999;
+            font-size: 12px;
+            padding: 10px 12px;
+        }
+
+        .menu-item {
+            display: block;
+            text-decoration: none;
+            color: #444;
+            padding: 13px 14px;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .menu-item:hover,
+        .menu-item.active {
+            background: #e9f7ef;
+            color: #198754;
+            font-weight: bold;
+        }
+
+        .main {
+            flex: 1;
+            padding: 25px;
+            overflow-x: auto;
+        }
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            gap: 15px;
+        }
+
+        .page-header h1 {
+            font-size: 26px;
+            margin-bottom: 6px;
+        }
+
+        .page-header p {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat {
+            background: #fff;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 18px;
+        }
+
+        .stat span {
+            display: block;
+            color: #777;
+            font-size: 12px;
+        }
+
+        .stat strong {
+            display: block;
+            margin-top: 8px;
+            font-size: 23px;
+        }
+
+        .toolbar {
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .search {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .filter {
+            width: 190px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 11px 13px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            background: #fff;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #198754;
+        }
+
+        .table-container {
+            background: #fff;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            min-width: 1050px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #eee;
+            text-align: right;
+            font-size: 12px;
+        }
+
+        th {
+            background: #f8f9fa;
+            color: #555;
+        }
+
+        .order-number {
+            color: #198754;
+            font-weight: bold;
+        }
+
+        .customer-name {
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .phone {
+            color: #777;
+            direction: ltr;
+            display: inline-block;
+        }
+
+        .price {
+            font-weight: bold;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 20px;
+            white-space: nowrap;
+            font-size: 11px;
+        }
+
+        .new {
+            background: #e7f1ff;
+            color: #0d6efd;
+        }
+
+        .preparing {
+            background: #fff3cd;
+            color: #997404;
+        }
+
+        .delivery {
+            background: #e9f7ef;
+            color: #198754;
+        }
+
+        .completed {
+            background: #d1e7dd;
+            color: #146c43;
+        }
+
+        .cancelled {
+            background: #fdecec;
+            color: #dc3545;
+        }
+
+        .actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .action-btn {
+            border: none;
+            border-radius: 7px;
+            padding: 8px 10px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .view {
+            background: #e7f1ff;
+            color: #0d6efd;
+        }
+
+        .cancel {
+            background: #fdecec;
+            color: #dc3545;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.5);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-box {
+            background: #fff;
+            width: 100%;
+            max-width: 650px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close {
+            width: 35px;
+            height: 35px;
+            border: none;
+            border-radius: 50%;
+            background: #eee;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .order-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            border-radius: 9px;
+            padding: 14px;
+        }
+
+        .info-box span {
+            display: block;
+            color: #777;
+            font-size: 11px;
+            margin-bottom: 6px;
+        }
+
+        .info-box strong {
+            font-size: 13px;
+        }
+
+        .products-list {
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .product-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 13px;
+        }
+
+        .total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 18px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        @media(max-width: 1100px) {
+
+            .stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+        }
+
+        @media(max-width: 700px) {
+
+            .layout {
+                display: block;
+            }
+
+            .sidebar {
+                width: 100%;
+                overflow-x: auto;
+            }
+
+            .sidebar nav {
+                display: flex;
+                gap: 5px;
+            }
+
+            .menu-item {
+                white-space: nowrap;
+            }
+
+            .main {
+                padding: 15px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .order-info {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="brand">
+
+        <div class="logo">
+            ب
+        </div>
+
+        <div>
+            <h2>مول البركة</h2>
+            <span>لوحة التحكم</span>
+        </div>
+
+    </div>
+
+    <div class="admin">
+
+        <strong>المدير</strong>
+
+        <div class="avatar">
+            م
+        </div>
+
+    </div>
+
+</header>
+
+<div class="layout">
+
+    <aside class="sidebar">
+
+        <div class="sidebar-title">
+            الإدارة
+        </div>
+
+        <nav>
+
+            <a
+                href="index.html"
+                class="menu-item"
+            >
+                📊 الرئيسية
+            </a>
+
+            <a
+                href="products.html"
+                class="menu-item"
+            >
+                🛒 المنتجات
+            </a>
+
+            <a
+                href="categories.html"
+                class="menu-item"
+            >
+                📁 الأقسام
+            </a>
+
+            <a
+                href="orders.html"
+                class="menu-item active"
+            >
+                📦 الطلبات
+            </a>
+
+            <a
+                href="customers.html"
+                class="menu-item"
+            >
+                👥 العملاء
+            </a>
+
+            <a
+                href="inventory.html"
+                class="menu-item"
+            >
+                📋 المخزون
+            </a>
+
+            <a
+                href="settings.html"
+                class="menu-item"
+            >
+                ⚙️ الإعدادات
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <main class="main">
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>
+                    إدارة الطلبات
+                </h1>
+
+                <p>
+                    متابعة الطلبات وحالات التوصيل
+                </p>
+
+            </div>
+
+        </div>
+
+        <section class="stats">
+
+            <div class="stat">
+                <span>إجمالي الطلبات</span>
+                <strong id="totalOrders">5</strong>
+            </div>
+
+            <div class="stat">
+                <span>طلبات جديدة</span>
+                <strong id="newOrders">1</strong>
+            </div>
+
+            <div class="stat">
+                <span>قيد التجهيز</span>
+                <strong id="preparingOrders">1</strong>
+            </div>
+
+            <div class="stat">
+                <span>خرجت للتوصيل</span>
+                <strong id="deliveryOrders">1</strong>
+            </div>
+
+            <div class="stat">
+                <span>تم التسليم</span>
+                <strong id="completedOrders">1</strong>
+            </div>
+
+        </section>
+
+        <section class="toolbar">
+
+            <div class="search">
+
+                <input
+                    type="text"
+                    id="search"
+                    placeholder="ابحث برقم الطلب أو اسم العميل..."
+                    onkeyup="filterOrders()"
+                >
+
+            </div>
+
+            <div class="filter">
+
+                <select
+                    id="statusFilter"
+                    onchange="filterOrders()"
+                >
+
+                    <option value="">
+                        كل الحالات
+                    </option>
+
+                    <option value="جديد">
+                        جديد
+                    </option>
+
+                    <option value="قيد التجهيز">
+                        قيد التجهيز
+                    </option>
+
+                    <option value="خرج للتوصيل">
+                        خرج للتوصيل
+                    </option>
+
+                    <option value="تم التسليم">
+                        تم التسليم
+                    </option>
+
+                    <option value="ملغي">
+                        ملغي
+                    </option>
+
+                </select>
+
+            </div>
+
+        </section>
+
+        <section class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            رقم الطلب
+                        </th>
+
+                        <th>
+                            العميل
+                        </th>
+
+                        <th>
+                            المنتجات
+                        </th>
+
+                        <th>
+                            الإجمالي
+                        </th>
+
+                        <th>
+                            الدفع
+                        </th>
+
+                        <th>
+                            التاريخ
+                        </th>
+
+                        <th>
+                            الحالة
+                        </th>
+
+                        <th>
+                            الإجراءات
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="ordersTable">
+
+                    <tr data-status="جديد">
+
+                        <td>
+                            <span class="order-number">
+                                #1001
+                            </span>
+                        </td>
+
+                        <td>
+                            <div class="customer-name">
+                                أحمد محمد
+                            </div>
+
+                            <span class="phone">
+                                01100000001
+                            </span>
+                        </td>
+
+                        <td>
+                            4 منتجات
+                        </td>
+
+                        <td class="price">
+                            485 ج.م
+                        </td>
+
+                        <td>
+                            عند الاستلام
+                        </td>
+
+                        <td>
+                            08/08/2026
+                        </td>
+
+                        <td>
+
+                            <select
+                                onchange="changeStatus(this)"
+                            >
+
+                                <option selected>
+                                    جديد
+                                </option>
+
+                                <option>
+                                    قيد التجهيز
+                                </option>
+
+                                <option>
+                                    خرج للتوصيل
+                                </option>
+
+                                <option>
+                                    تم التسليم
+                                </option>
+
+                                <option>
+                                    ملغي
+                                </option>
+
+                            </select>
+
+                        </td>
+
+                        <td>
+
+                            <div class="actions">
+
+                                <button
+                                    class="action-btn view"
+                                    onclick="viewOrder(this)"
+                                >
+                                    👁 عرض
+                                </button>
+
+                                <button
+                                    class="action-btn cancel"
+                                    onclick="cancelOrder(this)"
+                                >
+                                    إلغاء
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    <tr data-status="قيد التجهيز">
+
+                        <td>
+                            <span class="order-number">
+                                #1002
+                            </span>
+                        </td>
+
+                        <td>
+                            <div class="customer-name">
+                                محمود علي
+                            </div>
+
+                            <span class="phone">
+                                01100000002
+                            </span>
+                        </td>
+
+                        <td>
+                            6 منتجات
+                        </td>
+
+                        <td class="price">
+                            720 ج.م
+                        </td>
+
+                        <td>
+                            عند الاستلام
+                        </td>
+
+                        <td>
+                            08/08/2026
+                        </td>
+
+                        <td>
+
+                            <select
+                                onchange="changeStatus(this)"
+                            >
+
+                                <option>
+                                    جديد
+                                </option>
+
+                                <option selected>
+                                    قيد التجهيز
+                                </option>
+
+                                <option>
+                                    خرج للتوصيل
+                                </option>
+
+                                <option>
+                                    تم التسليم
+                                </option>
+
+                                <option>
+                                    ملغي
+                                </option>
+
+                            </select>
+
+                        </td>
+
+                        <td>
+
+                            <div class="actions">
+
+                                <button
+                                    class="action-btn view"
+                                    onclick="viewOrder(this)"
+                                >
+                                    👁 عرض
+                                </button>
+
+                                <button
+                                    class="action-btn cancel"
+                                    onclick="cancelOrder(this)"
+                                >
+                                    إلغاء
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    <tr data-status="خرج للتوصيل">
+
+                        <td>
+                            <span class="order-number">
+                                #1003
+                            </span>
+                        </td>
+
+                        <td>
+                            <div class="customer-name">
+                                محمد إبراهيم
+                            </div>
+
+                            <span class="phone">
+                                01100000003
+                            </span>
+                        </td>
+
+                        <td>
+                            3 منتجات
+                        </td>
+
+                        <td class="price">
+                            390 ج.م
+                        </td>
+
+                        <td>
+                            عند الاستلام
+                        </td>
+
+                        <td>
+                            08/08/2026
+                        </td>
+
+                        <td>
+
+                            <select
+                                onchange="changeStatus(this)"
+                            >
+
+                                <option>
+                                    جديد
+                                </option>
+
+                                <option>
+                                    قيد التجهيز
+                                </option>
+
+                                <option selected>
+                                    خرج للتوصيل
+                                </option>
+
+                                <option>
+                                    تم التسليم
+                                </option>
+
+                                <option>
+                                    ملغي
+                                </option>
+
+                            </select>
+
+                        </td>
+
+                        <td>
+
+                            <div class="actions">
+
+                                <button
+                                    class="action-btn view"
+                                    onclick="viewOrder(this)"
+                                >
+                                    👁 عرض
+                                </button>
+
+                                <button
+                                    class="action-btn cancel"
+                                    onclick="cancelOrder(this)"
+                                >
+                                    إلغاء
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    <tr data-status="تم التسليم">
+
+                        <td>
+                            <span class="order-number">
+                                #1004
+                            </span>
+                        </td>
+
+                        <td>
+                            <div class="customer-name">
+                                خالد حسن
+                            </div>
+
+                            <span class="phone">
+                                01100000004
+                            </span>
+                        </td>
+
+                        <td>
+                            5 منتجات
+                        </td>
+
+                        <td class="price">
+                            960 ج.م
+                        </td>
+
+                        <td>
+                            عند الاستلام
+                        </td>
+
+                        <td>
+                            07/08/2026
+                        </td>
+
+                        <td>
+
+                            <select
+                                onchange="changeStatus(this)"
+                            >
+
+                                <option>
+                                    جديد
+                                </option>
+
+                                <option>
+                                    قيد التجهيز
+                                </option>
+
+                                <option>
+                                    خرج للتوصيل
+                                </option>
+
+                                <option selected>
+                                    تم التسليم
+                                </option>
+
+                                <option>
+                                    ملغي
+                                </option>
+
+                            </select>
+
+                        </td>
+
+                        <td>
+
+                            <div class="actions">
+
+                                <button
+                                    class="action-btn view"
+                                    onclick="viewOrder(this)"
+                                >
+                                    👁 عرض
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    <tr data-status="ملغي">
+
+                        <td>
+                            <span class="order-number">
+                                #1005
+                            </span>
+                        </td>
+
+                        <td>
+                            <div class="customer-name">
+                                سامح أحمد
+                            </div>
+
+                            <span class="phone">
+                                01100000005
+                            </span>
+                        </td>
+
+                        <td>
+                            2 منتجات
+                        </td>
+
+                        <td class="price">
+                            230 ج.م
+                        </td>
+
+                        <td>
+                            عند الاستلام
+                        </td>
+
+                        <td>
+                            07/08/2026
+                        </td>
+
+                        <td>
+
+                            <select
+                                onchange="changeStatus(this)"
+                            >
+
+                                <option>
+                                    جديد
+                                </option>
+
+                                <option>
+                                    قيد التجهيز
+                                </option>
+
+                                <option>
+                                    خرج للتوصيل
+                                </option>
+
+                                <option>
+                                    تم التسليم
+                                </option>
+
+                                <option selected>
+                                    ملغي
+                                </option>
+
+                            </select>
+
+                        </td>
+
+                        <td>
+
+                            <div class="actions">
+
+                                <button
+                                    class="action-btn view"
+                                    onclick="viewOrder(this)"
+                                >
+                                    👁 عرض
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+</div>
+
+<div
+    class="modal"
+    id="orderModal"
+>
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+                تفاصيل الطلب
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div class="order-info">
+
+            <div class="info-box">
+
+                <span>
+                    رقم الطلب
+                </span>
+
+                <strong id="modalOrder">
+                    #1001
+                </strong>
+
+            </div>
+
+            <div class="info-box">
+
+                <span>
+                    العميل
+                </span>
+
+                <strong id="modalCustomer">
+                    أحمد محمد
+                </strong>
+
+            </div>
+
+            <div class="info-box">
+
+                <span>
+                    رقم الهاتف
+                </span>
+
+                <strong id="modalPhone">
+                    01100000001
+                </strong>
+
+            </div>
+
+            <div class="info-box">
+
+                <span>
+                    طريقة الدفع
+                </span>
+
+                <strong>
+                    عند الاستلام
+                </strong>
+
+            </div>
+
+            <div class="info-box">
+
+                <span>
+                    العنوان
+                </span>
+
+                <strong>
+                    شارع الشيخ عبدالرحمن
+                </strong>
+
+            </div>
+
+            <div class="info-box">
+
+                <span>
+                    الحالة
+                </span>
+
+                <strong id="modalStatus">
+                    جديد
+                </strong>
+
+            </div>
+
+        </div>
+
+        <div class="products-list">
+
+            <h3>
+                المنتجات
+            </h3>
+
+            <div class="product-row">
+
+                <span>
+                    طماطم × 2 كيلو
+                </span>
+
+                <strong>
+                    50 ج.م
+                </strong>
+
+            </div>
+
+            <div class="product-row">
+
+                <span>
+                    لحم بقري × 1 كيلو
+                </span>
+
+                <strong>
+                    420 ج.م
+                </strong>
+
+            </div>
+
+            <div class="product-row">
+
+                <span>
+                    زيت طعام × 1
+                </span>
+
+                <strong>
+                    95 ج.م
+                </strong>
+
+            </div>
+
+        </div>
+
+        <div class="total">
+
+            <span>
+                الإجمالي
+            </span>
+
+            <strong>
+                565 ج.م
+            </strong>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    function filterOrders() {
+
+        const search =
+            document
+                .getElementById("search")
+                .value
+                .toLowerCase();
+
+        const status =
+            document
+                .getElementById("statusFilter")
+                .value;
+
+        const rows =
+            document.querySelectorAll(
+                "#ordersTable tr"
+            );
+
+        rows.forEach(row => {
+
+            const order =
+                row
+                    .querySelector(".order-number")
+                    ?.textContent
+                    .toLowerCase() || "";
+
+            const customer =
+                row
+                    .querySelector(".customer-name")
+                    ?.textContent
+                    .toLowerCase() || "";
+
+            const rowStatus =
+                row.dataset.status || "";
+
+            const matchSearch =
+                order.includes(search) ||
+                customer.includes(search);
+
+            const matchStatus =
+                !status ||
+                rowStatus === status;
+
+            row.style.display =
+                matchSearch && matchStatus
+                    ? ""
+                    : "none";
+
+        });
+
+    }
+
+    function changeStatus(select) {
+
+        const row =
+            select.closest("tr");
+
+        const newStatus =
+            select.value;
+
+        row.dataset.status =
+            newStatus;
+
+        updateStatistics();
+
+        alert(
+            "تم تحديث حالة الطلب إلى: " +
+            newStatus
+        );
+
+    }
+
+    function cancelOrder(button) {
+
+        const row =
+            button.closest("tr");
+
+        const order =
+            row
+                .querySelector(".order-number")
+                .textContent;
+
+        const confirmed =
+            confirm(
+                "هل تريد إلغاء الطلب " +
+                order +
+                "؟"
+            );
+
+        if (!confirmed) {
+            return;
+        }
+
+        const select =
+            row.querySelector("select");
+
+        if (select) {
+
+            select.value =
+                "ملغي";
+
+        }
+
+        row.dataset.status =
+            "ملغي";
+
+        button.remove();
+
+        updateStatistics();
+
+        alert(
+            "تم إلغاء الطلب بنجاح."
+        );
+
+    }
+
+    function viewOrder(button) {
+
+        const row =
+            button.closest("tr");
+
+        const order =
+            row
+                .querySelector(".order-number")
+                .textContent;
+
+        const customer =
+            row
+                .querySelector(".customer-name")
+                .textContent;
+
+        const phone =
+            row
+                .querySelector(".phone")
+                .textContent;
+
+        const status =
+            row.dataset.status;
+
+        document
+            .getElementById("modalOrder")
+            .textContent = order;
+
+        document
+            .getElementById("modalCustomer")
+            .textContent = customer;
+
+        document
+            .getElementById("modalPhone")
+            .textContent = phone;
+
+        document
+            .getElementById("modalStatus")
+            .textContent = status;
+
+        document
+            .getElementById("orderModal")
+            .classList.add("show");
+
+    }
+
+    function closeModal() {
+
+        document
+            .getElementById("orderModal")
+            .classList.remove("show");
+
+    }
+
+    function updateStatistics() {
+
+        const rows =
+            document.querySelectorAll(
+                "#ordersTable tr"
+            );
+
+        let newCount = 0;
+        let preparingCount = 0;
+        let deliveryCount = 0;
+        let completedCount = 0;
+
+        rows.forEach(row => {
+
+            const status =
+                row.dataset.status;
+
+            if (status === "جديد") {
+                newCount++;
+            }
+
+            if (status === "قيد التجهيز") {
+                preparingCount++;
+            }
+
+            if (status === "خرج للتوصيل") {
+                deliveryCount++;
+            }
+
+            if (status === "تم التسليم") {
+                completedCount++;
+            }
+
+        });
+
+        document
+            .getElementById("totalOrders")
+            .textContent = rows.length;
+
+        document
+            .getElementById("newOrders")
+            .textContent = newCount;
+
+        document
+            .getElementById("preparingOrders")
+            .textContent = preparingCount;
+
+        document
+            .getElementById("deliveryOrders")
+            .textContent = deliveryCount;
+
+        document
+            .getElementById("completedOrders")
+            .textContent = completedCount;
+
+    }
+
+</script>
+
+</body>
+
+                  </html>
