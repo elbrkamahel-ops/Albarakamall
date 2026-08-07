@@ -9,7 +9,10 @@
 
 <link rel="stylesheet" href="style.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
@@ -18,40 +21,38 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 <body>
 
-<header>
+<header class="header">
 
 <div class="logo">
 <h1>مول البركة</h1>
-<p>أولاد الجارحي</p>
+<span>أولاد الجارحي</span>
 </div>
 
 <nav>
 
 <a href="#">الرئيسية</a>
 
-<a href="pages/offers.html">العروض</a>
+<a href="#offers">العروض</a>
 
-<a href="pages/vegetables.html">الخضروات</a>
+<a href="#categories">الأقسام</a>
 
-<a href="pages/fruits.html">الفواكه</a>
+<a href="#products">المنتجات</a>
 
-<a href="pages/meat.html">اللحوم</a>
-
-<a href="pages/chicken.html">الدجاج</a>
-
-<a href="pages/brands.html">الماركات</a>
-
-<a href="pages/spices.html">العطارة</a>
-
-<a href="pages/contact.html">اتصل بنا</a>
+<a href="#contact">اتصل بنا</a>
 
 </nav>
 
-<div class="icons">
+<div class="header-icons">
 
 <i class="fa-solid fa-magnifying-glass"></i>
 
+<div class="cart">
+
 <i class="fa-solid fa-cart-shopping"></i>
+
+<span id="cart-count">0</span>
+
+</div>
 
 </div>
 
@@ -59,58 +60,218 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 <section class="hero">
 
-<h2>كل احتياجات منزلك في مكان واحد</h2>
+<div class="overlay">
 
-<p>أفضل جودة - أفضل سعر - أفضل خدمة</p>
+<h1>مرحبًا بكم في مول البركة أولاد الجارحي</h1>
 
-<a href="pages/offers.html" class="btn">
-تسوق الآن
+<p>
+أفضل الخضروات والفواكه واللحوم والدجاج والعطارة والماركات
+بأفضل الأسعار.
+</p>
+
+<a href="#products" class="btn">
+
+ابدأ التسوق
+
 </a>
 
+</div>
+
 </section>
+
+<section id="categories" class="categories">
+
+<h2>الأقسام الرئيسية</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<i class="fa-solid fa-carrot"></i>
+
+<h3>الخضروات</h3>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-apple-whole"></i>
+
+<h3>الفواكه</h3>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-drumstick-bite"></i>
+
+<h3>الدجاج</h3>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-cow"></i>
+
+<h3>اللحوم</h3>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-basket-shopping"></i>
+
+<h3>الماركات</h3>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-seedling"></i>
+
+<h3>العطارة</h3>
+
+</div>
+
+</div>
+
+</section>
+<!-- قسم العروض -->
+
+<section id="offers" class="offers">
+
+<h2>🔥 عروض اليوم</h2>
+
+<div class="products">
+
+<div class="product">
+
+<img src="assets/images/tomato.jpg" alt="طماطم">
+
+<h3>طماطم</h3>
+
+<p class="price">15 جنيه / كجم</p>
+
+<button class="btn add-cart">أضف إلى السلة</button>
+
+</div>
+
+<div class="product">
+
+<img src="assets/images/apple.jpg" alt="تفاح">
+
+<h3>تفاح</h3>
+
+<p class="price">65 جنيه / كجم</p>
+
+<button class="btn add-cart">أضف إلى السلة</button>
+
+</div>
+
+<div class="product">
+
+<img src="assets/images/meat.jpg" alt="لحوم">
+
+<h3>لحم بقري</h3>
+
+<p class="price">420 جنيه / كجم</p>
+
+<button class="btn add-cart">أضف إلى السلة</button>
+
+</div>
+
+<div class="product">
+
+<img src="assets/images/chicken.jpg" alt="دجاج">
+
+<h3>دجاج طازج</h3>
+
+<p class="price">135 جنيه</p>
+
+<button class="btn add-cart">أضف إلى السلة</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- المنتجات -->
+
+<section id="products">
+
+<h2>جميع المنتجات</h2>
+
+<div class="products">
+
+<div class="product">
+
+<img src="assets/images/vegetables.jpg">
+
+<h3>الخضروات الطازجة</h3>
+
+<p>أفضل جودة يوميًا.</p>
+
+<button class="btn add-cart">شراء</button>
+
+</div>
+
+<div class="product">
+
+<img src="assets/images/fruits.jpg">
+
+<h3>الفواكه الطازجة</h3>
+
+<p>فاكهة محلية ومستورد.</p>
+
+<button class="btn add-cart">شراء</button>
+
+</div>
+
+<div class="product">
+
+<img src="assets/images/spices.jpg">
+
+<h3>العطارة</h3>
+
+<p>توابل وأعشاب طبيعية.</p>
+
+<button class="btn add-cart">شراء</button>
+
+</div>
+
+<div class="product">
+
+<img src="assets/images/brands.jpg">
+
+<h3>الماركات</h3>
+
+<p>جميع المنتجات الغذائية.</p>
+
+<button class="btn add-cart">شراء</button>
+
+</div>
+
+</div>
+
+</section>
+
+<footer id="contact">
+
+<h2>مول البركة أولاد الجارحي</h2>
+
+<p>📍 أفضل مكان للخضروات والفواكه واللحوم والدجاج والعطارة.</p>
+
+<p>📞 أضف رقم الهاتف هنا</p>
+
+<p>📱 أضف رقم واتساب هنا</p>
+
+<p>© 2026 جميع الحقوق محفوظة.</p>
+
+</footer>
 
 <script src="script.js"></script>
 
 </body>
 
 </html>
-<script src="script.js"></script>
-<section class="featured-products">
-
-<h2 style="text-align:center;margin:40px 0;color:#0b7a33;">
-🔥 العروض المميزة
-</h2>
-
-<div class="categories">
-
-<div class="card">
-<img src="assets/images/tomato.jpg">
-<h3>طماطم</h3>
-<p>السعر: 15 جنيه / كجم</p>
-<a href="#" class="btn">أضف للسلة</a>
-</div>
-
-<div class="card">
-<img src="assets/images/apple.jpg">
-<h3>تفاح</h3>
-<p>السعر: 65 جنيه / كجم</p>
-<a href="#" class="btn">أضف للسلة</a>
-</div>
-
-<div class="card">
-<img src="assets/images/meat1.jpg">
-<h3>لحم بقري</h3>
-<p>السعر: 420 جنيه / كجم</p>
-<a href="#" class="btn">أضف للسلة</a>
-</div>
-
-<div class="card">
-<img src="assets/images/chicken1.jpg">
-<h3>دجاجة كاملة</h3>
-<p>السعر: 135 جنيه</p>
-<a href="#" class="btn">أضف للسلة</a>
-</div>
-
-</div>
-
-</section>
