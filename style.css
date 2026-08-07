@@ -1,33 +1,28 @@
-/* =====================================================
-   MOL ALBARAKA - PROFESSIONAL E-COMMERCE DESIGN
-   ===================================================== */
-
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
-
-:root {
-  --green: #0f7a4d;
-  --green-dark: #075c39;
-  --green-light: #e9f7f0;
-  --gold: #e6a72d;
-  --red: #d94b3d;
-  --text: #17221d;
-  --muted: #68756e;
-  --white: #ffffff;
-  --bg: #f7f9f7;
-  --border: #e3e9e5;
-  --shadow: 0 10px 30px rgba(19, 57, 39, 0.08);
-  --radius: 18px;
-  --container: 1180px;
-}
-
-/* =========================
-   RESET
-========================= */
+/* =========================================================
+   ALBARAKA MALL
+   style.css
+   تصميم متجر مول البركة
+   ========================================================= */
 
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+}
+
+:root {
+  --primary: #087443;
+  --primary-dark: #045331;
+  --primary-light: #e9f8f0;
+  --accent: #f5b51b;
+  --danger: #d93636;
+  --text: #17231d;
+  --muted: #718078;
+  --white: #ffffff;
+  --bg: #f7faf8;
+  --border: #e3ebe6;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+  --radius: 18px;
 }
 
 html {
@@ -35,11 +30,24 @@ html {
 }
 
 body {
-  font-family: "Cairo", sans-serif;
+  font-family:
+    Tahoma,
+    Arial,
+    sans-serif;
+
+  direction: rtl;
+
   background: var(--bg);
+
   color: var(--text);
-  line-height: 1.8;
-  overflow-x: hidden;
+
+  line-height: 1.6;
+
+  min-height: 100vh;
+}
+
+body.cart-open {
+  overflow: hidden;
 }
 
 button,
@@ -50,6 +58,7 @@ select {
 
 button {
   cursor: pointer;
+  border: 0;
 }
 
 a {
@@ -62,50 +71,183 @@ img {
   display: block;
 }
 
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
 .container {
-  width: min(92%, var(--container));
-  margin-inline: auto;
+  width: min(1180px, calc(100% - 32px));
+  margin: auto;
 }
 
-/* =========================
+
+/* =========================================================
    TOP BAR
-========================= */
+   ========================================================= */
 
 .top-bar {
-  background: var(--green-dark);
-  color: white;
+  background: var(--primary-dark);
+  color: #fff;
   font-size: 13px;
 }
 
-.top-bar-content {
+.top-bar .container {
   min-height: 38px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  gap: 15px;
+}
+
+.top-info {
+  display: flex;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
-.top-bar a {
-  font-weight: 700;
-}
 
-.top-bar a:hover {
-  color: #ffe39b;
-}
-
-/* =========================
+/* =========================================================
    HEADER
-========================= */
+   ========================================================= */
 
-.header {
-  background: white;
+header,
+.main-header {
+  background: #fff;
+
   position: sticky;
   top: 0;
-  z-index: 1000;
-  box-shadow: 0 3px 18px rgba(0, 0, 0, 0.05);
+
+  z-index: 100;
+
+  border-bottom: 1px solid var(--border);
 }
 
-.header-content {
+.header-inner {
+  min-height: 78px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 25px;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.logo {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  min-width: max-content;
+}
+
+.logo-icon {
+  width: 48px;
+  height: 48px;
+
+  border-radius: 14px;
+
+  background: var(--primary);
+
+  color: #fff;
+
+  display: grid;
+  place-items: center;
+
+  font-size: 25px;
+
+  box-shadow:
+    0 7px 18px rgba(8, 116, 67, .22);
+}
+
+.logo-text strong {
+  display: block;
+
+  color: var(--primary);
+
+  font-size: 20px;
+
+  line-height: 1.2;
+}
+
+.logo-text span {
+  display: block;
+
+  color: var(--muted);
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.navigation {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  margin-right: auto;
+}
+
+.navigation a {
+  padding: 10px 13px;
+
+  border-radius: 10px;
+
+  color: #3d4a43;
+
+  font-size: 14px;
+
+  transition: .2s;
+}
+
+.navigation a:hover,
+.navigation a.active {
+  background: var(--primary-light);
+
+  color: var(--primary);
+}
+
+
+/* =========================================================
+   MENU BUTTON
+   ========================================================= */
+
+.menu-button {
+  display: none;
+
+  width: 44px;
+  height: 44px;
+
+  background: var(--primary-light);
+
+  color: var(--primary);
+
+  border-radius: 12px;
+
+  font-size: 22px;
+}
+
+
+/* =========================================================
+   CART BUTTON
+   ========================================================= */
+
+.cart-button {
+  position: relative;
+
+  width: .header-content {
   min-height: 82px;
   display: flex;
   align-items: center;
