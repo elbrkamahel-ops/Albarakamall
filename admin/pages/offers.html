@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        إدارة العروض | لوحة تحكم مول البركة
+    </title>
+
+    <meta name="description"
+          content="إدارة العروض والخصومات في مول البركة">
+
+    <link rel="stylesheet"
+          href="../assets/css/admin.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- ================================= -->
+    <!-- Sidebar -->
+    <!-- ================================= -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-header">
+
+            <div class="logo">
+                البركة
+            </div>
+
+            <h2>
+                لوحة التحكم
+            </h2>
+
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+
+            <a href="../index.html">
+                <span>🏠</span>
+                الرئيسية
+            </a>
+
+
+            <a href="products.html">
+                <span>📦</span>
+                المنتجات
+            </a>
+
+
+            <a href="categories.html">
+                <span>🗂️</span>
+                الأقسام
+            </a>
+
+
+            <a href="orders.html">
+                <span>🛒</span>
+                الطلبات
+            </a>
+
+
+            <a href="customers.html">
+                <span>👥</span>
+                العملاء
+            </a>
+
+
+            <a href="offers.html"
+               class="active">
+
+                <span>🏷️</span>
+
+                العروض
+
+            </a>
+
+
+            <a href="settings.html">
+
+                <span>⚙️</span>
+
+                الإعدادات
+
+            </a>
+
+
+            <a href="../../index.html">
+
+                <span>🌐</span>
+
+                الموقع الرئيسي
+
+            </a>
+
+
+        </nav>
+
+    </aside>
+
+
+
+    <!-- ================================= -->
+    <!-- Main -->
+    <!-- ================================= -->
+
+    <main class="main-content">
+
+
+        <!-- Topbar -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+                    إدارة العروض
+                </h1>
+
+                <p>
+                    إنشاء وإدارة العروض والخصومات
+                </p>
+
+            </div>
+
+
+            <div class="admin-user">
+
+                <span>
+                    👤
+                </span>
+
+                <strong>
+                    المدير
+                </strong>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- ================================= -->
+        <!-- Statistics -->
+        <!-- ================================= -->
+
+        <section class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🏷️
+                </div>
+
+                <div>
+
+                    <span>
+                        إجمالي العروض
+                    </span>
+
+                    <strong id="totalOffers">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🟢
+                </div>
+
+                <div>
+
+                    <span>
+                        العروض النشطة
+                    </span>
+
+                    <strong id="activeOffers">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ⏰
+                </div>
+
+                <div>
+
+                    <span>
+                        العروض المنتهية
+                    </span>
+
+                    <strong id="expiredOffers">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ================================= -->
+        <!-- Add Offer -->
+        <!-- ================================= -->
+
+        <section class="admin-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        إضافة عرض جديد
+                    </h2>
+
+                    <p>
+                        أنشئ عرضًا جديدًا للعملاء
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <form id="offerForm"
+                  class="admin-form">
+
+
+                <!-- Offer Name -->
+
+                <div class="form-group">
+
+                    <label for="offerName">
+                        اسم العرض
+                    </label>
+
+                    <input
+                        type="text"
+                        id="offerName"
+                        placeholder="مثال: خصم الخضروات"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- Description -->
+
+                <div class="form-group">
+
+                    <label for="offerDescription">
+                        وصف العرض
+                    </label>
+
+                    <textarea
+                        id="offerDescription"
+                        rows="4"
+                        placeholder="اكتب تفاصيل العرض"
+                    ></textarea>
+
+                </div>
+
+
+
+                <!-- Discount -->
+
+                <div class="form-group">
+
+                    <label for="discountValue">
+                        قيمة الخصم
+                    </label>
+
+                    <input
+                        type="number"
+                        id="discountValue"
+                        min="0"
+                        step="0.01"
+                        placeholder="20"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- Discount Type -->
+
+                <div class="form-group">
+
+                    <label for="discountType">
+                        نوع الخصم
+                    </label>
+
+                    <select id="discountType">
+
+                        <option value="percentage">
+                            نسبة مئوية %
+                        </option>
+
+                        <option value="fixed">
+                            مبلغ ثابت جنيه
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- Start Date -->
+
+                <div class="form-group">
+
+                    <label for="startDate">
+                        تاريخ بداية العرض
+                    </label>
+
+                    <input
+                        type="date"
+                        id="startDate"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- End Date -->
+
+                <div class="form-group">
+
+                    <label for="endDate">
+                        تاريخ انتهاء العرض
+                    </label>
+
+                    <input
+                        type="date"
+                        id="endDate"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- Status -->
+
+                <div class="form-group">
+
+                    <label for="offerStatus">
+                        الحالة
+                    </label>
+
+                    <select id="offerStatus">
+
+                        <option value="active">
+                            نشط
+                        </option>
+
+                        <option value="inactive">
+                            غير نشط
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- Actions -->
+
+                <div class="form-actions">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        إضافة العرض
+                    </button>
+
+
+                    <button
+                        type="reset"
+                        class="btn btn-secondary"
+                    >
+                        مسح
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+
+
+        <!-- ================================= -->
+        <!-- Offers Table -->
+        <!-- ================================= -->
+
+        <section class="admin-card">
+
+
+            <div class="card-header">
+
+
+                <div>
+
+                    <h2>
+                        العروض الحالية
+                    </h2>
+
+                    <p>
+                        جميع العروض والخصومات
+                    </p>
+
+                </div>
+
+
+                <div class="table-tools">
+
+                    <input
+                        type="search"
+                        id="offerSearch"
+                        placeholder="بحث عن عرض..."
+                    >
+
+
+                    <select id="offerFilter">
+
+                        <option value="all">
+                            جميع العروض
+                        </option>
+
+                        <option value="active">
+                            النشطة
+                        </option>
+
+                        <option value="inactive">
+                            غير النشطة
+                        </option>
+
+                        <option value="expired">
+                            المنتهية
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="table-responsive">
+
+
+                <table class="admin-table">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                #
+                            </th>
+
+                            <th>
+                                العرض
+                            </th>
+
+                            <th>
+                                الخصم
+                            </th>
+
+                            <th>
+                                البداية
+                            </th>
+
+                            <th>
+                                النهاية
+                            </th>
+
+                            <th>
+                                الحالة
+                            </th>
+
+                            <th>
+                                الإجراءات
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <tbody id="offersTableBody">
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </section>
+
+
+
+    </main>
+
+
+
+    <!-- ================================= -->
+    <!-- JavaScript -->
+    <!-- ================================= -->
+
+    <script>
+
+
+        /*
+        =====================================
+        بيانات العروض
+        =====================================
+        */
+
+        let offers = [];
+
+
+        const offerForm =
+            document.getElementById(
+                "offerForm"
+            );
+
+
+        const tableBody =
+            document.getElementById(
+                "offersTableBody"
+            );
+
+
+        const searchInput =
+            document.getElementById(
+                "offerSearch"
+            );
+
+
+        const filterInput =
+            document.getElementById(
+                "offerFilter"
+            );
+
+
+
+        /*
+        =====================================
+        تحديد حالة العرض
+        =====================================
+        */
+
+        function getOfferStatus(offer) {
+
+
+            const today =
+                new Date()
+                    .toISOString()
+                    .split("T")[0];
+
+
+            if (
+                offer.status === "inactive"
+            ) {
+
+                return "inactive";
+
+            }
+
+
+            if (
+                offer.endDate < today
+            ) {
+
+                return "expired";
+
+            }
+
+
+            return "active";
+
+        }
+
+
+
+        /*
+        =====================================
+        اسم الحالة
+        =====================================
+        */
+
+        function getStatusName(status) {
+
+
+            const names = {
+
+                active:
+                    "نشط",
+
+                inactive:
+                    "غير نشط",
+
+                expired:
+                    "منتهي"
+
+            };
+
+
+            return (
+                names[status] ||
+                status
+            );
+
+        }
+
+
+
+        /*
+        =====================================
+        عرض قيمة الخصم
+        =====================================
+        */
+
+        function formatDiscount(offer) {
+
+
+            if (
+                offer.discountType ===
+                "percentage"
+            ) {
+
+                return `
+                    ${offer.discountValue}%
+                `;
+
+            }
+
+
+            return `
+                ${Number(
+                    offer.discountValue
+                ).toLocaleString("ar-EG")}
+                جنيه
+            `;
+
+        }
+
+
+
+        /*
+        =====================================
+        عرض العروض
+        =====================================
+        */
+
+        function renderOffers() {
+
+
+            tableBody.innerHTML = "";
+
+
+            const search =
+                searchInput.value
+                    .toLowerCase()
+                    .trim();
+
+
+            const filter =
+                filterInput.value;
+
+
+            const filtered =
+                offers.filter(
+                    function(offer) {
+
+
+                        const status =
+                            getOfferStatus(
+                                offer
+                            );
+
+
+                        const matchSearch =
+
+                            offer.name
+                                .toLowerCase()
+                                .includes(search)
+
+                            ||
+
+                            offer.description
+                                .toLowerCase()
+                                .includes(search);
+
+
+                        const matchFilter =
+
+                            filter === "all"
+
+                            ||
+
+                            filter === status;
+
+
+                        return (
+                            matchSearch &&
+                            matchFilter
+                        );
+
+                    }
+                );
+
+
+            if (
+                filtered.length === 0
+            ) {
+
+
+                tableBody.innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="7"
+                            style="
+                                text-align:center;
+                                padding:40px;
+                            "
+                        >
+
+                            <div
+                                style="
+                                    font-size:40px;
+                                "
+                            >
+                                🏷️
+                            </div>
+
+                            <p>
+                                لا توجد عروض
+                            </p>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+
+                updateStatistics();
+
+
+                return;
+
+            }
+
+
+
+            filtered.forEach(
+                function(offer, index) {
+
+
+                    const status =
+                        getOfferStatus(
+                            offer
+                        );
+
+
+                    const row =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+                    row.innerHTML = `
+
+                        <td>
+                            ${index + 1}
+                        </td>
+
+
+                        <td>
+
+                            <strong>
+                                ${offer.name}
+                            </strong>
+
+                            <br>
+
+                            <small>
+                                ${offer.description}
+                            </small>
+
+                        </td>
+
+
+                        <td>
+                            ${formatDiscount(
+                                offer
+                            )}
+                        </td>
+
+
+                        <td>
+                            ${offer.startDate}
+                        </td>
+
+
+                        <td>
+                            ${offer.endDate}
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="status ${status}"
+                            >
+                                ${getStatusName(
+                                    status
+                                )}
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+
+                            <button
+                                class="
+                                    btn
+                                    btn-small
+                                    btn-edit
+                                "
+                                onclick="
+                                    toggleOffer(
+                                        ${offer.id}
+                                    )
+                                "
+                            >
+                                ${
+                                    status === "active"
+                                    ? "تعطيل"
+                                    : "تفعيل"
+                                }
+                            </button>
+
+
+                            <button
+                                class="
+                                    btn
+                                    btn-small
+                                    btn-delete
+                                "
+                                onclick="
+                                    deleteOffer(
+                                        ${offer.id}
+                                    )
+                                "
+                            >
+                                حذف
+                            </button>
+
+
+                        </td>
+
+                    `;
+
+
+                    tableBody.appendChild(
+                        row
+                    );
+
+                }
+            );
+
+
+            updateStatistics();
+
+        }
+
+
+
+        /*
+        =====================================
+        إضافة عرض
+        =====================================
+        */
+
+        offerForm.addEventListener(
+            "submit",
+            function(event) {
+
+
+                event.preventDefault();
+
+
+                const name =
+                    document
+                        .getElementById(
+                            "offerName"
+                        )
+                        .value
+                        .trim();
+
+
+                const description =
+                    document
+                        .getElementById(
+                            "offerDescription"
+                        )
+                        .value
+                        .trim();
+
+
+                const discountValue =
+                    Number(
+                        document
+                            .getElementById(
+                                "discountValue"
+                            )
+                            .value
+                    );
+
+
+                const discountType =
+                    document
+                        .getElementById(
+                            "discountType"
+                        )
+                        .value;
+
+
+                const startDate =
+                    document
+                        .getElementById(
+                            "startDate"
+                        )
+                        .value;
+
+
+                const endDate =
+                    document
+                        .getElementById(
+                            "endDate"
+                        )
+                        .value;
+
+
+                const status =
+                    document
+                        .getElementById(
+                            "offerStatus"
+                        )
+                        .value;
+
+
+
+                if (
+                    !name ||
+                    !startDate ||
+                    !endDate
+                ) {
+
+                    alert(
+                        "يرجى إدخال البيانات المطلوبة"
+                    );
+
+                    return;
+
+                }
+
+
+
+                if (
+                    endDate < startDate
+                ) {
+
+                    alert(
+                        "تاريخ الانتهاء يجب أن يكون بعد تاريخ البداية"
+                    );
+
+                    return;
+
+                }
+
+
+
+                if (
+                    discountValue <= 0
+                ) {
+
+                    alert(
+                        "قيمة الخصم يجب أن تكون أكبر من صفر"
+                    );
+
+                    return;
+
+                }
+
+
+
+                if (
+                    discountType ===
+                    "percentage" &&
+                    discountValue > 100
+                ) {
+
+                    alert(
+                        "نسبة الخصم لا يمكن أن تتجاوز 100%"
+                    );
+
+                    return;
+
+                }
+
+
+
+                const newOffer = {
+
+                    id:
+                        Date.now(),
+
+                    name:
+                        name,
+
+                    description:
+                        description ||
+                        "عرض خاص",
+
+                    discountValue:
+                        discountValue,
+
+                    discountType:
+                        discountType,
+
+                    startDate:
+                        startDate,
+
+                    endDate:
+                        endDate,
+
+                    status:
+                        status
+
+                };
+
+
+
+                offers.push(
+                    newOffer
+                );
+
+
+                offerForm.reset();
+
+
+                renderOffers();
+
+
+                alert(
+                    "تمت إضافة العرض بنجاح"
+                );
+
+            }
+        );
+
+
+
+        /*
+        =====================================
+        تفعيل / تعطيل العرض
+        =====================================
+        */
+
+        function toggleOffer(
+            offerId
+        ) {
+
+
+            const offer =
+                offers.find(
+                    function(item) {
+
+                        return (
+                            item.id ===
+                            offerId
+                        );
+
+                    }
+                );
+
+
+            if (!offer) {
+
+                return;
+
+            }
+
+
+            offer.status =
+
+                offer.status === "active"
+                ? "inactive"
+                : "active";
+
+
+            renderOffers();
+
+        }
+
+
+
+        /*
+        =====================================
+        حذف العرض
+        =====================================
+        */
+
+        function deleteOffer(
+            offerId
+        ) {
+
+
+            const confirmed =
+                confirm(
+                    "هل أنت متأكد من حذف هذا العرض؟"
+                );
+
+
+            if (!confirmed) {
+
+                return;
+
+            }
+
+
+            offers =
+                offers.filter(
+                    function(offer) {
+
+                        return (
+                            offer.id !==
+                            offerId
+                        );
+
+                    }
+                );
+
+
+            renderOffers();
+
+
+            alert(
+                "تم حذف العرض"
+            );
+
+        }
+
+
+
+        /*
+        =====================================
+        الإحصائيات
+        =====================================
+        */
+
+        function updateStatistics() {
+
+
+            const total =
+                offers.length;
+
+
+            const active =
+                offers.filter(
+                    function(offer) {
+
+                        return (
+                            getOfferStatus(
+                                offer
+                            ) ===
+                            "active"
+                        );
+
+                    }
+                ).length;
+
+
+            const expired =
+                offers.filter(
+                    function(offer) {
+
+                        return (
+                            getOfferStatus(
+                                offer
+                            ) ===
+                            "expired"
+                        );
+
+                    }
+                ).length;
+
+
+            document.getElementById(
+                "totalOffers"
+            ).textContent =
+                total;
+
+
+            document.getElementById(
+                "activeOffers"
+            ).textContent =
+                active;
+
+
+            document.getElementById(
+                "expiredOffers"
+            ).textContent =
+                expired;
+
+        }
+
+
+
+        /*
+        =====================================
+        البحث
+        =====================================
+        */
+
+        searchInput.addEventListener(
+            "input",
+            renderOffers
+        );
+
+
+
+        /*
+        =====================================
+        الفلترة
+        =====================================
+        */
+
+        filterInput.addEventListener(
+            "change",
+            renderOffers
+        );
+
+
+
+        /*
+        =====================================
+        التشغيل الأول
+        =====================================
+        */
+
+        renderOffers();
+
+
+    </script>
+
+
+</body>
+
+                          </html>
