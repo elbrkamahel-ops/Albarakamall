@@ -2,21 +2,20 @@
 <html lang="ar" dir="rtl">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <meta name="theme-color" content="#087f23">
+    <meta name="theme-color" content="#078b2b">
 
     <title>إتمام الطلب | مول البركة</title>
 
     <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- ملف اتصال Supabase الموجود عندك -->
-    <script src="./supabase.js"></script>
+    <!-- ملف إعداد Supabase الموجود في المشروع -->
+    <script src="./supabase-config.js"></script>
 
     <style>
 
@@ -27,199 +26,415 @@
         }
 
         body {
-            font-family: Tahoma, Arial, sans-serif;
+            font-family:
+                Tahoma,
+                Arial,
+                sans-serif;
+
             background:
-                linear-gradient(135deg, #f3fff5, #ffffff);
+                linear-gradient(
+                    135deg,
+                    #f2fff5 0%,
+                    #ffffff 55%,
+                    #f3fff6 100%
+                );
+
             color: #222;
             min-height: 100vh;
         }
 
         header {
             background:
-                linear-gradient(135deg, #087f23, #10a83b);
+                linear-gradient(
+                    135deg,
+                    #087d27,
+                    #0ba43a
+                );
+
             color: white;
-            padding: 18px 5%;
+
+            padding:
+                18px
+                5%;
+
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
-            box-shadow: 0 4px 20px rgba(0,0,0,.12);
+
+            box-shadow:
+                0 5px 25px
+                rgba(0,0,0,.13);
+
             position: sticky;
+
             top: 0;
-            z-index: 100;
+
+            z-index: 1000;
         }
 
-        .logo {
-            font-size: 25px;
+        .brand {
+            text-align: right;
+        }
+
+        .brand-title {
+            font-size: 27px;
             font-weight: 900;
+            line-height: 1.2;
         }
 
-        .logo small {
-            display: block;
-            font-size: 13px;
-            margin-top: 5px;
-            opacity: .9;
+        .brand-subtitle {
+            font-size: 14px;
+            margin-top: 6px;
+            opacity: .92;
         }
 
-        .back {
-            color: white;
+        .back-btn {
             text-decoration: none;
-            background: rgba(255,255,255,.16);
-            padding: 12px 18px;
-            border-radius: 14px;
-            font-weight: bold;
+            color: white;
+
+            background:
+                rgba(255,255,255,.16);
+
+            border:
+                1px solid
+                rgba(255,255,255,.15);
+
+            padding:
+                13px
+                20px;
+
+            border-radius: 15px;
+
+            font-weight: 900;
+
+            transition: .2s;
+        }
+
+        .back-btn:hover {
+            background:
+                rgba(255,255,255,.25);
+
+            transform:
+                translateY(-2px);
         }
 
         main {
-            width: min(1100px, 94%);
-            margin: 32px auto 70px;
+            width:
+                min(1100px, 94%);
+
+            margin:
+                38px auto 80px;
         }
 
-        .page-title {
+        .hero {
             text-align: center;
-            margin-bottom: 28px;
+            margin-bottom: 30px;
         }
 
-        .page-title h1 {
-            color: #087f23;
-            font-size: 32px;
-            margin-bottom: 10px;
+        .hero h1 {
+            color: #07872a;
+            font-size: 35px;
+            margin-bottom: 12px;
+            font-weight: 900;
         }
 
-        .page-title p {
+        .hero p {
             color: #777;
             font-size: 17px;
         }
 
-        .checkout-grid {
+        .status {
+            display: none;
+
+            margin-bottom: 22px;
+
+            padding: 18px 20px;
+
+            border-radius: 17px;
+
+            font-weight: bold;
+
+            line-height: 1.8;
+        }
+
+        .status.error {
+            display: block;
+
+            color: #a40000;
+
+            background:
+                #fff1f1;
+
+            border:
+                1px solid
+                #ffcaca;
+        }
+
+        .status.success {
+            display: block;
+
+            color: #087d27;
+
+            background:
+                #effff3;
+
+            border:
+                1px solid
+                #bceac8;
+        }
+
+        .layout {
             display: grid;
-            grid-template-columns: 1.4fr .8fr;
-            gap: 22px;
+
+            grid-template-columns:
+                minmax(0, 1.35fr)
+                minmax(300px, .75fr);
+
+            gap: 24px;
+
             align-items: start;
         }
 
         .card {
             background: white;
-            border-radius: 22px;
-            padding: 25px;
+
+            border:
+                1px solid
+                #edf1ed;
+
+            border-radius: 24px;
+
+            padding: 27px;
+
             box-shadow:
-                0 8px 35px rgba(0,0,0,.07);
-            border: 1px solid #edf2ee;
+                0 10px 40px
+                rgba(0,0,0,.07);
         }
 
-        .card h2 {
-            color: #087f23;
-            font-size: 21px;
-            margin-bottom: 22px;
+        .card-title {
+            color: #087d27;
+
+            font-size: 22px;
+
+            font-weight: 900;
+
+            margin-bottom: 24px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
         }
 
         .field {
-            margin-bottom: 18px;
+            margin-bottom: 19px;
         }
 
-        label {
+        .field label {
             display: block;
-            font-weight: bold;
+
             margin-bottom: 9px;
+
+            font-weight: 900;
+
             font-size: 15px;
         }
 
         .required {
-            color: #d00000;
+            color: #c90000;
         }
 
         input,
         textarea,
         select {
             width: 100%;
-            border: 1px solid #dce5df;
-            border-radius: 14px;
+
+            border:
+                1px solid
+                #dce6df;
+
+            border-radius: 15px;
+
+            background:
+                #fbfdfb;
+
             padding: 15px;
+
             font-family: inherit;
+
             font-size: 16px;
+
             outline: none;
-            background: #fbfdfb;
+
             transition: .2s;
         }
 
         input:focus,
         textarea:focus,
         select:focus {
-            border-color: #0b982e;
             background: white;
+
+            border-color:
+                #0b982f;
+
             box-shadow:
-                0 0 0 3px rgba(11,152,46,.08);
+                0 0 0 4px
+                rgba(11,152,47,.08);
         }
 
         textarea {
-            min-height: 110px;
+            min-height: 115px;
             resize: vertical;
         }
 
-        .payment-box {
-            display: grid;
-            gap: 10px;
-        }
+        .payment {
+            border:
+                1px solid
+                #dce6df;
 
-        .payment-option {
+            border-radius: 16px;
+
+            padding: 16px;
+
+            background:
+                #fbfdfb;
+
             display: flex;
+
             align-items: center;
-            gap: 10px;
-            border: 1px solid #dfe8e1;
-            border-radius: 14px;
-            padding: 15px;
-            cursor: pointer;
-            background: #fbfdfb;
+
+            gap: 12px;
+
+            font-weight: bold;
         }
 
-        .payment-option input {
+        .payment input {
             width: auto;
         }
 
-        .order-list {
-            display: grid;
-            gap: 12px;
+        .submit {
+            width: 100%;
+
+            border: 0;
+
+            border-radius: 16px;
+
+            padding: 18px;
+
+            margin-top: 5px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #087d27,
+                    #12ad40
+                );
+
+            font-family: inherit;
+
+            font-size: 18px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 25px
+                rgba(8,125,39,.20);
+
+            transition: .2s;
         }
 
-        .product {
+        .submit:hover {
+            transform:
+                translateY(-2px);
+        }
+
+        .submit:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .secure {
+            text-align: center;
+
+            color: #888;
+
+            font-size: 12px;
+
+            margin-top: 13px;
+        }
+
+        .cart-list {
             display: flex;
-            align-items: center;
-            gap: 12px;
-            padding-bottom: 13px;
-            border-bottom: 1px solid #edf0ed;
+
+            flex-direction: column;
+
+            gap: 13px;
         }
 
-        .product:last-child {
+        .cart-item {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding-bottom: 13px;
+
+            border-bottom:
+                1px solid
+                #edf1ed;
+        }
+
+        .cart-item:last-child {
             border-bottom: 0;
         }
 
-        .product-image {
-            width: 65px;
-            height: 65px;
+        .cart-image {
+            width: 64px;
+
+            height: 64px;
+
             border-radius: 13px;
+
             object-fit: cover;
-            background: #f2f2f2;
+
+            background:
+                #f1f3f1;
+
             flex-shrink: 0;
         }
 
-        .product-info {
+        .cart-info {
             flex: 1;
             min-width: 0;
         }
 
-        .product-name {
-            font-weight: bold;
-            margin-bottom: 5px;
+        .cart-name {
+            font-weight: 900;
+
             line-height: 1.5;
+
+            margin-bottom: 4px;
         }
 
-        .product-meta {
+        .cart-quantity {
             color: #777;
             font-size: 13px;
         }
 
-        .product-price {
-            color: #087f23;
-            font-weight: bold;
+        .cart-price {
+            color: #07872a;
+
+            font-weight: 900;
+
             white-space: nowrap;
         }
 
@@ -229,182 +444,166 @@
 
         .summary-row {
             display: flex;
-            justify-content: space-between;
+
+            justify-content:
+                space-between;
+
             align-items: center;
-            gap: 10px;
-            padding: 11px 0;
+
+            gap: 15px;
+
+            padding: 12px 0;
+
             color: #555;
         }
 
-        .summary-row.total {
-            border-top: 2px solid #e9eee9;
-            margin-top: 8px;
-            padding-top: 17px;
-            color: #087f23;
+        .summary-total {
+            border-top:
+                2px solid
+                #edf1ed;
+
+            margin-top: 7px;
+
+            padding-top: 18px;
+
+            color: #07872a;
+
             font-size: 21px;
+
             font-weight: 900;
         }
 
-        .submit-btn {
-            width: 100%;
-            border: 0;
-            padding: 17px;
-            margin-top: 12px;
-            border-radius: 15px;
-            background:
-                linear-gradient(135deg, #087f23, #13a93d);
-            color: white;
-            font-family: inherit;
-            font-size: 17px;
-            font-weight: 900;
-            cursor: pointer;
-            box-shadow:
-                0 8px 22px rgba(8,127,35,.2);
-            transition: .2s;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .submit-btn:disabled {
-            opacity: .65;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .message {
+        .empty {
             display: none;
-            padding: 16px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            font-weight: bold;
-            line-height: 1.8;
-        }
 
-        .message.error {
-            display: block;
-            background: #fff0f0;
-            color: #b00000;
-            border: 1px solid #ffcaca;
-        }
-
-        .message.success {
-            display: block;
-            background: #effff2;
-            color: #087f23;
-            border: 1px solid #bdebc7;
-        }
-
-        .empty-box {
-            display: none;
-            text-align: center;
             background: white;
-            border-radius: 22px;
-            padding: 55px 20px;
-            box-shadow: 0 8px 35px rgba(0,0,0,.07);
+
+            border-radius: 24px;
+
+            padding: 60px 20px;
+
+            text-align: center;
+
+            box-shadow:
+                0 10px 40px
+                rgba(0,0,0,.07);
         }
 
         .empty-icon {
-            font-size: 60px;
+            font-size: 65px;
             margin-bottom: 15px;
         }
 
-        .empty-box h2 {
-            color: #087f23;
+        .empty h2 {
+            color: #07872a;
             margin-bottom: 10px;
         }
 
-        .empty-box p {
-            color: #666;
+        .empty p {
+            color: #777;
             line-height: 1.8;
         }
 
-        .home-btn {
+        .shop-btn {
             display: inline-block;
-            margin-top: 20px;
-            padding: 13px 25px;
-            background: #087f23;
-            color: white;
-            text-decoration: none;
-            border-radius: 13px;
-            font-weight: bold;
-        }
 
-        .secure {
-            text-align: center;
-            margin-top: 14px;
-            color: #888;
-            font-size: 12px;
+            margin-top: 20px;
+
+            padding:
+                13px 25px;
+
+            border-radius: 14px;
+
+            color: white;
+
+            background: #087d27;
+
+            text-decoration: none;
+
+            font-weight: 900;
         }
 
         .loading {
             text-align: center;
-            padding: 30px 10px;
-            color: #777;
-        }
 
-        .debug {
-            display: none;
+            padding: 25px;
+
+            color: #777;
         }
 
         @media (max-width: 800px) {
 
             header {
-                padding: 15px 4%;
+                padding:
+                    15px 4%;
             }
 
-            .logo {
-                font-size: 20px;
+            .brand-title {
+                font-size: 21px;
             }
 
-            .back {
-                padding: 10px 13px;
+            .brand-subtitle {
+                font-size: 12px;
+            }
+
+            .back-btn {
+                padding:
+                    10px 13px;
+
                 font-size: 13px;
             }
 
             main {
                 width: 94%;
-                margin-top: 25px;
+
+                margin-top: 28px;
             }
 
-            .page-title h1 {
-                font-size: 27px;
+            .hero h1 {
+                font-size: 29px;
             }
 
-            .page-title p {
+            .hero p {
                 font-size: 15px;
             }
 
-            .checkout-grid {
+            .layout {
                 grid-template-columns: 1fr;
             }
 
             .card {
-                padding: 19px;
-                border-radius: 18px;
+                padding: 20px;
+
+                border-radius: 19px;
             }
 
-            .card h2 {
-                font-size: 20px;
-            }
         }
 
     </style>
-
 </head>
 
 <body>
 
 <header>
 
-    <div class="logo">
-        🛒 مول البركة
-        <small>أولاد الجارحي</small>
+    <div class="brand">
+
+        <div class="brand-title">
+            🛒 مول البركة
+        </div>
+
+        <div class="brand-subtitle">
+            أولاد الجارحي
+        </div>
+
     </div>
 
-    <a href="cart.html" class="back">
+    <a
+        href="cart.html"
+        class="back-btn">
+
         ← العودة للسلة
+
     </a>
 
 </header>
@@ -412,15 +611,99 @@
 
 <main>
 
-    <div class="page-title">
+    <section class="hero">
 
-        <h1>إتمام الطلب</h1>
+        <h1>
+            إتمام الطلب
+        </h1>
 
         <p>
             أدخل بياناتك وسنجهز طلبك بكل عناية
         </p>
 
+    </section>
+
+
+    <div
+        id="status"
+        class="status">
     </div>
 
 
-    <div id="message"
+    <div
+        id="checkoutLayout"
+        class="layout">
+
+
+        <!-- بيانات العميل -->
+
+        <section class="card">
+
+            <h2 class="card-title">
+                📋 بيانات العميل
+            </h2>
+
+
+            <form id="checkoutForm">
+
+                <div class="field">
+
+                    <label>
+                        الاسم بالكامل
+                        <span class="required">*</span>
+                    </label>
+
+                    <input
+                        id="customerName"
+                        type="text"
+                        autocomplete="name"
+                        placeholder="اكتب الاسم بالكامل"
+                        required>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        رقم الهاتف
+                        <span class="required">*</span>
+                    </label>
+
+                    <input
+                        id="customerPhone"
+                        type="tel"
+                        inputmode="tel"
+                        autocomplete="tel"
+                        placeholder="01xxxxxxxxx"
+                        required>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        العنوان بالتفصيل
+                        <span class="required">*</span>
+                    </label>
+
+                    <textarea
+                        id="customerAddress"
+                        autocomplete="street-address"
+                        placeholder="المنطقة - الشارع - رقم المنزل - علامة مميزة"
+                        required></textarea>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        طريقة الدفع
+                    </label>
+
+                    <div class="payment">
+
+                        <input
+                            type="radio
