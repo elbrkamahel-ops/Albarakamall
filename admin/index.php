@@ -1,10 +1,16 @@
 <?php
 declare(strict_types=1);
+
 session_start();
 
-/* =========================================================
-   حماية لوحة الإدارة
-   ========================================================= */
+/*
+|--------------------------------------------------------------------------
+| مول البركة - لوحة تحكم احترافية
+| الملف: admin/index.php
+|--------------------------------------------------------------------------
+*/
+
+/* حماية لوحة التحكم */
 if (empty($_SESSION['admin_logged_in'])) {
     header('Location: login.php');
     exit;
@@ -13,33 +19,244 @@ if (empty($_SESSION['admin_logged_in'])) {
 $adminName = $_SESSION['admin_name'] ?? 'مدير مول البركة';
 $adminRole = $_SESSION['admin_role'] ?? 'manager';
 
-function e(string $value): string
-{
-    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+/*
+|--------------------------------------------------------------------------
+| محاولة الاتصال بقاعدة البيانات
+|--------------------------------------------------------------------------
+*/
+$db = null;
+
+try {
+    $configFile = __DIR__ . '/../config/config.php';
+
+    if (file_exists($configFile)) {
+        require_once $configFile;
+    }
+
+    /* يدعم PDO */
+    if (isset($pdo) && $pdo instanceof PDO) {
+        $db = $pdo;
+    }
+
+    /* يدعم mysqli */
+    elseif (isset($conn) && $conn instanceof mysqli) {
+        $db = $conn;
+    }
+
+    elseif (isset($mysqli) && $mysqli instanceof mysqli) {
+        $db = $mysqli;
+    }
+
+} catch (Throwable $e) {
+    $db = null;
 }
+
+/*
+|--------------------------------------------------------------------------
+| دوال آمنة
+|--------------------------------------------------------------------------
+*/
+
+function e($value): string
+{
+    return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
+}
+
+function money($value): string
+{
+    return number_format((float)$value, 2) . ' ج.م';
+}
+
+function dbScalar($db, string $sql, $default = 0)
+{
+    try {
+
+        if ($db instanceof PDO) {
+            $stmt = $db->query($sql);
+
+            if ($stmt) {
+                $value = $stmt->fetchColumn();
+
+                return $value !== false && $value !== null
+                    ? $value
+                    : $default;
+            }
+        }
+
+        if ($db instanceof mysqli) {
+            $result = $db->query($sql);
+
+            if ($result && ($row = $result->fetch_row())) {
+                return $row[0] ?? $default;
+            }
+        }
+
+    } catch (Throwable $e) {
+        return $default;
+    }
+
+    return $default;
+}
+
+function dbRows($db, string $sql): array
+{
+    $rows = [];
+
+    try {
+
+        if ($db instanceof PDO) {
+            $stmt = $db->query($sql);
+
+            if ($stmt) {
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+        }
+
+        if ($db instanceof mysqli) {
+            $result = $db->query($sql);
+
+            if ($result) {
+                while ($row = $result->fetch_assoc()) {
+                    $rows[] = $row;
+                }
+            }
+        }
+
+    } catch (Throwable $e) {
+        return [];
+    }
+
+    return $rows;
+}
+
+/*
+|--------------------------------------------------------------------------
+| الإحصائيات
+|--------------------------------------------------------------------------
+*/
+
+$productsCount  = (int) dbScalar(
+    $db,
+    "SELECT COUNT(*) FROM products WHERE active = 1",
+    0
+);
+
+$customersCount = (int) dbScalar(
+    $db,
+    "SELECT COUNT(*) FROM customers",
+    0
+);
+
+$ordersCount = (int) dbScalar(
+    $db,
+    "SELECT COUNT(*) FROM orders",
+    0
+);
+
+$categoriesCount = (int) dbScalar(
+    $db,
+    "SELECT COUNT(*) FROM categories WHERE active = 1",
+    0
+);
+
+$totalSales = (float) dbScalar(
+    $db,
+    "SELECT COALESCE(SUM(total),0) FROM orders",
+    0
+);
+
+$todaySales = (float) dbScalar(
+    $db,
+    "SELECT COALESCE(SUM(total),0)
+     FROM orders
+     WHERE DATE(created_at)=CURDATE()",
+    0
+);
+
+$todayOrders = (int) dbScalar(
+    $db,
+    "SELECT COUNT(*)
+     FROM orders
+     WHERE DATE(created_at)=CURDATE()",
+    0
+);
+
+$lowStock = (int) dbScalar(
+    $db,
+    "SELECT COUNT(*)
+     FROM products
+     WHERE active=1 AND stock <= 5",
+    0
+);
+
+/*
+|--------------------------------------------------------------------------
+| آخر الطلبات
+|--------------------------------------------------------------------------
+*/
+
+$recentOrders = dbRows(
+    $db,
+    "SELECT
+        id,
+        order_number,
+        customer_name,
+        customer_mobile,
+        total,
+        order_status,
+        payment_status,
+        created_at
+     FROM orders
+     ORDER BY id DESC
+     LIMIT 7"
+);
+
+/*
+|--------------------------------------------------------------------------
+| المنتجات الأكثر ظهورًا
+|--------------------------------------------------------------------------
+*/
+
+$topProducts = dbRows(
+    $db,
+    "SELECT
+        p.name,
+        p.price,
+        p.stock,
+        p.image,
+        p.featured,
+        p.offer
+     FROM products p
+     WHERE p.active = 1
+     ORDER BY p.featured DESC, p.id DESC
+     LIMIT 6"
+);
+
 ?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <meta name="theme-color" content="#0b7f3f">
-<meta name="robots" content="noindex,nofollow">
 
-<title>لوحة تحكم مول البركة</title>
+<title>لوحة التحكم | مول البركة</title>
 
 <style>
 
 /* =========================================================
    RESET
-   ========================================================= */
+========================================================= */
 
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
 }
 
 html{
@@ -50,60 +267,46 @@ body{
     font-family:
         Tahoma,
         Arial,
-        "Segoe UI",
         sans-serif;
 
-    background:#f5f7f9;
-    color:#17212b;
+    background:
+        #f4f7f6;
+
+    color:#17221c;
+
     min-height:100vh;
-}
-
-a{
-    text-decoration:none;
-    color:inherit;
-}
-
-button{
-    font-family:inherit;
-    border:0;
-    cursor:pointer;
 }
 
 /* =========================================================
    VARIABLES
-   ========================================================= */
+========================================================= */
 
 :root{
+
     --green:#087f3f;
-    --green-dark:#056331;
-    --green-light:#e9f8ef;
+    --green-dark:#056332;
+    --green-light:#e9f7ef;
 
-    --orange:#f59e0b;
-    --red:#dc2626;
-    --blue:#2563eb;
-    --purple:#7c3aed;
+    --gold:#d9a441;
 
-    --dark:#111827;
-    --dark2:#1f2937;
+    --dark:#10241a;
 
-    --text:#17212b;
-    --muted:#718096;
+    --text:#17221c;
+    --muted:#718078;
 
     --white:#ffffff;
-    --border:#e5e7eb;
+
+    --border:#e8eeeb;
 
     --shadow:
-        0 10px 30px rgba(15,23,42,.07);
-
-    --shadow-hover:
-        0 18px 45px rgba(15,23,42,.13);
+        0 10px 30px rgba(12,42,27,.07);
 
     --radius:20px;
 }
 
 /* =========================================================
    LAYOUT
-   ========================================================= */
+========================================================= */
 
 .app{
     min-height:100vh;
@@ -112,859 +315,1129 @@ button{
 
 /* =========================================================
    SIDEBAR
-   ========================================================= */
+========================================================= */
 
 .sidebar{
+
     width:270px;
+
     background:
         linear-gradient(
             180deg,
-            #063f27 0%,
-            #075d35 45%,
+            #073b25 0%,
+            #075c35 45%,
             #087f3f 100%
         );
 
     color:white;
+
     position:fixed;
-    right:0;
+
     top:0;
     bottom:0;
+    right:0;
+
     z-index:1000;
 
-    display:flex;
-    flex-direction:column;
+    padding:22px 16px;
 
-    transition:.3s ease;
+    overflow-y:auto;
 
     box-shadow:
-        -10px 0 35px rgba(0,0,0,.10);
+        -10px 0 35px rgba(0,0,0,.12);
+
+    transition:.3s;
 }
 
 .brand{
-    padding:25px 22px 20px;
-    border-bottom:1px solid rgba(255,255,255,.12);
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:
+        5px 8px 25px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.13);
+
+    margin-bottom:20px;
 }
 
 .brand-logo{
-    display:flex;
-    align-items:center;
-    gap:13px;
-}
 
-.brand-icon{
-    width:52px;
-    height:52px;
+    width:50px;
+    height:50px;
+
+    border-radius:15px;
 
     background:white;
+
     color:var(--green);
 
-    border-radius:16px;
-
     display:flex;
+
     align-items:center;
     justify-content:center;
 
-    font-size:27px;
-    box-shadow:0 8px 25px rgba(0,0,0,.15);
-}
-
-.brand-title{
-    font-size:20px;
+    font-size:25px;
     font-weight:900;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.15);
 }
 
-.brand-sub{
+.brand-text strong{
+
+    display:block;
+
+    font-size:19px;
+
+}
+
+.brand-text span{
+
+    display:block;
+
     font-size:11px;
-    opacity:.65;
+
+    opacity:.7;
+
     margin-top:4px;
 }
 
-.sidebar-content{
-    padding:18px 13px;
-    overflow-y:auto;
-    flex:1;
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile{
+
+    background:
+        rgba(255,255,255,.08);
+
+    border:
+        1px solid rgba(255,255,255,.1);
+
+    border-radius:17px;
+
+    padding:14px;
+
+    margin-bottom:20px;
 }
 
-.menu-title{
-    color:rgba(255,255,255,.45);
-    font-size:11px;
+.profile-top{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.avatar{
+
+    width:43px;
+    height:43px;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #dcefe4
+        );
+
+    color:var(--green);
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-weight:900;
+}
+
+.profile-name{
+
+    font-size:14px;
     font-weight:bold;
-    padding:15px 14px 8px;
+}
+
+.profile-role{
+
+    font-size:11px;
+    opacity:.65;
+
+    margin-top:4px;
+}
+
+/* =========================================================
+   MENU
+========================================================= */
+
+.menu-title{
+
+    font-size:11px;
+
+    color:
+        rgba(255,255,255,.45);
+
+    padding:
+        10px 12px 8px;
+
+    font-weight:bold;
 }
 
 .menu{
-    list-style:none;
-}
 
-.menu li{
-    margin:4px 0;
+    display:flex;
+
+    flex-direction:column;
+
+    gap:5px;
 }
 
 .menu a{
-    display:flex;
-    align-items:center;
-    gap:12px;
 
-    padding:13px 15px;
+    color:white;
+
+    text-decoration:none;
+
+    padding:
+        13px 14px;
 
     border-radius:13px;
 
-    color:rgba(255,255,255,.82);
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
 
     font-size:14px;
-    font-weight:700;
 
     transition:.2s;
 }
 
 .menu a:hover{
-    background:rgba(255,255,255,.11);
-    color:white;
-    transform:translateX(-3px);
+
+    background:
+        rgba(255,255,255,.12);
+
+    transform:
+        translateX(-3px);
 }
 
 .menu a.active{
+
     background:white;
+
     color:var(--green);
 
     box-shadow:
         0 8px 20px rgba(0,0,0,.12);
-}
 
-.menu-icon{
-    width:27px;
-    height:27px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:18px;
-}
-
-.badge{
-    margin-right:auto;
-
-    min-width:23px;
-    height:23px;
-
-    padding:0 6px;
-
-    border-radius:20px;
-
-    background:#ef4444;
-    color:white;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:10px;
-}
-
-.sidebar-footer{
-    padding:15px;
-    border-top:1px solid rgba(255,255,255,.1);
-}
-
-.admin-mini{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.admin-avatar{
-    width:40px;
-    height:40px;
-
-    border-radius:13px;
-
-    background:rgba(255,255,255,.15);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:18px;
-}
-
-.admin-name{
-    font-size:12px;
     font-weight:bold;
 }
 
-.admin-role{
-    font-size:10px;
-    opacity:.6;
-    margin-top:3px;
+.menu-icon{
+
+    width:25px;
+
+    text-align:center;
+
+    font-size:18px;
+}
+
+.logout{
+
+    margin-top:20px;
+
+    border-top:
+        1px solid rgba(255,255,255,.12);
+
+    padding-top:18px;
+}
+
+.logout a{
+
+    color:#ffd7d7 !important;
 }
 
 /* =========================================================
    MAIN
-   ========================================================= */
+========================================================= */
 
 .main{
-    width:calc(100% - 270px);
+
+    flex:1;
+
     margin-right:270px;
-    min-height:100vh;
+
+    min-width:0;
 }
 
 /* =========================================================
    TOPBAR
-   ========================================================= */
+========================================================= */
 
 .topbar{
-    height:78px;
+
+    height:76px;
 
     background:white;
 
-    border-bottom:1px solid var(--border);
+    border-bottom:
+        1px solid var(--border);
 
     display:flex;
+
     align-items:center;
 
     justify-content:space-between;
 
-    padding:0 28px;
+    padding:
+        0 30px;
 
     position:sticky;
+
     top:0;
 
-    z-index:900;
+    z-index:500;
 }
 
-.top-left{
+.topbar-title{
+
     display:flex;
+
     align-items:center;
-    gap:14px;
+
+    gap:12px;
 }
 
 .mobile-menu{
+
     display:none;
+
+    width:42px;
+    height:42px;
+
+    border:0;
+
+    border-radius:12px;
+
+    background:
+        var(--green-light);
+
+    color:var(--green);
+
+    font-size:21px;
+}
+
+.top-title h1{
+
+    font-size:20px;
+
+    font-weight:900;
+}
+
+.top-title p{
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    margin-top:4px;
+}
+
+.top-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.top-button{
 
     width:42px;
     height:42px;
 
     border-radius:12px;
 
-    background:#f3f4f6;
+    border:
+        1px solid var(--border);
 
-    font-size:20px;
-}
-
-.search{
-    width:320px;
-
-    height:43px;
-
-    background:#f6f7f9;
-
-    border:1px solid #edf0f2;
-
-    border-radius:13px;
+    background:white;
 
     display:flex;
-    align-items:center;
 
-    padding:0 14px;
-
-    gap:10px;
-
-    color:#9ca3af;
-}
-
-.search input{
-    width:100%;
-    border:0;
-    outline:0;
-    background:transparent;
-
-    font-family:inherit;
-}
-
-.top-actions{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.icon-btn{
-    width:43px;
-    height:43px;
-
-    border-radius:13px;
-
-    background:#f5f7f9;
-
-    display:flex;
     align-items:center;
     justify-content:center;
 
-    position:relative;
+    text-decoration:none;
+
+    color:var(--text);
 
     font-size:18px;
+
+    transition:.2s;
 }
 
-.notification-dot{
-    position:absolute;
+.top-button:hover{
 
-    top:8px;
-    left:8px;
+    border-color:var(--green);
+
+    color:var(--green);
+
+    transform:translateY(-2px);
+}
+
+.notification{
+
+    position:relative;
+}
+
+.notification::after{
+
+    content:"";
+
+    position:absolute;
 
     width:8px;
     height:8px;
 
-    border-radius:50%;
-
     background:#ef4444;
 
     border:2px solid white;
-}
 
-.view-store{
-    background:var(--green);
-    color:white;
+    border-radius:50%;
 
-    padding:12px 17px;
-
-    border-radius:12px;
-
-    font-size:12px;
-    font-weight:bold;
+    top:7px;
+    right:7px;
 }
 
 /* =========================================================
    CONTENT
-   ========================================================= */
+========================================================= */
 
 .content{
-    padding:28px;
-    max-width:1600px;
+
+    padding:30px;
+
+    max-width:1700px;
+
     margin:auto;
 }
 
 /* =========================================================
    WELCOME
-   ========================================================= */
+========================================================= */
 
 .welcome{
+
     background:
+
+        radial-gradient(
+            circle at 90% 20%,
+            rgba(255,255,255,.2),
+            transparent 30%
+        ),
+
         linear-gradient(
-            120deg,
-            #063f27,
-            #087f3f 55%,
-            #10a85b
+            135deg,
+            #087f3f,
+            #075c35
         );
 
     color:white;
 
     border-radius:25px;
 
-    padding:28px 30px;
+    padding:30px;
 
-    min-height:190px;
+    display:flex;
 
-    position:relative;
-    overflow:hidden;
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
 
     box-shadow:
-        0 15px 40px rgba(8,127,63,.18);
+        0 15px 35px rgba(8,127,63,.18);
 
     margin-bottom:25px;
-}
 
-.welcome:before{
-    content:"";
+    overflow:hidden;
 
-    position:absolute;
-
-    width:280px;
-    height:280px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.07);
-
-    left:-80px;
-    top:-110px;
-}
-
-.welcome:after{
-    content:"";
-
-    position:absolute;
-
-    width:200px;
-    height:200px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.05);
-
-    left:170px;
-    bottom:-130px;
-}
-
-.welcome-content{
     position:relative;
-    z-index:2;
 }
 
-.welcome-small{
-    font-size:13px;
-    opacity:.8;
+.welcome::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+    height:220px;
+
+    border-radius:50%;
+
+    border:
+        30px solid rgba(255,255,255,.04);
+
+    left:-70px;
+    bottom:-100px;
+}
+
+.welcome h2{
+
+    font-size:28px;
+
     margin-bottom:8px;
 }
 
-.welcome h1{
-    font-size:30px;
-    margin-bottom:9px;
-}
-
 .welcome p{
-    font-size:14px;
-    opacity:.82;
+
+    opacity:.78;
+
+    font-size:13px;
 }
 
-.welcome-date{
-    margin-top:20px;
+.welcome-badge{
 
-    display:inline-flex;
-    align-items:center;
+    background:
+        rgba(255,255,255,.12);
 
-    gap:8px;
+    border:
+        1px solid rgba(255,255,255,.15);
 
-    background:rgba(255,255,255,.12);
+    border-radius:18px;
 
-    padding:9px 14px;
+    padding:18px 22px;
 
-    border-radius:12px;
+    min-width:190px;
+
+    text-align:center;
+}
+
+.welcome-badge strong{
+
+    display:block;
+
+    font-size:23px;
+
+}
+
+.welcome-badge span{
 
     font-size:11px;
-}
 
-/* =========================================================
-   SECTION HEADER
-   ========================================================= */
-
-.section-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    margin:28px 0 15px;
-}
-
-.section-title{
-    font-size:19px;
-    font-weight:900;
-}
-
-.section-sub{
-    color:var(--muted);
-    font-size:11px;
-    margin-top:5px;
-}
-
-.link{
-    color:var(--green);
-    font-size:12px;
-    font-weight:bold;
+    opacity:.7;
 }
 
 /* =========================================================
    STATS
-   ========================================================= */
+========================================================= */
 
 .stats{
+
     display:grid;
 
     grid-template-columns:
         repeat(4,1fr);
 
     gap:17px;
+
+    margin-bottom:25px;
 }
 
 .stat{
+
     background:white;
 
-    border:1px solid var(--border);
+    border:
+        1px solid var(--border);
 
-    border-radius:20px;
+    border-radius:19px;
 
-    padding:20px;
+    padding:21px;
 
     box-shadow:var(--shadow);
 
     transition:.25s;
 
     position:relative;
+
     overflow:hidden;
 }
 
 .stat:hover{
-    transform:translateY(-4px);
-    box-shadow:var(--shadow-hover);
+
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+        0 15px 35px rgba(12,42,27,.11);
+}
+
+.stat::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:80px;
+    height:80px;
+
+    border-radius:50%;
+
+    background:
+        var(--green-light);
+
+    left:-25px;
+    bottom:-30px;
 }
 
 .stat-top{
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
+
+    position:relative;
+
+    z-index:2;
 }
 
 .stat-icon{
-    width:48px;
-    height:48px;
 
-    border-radius:15px;
+    width:47px;
+    height:47px;
+
+    border-radius:14px;
+
+    background:
+        var(--green-light);
+
+    color:var(--green);
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
-    font-size:22px;
-}
-
-.green{
-    background:#e8f8ef;
-    color:#087f3f;
-}
-
-.blue{
-    background:#eaf1ff;
-    color:#2563eb;
-}
-
-.orange{
-    background:#fff5df;
-    color:#d97706;
-}
-
-.purple{
-    background:#f1eaff;
-    color:#7c3aed;
-}
-
-.stat-change{
-    font-size:10px;
-    font-weight:bold;
-    color:#16a34a;
-}
-
-.stat-number{
-    font-size:28px;
-    font-weight:900;
-    margin-top:17px;
+    font-size:21px;
 }
 
 .stat-label{
+
     color:var(--muted);
+
     font-size:12px;
-    margin-top:5px;
+}
+
+.stat-number{
+
+    font-size:25px;
+
+    font-weight:900;
+
+    margin-top:14px;
+
+    position:relative;
+
+    z-index:2;
+}
+
+.stat-footer{
+
+    margin-top:7px;
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    position:relative;
+
+    z-index:2;
+}
+
+.stat-warning .stat-icon{
+
+    background:#fff4df;
+
+    color:#c68100;
+}
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.dashboard-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,2fr)
+        minmax(300px,1fr);
+
+    gap:20px;
+
+    margin-bottom:25px;
+}
+
+.card{
+
+    background:white;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:20px;
+
+    box-shadow:var(--shadow);
+
+    overflow:hidden;
+}
+
+.card-head{
+
+    padding:20px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+.card-head h3{
+
+    font-size:16px;
+
+    font-weight:900;
+}
+
+.card-head span{
+
+    font-size:11px;
+
+    color:var(--muted);
+}
+
+.view-all{
+
+    color:var(--green);
+
+    text-decoration:none;
+
+    font-size:12px;
+
+    font-weight:bold;
+}
+
+/* =========================================================
+   ORDERS
+========================================================= */
+
+.table-wrap{
+
+    width:100%;
+
+    overflow-x:auto;
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:650px;
+}
+
+th{
+
+    text-align:right;
+
+    font-size:11px;
+
+    color:var(--muted);
+
+    font-weight:bold;
+
+    padding:
+        14px 18px;
+
+    background:#fbfcfc;
+}
+
+td{
+
+    padding:
+        15px 18px;
+
+    border-top:
+        1px solid var(--border);
+
+    font-size:12px;
+}
+
+.order-number{
+
+    color:var(--green);
+
+    font-weight:900;
+}
+
+.customer{
+
+    font-weight:bold;
+}
+
+.customer small{
+
+    display:block;
+
+    color:var(--muted);
+
+    margin-top:3px;
+
+    font-size:10px;
+}
+
+.status{
+
+    display:inline-flex;
+
+    padding:
+        6px 10px;
+
+    border-radius:30px;
+
+    font-size:10px;
+
+    font-weight:bold;
+
+    background:#eef5f1;
+
+    color:var(--green);
+}
+
+.status.pending{
+
+    background:#fff5df;
+
+    color:#b47700;
+}
+
+.status.cancelled{
+
+    background:#ffeded;
+
+    color:#d13b3b;
+}
+
+.status.completed{
+
+    background:#e9f7ef;
+
+    color:#087f3f;
 }
 
 /* =========================================================
    QUICK ACTIONS
-   ========================================================= */
+========================================================= */
 
 .quick-grid{
+
+    padding:20px;
+
     display:grid;
 
     grid-template-columns:
-        repeat(6,1fr);
+        repeat(2,1fr);
 
-    gap:13px;
+    gap:11px;
 }
 
 .quick{
-    background:white;
 
-    border:1px solid var(--border);
+    text-decoration:none;
 
-    border-radius:17px;
+    color:var(--text);
 
-    padding:18px 10px;
+    background:#fafcfa;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:15px;
+
+    padding:17px 13px;
 
     text-align:center;
-
-    box-shadow:var(--shadow);
 
     transition:.2s;
 }
 
 .quick:hover{
-    transform:translateY(-4px);
-    border-color:#ccebd9;
-    box-shadow:var(--shadow-hover);
+
+    background:
+        var(--green-light);
+
+    border-color:
+        #c9e7d5;
+
+    color:var(--green);
+
+    transform:translateY(-2px);
 }
 
 .quick-icon{
-    width:44px;
-    height:44px;
 
-    margin:0 auto 10px;
+    font-size:23px;
 
-    border-radius:14px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:var(--green-light);
-
-    color:var(--green);
-
-    font-size:20px;
+    margin-bottom:7px;
 }
 
-.quick span{
-    display:block;
+.quick-title{
 
     font-size:11px;
+
     font-weight:bold;
 }
 
 /* =========================================================
-   DASHBOARD GRID
-   ========================================================= */
+   PRODUCTS
+========================================================= */
 
-.dashboard-grid{
+.products{
+
     display:grid;
 
     grid-template-columns:
-        minmax(0,1.7fr)
-        minmax(300px,1fr);
+        repeat(3,1fr);
 
-    gap:20px;
+    gap:14px;
 
-    margin-top:20px;
-}
-
-/* =========================================================
-   CARD
-   ========================================================= */
-
-.card{
-    background:white;
-
-    border:1px solid var(--border);
-
-    border-radius:20px;
-
-    box-shadow:var(--shadow);
-
-    overflow:hidden;
-}
-
-.card-header{
-    padding:19px 20px;
-
-    border-bottom:1px solid #f0f2f4;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.card-title{
-    font-size:15px;
-    font-weight:900;
-}
-
-.card-body{
     padding:20px;
 }
 
-/* =========================================================
-   ORDERS
-   ========================================================= */
+.product{
 
-.orders{
-    width:100%;
-    border-collapse:collapse;
+    border:
+        1px solid var(--border);
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    background:#fff;
+
+    transition:.2s;
 }
 
-.orders th{
-    text-align:right;
+.product:hover{
 
-    color:#9aa3af;
+    transform:translateY(-3px);
 
-    font-size:10px;
-    font-weight:bold;
-
-    padding:10px;
-
-    background:#fafbfc;
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.06);
 }
 
-.orders td{
-    padding:13px 10px;
+.product-image{
 
-    border-top:1px solid #f0f2f4;
+    height:125px;
 
-    font-size:11px;
-}
+    background:#f4f7f5;
 
-.order-id{
-    color:var(--green);
-    font-weight:900;
-}
-
-.customer{
-    font-weight:bold;
-}
-
-.status{
-    display:inline-flex;
-
-    padding:6px 9px;
-
-    border-radius:20px;
-
-    font-size:9px;
-
-    font-weight:bold;
-}
-
-.pending{
-    background:#fff5df;
-    color:#b45309;
-}
-
-.completed{
-    background:#e8f8ef;
-    color:#087f3f;
-}
-
-.cancelled{
-    background:#feecec;
-    color:#dc2626;
-}
-
-/* =========================================================
-   ACTIVITY
-   ========================================================= */
-
-.activity{
-    display:flex;
-    flex-direction:column;
-}
-
-.activity-item{
     display:flex;
 
-    gap:12px;
-
-    padding:14px 0;
-
-    border-bottom:1px solid #f0f2f4;
-}
-
-.activity-item:last-child{
-    border-bottom:0;
-}
-
-.activity-icon{
-    width:38px;
-    height:38px;
-
-    border-radius:12px;
-
-    background:var(--green-light);
-
-    display:flex;
     align-items:center;
     justify-content:center;
-
-    color:var(--green);
-
-    flex-shrink:0;
-}
-
-.activity-text{
-    font-size:11px;
-    line-height:1.7;
-}
-
-.activity-time{
-    color:#9ca3af;
-    font-size:9px;
-    margin-top:3px;
-}
-
-/* =========================================================
-   PERFORMANCE
-   ========================================================= */
-
-.performance{
-    margin-top:20px;
-}
-
-.performance-row{
-    margin-bottom:18px;
-}
-
-.performance-info{
-    display:flex;
-    justify-content:space-between;
-
-    margin-bottom:7px;
-
-    font-size:11px;
-}
-
-.progress{
-    height:8px;
-
-    background:#eef1f3;
-
-    border-radius:20px;
 
     overflow:hidden;
 }
 
-.progress-bar{
+.product-image img{
+
+    width:100%;
     height:100%;
 
-    border-radius:20px;
+    object-fit:cover;
+}
 
-    background:
-        linear-gradient(
-            90deg,
-            #087f3f,
-            #17ad61
-        );
+.product-placeholder{
+
+    font-size:40px;
+}
+
+.product-body{
+
+    padding:12px;
+}
+
+.product-name{
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+.product-price{
+
+    color:var(--green);
+
+    font-weight:900;
+
+    font-size:13px;
+
+    margin-top:6px;
+}
+
+.stock{
+
+    font-size:10px;
+
+    color:var(--muted);
+
+    margin-top:5px;
+}
+
+.stock.low{
+
+    color:#d37c00;
+
+    font-weight:bold;
+}
+
+/* =========================================================
+   SALES BOX
+========================================================= */
+
+.sales-box{
+
+    padding:20px;
+}
+
+.sales-main{
+
+    font-size:31px;
+
+    font-weight:900;
+
+    color:var(--green);
+
+    margin-bottom:5px;
+}
+
+.sales-label{
+
+    font-size:11px;
+
+    color:var(--muted);
+}
+
+.sales-line{
+
+    height:1px;
+
+    background:var(--border);
+
+    margin:20px 0;
+}
+
+.sales-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:10px 0;
+
+    font-size:12px;
+}
+
+.sales-row span{
+
+    color:var(--muted);
+}
+
+.sales-row strong{
+
+    font-size:13px;
 }
 
 /* =========================================================
    FOOTER
-   ========================================================= */
+========================================================= */
 
 .footer{
+
     text-align:center;
 
-    padding:30px 0 15px;
+    padding:
+        30px 10px;
 
-    color:#9ca3af;
+    color:#91a099;
 
     font-size:10px;
 }
 
 /* =========================================================
+   OVERLAY
+========================================================= */
+
+.overlay{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+        rgba(0,0,0,.45);
+
+    z-index:900;
+}
+
+/* =========================================================
    MOBILE
-   ========================================================= */
+========================================================= */
 
 @media(max-width:1100px){
 
     .stats{
+
         grid-template-columns:
             repeat(2,1fr);
     }
 
-    .quick-grid{
-        grid-template-columns:
-            repeat(3,1fr);
+    .dashboard-grid{
+
+        grid-template-columns:1fr;
     }
 
 }
@@ -972,92 +1445,111 @@ button{
 @media(max-width:800px){
 
     .sidebar{
-        transform:translateX(100%);
+
+        transform:
+            translateX(100%);
+
+        width:280px;
     }
 
     .sidebar.open{
-        transform:translateX(0);
+
+        transform:
+            translateX(0);
     }
 
     .main{
-        width:100%;
+
         margin-right:0;
     }
 
     .mobile-menu{
-        display:flex;
-        align-items:center;
-        justify-content:center;
+
+        display:block;
     }
 
-    .search{
-        display:none;
-    }
+    .overlay.open{
 
-    .view-store{
-        display:none;
+        display:block;
     }
 
     .topbar{
-        padding:0 15px;
+
+        padding:
+            0 15px;
     }
 
     .content{
-        padding:15px;
+
+        padding:17px;
     }
 
-    .dashboard-grid{
-        grid-template-columns:1fr;
+    .welcome{
+
+        padding:22px;
+
+        align-items:flex-start;
+
+        flex-direction:column;
+    }
+
+    .welcome h2{
+
+        font-size:22px;
+    }
+
+    .welcome-badge{
+
+        width:100%;
     }
 
 }
 
-@media(max-width:520px){
+@media(max-width:560px){
 
     .stats{
-        grid-template-columns:
-            1fr 1fr;
 
-        gap:10px;
+        grid-template-columns:1fr;
     }
 
-    .stat{
-        padding:15px;
-    }
+    .products{
 
-    .stat-number{
-        font-size:23px;
-    }
-
-    .quick-grid{
         grid-template-columns:
             repeat(2,1fr);
+
+        padding:13px;
+    }
+
+    .top-title p{
+
+        display:none;
+    }
+
+    .top-title h1{
+
+        font-size:16px;
+    }
+
+    .top-button{
+
+        width:38px;
+        height:38px;
     }
 
     .welcome{
-        padding:23px;
-        min-height:175px;
+
+        border-radius:18px;
     }
 
-    .welcome h1{
-        font-size:24px;
-    }
+    .stat{
 
-    .section-title{
-        font-size:17px;
-    }
-
-    .orders{
-        min-width:620px;
-    }
-
-    .table-scroll{
-        overflow-x:auto;
+        padding:18px;
     }
 
 }
 
 </style>
+
 </head>
 
 <body>
@@ -1066,167 +1558,44 @@ button{
 
 <!-- =====================================================
      SIDEBAR
-     ===================================================== -->
+====================================================== -->
 
 <aside class="sidebar" id="sidebar">
 
     <div class="brand">
 
         <div class="brand-logo">
+            ب
+        </div>
 
-            <div class="brand-icon">
-                🛒
-            </div>
+        <div class="brand-text">
 
-            <div>
-                <div class="brand-title">
-                    مول البركة
-                </div>
+            <strong>مول البركة</strong>
 
-                <div class="brand-sub">
-                    نظام إدارة المتجر
-                </div>
-            </div>
+            <span>
+                Al Baraka Mall
+            </span>
 
         </div>
 
     </div>
 
+    <div class="profile">
 
-    <div class="sidebar-content">
+        <div class="profile-top">
 
-        <div class="menu-title">
-            الرئيسية
-        </div>
-
-        <ul class="menu">
-
-            <li>
-                <a href="index.php" class="active">
-                    <span class="menu-icon">📊</span>
-                    لوحة التحكم
-                </a>
-            </li>
-
-        </ul>
-
-
-        <div class="menu-title">
-            إدارة المتجر
-        </div>
-
-        <ul class="menu">
-
-            <li>
-                <a href="orders.php">
-                    <span class="menu-icon">🛍️</span>
-                    الطلبات
-                    <span class="badge">5</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="products.php">
-                    <span class="menu-icon">📦</span>
-                    المنتجات
-                </a>
-            </li>
-
-            <li>
-                <a href="categories.php">
-                    <span class="menu-icon">🗂️</span>
-                    الأقسام
-                </a>
-            </li>
-
-            <li>
-                <a href="customers.php">
-                    <span class="menu-icon">👥</span>
-                    العملاء
-                </a>
-            </li>
-
-            <li>
-                <a href="offers.html">
-                    <span class="menu-icon">🏷️</span>
-                    العروض
-                </a>
-            </li>
-
-            <li>
-                <a href="inventory.html">
-                    <span class="menu-icon">📊</span>
-                    المخزون
-                </a>
-            </li>
-
-        </ul>
-
-
-        <div class="menu-title">
-            التقارير
-        </div>
-
-        <ul class="menu">
-
-            <li>
-                <a href="reports.html">
-                    <span class="menu-icon">📈</span>
-                    التقارير
-                </a>
-            </li>
-
-        </ul>
-
-
-        <div class="menu-title">
-            النظام
-        </div>
-
-        <ul class="menu">
-
-            <li>
-                <a href="settings.html">
-                    <span class="menu-icon">⚙️</span>
-                    الإعدادات
-                </a>
-            </li>
-
-            <li>
-                <a href="../index.html" target="_blank">
-                    <span class="menu-icon">🌐</span>
-                    زيارة المتجر
-                </a>
-            </li>
-
-            <li>
-                <a href="logout.php">
-                    <span class="menu-icon">🚪</span>
-                    تسجيل الخروج
-                </a>
-            </li>
-
-        </ul>
-
-    </div>
-
-
-    <div class="sidebar-footer">
-
-        <div class="admin-mini">
-
-            <div class="admin-avatar">
-                👤
+            <div class="avatar">
+                <?= e(mb_substr($adminName,0,1,'UTF-8')) ?>
             </div>
 
             <div>
 
-                <div class="admin-name">
+                <div class="profile-name">
                     <?= e($adminName) ?>
                 </div>
 
-                <div class="admin-role">
-                    <?= e($adminRole) ?>
+                <div class="profile-role">
+                    <?= e($adminRole) ?> • متصل الآن
                 </div>
 
             </div>
@@ -1235,486 +1604,6 @@ button{
 
     </div>
 
-</aside>
-
-
-<!-- =====================================================
-     MAIN
-     ===================================================== -->
-
-<main class="main">
-
-
-<!-- TOPBAR -->
-
-<header class="topbar">
-
-    <div class="top-left">
-
-        <button
-            class="mobile-menu"
-            onclick="toggleSidebar()">
-            ☰
-        </button>
-
-        <div class="search">
-
-            🔎
-
-            <input
-                type="search"
-                placeholder="ابحث في لوحة التحكم...">
-
-        </div>
-
-    </div>
-
-
-    <div class="top-actions">
-
-        <a
-            href="../index.html"
-            target="_blank"
-            class="view-store">
-            🌐 زيارة المتجر
-        </a>
-
-        <button class="icon-btn">
-            🔔
-            <span class="notification-dot"></span>
-        </button>
-
-        <div class="icon-btn">
-            👤
-        </div>
-
-    </div>
-
-</header>
-
-
-<!-- CONTENT -->
-
-<section class="content">
-
-
-<!-- WELCOME -->
-
-<div class="welcome">
-
-    <div class="welcome-content">
-
-        <div class="welcome-small">
-            لوحة الإدارة الرئيسية
-        </div>
-
-        <h1>
-            أهلاً بك في مول البركة 👋
-        </h1>
-
-        <p>
-            تحكم كامل في المبيعات والطلبات والمنتجات والعملاء والمخزون من مكان واحد.
-        </p>
-
-        <div class="welcome-date">
-            📅
-            <span id="today"></span>
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- STATS -->
-
-<div class="section-header">
-
-    <div>
-        <div class="section-title">
-            نظرة عامة
-        </div>
-
-        <div class="section-sub">
-            ملخص أداء المتجر
-        </div>
-    </div>
-
-</div>
-
-
-<div class="stats">
-
-    <div class="stat">
-
-        <div class="stat-top">
-
-            <div class="stat-icon green">
-                💰
-            </div>
-
-            <div class="stat-change">
-                ↑ 12.5%
-            </div>
-
-        </div>
-
-        <div class="stat-number">
-            0 ج.م
-        </div>
-
-        <div class="stat-label">
-            إجمالي المبيعات
-        </div>
-
-    </div>
-
-
-    <div class="stat">
-
-        <div class="stat-top">
-
-            <div class="stat-icon blue">
-                🛍️
-            </div>
-
-            <div class="stat-change">
-                ↑ 8.2%
-            </div>
-
-        </div>
-
-        <div class="stat-number">
-            0
-        </div>
-
-        <div class="stat-label">
-            إجمالي الطلبات
-        </div>
-
-    </div>
-
-
-    <div class="stat">
-
-        <div class="stat-top">
-
-            <div class="stat-icon orange">
-                📦
-            </div>
-
-            <div class="stat-change">
-                متاح
-            </div>
-
-        </div>
-
-        <div class="stat-number">
-            0
-        </div>
-
-        <div class="stat-label">
-            المنتجات
-        </div>
-
-    </div>
-
-
-    <div class="stat">
-
-        <div class="stat-top">
-
-            <div class="stat-icon purple">
-                👥
-            </div>
-
-            <div class="stat-change">
-                جديد
-            </div>
-
-        </div>
-
-        <div class="stat-number">
-            0
-        </div>
-
-        <div class="stat-label">
-            العملاء
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- QUICK ACTIONS -->
-
-<div class="section-header">
-
-    <div>
-        <div class="section-title">
-            الوصول السريع
-        </div>
-
-        <div class="section-sub">
-            أهم أدوات الإدارة
-        </div>
-    </div>
-
-</div>
-
-
-<div class="quick-grid">
-
-    <a href="orders.php" class="quick">
-
-        <div class="quick-icon">
-            🛍️
-        </div>
-
-        <span>
-            الطلبات
-        </span>
-
-    </a>
-
-
-    <a href="products.php" class="quick">
-
-        <div class="quick-icon">
-            📦
-        </div>
-
-        <span>
-            المنتجات
-        </span>
-
-    </a>
-
-
-    <a href="categories.php" class="quick">
-
-        <div class="quick-icon">
-            🗂️
-        </div>
-
-        <span>
-            الأقسام
-        </span>
-
-    </a>
-
-
-    <a href="customers.php" class="quick">
-
-        <div class="quick-icon">
-            👥
-        </div>
-
-        <span>
-            العملاء
-        </span>
-
-    </a>
-
-
-    <a href="offers.html" class="quick">
-
-        <div class="quick-icon">
-            🏷️
-        </div>
-
-        <span>
-            العروض
-        </span>
-
-    </a>
-
-
-    <a href="settings.html" class="quick">
-
-        <div class="quick-icon">
-            ⚙️
-        </div>
-
-        <span>
-            الإعدادات
-        </span>
-
-    </a>
-
-</div>
-
-
-<!-- DASHBOARD -->
-
-<div class="dashboard-grid">
-
-
-<!-- ORDERS -->
-
-<div class="card">
-
-    <div class="card-header">
-
-        <div>
-
-            <div class="card-title">
-                أحدث الطلبات
-            </div>
-
-            <div class="section-sub">
-                آخر العمليات على المتجر
-            </div>
-
-        </div>
-
-        <a
-            href="orders.php"
-            class="link">
-            عرض الكل
-        </a>
-
-    </div>
-
-
-    <div class="card-body">
-
-        <div class="table-scroll">
-
-            <table class="orders">
-
-                <thead>
-
-                <tr>
-
-                    <th>
-                        رقم الطلب
-                    </th>
-
-                    <th>
-                        العميل
-                    </th>
-
-                    <th>
-                        الإجمالي
-                    </th>
-
-                    <th>
-                        الحالة
-                    </th>
-
-                </tr>
-
-                </thead>
-
-
-                <tbody>
-
-                <tr>
-
-                    <td class="order-id">
-                        #1001
-                    </td>
-
-                    <td class="customer">
-                        لا توجد طلبات
-                    </td>
-
-                    <td>
-                        0 ج.م
-                    </td>
-
-                    <td>
-                        <span class="status pending">
-                            انتظار
-                        </span>
-                    </td>
-
-                </tr>
-
-
-                <tr>
-
-                    <td class="order-id">
-                        #1000
-                    </td>
-
-                    <td>
-                        —
-                    </td>
-
-                    <td>
-                        0 ج.م
-                    </td>
-
-                    <td>
-                        <span class="status completed">
-                            مكتمل
-                        </span>
-                    </td>
-
-                </tr>
-
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- ACTIVITY -->
-
-<div class="card">
-
-    <div class="card-header">
-
-        <div class="card-title">
-            آخر النشاطات
-        </div>
-
-        <span>
-            🔔
-        </span>
-
-    </div>
-
-
-    <div class="card-body">
-
-        <div class="activity">
-
-
-            <div class="activity-item">
-
-                <div class="activity-icon">
-                    🛒
-                </div>
-
-                <div class="activity-text">
-
-                    <strong>
-                        لوحة التحكم جاهزة
-                    </strong>
-
-                    <div>
-                        تم تشغيل نظام إدارة مول البركة.
-                    </div>
-
-                    <div class="activity-time">
-                        الآن
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="activity-item">
-
-                <div class="
+    <div class="menu-title">
+        الرئيسية
+    </div
