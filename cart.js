@@ -1,986 +1,811 @@
-/* =========================================
-   AlbarakaMall
-   Shopping Cart System
-========================================= */
+/* =========================================================
+   مول البركة - نظام السلة
+   يعمل بدون PHP
+   ========================================================= */
 
 (function () {
 
     "use strict";
 
 
-    /* =========================================
-       Storage Key
-    ========================================= */
+    /* -----------------------------------------------------
+       أسماء أماكن التخزين التي نحاول قراءتها
+       ----------------------------------------------------- */
 
-    const CART_KEY = "albaraka_cart";
+    const CART_KEYS = [
+        "albaraka_cart",
+        "shopping_cart",
+        "cart"
+    ];
 
 
-    /* =========================================
-       Get Cart
-    ========================================= */
+    /* -----------------------------------------------------
+       معرفة مكان السلة
+       ----------------------------------------------------- */
+
+    function findCartKey() {
+
+        for (const key of CART_KEYS) {
+
+            const value = localStorage.getItem(key);
+
+            if (value !== null) {
+                return key;
+            }
+
+        }
+
+        return "albaraka_cart";
+    }
+
+
+    let CART_KEY = findCartKey();
+
+
+    /* -----------------------------------------------------
+       قراءة السلة
+       ----------------------------------------------------- */
 
     function getCart() {
 
         try {
 
-            const savedCart =
-                localStorage.getItem(CART_KEY);
+            const data = localStorage.getItem(CART_KEY);
 
-            if (!savedCart) {
+            if (!data) {
                 return [];
             }
 
-            const cart =
-                JSON.parse(savedCart);
+            const parsed = JSON.parse(data);
 
-            if (!Array.isArray(cart)) {
-                return [];
+            if (Array.isArray(parsed)) {
+                return parsed;
             }
 
-            return cart;
+            if (typeof parsed === "object" && parsed !== null) {
+
+                return Object.values(parsed);
+
+            }
+
+            return [];
 
         } catch (error) {
 
-            console.error(
-                "خطأ في قراءة السلة:",
-                error
-            );
+            console.error("Cart read error:", error);
 
             return [];
+
         }
+
     }
 
 
-    /* =========================================
-       Save Cart
-    ========================================= */
+    /* -----------------------------------------------------
+       حفظ السلة
+       ----------------------------------------------------- */
 
     function saveCart(cart) {
 
-        try {
+        localStorage.setItem(
+            CART_KEY,
+            JSON.stringify(cart)
+        );
 
-            localStorage.setItem(
-                CART_KEY,
-                JSON.stringify(cart)
-            );
+        /* نحاول الحفاظ على التوافق مع المشروع القديم */
 
-        } catch (error) {
+        localStorage.setItem(
+            "albaraka_cart",
+            JSON.stringify(cart)
+        );
 
-            console.error(
-                "خطأ في حفظ السلة:",
-                error
-            );
-        }
     }
 
 
-    /* =========================================
-       Format Price
-    ========================================= */
+    /* -----------------------------------------------------
+       تنظيف بيانات المنتجات
+       ----------------------------------------------------- */
 
-    function formatPrice(price) {
+    function normalizeProduct(item) {
 
-        const number =
-            Number(price) || 0;
-
-        return number.toLocaleString(
-            "ar-EG"
-        );
-    }
-
-
-    /* =========================================
-       Elements
-    ========================================= */
-
-    const cartItems =
-        document.getElementById(
-            "cartItems"
-        );
-
-    const emptyCart =
-        document.getElementById(
-            "emptyCart"
-        );
-
-    const cartCount =
-        document.getElementById(
-            "cartCount"
-        );
-
-    const subtotal =
-        document.getElementById(
-            "subtotal"
-        );
-
-    const shipping =
-        document.getElementById(
-            "shipping"
-        );
-
-    const total =
-        document.getElementById(
-            "total"
-        );
-
-    const checkoutBtn =
-        document.getElementById(
-            "checkoutBtn"
-        );
-
-    const notification =
-        document.getElementById(
-            "cartNotification"
-        );
-
-
-    /* =========================================
-       Notification
-    ========================================= */
-
-    let notificationTimer = null;
-
-    function showNotification(message) {
-
-        if (!notification) {
-            return;
-        }
-
-        notification.textContent =
-            message;
-
-        notification.classList.add(
-            "show"
-        );
-
-        clearTimeout(
-            notificationTimer
-        );
-
-        notificationTimer =
-            setTimeout(function () {
-
-                notification.classList.remove(
-                    "show"
-                );
-
-            }, 2200);
-    }
-
-
-    /* =========================================
-       Calculate Count
-    ========================================= */
-
-    function getProductsCount(cart) {
-
-        return cart.reduce(
-            function (total, item) {
-
-                return total +
-                    (Number(item.quantity) || 0);
-
-            },
-            0
-        );
-    }
-
-
-    /* =========================================
-       Calculate Subtotal
-    ========================================= */
-
-    function getSubtotal(cart) {
-
-        return cart.reduce(
-            function (total, item) {
-
-                const price =
-                    Number(item.price) || 0;
-
-                const quantity =
-                    Number(item.quantity) || 0;
-
-                return total +
-                    (price * quantity);
-
-            },
-            0
-        );
-    }
-
-
-    /* =========================================
-       Shipping
-    ========================================= */
-
-    function calculateShipping(subtotalValue) {
-
-        /*
-          في هذه المرحلة الشحن مجاني.
-          سنضيف نظام الشحن لاحقًا.
-        */
-
-        if (subtotalValue <= 0) {
-            return 0;
-        }
-
-        return 0;
-    }
-
-
-    /* =========================================
-       Update Cart Badge
-    ========================================= */
-
-    function updateCartBadges() {
-
-        const cart =
-            getCart();
-
-        const count =
-            getProductsCount(cart);
-
-
-        /*
-          ندعم أكثر من اسم لعداد السلة
-          حتى نستطيع ربطه بواجهة المتجر.
-        */
-
-        const selectors = [
-            "#cartCountBadge",
-            "#cartBadge",
-            ".cart-count",
-            ".cart-badge",
-            "[data-cart-count]"
-        ];
-
-
-        selectors.forEach(
-            function (selector) {
-
-                const elements =
-                    document.querySelectorAll(
-                        selector
-                    );
-
-                elements.forEach(
-                    function (element) {
-
-                        element.textContent =
-                            count;
-
-                        if (count > 0) {
-
-                            element.style.display =
-                                "";
-
-                        } else {
-
-                            element.style.display =
-                                "none";
-                        }
-
-                    }
-                );
-            }
-        );
-    }
-
-
-    /* =========================================
-       Render Cart
-    ========================================= */
-
-    function renderCart() {
-
-        const cart =
-            getCart();
-
-
-        if (!cartItems) {
-            updateCartBadges();
-            return;
+        if (!item) {
+            return null;
         }
 
 
-        /*
-          Empty Cart
-        */
+        const id =
+            item.id ??
+            item.product_id ??
+            item.productId ??
+            item.code;
 
-        if (cart.length === 0) {
-
-            cartItems.innerHTML = "";
-
-            if (emptyCart) {
-                emptyCart.style.display =
-                    "block";
-            }
-
-            if (checkoutBtn) {
-                checkoutBtn.disabled =
-                    true;
-            }
-
-        } else {
-
-            if (emptyCart) {
-                emptyCart.style.display =
-                    "none";
-            }
-
-            if (checkoutBtn) {
-                checkoutBtn.disabled =
-                    false;
-            }
-
-
-            cartItems.innerHTML =
-                cart.map(
-                    function (item, index) {
-
-                        return createCartItem(
-                            item,
-                            index
-                        );
-
-                    }
-                ).join("");
-        }
-
-
-        updateSummary(
-            cart
-        );
-
-        updateCartBadges();
-    }
-
-
-    /* =========================================
-       Create Cart Item
-    ========================================= */
-
-    function createCartItem(
-        item,
-        index
-    ) {
 
         const name =
-            escapeHTML(
-                item.name ||
-                "منتج"
-            );
+            item.name ??
+            item.product_name ??
+            item.title ??
+            "منتج";
 
 
         const price =
-            Number(item.price) || 0;
-
-
-        const quantity =
-            Math.max(
-                1,
-                Number(item.quantity) || 1
+            Number(
+                item.price ??
+                item.sale_price ??
+                item.product_price ??
+                0
             );
 
 
-        const itemTotal =
-            price * quantity;
+        const quantity =
+            Number(
+                item.quantity ??
+                item.qty ??
+                item.count ??
+                1
+            );
 
 
         const image =
-            item.image ||
-            item.img ||
+            item.image ??
+            item.image_url ??
+            item.photo ??
+            item.thumbnail ??
             "";
 
 
-        const imageHTML =
-            image
-                ? `
-                    <img
-                        src="${escapeAttribute(image)}"
-                        alt="${escapeAttribute(name)}"
-                        onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=&quot;no-image&quot;>🛍️</div>';"
-                    >
-                  `
-                : `
-                    <div class="no-image">
-                        🛍️
+        return {
+
+            id: String(
+                id ?? Date.now()
+            ),
+
+            name: String(name),
+
+            price: isNaN(price)
+                ? 0
+                : price,
+
+            quantity:
+                quantity > 0
+                    ? quantity
+                    : 1,
+
+            image: image
+
+        };
+
+    }
+
+
+    /* -----------------------------------------------------
+       الحصول على المنتجات
+       ----------------------------------------------------- */
+
+    function getProducts() {
+
+        return getCart()
+            .map(normalizeProduct)
+            .filter(Boolean);
+
+    }
+
+
+    /* -----------------------------------------------------
+       حفظ المنتجات
+       ----------------------------------------------------- */
+
+    function setProducts(products) {
+
+        saveCart(products);
+
+    }
+
+
+    /* -----------------------------------------------------
+       تنسيق السعر
+       ----------------------------------------------------- */
+
+    function money(value) {
+
+        return Number(value || 0)
+            .toLocaleString("ar-EG") +
+            " جنيه";
+
+    }
+
+
+    /* -----------------------------------------------------
+       إجمالي عدد المنتجات
+       ----------------------------------------------------- */
+
+    function getCount(products) {
+
+        return products.reduce(
+            function (total, item) {
+
+                return total +
+                    Number(item.quantity || 0);
+
+            },
+            0
+        );
+
+    }
+
+
+    /* -----------------------------------------------------
+       إجمالي السعر
+       ----------------------------------------------------- */
+
+    function getTotal(products) {
+
+        return products.reduce(
+            function (total, item) {
+
+                return total +
+                    (
+                        Number(item.price || 0) *
+                        Number(item.quantity || 0)
+                    );
+
+            },
+            0
+        );
+
+    }
+
+
+    /* -----------------------------------------------------
+       رسم السلة
+       ----------------------------------------------------- */
+
+    function renderCart() {
+
+        const area =
+            document.getElementById("cartArea");
+
+
+        if (!area) {
+            return;
+        }
+
+
+        const products =
+            getProducts();
+
+
+        /* السلة فارغة */
+
+        if (products.length === 0) {
+
+            area.innerHTML = `
+
+                <div class="box empty">
+
+                    <div class="empty-icon">
+                        🛒
                     </div>
-                  `;
+
+                    <h2>
+                        السلة فارغة
+                    </h2>
+
+                    <p>
+                        لم تضف أي منتجات إلى السلة بعد.
+                    </p>
+
+                    <a
+                        href="index.html"
+                        class="shop">
+
+                        ابدأ التسوق
+
+                    </a>
+
+                </div>
+
+            `;
+
+            updateCartBadges(0);
+
+            return;
+        }
 
 
-        return `
-            <article
-                class="cart-item"
-                data-index="${index}"
-            >
+        let itemsHTML = "";
 
-                <div class="cart-item-image">
+
+        products.forEach(function (item, index) {
+
+            const quantity =
+                Number(item.quantity || 1);
+
+
+            const subtotal =
+                Number(item.price || 0) *
+                quantity;
+
+
+            const imageHTML =
+                item.image
+
+                    ? `
+                        <img
+                            src="${escapeHTML(item.image)}"
+                            class="item-image"
+                            alt="${escapeHTML(item.name)}"
+                            onerror="this.style.display='none';">
+                      `
+
+                    : `
+                        <div
+                            class="item-image"
+                            style="
+                                display:flex;
+                                align-items:center;
+                                justify-content:center;
+                                font-size:40px;
+                            ">
+                            🛒
+                        </div>
+                      `;
+
+
+            itemsHTML += `
+
+                <div class="cart-item">
+
                     ${imageHTML}
+
+                    <div class="item-info">
+
+                        <div class="item-name">
+                            ${escapeHTML(item.name)}
+                        </div>
+
+                        <div class="item-price">
+                            ${money(item.price)}
+                        </div>
+
+                        <div class="item-total">
+                            الإجمالي:
+                            ${money(subtotal)}
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="quantity">
+
+                            <button
+                                type="button"
+                                onclick="window.cartPlus('${escapeAttribute(item.id)}')">
+
+                                +
+
+                            </button>
+
+                            <span>
+                                ${quantity}
+                            </span>
+
+                            <button
+                                type="button"
+                                onclick="window.cartMinus('${escapeAttribute(item.id)}')">
+
+                                −
+
+                            </button>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="remove"
+                            onclick="window.cartRemove('${escapeAttribute(item.id)}')">
+
+                            🗑 حذف
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        });
+
+
+        const count =
+            getCount(products);
+
+
+        const total =
+            getTotal(products);
+
+
+        area.innerHTML = `
+
+            <div class="layout">
+
+
+                <div class="box">
+
+                    ${itemsHTML}
+
                 </div>
 
 
-                <div class="cart-item-info">
+                <div class="box summary">
 
-                    <h3 class="cart-item-name">
-                        ${name}
-                    </h3>
+                    <h2>
+                        ملخص الطلب
+                    </h2>
 
 
-                    <div class="cart-item-price">
+                    <div class="summary-row">
 
-                        ${formatPrice(price)}
-                        ج.م
+                        <span>
+                            عدد المنتجات
+                        </span>
 
-                        <span class="cart-item-unit">
-                            / للمنتج
+                        <strong>
+                            ${count}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            قيمة المنتجات
+                        </span>
+
+                        <strong>
+                            ${money(total)}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            التوصيل
+                        </span>
+
+                        <strong>
+                            يحدد عند إتمام الطلب
+                        </strong>
+
+                    </div>
+
+
+                    <div class="total">
+
+                        <span>
+                            الإجمالي
+                        </span>
+
+                        <span>
+                            ${money(total)}
                         </span>
 
                     </div>
 
 
-                    <div class="quantity-control">
+                    <a
+                        href="checkout.html"
+                        class="checkout"
+                        id="checkoutButton">
 
-                        <button
-                            type="button"
-                            class="quantity-btn"
-                            data-action="increase"
-                            data-index="${index}"
-                            aria-label="زيادة الكمية"
-                        >
-                            +
-                        </button>
+                        إتمام الطلب
 
-
-                        <span
-                            class="quantity-value"
-                        >
-                            ${quantity}
-                        </span>
-
-
-                        <button
-                            type="button"
-                            class="quantity-btn"
-                            data-action="decrease"
-                            data-index="${index}"
-                            aria-label="تقليل الكمية"
-                        >
-                            −
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <div class="cart-item-actions">
-
-                    <div class="cart-item-total">
-
-                        ${formatPrice(itemTotal)}
-                        ج.م
-
-                    </div>
+                    </a>
 
 
                     <button
                         type="button"
-                        class="remove-btn"
-                        data-action="remove"
-                        data-index="${index}"
-                    >
-                        🗑 حذف المنتج
+                        class="clear"
+                        onclick="window.clearCart()">
+
+                        🗑 تفريغ السلة بالكامل
+
                     </button>
 
                 </div>
 
-            </article>
+            </div>
+
         `;
+
+
+        updateCartBadges(count);
+
     }
 
 
-    /* =========================================
-       Update Summary
-    ========================================= */
+    /* -----------------------------------------------------
+       زيادة الكمية
+       ----------------------------------------------------- */
 
-    function updateSummary(cart) {
+    window.cartPlus = function (id) {
 
-        const count =
-            getProductsCount(cart);
+        const products =
+            getProducts();
 
-        const subtotalValue =
-            getSubtotal(cart);
 
-        const shippingValue =
-            calculateShipping(
-                subtotalValue
+        const item =
+            products.find(
+                product =>
+                    String(product.id) === String(id)
             );
 
-        const totalValue =
-            subtotalValue +
-            shippingValue;
 
+        if (item) {
 
-        if (cartCount) {
+            item.quantity =
+                Number(item.quantity || 0) + 1;
 
-            cartCount.textContent =
-                count;
         }
 
 
-        if (subtotal) {
-
-            subtotal.textContent =
-                formatPrice(
-                    subtotalValue
-                );
-        }
-
-
-        if (shipping) {
-
-            shipping.textContent =
-                shippingValue > 0
-                    ? `${formatPrice(shippingValue)} ج.م`
-                    : "مجاني";
-        }
-
-
-        if (total) {
-
-            total.textContent =
-                formatPrice(
-                    totalValue
-                );
-        }
-    }
-
-
-    /* =========================================
-       Increase Quantity
-    ========================================= */
-
-    function increaseQuantity(index) {
-
-        const cart =
-            getCart();
-
-
-        if (!cart[index]) {
-            return;
-        }
-
-
-        cart[index].quantity =
-            (Number(
-                cart[index].quantity
-            ) || 1) + 1;
-
-
-        saveCart(cart);
+        setProducts(products);
 
         renderCart();
-
-        showNotification(
-            "تمت زيادة الكمية"
-        );
-    }
-
-
-    /* =========================================
-       Decrease Quantity
-    ========================================= */
-
-    function decreaseQuantity(index) {
-
-        const cart =
-            getCart();
-
-
-        if (!cart[index]) {
-            return;
-        }
-
-
-        const currentQuantity =
-            Number(
-                cart[index].quantity
-            ) || 1;
-
-
-        if (currentQuantity <= 1) {
-
-            removeItem(index);
-
-            return;
-        }
-
-
-        cart[index].quantity =
-            currentQuantity - 1;
-
-
-        saveCart(cart);
-
-        renderCart();
-
-        showNotification(
-            "تم تقليل الكمية"
-        );
-    }
-
-
-    /* =========================================
-       Remove Item
-    ========================================= */
-
-    function removeItem(index) {
-
-        const cart =
-            getCart();
-
-
-        if (!cart[index]) {
-            return;
-        }
-
-
-        const productName =
-            cart[index].name ||
-            "المنتج";
-
-
-        cart.splice(
-            index,
-            1
-        );
-
-
-        saveCart(cart);
-
-        renderCart();
-
-        showNotification(
-            `تم حذف ${productName} من السلة`
-        );
-    }
-
-
-    /* =========================================
-       Event Delegation
-    ========================================= */
-
-    if (cartItems) {
-
-        cartItems.addEventListener(
-            "click",
-            function (event) {
-
-                const button =
-                    event.target.closest(
-                        "[data-action]"
-                    );
-
-
-                if (!button) {
-                    return;
-                }
-
-
-                const action =
-                    button.dataset.action;
-
-
-                const index =
-                    Number(
-                        button.dataset.index
-                    );
-
-
-                if (
-                    Number.isNaN(index)
-                ) {
-                    return;
-                }
-
-
-                if (
-                    action ===
-                    "increase"
-                ) {
-
-                    increaseQuantity(
-                        index
-                    );
-
-                }
-
-
-                if (
-                    action ===
-                    "decrease"
-                ) {
-
-                    decreaseQuantity(
-                        index
-                    );
-
-                }
-
-
-                if (
-                    action ===
-                    "remove"
-                ) {
-
-                    removeItem(
-                        index
-                    );
-
-                }
-
-            }
-        );
-    }
-
-
-    /* =========================================
-       Checkout
-    ========================================= */
-
-    if (checkoutBtn) {
-
-        checkoutBtn.addEventListener(
-            "click",
-            function () {
-
-                const cart =
-                    getCart();
-
-
-                if (
-                    cart.length === 0
-                ) {
-
-                    showNotification(
-                        "السلة فارغة"
-                    );
-
-                    return;
-                }
-
-
-                /*
-                  صفحة الدفع سيتم إنشاؤها
-                  في المرحلة الثانية.
-                */
-
-                showNotification(
-                    "سيتم تجهيز صفحة إتمام الطلب في المرحلة القادمة"
-                );
-            }
-        );
-    }
-
-
-    /* =========================================
-       Escape HTML
-    ========================================= */
-
-    function escapeHTML(value) {
-
-        return String(value)
-            .replace(
-                /&/g,
-                "&amp;"
-            )
-            .replace(
-                /</g,
-                "&lt;"
-            )
-            .replace(
-                />/g,
-                "&gt;"
-            )
-            .replace(
-                /"/g,
-                "&quot;"
-            )
-            .replace(
-                /'/g,
-                "&#039;"
-            );
-    }
-
-
-    /* =========================================
-       Escape Attribute
-    ========================================= */
-
-    function escapeAttribute(value) {
-
-        return escapeHTML(
-            value
-        );
-    }
-
-
-    /* =========================================
-       Public Add To Cart Function
-    ========================================= */
-
-    window.AlbarakaCart = {
-
-        add: function (product) {
-
-            if (
-                !product ||
-                typeof product !==
-                "object"
-            ) {
-
-                return false;
-            }
-
-
-            const cart =
-                getCart();
-
-
-            const productId =
-                product.id ??
-                product.productId ??
-                product._id ??
-                product.name;
-
-
-            const existingIndex =
-                cart.findIndex(
-                    function (item) {
-
-                        const itemId =
-                            item.id ??
-                            item.productId ??
-                            item._id ??
-                            item.name;
-
-
-                        return String(
-                            itemId
-                        ) === String(
-                            productId
-                        );
-
-                    }
-                );
-
-
-            if (
-                existingIndex !== -1
-            ) {
-
-                cart[
-                    existingIndex
-                ].quantity =
-                    (
-                        Number(
-                            cart[
-                                existingIndex
-                            ].quantity
-                        ) || 1
-                    ) + 1;
-
-            } else {
-
-                cart.push({
-
-                    id:
-                        product.id ??
-                        product.productId ??
-                        product._id ??
-                        Date.now(),
-
-                    name:
-                        product.name ||
-                        product.title ||
-                        "منتج",
-
-                    price:
-                        Number(
-                            product.price
-                        ) || 0,
-
-                    image:
-                        product.image ||
-                        product.img ||
-                        "",
-
-                    quantity: 1
-
-                });
-            }
-
-
-            saveCart(cart);
-
-            updateCartBadges();
-
-            showNotification(
-                "تمت إضافة المنتج إلى السلة"
-            );
-
-
-            return true;
-        },
-
-
-        get: function () {
-
-            return getCart();
-
-        },
-
-
-        clear: function () {
-
-            saveCart([]);
-
-            renderCart();
-
-        },
-
-
-        count: function () {
-
-            return getProductsCount(
-                getCart()
-            );
-
-        },
-
-
-        total: function () {
-
-            return getSubtotal(
-                getCart()
-            );
-
-        }
 
     };
 
 
-    /* =========================================
-       Initialize
-    ========================================= */
+    /* -----------------------------------------------------
+       تقليل الكمية
+       ----------------------------------------------------- */
+
+    window.cartMinus = function (id) {
+
+        let products =
+            getProducts();
+
+
+        const item =
+            products.find(
+                product =>
+                    String(product.id) === String(id)
+            );
+
+
+        if (!item) {
+            return;
+        }
+
+
+        item.quantity =
+            Number(item.quantity || 1) - 1;
+
+
+        if (item.quantity <= 0) {
+
+            products =
+                products.filter(
+                    product =>
+                        String(product.id) !== String(id)
+                );
+
+        }
+
+
+        setProducts(products);
+
+        renderCart();
+
+    };
+
+
+    /* -----------------------------------------------------
+       حذف منتج
+       ----------------------------------------------------- */
+
+    window.cartRemove = function (id) {
+
+        let products =
+            getProducts();
+
+
+        products =
+            products.filter(
+                product =>
+                    String(product.id) !== String(id)
+            );
+
+
+        setProducts(products);
+
+        renderCart();
+
+    };
+
+
+    /* -----------------------------------------------------
+       تفريغ السلة
+       ----------------------------------------------------- */
+
+    window.clearCart = function () {
+
+        const answer =
+            confirm(
+                "هل تريد تفريغ السلة بالكامل؟"
+            );
+
+
+        if (!answer) {
+            return;
+        }
+
+
+        localStorage.removeItem(
+            "albaraka_cart"
+        );
+
+        localStorage.removeItem(
+            "shopping_cart"
+        );
+
+        localStorage.removeItem(
+            "cart"
+        );
+
+
+        CART_KEY =
+            "albaraka_cart";
+
+
+        renderCart();
+
+    };
+
+
+    /* -----------------------------------------------------
+       تحديث عداد السلة في الموقع
+       ----------------------------------------------------- */
+
+    function updateCartBadges(count) {
+
+        const selectors = [
+
+            ".cart-count",
+
+            "#cartCount",
+
+            "#cart-count",
+
+            "[data-cart-count]"
+
+        ];
+
+
+        selectors.forEach(function (selector) {
+
+            document
+                .querySelectorAll(selector)
+                .forEach(function (element) {
+
+                    element.textContent =
+                        count;
+
+                });
+
+        });
+
+    }
+
+
+    /* -----------------------------------------------------
+       إرسال السلة إلى checkout
+       ----------------------------------------------------- */
+
+    function prepareCheckout() {
+
+        const button =
+            document.getElementById(
+                "checkoutButton"
+            );
+
+
+        if (!button) {
+            return;
+        }
+
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                const products =
+                    getProducts();
+
+
+                if (products.length === 0) {
+
+                    alert(
+                        "السلة فارغة"
+                    );
+
+                    return;
+
+                }
+
+
+                /* حفظ نسخة مؤكدة */
+
+                sessionStorage.setItem(
+                    "checkout_cart",
+                    JSON.stringify(products)
+                );
+
+            }
+        );
+
+    }
+
+
+    /* -----------------------------------------------------
+       حماية النصوص
+       ----------------------------------------------------- */
+
+    function escapeHTML(value) {
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    function escapeAttribute(value) {
+
+        return String(value)
+            .replace(/\\/g, "\\\\")
+            .replace(/'/g, "\\'");
+
+    }
+
+
+    /* -----------------------------------------------------
+       مزامنة لو السلة اتغيرت من صفحة أخرى
+       ----------------------------------------------------- */
+
+    window.addEventListener(
+        "storage",
+        function () {
+
+            CART_KEY =
+                findCartKey();
+
+            renderCart();
+
+        }
+    );
+
+
+    /* -----------------------------------------------------
+       بدء التشغيل
+       ----------------------------------------------------- */
 
     document.addEventListener(
         "DOMContentLoaded",
         function () {
 
             renderCart();
+
+            prepareCheckout();
 
         }
     );
