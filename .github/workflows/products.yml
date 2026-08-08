@@ -1,0 +1,167 @@
+name: Update Albaraka Products
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "add, update, delete"
+        required: true
+        type: string
+
+      product:
+        description: "Product JSON"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  update-products:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update products.json
+        env:
+          ACTION_TYPE: ${{ inputs.action }}
+          PRODUCT_JSON: ${{ inputs.product }}
+        run: |
+
+          python3 <<'PY'
+
+          import json
+          import os
+          import sys
+
+          file_name = "products.json"
+
+          if not os.path.exists(file_name):
+              print("products.json not found")
+              sys.exit(1)
+
+          with open(
+              file_name,
+              "r",
+              encoding="utf-8"
+          ) as f:
+
+              data = json.load(f)
+
+          products = data.get("products", [])
+
+          action = os.environ["ACTION_TYPE"]
+
+          product_text = os.environ["PRODUCT_JSON"]
+
+          try:
+
+              product = json.loads(product_text)
+
+          except Exception:
+
+              print("Invalid product JSON")
+              sys.exit(1)
+
+          product_id = str(
+              product.get("id", "")
+          )
+
+          if not product_id:
+
+              print("Product ID is required")
+              sys.exit(1)
+
+          if action == "add":
+
+              exists = any(
+                  str(p.get("id")) == product_id
+                  for p in products
+              )
+
+              if exists:
+
+                  print("Product already exists")
+                  sys.exit(1)
+
+              products.insert(
+                  0,
+                  product
+              )
+
+          elif action == "update":
+
+              found = False
+
+              for i, p in enumerate(products):
+
+                  if str(p.get("id")) == product_id:
+
+                      products[i] = product
+
+                      found = True
+
+                      break
+
+              if not found:
+
+                  print("Product not found")
+                  sys.exit(1)
+
+          elif action == "delete":
+
+              old_length = len(products)
+
+              products = [
+                  p for p in products
+                  if str(p.get("id")) != product_id
+              ]
+
+              if len(products) == old_length:
+
+                  print("Product not found")
+                  sys.exit(1)
+
+          else:
+
+              print("Invalid action")
+              sys.exit(1)
+
+          data["products"] = products
+
+          with open(
+              file_name,
+              "w",
+              encoding="utf-8"
+          ) as f:
+
+              json.dump(
+                  data,
+                  f,
+                  ensure_ascii=False,
+                  indent=2
+              )
+
+          print(
+              "products.json updated successfully"
+          )
+
+          PY
+
+      - name: Commit changes
+        run: |
+
+          git config user.name "Albaraka Store"
+
+          git config user.email "actions@github.com"
+
+          git add products.json
+
+          git diff --cached --quiet || \
+          git commit -m "Update store products"
+
+          git push
