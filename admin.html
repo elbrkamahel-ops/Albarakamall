@@ -1,943 +1,1418 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <title>لوحة التحكم | البركة مول</title>
+<title>لوحة تحكم مول البركة</title>
 
-    <link rel="stylesheet" href="style.css">
+<style>
 
-    <style>
-        .admin-page {
-            padding: 30px 0 60px;
-        }
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
-        .admin-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
+body{
+    font-family:Arial,Tahoma,sans-serif;
+    background:#f4f7f5;
+    color:#17251d;
+}
 
-        .admin-header h1 {
-            font-size: 27px;
-        }
+button,
+input,
+select{
+    font-family:inherit;
+}
 
-        .admin-header p {
-            color: #777;
-            font-size: 13px;
-            margin-top: 5px;
-        }
+button{
+    cursor:pointer;
+}
 
-        .admin-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-bottom: 25px;
-        }
+.header{
+    background:#087f3f;
+    color:#fff;
+    padding:18px;
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 4px 15px rgba(0,0,0,.12);
+}
 
-        .stat-card {
-            background: white;
-            border: 1px solid #e7e7e7;
-            border-radius: 12px;
-            padding: 20px;
-        }
+.header-inner{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
 
-        .stat-icon {
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
 
-        .stat-card span {
-            color: #777;
-            font-size: 12px;
-        }
+.logo-icon{
+    width:48px;
+    height:48px;
+    background:#fff;
+    color:#087f3f;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    font-weight:900;
+}
 
-        .stat-card strong {
-            display: block;
-            font-size: 24px;
-            margin-top: 5px;
-            color: #00843d;
-        }
+.logo strong{
+    display:block;
+    font-size:18px;
+}
 
-        .admin-section {
-            background: white;
-            border: 1px solid #e7e7e7;
-            border-radius: 14px;
-            padding: 22px;
-            margin-bottom: 22px;
-        }
+.logo small{
+    opacity:.8;
+    font-size:10px;
+}
 
-        .admin-section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            margin-bottom: 18px;
-        }
+.back{
+    background:#fff;
+    color:#087f3f;
+    padding:11px 16px;
+    border-radius:11px;
+    text-decoration:none;
+    font-weight:900;
+    font-size:12px;
+}
 
-        .admin-section-header h2 {
-            font-size: 20px;
-        }
+.container{
+    max-width:1200px;
+    margin:25px auto;
+    padding:0 15px;
+}
 
-        .admin-button {
-            border: 0;
-            background: #00843d;
-            color: white;
-            border-radius: 7px;
-            padding: 10px 17px;
-            font-family: inherit;
-            font-weight: bold;
-            cursor: pointer;
-        }
+.title{
+    margin-bottom:20px;
+}
 
-        .admin-button:hover {
-            background: #006b31;
-        }
+.title h1{
+    font-size:27px;
+}
 
-        .admin-button.danger {
-            background: #c62828;
-        }
+.title p{
+    color:#7d8982;
+    margin-top:6px;
+    font-size:12px;
+}
 
-        .admin-button.gray {
-            background: #666;
-        }
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:13px;
+    margin-bottom:20px;
+}
 
-        .admin-form {
-            display: none;
-            background: #f7faf8;
-            border: 1px solid #e2ebe5;
-            border-radius: 10px;
-            padding: 18px;
-            margin-bottom: 20px;
-        }
+.stat{
+    background:#fff;
+    border:1px solid #e1e9e4;
+    border-radius:16px;
+    padding:18px;
+}
 
-        .admin-form.show {
-            display: block;
-        }
+.stat span{
+    color:#849088;
+    display:block;
+    font-size:11px;
+    margin-bottom:8px;
+}
 
-        .admin-form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 13px;
-        }
+.stat strong{
+    color:#087f3f;
+    font-size:25px;
+}
 
-        .admin-field {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
+.card{
+    background:#fff;
+    border:1px solid #e1e9e4;
+    border-radius:18px;
+    padding:20px;
+    margin-bottom:20px;
+}
 
-        .admin-field.full {
-            grid-column: 1 / -1;
-        }
+.card-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:18px;
+}
 
-        .admin-field label {
-            font-size: 12px;
-            font-weight: bold;
-        }
+.card-title h2{
+    font-size:18px;
+}
 
-        .admin-field input,
-        .admin-field select {
-            height: 42px;
-            border: 1px solid #ddd;
-            border-radius: 7px;
-            padding: 0 10px;
-            font-family: inherit;
-            outline: none;
-        }
+.add-new{
+    border:0;
+    background:#087f3f;
+    color:#fff;
+    padding:12px 18px;
+    border-radius:11px;
+    font-weight:900;
+}
 
-        .admin-field input:focus,
-        .admin-field select:focus {
-            border-color: #00843d;
-        }
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+}
 
-        .form-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 15px;
-        }
+.field{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
 
-        .products-table,
-        .orders-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+.field.full{
+    grid-column:1/-1;
+}
 
-        .products-table th,
-        .products-table td,
-        .orders-table th,
-        .orders-table td {
-            padding: 12px 9px;
-            border-bottom: 1px solid #eee;
-            text-align: right;
-            font-size: 12px;
-        }
+.field label{
+    font-size:11px;
+    font-weight:900;
+}
 
-        .products-table th,
-        .orders-table th {
-            background: #f7f8f7;
-            font-weight: bold;
-        }
+.field input,
+.field select{
+    height:45px;
+    border:1px solid #dce6df;
+    border-radius:10px;
+    padding:0 12px;
+    outline:none;
+    background:#fafcfb;
+}
 
-        .product-admin-image {
-            width: 45px;
-            height: 45px;
-            display: grid;
-            place-items: center;
-            background: #f1f6f2;
-            border-radius: 8px;
-            font-size: 25px;
-        }
+.field input:focus,
+.field select:focus{
+    border-color:#087f3f;
+    background:#fff;
+}
 
-        .action-buttons {
-            display: flex;
-            gap: 5px;
-            flex-wrap: wrap;
-        }
+.actions{
+    display:flex;
+    gap:8px;
+    margin-top:15px;
+}
 
-        .small-button {
-            border: 0;
-            border-radius: 5px;
-            padding: 6px 9px;
-            font-family: inherit;
-            font-size: 11px;
-            cursor: pointer;
-        }
+.save{
+    border:0;
+    background:#087f3f;
+    color:#fff;
+    padding:12px 25px;
+    border-radius:10px;
+    font-weight:900;
+}
 
-        .small-button.edit {
-            background: #e8f3ec;
-            color: #00843d;
-        }
+.cancel{
+    border:0;
+    background:#edf1ee;
+    color:#49564e;
+    padding:12px 20px;
+    border-radius:10px;
+    font-weight:bold;
+}
 
-        .small-button.delete {
-            background: #ffeded;
-            color: #c62828;
-        }
+.products{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
 
-        .order-status {
-            display: inline-block;
-            padding: 5px 9px;
-            border-radius: 20px;
-            background: #eaf7ef;
-            color: #00843d;
-            font-size: 10px;
-        }
+.product{
+    border:1px solid #e2e9e4;
+    border-radius:15px;
+    overflow:hidden;
+    background:#fff;
+}
 
-        .no-data {
-            text-align: center;
-            color: #888;
-            padding: 30px;
-            font-size: 13px;
-        }
+.product-image{
+    height:120px;
+    background:#f3f7f4;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:55px;
+    position:relative;
+}
 
-        @media (max-width: 900px) {
-            .admin-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+.offer{
+    position:absolute;
+    top:8px;
+    right:8px;
+    background:#e64c3c;
+    color:#fff;
+    padding:5px 8px;
+    border-radius:6px;
+    font-size:9px;
+}
 
-            .products-table,
-            .orders-table {
-                display: block;
-                overflow-x: auto;
-            }
-        }
+.product-body{
+    padding:12px;
+}
 
-        @media (max-width: 600px) {
-            .admin-header {
-                align-items: flex-start;
-                flex-direction: column;
-            }
+.product-body h3{
+    font-size:13px;
+    margin-bottom:6px;
+}
 
-            .admin-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+.product-category{
+    color:#8b968f;
+    font-size:10px;
+}
 
-            .admin-section {
-                padding: 15px;
-            }
+.price{
+    color:#087f3f;
+    font-weight:900;
+    margin-top:8px;
+}
 
-            .admin-form-grid {
-                grid-template-columns: 1fr;
-            }
+.product-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+    margin-top:12px;
+}
 
-            .admin-field.full {
-                grid-column: auto;
-            }
-        }
-    </style>
+.edit{
+    border:0;
+    background:#eef7f1;
+    color:#087f3f;
+    padding:9px;
+    border-radius:8px;
+    font-weight:900;
+}
+
+.delete{
+    border:0;
+    background:#fff0ef;
+    color:#d34438;
+    padding:9px;
+    border-radius:8px;
+    font-weight:900;
+}
+
+.empty{
+    text-align:center;
+    padding:40px;
+    color:#89948e;
+    grid-column:1/-1;
+}
+
+.toast{
+    position:fixed;
+    left:20px;
+    bottom:20px;
+    background:#087f3f;
+    color:#fff;
+    padding:13px 18px;
+    border-radius:11px;
+    font-size:12px;
+    font-weight:bold;
+    opacity:0;
+    transform:translateY(20px);
+    transition:.25s;
+    z-index:999;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+@media(max-width:900px){
+
+    .products{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:600px){
+
+    .header-inner{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .back{
+        text-align:center;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .field.full{
+        grid-column:auto;
+    }
+
+    .products{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+</style>
 </head>
 
 <body>
 
-<div class="top-bar">
-    <div class="container top-bar-inner">
-        <div class="top-right">
-            <span>🛠️ لوحة تحكم البركة مول</span>
-        </div>
+<header class="header">
 
-        <div class="top-left">
-            <span>📞 01119511185</span>
-        </div>
-    </div>
+<div class="header-inner">
+
+<div class="logo">
+
+<div class="logo-icon">
+ب
 </div>
 
+<div>
+<strong>مول البركة</strong>
+<small>لوحة إدارة المتجر</small>
+</div>
 
-<header class="main-header">
+</div>
 
-    <div class="container header-main">
+<a href="index.html" class="back">
+← العودة للمتجر
+</a>
 
-        <a href="index.html" class="logo">
-
-            <div class="logo-symbol">🛒</div>
-
-            <div class="logo-text">
-                <strong>البركة</strong>
-                <small>مول</small>
-            </div>
-
-        </a>
-
-        <a href="index.html" class="account-button">
-            <span class="account-icon">🏠</span>
-
-            <span class="account-text">
-                <small>العودة إلى</small>
-                <strong>المتجر</strong>
-            </span>
-        </a>
-
-    </div>
+</div>
 
 </header>
 
 
-<main class="admin-page">
+<main class="container">
 
-    <div class="container">
+<div class="title">
 
-        <div class="admin-header">
+<h1>
+لوحة تحكم المنتجات
+</h1>
 
-            <div>
-                <h1>لوحة التحكم 🛠️</h1>
+<p>
+أضف المنتجات وعدّل الأسعار والأقسام والوحدات بسهولة
+</p>
 
-                <p>
-                    إدارة المنتجات والطلبات في البركة مول
-                </p>
-            </div>
+</div>
 
-        </div>
 
+<div class="stats">
 
-        <!-- STATISTICS -->
+<div class="stat">
+<span>إجمالي المنتجات</span>
+<strong id="totalProducts">0</strong>
+</div>
 
-        <div class="admin-grid">
+<div class="stat">
+<span>الخضروات</span>
+<strong id="vegetablesCount">0</strong>
+</div>
 
-            <div class="stat-card">
+<div class="stat">
+<span>الفواكه</span>
+<strong id="fruitsCount">0</strong>
+</div>
 
-                <div class="stat-icon">📦</div>
+<div class="stat">
+<span>العروض</span>
+<strong id="offersCount">0</strong>
+</div>
 
-                <span>المنتجات</span>
+</div>
 
-                <strong id="productsCount">
-                    0
-                </strong>
 
-            </div>
+<div class="card">
 
+<div class="card-title">
 
-            <div class="stat-card">
+<h2 id="formTitle">
+إضافة منتج جديد
+</h2>
 
-                <div class="stat-icon">🛒</div>
+<button
+type="button"
+class="add-new"
+id="newProduct"
+>
++ منتج جديد
+</button>
 
-                <span>الطلبات</span>
+</div>
 
-                <strong id="ordersCount">
-                    0
-                </strong>
 
-            </div>
+<form id="productForm">
 
+<input
+type="hidden"
+id="productId"
+>
 
-            <div class="stat-card">
 
-                <div class="stat-icon">👥</div>
+<div class="form-grid">
 
-                <span>العملاء</span>
 
-                <strong id="usersCount">
-                    0
-                </strong>
+<div class="field">
 
-            </div>
+<label>
+اسم المنتج
+</label>
 
+<input
+id="productName"
+type="text"
+placeholder="مثال: طماطم بلدي"
+required
+>
 
-            <div class="stat-card">
+</div>
 
-                <div class="stat-icon">💰</div>
 
-                <span>إجمالي المبيعات</span>
+<div class="field">
 
-                <strong id="salesTotal">
-                    0 ج.م
-                </strong>
+<label>
+السعر بالجنيه
+</label>
 
-            </div>
+<input
+id="productPrice"
+type="number"
+min="0"
+step="0.01"
+placeholder="مثال: 25"
+required
+>
 
-        </div>
+</div>
 
 
-        <!-- PRODUCTS -->
+<div class="field">
 
-        <section class="admin-section">
+<label>
+القسم
+</label>
 
-            <div class="admin-section-header">
+<select id="productCategory">
 
-                <h2>
-                    📦 المنتجات
-                </h2>
+<option value="خضروات">
+🥬 خضروات
+</option>
 
-                <button
-                    class="admin-button"
-                    id="showProductForm"
-                >
-                    + إضافة منتج
-                </button>
+<option value="فواكه">
+🍎 فواكه
+</option>
 
-            </div>
+<option value="لحوم">
+🥩 لحوم
+</option>
 
+<option value="طيور">
+🐔 طيور
+</option>
 
-            <div
-                class="admin-form"
-                id="productForm"
-            >
+<option value="ماركت">
+🛒 ماركت
+</option>
 
-                <form id="addProductForm">
+<option value="عطارة">
+🌿 عطارة
+</option>
 
-                    <div class="admin-form-grid">
+<option value="ألبان">
+🥛 ألبان
+</option>
 
-                        <div class="admin-field">
+<option value="مشروبات">
+🧃 مشروبات
+</option>
 
-                            <label>
-                                اسم المنتج
-                            </label>
+<option value="منظفات">
+🧼 منظفات
+</option>
 
-                            <input
-                                id="productName"
-                                type="text"
-                                required
-                            >
+</select>
 
-                        </div>
+</div>
 
 
-                        <div class="admin-field">
+<div class="field">
 
-                            <label>
-                                السعر
-                            </label>
+<label>
+وحدة البيع
+</label>
 
-                            <input
-                                id="productPrice"
-                                type="number"
-                                min="0"
-                                required
-                            >
+<select id="productUnit">
 
-                        </div>
+<option value="كيلو">
+كيلو
+</option>
 
+<option value="قطعة">
+قطعة
+</option>
 
-                        <div class="admin-field">
+<option value="عبوة">
+عبوة
+</option>
 
-                            <label>
-                                السعر القديم
-                            </label>
+<option value="كرتونة">
+كرتونة
+</option>
 
-                            <input
-                                id="productOldPrice"
-                                type="number"
-                                min="0"
-                            >
+<option value="زجاجة">
+زجاجة
+</option>
 
-                        </div>
+<option value="كيس">
+كيس
+</option>
 
+<option value="علبة">
+علبة
+</option>
 
-                        <div class="admin-field">
+<option value="100 جرام">
+100 جرام
+</option>
 
-                            <label>
-                                الوحدة
-                            </label>
+</select>
 
-                            <input
-                                id="productUnit"
-                                type="text"
-                                placeholder="للكيلو"
-                            >
+</div>
 
-                        </div>
 
+<div class="field">
 
-                        <div class="admin-field">
+<label>
+الإيموجي / رمز المنتج
+</label>
 
-                            <label>
-                                القسم
-                            </label>
+<input
+id="productEmoji"
+type="text"
+placeholder="🍅"
+maxlength="4"
+>
 
-                            <select id="productCategory">
+</div>
 
-                                <option value="grocery">
-                                    بقالة
-                                </option>
 
-                                <option value="vegetables">
-                                    خضروات وفاكهة
-                                </option>
+<div class="field">
 
-                                <option value="meat">
-                                    لحوم
-                                </option>
+<label>
+حالة المنتج
+</label>
 
-                                <option value="chicken">
-                                    دواجن
-                                </option>
+<select id="productOffer">
 
-                                <option value="dairy">
-                                    ألبان
-                                </option>
+<option value="no">
+منتج عادي
+</option>
 
-                                <option value="drinks">
-                                    مشروبات
-                                </option>
+<option value="yes">
+🔥 عرض
+</option>
 
-                                <option value="cleaning">
-                                    منظفات
-                                </option>
+</select>
 
-                                <option value="bakery">
-                                    مخبوزات
-                                </option>
+</div>
 
-                            </select>
 
-                        </div>
+</div>
 
 
-                        <div class="admin-field">
+<div class="actions">
 
-                            <label>
-                                رمز المنتج
-                            </label>
+<button
+type="submit"
+class="save"
+>
+حفظ المنتج
+</button>
 
-                            <input
-                                id="productImage"
-                                type="text"
-                                placeholder="🍎"
-                            >
+<button
+type="button"
+class="cancel"
+id="cancelEdit"
+>
+إلغاء
+</button>
 
-                        </div>
+</div>
 
+</form>
 
-                        <div class="admin-field">
+</div>
 
-                            <label>
-                                التقييم
-                            </label>
 
-                            <input
-                                id="productRating"
-                                type="number"
-                                min="1"
-                                max="5"
-                                step="0.1"
-                                value="5"
-                            >
+<div class="card">
 
-                        </div>
+<div class="card-title">
 
+<h2>
+المنتجات الحالية
+</h2>
 
-                        <div class="admin-field">
+</div>
 
-                            <label>
-                                نوع العرض
-                            </label>
 
-                            <select id="productBadge">
+<div
+class="products"
+id="productsList"
+>
+</div>
 
-                                <option value="">
-                                    بدون عرض
-                                </option>
-
-                                <option value="عرض">
-                                    عرض
-                                </option>
-
-                                <option value="خصم">
-                                    خصم
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="form-actions">
-
-                        <button
-                            type="submit"
-                            class="admin-button"
-                        >
-                            حفظ المنتج
-                        </button>
-
-                        <button
-                            type="button"
-                            class="admin-button gray"
-                            id="cancelProduct"
-                        >
-                            إلغاء
-                        </button>
-
-                    </div>
-
-                </form>
-
-            </div>
-
-
-            <div id="productsTableContainer"></div>
-
-        </section>
-
-
-        <!-- ORDERS -->
-
-        <section class="admin-section">
-
-            <div class="admin-section-header">
-
-                <h2>
-                    🛍️ الطلبات
-                </h2>
-
-            </div>
-
-
-            <div id="ordersTableContainer"></div>
-
-        </section>
-
-
-        <!-- USERS -->
-
-        <section class="admin-section">
-
-            <div class="admin-section-header">
-
-                <h2>
-                    👥 العملاء المسجلون
-                </h2>
-
-            </div>
-
-
-            <div id="usersTableContainer"></div>
-
-        </section>
-
-
-    </div>
+</div>
 
 </main>
 
 
-<footer class="footer">
-
-    <div class="footer-bottom">
-
-        <div class="container">
-
-            <span>
-                © 2026 البركة مول
-            </span>
-
-            <span>
-                لوحة التحكم
-            </span>
-
-        </div>
-
-    </div>
-
-</footer>
+<div
+class="toast"
+id="toast"
+></div>
 
 
 <script>
 
-/* ==========================================
-   PRODUCTS
-========================================== */
+"use strict";
+
+
+const STORAGE_KEY =
+"albaraka_products_v1";
+
 
 const defaultProducts = [
 
-    {
-        id: 1,
-        name: "أرز فاخر 1 كيلو",
-        category: "grocery",
-        categoryName: "بقالة",
-        price: 35,
-        oldPrice: 42,
-        unit: "للكيلو",
-        image: "🍚",
-        rating: 4.8,
-        badge: "خصم"
-    },
+{
+id:"p1",
+name:"طماطم بلدي",
+price:20,
+category:"خضروات",
+unit:"كيلو",
+emoji:"🍅",
+offer:false
+},
 
-    {
-        id: 2,
-        name: "طماطم طازجة",
-        category: "vegetables",
-        categoryName: "خضروات وفاكهة",
-        price: 25,
-        oldPrice: 30,
-        unit: "للكيلو",
-        image: "🍅",
-        rating: 4.9,
-        badge: "عرض"
-    },
+{
+id:"p2",
+name:"بطاطس",
+price:25,
+category:"خضروات",
+unit:"كيلو",
+emoji:"🥔",
+offer:false
+},
 
-    {
-        id: 3,
-        name: "تفاح أحمر",
-        category: "vegetables",
-        categoryName: "خضروات وفاكهة",
-        price: 65,
-        oldPrice: 75,
-        unit: "للكيلو",
-        image: "🍎",
-        rating: 4.8,
-        badge: "خصم"
-    },
+{
+id:"p3",
+name:"خيار",
+price:30,
+category:"خضروات",
+unit:"كيلو",
+emoji:"🥒",
+offer:false
+},
 
-    {
-        id: 4,
-        name: "موز طازج",
-        category: "vegetables",
-        categoryName: "خضروات وفاكهة",
-        price: 35,
-        oldPrice: 40,
-        unit: "للكيلو",
-        image: "🍌",
-        rating: 4.7,
-        badge: ""
-    },
+{
+id:"p4",
+name:"موز",
+price:35,
+category:"فواكه",
+unit:"كيلو",
+emoji:"🍌",
+offer:false
+},
 
-    {
-        id: 5,
-        name: "برتقال طازج",
-        category: "vegetables",
-        categoryName: "خضروات وفاكهة",
-        price: 30,
-        oldPrice: 38,
-        unit: "للكيلو",
-        image: "🍊",
-        rating: 4.7,
-        badge: "عرض"
-    },
+{
+id:"p5",
+name:"تفاح",
+price:70,
+category:"فواكه",
+unit:"كيلو",
+emoji:"🍎",
+offer:true
+},
 
-    {
-        id: 6,
-        name: "لحمة بقري طازجة",
-        category: "meat",
-        categoryName: "اللحوم",
-        price: 390,
-        oldPrice: 430,
-        unit: "للكيلو",
-        image: "🥩",
-        rating: 4.9,
-        badge: "خصم"
-    },
+{
+id:"p6",
+name:"برتقال",
+price:30,
+category:"فواكه",
+unit:"كيلو",
+emoji:"🍊",
+offer:false
+},
 
-    {
-        id: 7,
-        name: "فراخ كاملة",
-        category: "chicken",
-        categoryName: "دواجن",
-        price: 145,
-        oldPrice: 160,
-        unit: "للكيلو",
-        image: "🍗",
-        rating: 4.8,
-        badge: "عرض"
-    },
+{
+id:"p7",
+name:"لحمة بلدي",
+price:420,
+category:"لحوم",
+unit:"كيلو",
+emoji:"🥩",
+offer:false
+},
 
-    {
-        id: 8,
-        name: "لبن كامل الدسم",
-        category: "dairy",
-        categoryName: "ألبان",
-        price: 38,
-        oldPrice: 42,
-        unit: "1 لتر",
-        image: "🥛",
-        rating: 4.8,
-        badge: ""
-    }
+{
+id:"p8",
+name:"فراخ",
+price:115,
+category:"طيور",
+unit:"كيلو",
+emoji:"🐔",
+offer:false
+},
+
+{
+id:"p9",
+name:"سكر",
+price:35,
+category:"ماركت",
+unit:"كيلو",
+emoji:"🛍️",
+offer:false
+},
+
+{
+id:"p10",
+name:"بهارات مشكلة",
+price:25,
+category:"عطارة",
+unit:"100 جرام",
+emoji:"🌿",
+offer:false
+}
 
 ];
 
 
-let products =
-    JSON.parse(
-        localStorage.getItem(
-            "albarakaProducts"
-        )
-    ) || defaultProducts;
+const form =
+document.getElementById(
+"productForm"
+);
+
+const productId =
+document.getElementById(
+"productId"
+);
+
+const productName =
+document.getElementById(
+"productName"
+);
+
+const productPrice =
+document.getElementById(
+"productPrice"
+);
+
+const productCategory =
+document.getElementById(
+"productCategory"
+);
+
+const productUnit =
+document.getElementById(
+"productUnit"
+);
+
+const productEmoji =
+document.getElementById(
+"productEmoji"
+);
+
+const productOffer =
+document.getElementById(
+"productOffer"
+);
+
+const productsList =
+document.getElementById(
+"productsList"
+);
+
+const toast =
+document.getElementById(
+"toast"
+);
 
 
-/* ==========================================
-   USERS & ORDERS
-========================================== */
+function getProducts(){
 
-let users =
-    JSON.parse(
-        localStorage.getItem(
-            "albarakaUsers"
-        )
-    ) || [];
+try{
 
+const saved =
+localStorage.getItem(
+STORAGE_KEY
+);
 
-let orders =
-    JSON.parse(
-        localStorage.getItem(
-            "albarakaOrders"
-        )
-    ) || [];
+if(!saved){
 
+localStorage.setItem(
+STORAGE_KEY,
+JSON.stringify(
+defaultProducts
+)
+);
 
-/* ==========================================
-   ELEMENTS
-========================================== */
+return [...defaultProducts];
 
-const productForm =
-    document.getElementById(
-        "productForm"
-    );
+}
 
-const addProductForm =
-    document.getElementById(
-        "addProductForm"
-    );
+const data =
+JSON.parse(saved);
 
+return Array.isArray(data)
+? data
+: [...defaultProducts];
 
-/* ==========================================
-   SHOW FORM
-========================================== */
+}catch(error){
 
-document
-    .getElementById("showProductForm")
-    .addEventListener(
-        "click",
-        () => {
+return [...defaultProducts];
 
-            productForm.classList.add(
-                "show"
-            );
+}
 
-        }
-    );
+}
 
 
-/* ==========================================
-   CANCEL FORM
-========================================== */
+function saveProducts(products){
 
-document
-    .getElementById("cancelProduct")
-    .addEventListener(
-        "click",
-        () => {
+localStorage.setItem(
+STORAGE_KEY,
+JSON.stringify(products)
+);
 
-            productForm.classList.remove(
-                "show"
-            );
-
-            addProductForm.reset();
-
-        }
-    );
+}
 
 
-/* ==========================================
-   ADD PRODUCT
-========================================== */
+function showToast(message){
 
-addProductForm.addEventListener(
-    "submit",
-    event => {
+toast.textContent =
+message;
 
-        event.preventDefault();
+toast.classList.add(
+"show"
+);
 
+clearTimeout(
+window.toastTimer
+);
 
-        const category =
-            document.getElementById(
-                "productCategory"
-            ).value;
+window.toastTimer =
+setTimeout(
+function(){
 
+toast.classList.remove(
+"show"
+);
 
-        const categoryNames = {
+},
+2200
+);
 
-            grocery: "بقالة",
-
-            vegetables:
-                "خضروات وفاكهة",
-
-            meat: "لحوم",
-
-            chicken: "دواجن",
-
-            dairy: "ألبان",
-
-            drinks: "مشروبات",
-
-            cleaning: "منظفات",
-
-            bakery: "مخبوزات"
-
-        };
+}
 
 
-        const newProduct = {
+function escapeHTML(value){
 
-            id: Date.now(),
+return String(value ?? "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 
-            name:
-                document.getElementById(
-                    "productName"
-                ).value.trim(),
+}
 
-            category,
 
-            categoryName:
-                categoryNames[category],
+function render(){
 
-            price:
-                Number(
-                    document.getElementById(
-                        "productPrice"
-                    ).value
-                ),
+const products =
+getProducts();
 
-            oldPrice:
-                Number(
-                    document.getElementById(
-                        "productOldPrice"
-                    ).value
-                ) || 0,
 
-            unit:
-                document.getElementById(
+// الإحصائيات
+
+document.getElementById(
+"totalProducts"
+).textContent =
+products.length;
+
+
+document.getElementById(
+"vegetablesCount"
+).textContent =
+products.filter(
+p => p.category === "خضروات"
+).length;
+
+
+document.getElementById(
+"fruitsCount"
+).textContent =
+products.filter(
+p => p.category === "فواكه"
+).length;
+
+
+document.getElementById(
+"offersCount"
+).textContent =
+products.filter(
+p => p.offer === true
+).length;
+
+
+// المنتجات
+
+if(products.length === 0){
+
+productsList.innerHTML = `
+<div class="empty">
+لا توجد منتجات حاليًا
+</div>
+`;
+
+return;
+
+}
+
+
+productsList.innerHTML =
+products.map(
+product => `
+
+<div class="product">
+
+<div class="product-image">
+
+${escapeHTML(
+product.emoji || "🛒"
+)}
+
+${product.offer
+? `<span class="offer">🔥 عرض</span>`
+: ""
+}
+
+</div>
+
+
+<div class="product-body">
+
+<h3>
+${escapeHTML(
+product.name
+)}
+</h3>
+
+<div class="product-category">
+
+${escapeHTML(
+product.category
+)}
+•
+${escapeHTML(
+product.unit
+)}
+
+</div>
+
+<div class="price">
+
+${Number(
+product.price
+).toLocaleString("ar-EG")}
+ ج.م
+
+</div>
+
+
+<div class="product-actions">
+
+<button
+class="edit"
+data-edit="${escapeHTML(
+product.id
+)}"
+>
+✏️ تعديل
+</button>
+
+<button
+class="delete"
+data-delete="${escapeHTML(
+product.id
+)}"
+>
+🗑️ حذف
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`
+).join("");
+
+}
+
+
+function resetForm(){
+
+form.reset();
+
+productId.value = "";
+
+productOffer.value =
+"no";
+
+document.getElementById(
+"formTitle"
+).textContent =
+"إضافة منتج جديد";
+
+}
+
+
+function editProduct(id){
+
+const products =
+getProducts();
+
+const product =
+products.find(
+p =>
+String(p.id) ===
+String(id)
+);
+
+if(!product){
+return;
+}
+
+
+productId.value =
+product.id;
+
+productName.value =
+product.name;
+
+productPrice.value =
+product.price;
+
+productCategory.value =
+product.category;
+
+productUnit.value =
+product.unit;
+
+productEmoji.value =
+product.emoji || "";
+
+productOffer.value =
+product.offer
+? "yes"
+: "no";
+
+
+document.getElementById(
+"formTitle"
+).textContent =
+"تعديل المنتج";
+
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+function deleteProduct(id){
+
+const products =
+getProducts();
+
+const product =
+products.find(
+p =>
+String(p.id) ===
+String(id)
+);
+
+if(!product){
+return;
+}
+
+
+const confirmed =
+confirm(
+"هل تريد حذف المنتج: " +
+product.name +
+" ؟"
+);
+
+if(!confirmed){
+return;
+}
+
+
+const newProducts =
+products.filter(
+p =>
+String(p.id) !==
+String(id)
+);
+
+
+saveProducts(
+newProducts
+);
+
+render();
+
+showToast(
+"تم حذف المنتج"
+);
+
+}
+
+
+form.addEventListener(
+"submit",
+function(event){
+
+event.preventDefault();
+
+
+const name =
+productName.value.trim();
+
+const price =
+Number(
+productPrice.value
+);
+
+const category =
+productCategory.value;
+
+const unit =
+productUnit.value;
+
+const emoji =
+productEmoji.value.trim()
+|| "🛒";
+
+const offer =
+productOffer.value ===
+"yes";
+
+
+if(!name){
+
+showToast(
+"اكتب اسم المنتج"
+);
+
+return;
+
+}
+
+
+if(
+!Number.isFinite(price) ||
+price < 0
+){
+
+showToast(
+"اكتب سعرًا صحيحًا"
+);
+
+return;
+
+}
+
+
+const products =
+getProducts();
+
+
+const id =
+productId.value;
+
+
+if(id){
+
+const index =
+products.findIndex(
+p =>
+String(p.id) ===
+String(id)
+);
+
+
+if(index === -1){
+
+showToast(
+"المنتج غير موجود"
+);
+
+return;
+
+}
+
+
+products[index] = {
+
+...products[index],
+
+name,
+price,
+category,
+unit,
+emoji,
+offer
+
+};
+
+
+showToast(
+"تم تعديل المنتج بنجاح"
+);
+
+}else{
+
+
+const newProduct = {
+
+id:
+"p-" +
+Date.now(),
+
+name,
+price,
+category,
+unit,
+emoji,
+offer
+
+};
+
+
+products.unshift(
+newProduct
+);
+
+
+showToast(
+"تم إضافة المنتج بنجاح"
+);
+
+}
+
+
+saveProducts(
+products
+);
+
+resetForm();
+
+render();
+
+}
+);
+
+
+document.getElementById(
+"newProduct"
+).addEventListener(
+"click",
+function(){
+
+resetForm();
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+);
+
+
+document.getElementById(
+"cancelEdit"
+).addEventListener(
+"click",
+function(){
+
+resetForm();
+
+}
+);
+
+
+productsList.addEventListener(
+"click",
+function(event){
+
+const editButton =
+event.target.closest(
+"[data-edit]"
+);
+
+if(editButton){
+
+editProduct(
+editButton.dataset.edit
+);
+
+return;
+
+}
+
+
+const deleteButton =
+event.target.closest(
+"[data-delete]"
+);
+
+if(deleteButton){
+
+deleteProduct(
+deleteButton.dataset.delete
+);
+
+}
+
+}
+);
+
+
+render();
+
+</script>
+
+</body>
+</html>
