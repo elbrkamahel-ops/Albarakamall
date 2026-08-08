@@ -2,110 +2,280 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="مول البركة - خضروات وفاكهة ولحوم ودواجن وجزارة وماركت">
 <title>مول البركة | كل احتياجات بيتك</title>
 
 <style>
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-html,body{
-    width:100%;
-    overflow-x:hidden;
+html{
+  scroll-behavior:smooth;
 }
 
 body{
-    font-family:Tahoma,Arial,sans-serif;
-    background:#f5f7f6;
-    color:#202522;
-    line-height:1.7;
+  font-family:Tahoma,Arial,sans-serif;
+  background:#f5f7f6;
+  color:#202522;
+  line-height:1.7;
 }
 
 a{
-    text-decoration:none;
-    color:inherit;
+  text-decoration:none;
+  color:inherit;
 }
 
 button,input{
-    font-family:inherit;
+  font-family:inherit;
 }
 
-/* ================= TOP ================= */
+.container{
+  width:min(1200px,calc(100% - 30px));
+  margin:auto;
+}
 
+/* TOP */
 .top{
-    background:#f0f5f2;
-    border-bottom:1px solid #e3e9e5;
-    color:#52615a;
-    font-size:12px;
+  background:#eef5f1;
+  border-bottom:1px solid #dde7e1;
+  color:#506159;
+  font-size:12px;
 }
 
 .top-inner{
-    width:min(1200px,calc(100% - 30px));
-    margin:auto;
-    min-height:36px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+  width:min(1200px,calc(100% - 30px));
+  min-height:38px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
 
-/* ================= HEADER ================= */
-
+/* HEADER */
 .header{
-    background:#fff;
+  background:#fff;
 }
 
 .header-inner{
-    width:min(1200px,calc(100% - 30px));
-    margin:auto;
-    min-height:92px;
-    display:flex;
-    align-items:center;
-    gap:22px;
+  width:min(1200px,calc(100% - 30px));
+  min-height:92px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  gap:18px;
 }
 
 .logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    min-width:205px;
+  min-width:205px;
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
 .logo-box{
-    width:58px;
-    height:58px;
-    border-radius:16px;
-    background:#087b45;
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:bold;
-    font-size:14px;
-    box-shadow:0 5px 18px rgba(8,123,69,.2);
+  width:58px;
+  height:58px;
+  border-radius:16px;
+  background:#087b45;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  font-size:14px;
 }
 
 .logo-text strong{
-    display:block;
-    color:#087b45;
-    font-size:22px;
-    line-height:1.2;
+  display:block;
+  color:#087b45;
+  font-size:23px;
 }
 
-.logo-text span{
-    display:block;
-    color:#77817c;
-    font-size:11px;
-    margin-top:4px;
+.logo-text small{
+  color:#7a8580;
+  font-size:10px;
 }
 
 .search{
-    flex:1;
-    height:48px;
-    display:flex;
-    border:2px solid #087b45;
+  height:48px;
+  flex:1;
+  display:flex;
+  overflow:hidden;
+  border:2px solid #087b45;
+  border-radius:10px;
+  background:#fff;
+}
+
+.search input{
+  width:100%;
+  min-width:0;
+  border:0;
+  outline:0;
+  padding:0 15px;
+  font-size:14px;
+}
+
+.search button{
+  width:55px;
+  border:0;
+  background:#087b45;
+  color:#fff;
+  font-size:18px;
+  cursor:pointer;
+}
+
+.header-action{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  white-space:nowrap;
+}
+
+.action-icon{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:#eaf6ef;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:21px;
+}
+
+.action-text small{
+  display:block;
+  color:#89938e;
+  font-size:9px;
+}
+
+.action-text strong{
+  font-size:12px;
+}
+
+.cart{
+  position:relative;
+}
+
+.cart-count{
+  position:absolute;
+  top:-7px;
+  right:-6px;
+  width:21px;
+  height:21px;
+  border-radius:50%;
+  background:#f0a800;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:10px;
+}
+
+/* NAV */
+.nav{
+  background:#087b45;
+  color:#fff;
+}
+
+.nav-inner{
+  width:min(1200px,100%);
+  margin:auto;
+  display:flex;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+
+.nav-inner::-webkit-scrollbar{
+  display:none;
+}
+
+.nav a{
+  min-height:50px;
+  padding:0 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  white-space:nowrap;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.nav a:hover,
+.nav a.active{
+  background:#056337;
+}
+
+.nav .special{
+  color:#ffe06a;
+}
+
+/* HERO */
+.hero{
+  margin-top:20px;
+  min-height:440px;
+  border-radius:24px;
+  overflow:hidden;
+  position:relative;
+  background:linear-gradient(120deg,#eaf8ef,#f7fbf8 58%,#fff5d7);
+  display:flex;
+  align-items:center;
+}
+
+.hero-content{
+  width:55%;
+  padding:45px;
+  position:relative;
+  z-index:3;
+}
+
+.badge{
+  display:inline-block;
+  padding:8px 16px;
+  border-radius:20px;
+  background:#fff;
+  color:#087b45;
+  font-size:12px;
+  font-weight:bold;
+  box-shadow:0 6px 20px rgba(0,0,0,.06);
+}
+
+.hero h1{
+  margin:18px 0 12px;
+  font-size:clamp(38px,5vw,62px);
+  line-height:1.3;
+  font-weight:900;
+}
+
+.hero h1 span{
+  color:#087b45;
+}
+
+.hero p{
+  max-width:570px;
+  color:#65726b;
+  font-size:15px;
+  line-height:2;
+}
+
+.hero-buttons{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:22px;
+}
+
+.btn{
+  min-height:45px;
+  padding:0 23px;
+  border-radius:9px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12    border:2px solid #087b45;
     border-radius:10px;
     overflow:hidden;
 }
