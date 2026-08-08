@@ -1,1766 +1,1076 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="مول البركة - خضروات وفاكهة ولحوم ودواجن وجزارة وماركت">
-<title>مول البركة | كل احتياجات بيتك</title>
+    <meta charset="UTF-8">
 
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-html{
-  scroll-behavior:smooth;
-}
+    <meta name="theme-color"
+          content="#00843D">
 
-body{
-  font-family:Tahoma,Arial,sans-serif;
-  background:#f5f7f6;
-  color:#202522;
-  line-height:1.7;
-}
+    <meta name="description"
+          content="البركة مول - كل احتياجات بيتك في مكان واحد">
 
-a{
-  text-decoration:none;
-  color:inherit;
-}
+    <title>البركة مول | تسوق أونلاين</title>
 
-button,input{
-  font-family:inherit;
-}
-
-.container{
-  width:min(1200px,calc(100% - 30px));
-  margin:auto;
-}
-
-/* TOP */
-.top{
-  background:#eef5f1;
-  border-bottom:1px solid #dde7e1;
-  color:#506159;
-  font-size:12px;
-}
-
-.top-inner{
-  width:min(1200px,calc(100% - 30px));
-  min-height:38px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-/* HEADER */
-.header{
-  background:#fff;
-}
-
-.header-inner{
-  width:min(1200px,calc(100% - 30px));
-  min-height:92px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  gap:18px;
-}
-
-.logo{
-  min-width:205px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.logo-box{
-  width:58px;
-  height:58px;
-  border-radius:16px;
-  background:#087b45;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:bold;
-  font-size:14px;
-}
-
-.logo-text strong{
-  display:block;
-  color:#087b45;
-  font-size:23px;
-}
-
-.logo-text small{
-  color:#7a8580;
-  font-size:10px;
-}
-
-.search{
-  height:48px;
-  flex:1;
-  display:flex;
-  overflow:hidden;
-  border:2px solid #087b45;
-  border-radius:10px;
-  background:#fff;
-}
-
-.search input{
-  width:100%;
-  min-width:0;
-  border:0;
-  outline:0;
-  padding:0 15px;
-  font-size:14px;
-}
-
-.search button{
-  width:55px;
-  border:0;
-  background:#087b45;
-  color:#fff;
-  font-size:18px;
-  cursor:pointer;
-}
-
-.header-action{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  white-space:nowrap;
-}
-
-.action-icon{
-  width:44px;
-  height:44px;
-  border-radius:50%;
-  background:#eaf6ef;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:21px;
-}
-
-.action-text small{
-  display:block;
-  color:#89938e;
-  font-size:9px;
-}
-
-.action-text strong{
-  font-size:12px;
-}
-
-.cart{
-  position:relative;
-}
-
-.cart-count{
-  position:absolute;
-  top:-7px;
-  right:-6px;
-  width:21px;
-  height:21px;
-  border-radius:50%;
-  background:#f0a800;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:10px;
-}
-
-/* NAV */
-.nav{
-  background:#087b45;
-  color:#fff;
-}
-
-.nav-inner{
-  width:min(1200px,100%);
-  margin:auto;
-  display:flex;
-  overflow-x:auto;
-  scrollbar-width:none;
-}
-
-.nav-inner::-webkit-scrollbar{
-  display:none;
-}
-
-.nav a{
-  min-height:50px;
-  padding:0 18px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  white-space:nowrap;
-  font-size:13px;
-  font-weight:bold;
-}
-
-.nav a:hover,
-.nav a.active{
-  background:#056337;
-}
-
-.nav .special{
-  color:#ffe06a;
-}
-
-/* HERO */
-.hero{
-  margin-top:20px;
-  min-height:440px;
-  border-radius:24px;
-  overflow:hidden;
-  position:relative;
-  background:linear-gradient(120deg,#eaf8ef,#f7fbf8 58%,#fff5d7);
-  display:flex;
-  align-items:center;
-}
-
-.hero-content{
-  width:55%;
-  padding:45px;
-  position:relative;
-  z-index:3;
-}
-
-.badge{
-  display:inline-block;
-  padding:8px 16px;
-  border-radius:20px;
-  background:#fff;
-  color:#087b45;
-  font-size:12px;
-  font-weight:bold;
-  box-shadow:0 6px 20px rgba(0,0,0,.06);
-}
-
-.hero h1{
-  margin:18px 0 12px;
-  font-size:clamp(38px,5vw,62px);
-  line-height:1.3;
-  font-weight:900;
-}
-
-.hero h1 span{
-  color:#087b45;
-}
-
-.hero p{
-  max-width:570px;
-  color:#65726b;
-  font-size:15px;
-  line-height:2;
-}
-
-.hero-buttons{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:22px;
-}
-
-.btn{
-  min-height:45px;
-  padding:0 23px;
-  border-radius:9px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  font-size:12    border:2px solid #087b45;
-    border-radius:10px;
-    overflow:hidden;
-}
-
-.search input{
-    width:100%;
-    min-width:0;
-    border:0;
-    outline:0;
-    padding:0 15px;
-    font-size:14px;
-}
-
-.search button{
-    width:55px;
-    border:0;
-    background:#087b45;
-    color:#fff;
-    font-size:19px;
-}
-
-.header-action{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    white-space:nowrap;
-}
-
-.action-icon{
-    width:43px;
-    height:43px;
-    border-radius:50%;
-    background:#eaf6ef;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:20px;
-}
-
-.action-text small{
-    display:block;
-    color:#8a948f;
-    font-size:10px;
-}
-
-.action-text strong{
-    font-size:13px;
-}
-
-.cart{
-    position:relative;
-}
-
-.cart-count{
-    position:absolute;
-    top:-7px;
-    right:-7px;
-    width:21px;
-    height:21px;
-    border-radius:50%;
-    background:#f2a900;
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:10px;
-}
-
-/* ================= NAV ================= */
-
-.nav{
-    background:#087b45;
-    color:#fff;
-}
-
-.nav-inner{
-    width:min(1200px,100%);
-    margin:auto;
-    min-height:48px;
-    display:flex;
-    overflow-x:auto;
-    scrollbar-width:none;
-}
-
-.nav-inner::-webkit-scrollbar{
-    display:none;
-}
-
-.nav a{
-    min-height:48px;
-    padding:0 18px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    white-space:nowrap;
-    font-size:13px;
-    font-weight:bold;
-}
-
-.nav a:hover,
-.nav a.active{
-    background:#056337;
-}
-
-.nav .offer{
-    color:#ffe06b;
-}
-
-/* ================= MAIN ================= */
-
-.container{
-    width:min(1200px,calc(100% - 30px));
-    margin:auto;
-}
-
-/* ================= HERO ================= */
-
-.hero{
-    margin-top:20px;
-    min-height:430px;
-    border-radius:22px;
-    overflow:hidden;
-    position:relative;
-    background:linear-gradient(120deg,#eaf8ef,#f8fbf7 60%,#fff5d9);
-    display:flex;
-    align-items:center;
-}
-
-.hero-content{
-    width:55%;
-    padding:50px;
-    position:relative;
-    z-index:3;
-}
-
-.hero-badge{
-    display:inline-block;
-    background:#fff;
-    color:#087b45;
-    border-radius:20px;
-    padding:8px 15px;
-    font-size:12px;
-    font-weight:bold;
-    box-shadow:0 5px 18px rgba(0,0,0,.06);
-}
-
-.hero h1{
-    margin:18px 0 12px;
-    font-size:55px;
-    line-height:1.35;
-    font-weight:900;
-}
-
-.hero h1 span{
-    color:#087b45;
-}
-
-.hero p{
-    color:#66736c;
-    font-size:15px;
-    max-width:570px;
-    line-height:2;
-}
-
-.hero-buttons{
-    display:flex;
-    gap:10px;
-    margin-top:22px;
-    flex-wrap:wrap;
-}
-
-.btn{
-    min-height:45px;
-    padding:0 22px;
-    border-radius:9px;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    font-size:13px;
-    font-weight:bold;
-}
-
-.btn-green{
-    background:#087b45;
-    color:#fff;
-}
-
-.btn-white{
-    background:#fff;
-    border:1px solid #dfe6e1;
-    color:#087b45;
-}
-
-.hero-points{
-    display:flex;
-    flex-wrap:wrap;
-    gap:15px;
-    margin-top:20px;
-    color:#52615a;
-    font-size:11px;
-    font-weight:bold;
-}
-
-.hero-art{
-    width:45%;
-    height:430px;
-    position:relative;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.circle{
-    width:285px;
-    height:285px;
-    border-radius:50%;
-    background:#d5eddd;
-    position:absolute;
-}
-
-.basket{
-    width:175px;
-    height:175px;
-    border-radius:50%;
-    background:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:90px;
-    position:relative;
-    z-index:2;
-    box-shadow:0 18px 45px rgba(0,0,0,.09);
-}
-
-.food{
-    position:absolute;
-    z-index:3;
-    font-size:55px;
-}
-
-.food.a{
-    top:65px;
-    right:70px;
-}
-
-.food.b{
-    top:110px;
-    left:55px;
-}
-
-.food.c{
-    bottom:55px;
-    right:55px;
-}
-
-.food.d{
-    bottom:70px;
-    left:75px;
-}
-
-/* ================= FEATURES ================= */
-
-.features{
-    margin-top:15px;
-    background:#fff;
-    border:1px solid #e2e8e4;
-    border-radius:14px;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    overflow:hidden;
-}
-
-.feature{
-    min-height:85px;
-    padding:15px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    border-left:1px solid #e2e8e4;
-}
-
-.feature:last-child{
-    border-left:0;
-}
-
-.feature-icon{
-    width:42px;
-    height:42px;
-    border-radius:50%;
-    background:#eaf6ef;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:20px;
-    flex-shrink:0;
-}
-
-.feature strong{
-    display:block;
-    font-size:13px;
-}
-
-.feature span{
-    display:block;
-    color:#7b8580;
-    font-size:10px;
-}
-
-/* ================= SECTION ================= */
-
-.section{
-    margin-top:45px;
-}
-
-.section-title{
-    display:flex;
-    align-items:end;
-    justify-content:space-between;
-    margin-bottom:18px;
-}
-
-.section-title h2{
-    font-size:27px;
-}
-
-.section-title h2 span{
-    color:#087b45;
-}
-
-.section-title a{
-    color:#087b45;
-    font-size:12px;
-    font-weight:bold;
-}
-
-/* ================= CATEGORIES ================= */
-
-.categories{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-}
-
-.category{
-    background:#fff;
-    border:1px solid #e2e8e4;
-    border-radius:15px;
-    padding:13px;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    transition:.2s;
-}
-
-.category:hover{
-    transform:translateY(-4px);
-    box-shadow:0 8px 25px rgba(0,0,0,.07);
-}
-
-.category-icon{
-    width:82px;
-    height:82px;
-    border-radius:13px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:45px;
-    flex-shrink:0;
-}
-
-.green-bg{
-    background:#eaf7ef;
-}
-
-.red-bg{
-    background:#fff0ed;
-}
-
-.yellow-bg{
-    background:#fff7dc;
-}
-
-.blue-bg{
-    background:#edf3ff;
-}
-
-.category h3{
-    font-size:13px;
-    margin-bottom:4px;
-}
-
-.category p{
-    color:#818a85;
-    font-size:10px;
-}
-
-/* ================= OFFER ================= */
-
-.offer-box{
-    margin-top:40px;
-    min-height:190px;
-    border-radius:20px;
-    background:linear-gradient(135deg,#fff2c9,#fffaf0);
-    border:1px solid #f0dfa9;
-    padding:30px 40px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.offer-box h2{
-    font-size:29px;
-}
-
-.offer-box p{
-    color:#716951;
-    font-size:13px;
-    margin:5px 0 15px;
-}
-
-.offer-icon{
-    font-size:90px;
-}
-
-/* ================= PRODUCTS ================= */
-
-.products{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-}
-
-.product{
-    background:#fff;
-    border:1px solid #e2e8e4;
-    border-radius:15px;
-    overflow:hidden;
-    transition:.2s;
-}
-
-.product:hover{
-    transform:translateY(-4px);
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-}
-
-.product-image{
-    height:175px;
-    background:#f2f7f3;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:70px;
-}
-
-.product-info{
-    padding:13px;
-}
-
-.product-category{
-    color:#8a948f;
-    font-size:10px;
-}
-
-.product h3{
-    font-size:14px;
-    margin:4px 0;
-}
-
-.price{
-    color:#087b45;
-    font-size:18px;
-    font-weight:bold;
-}
-
-.price small{
-    color:#7c8681;
-    font-size:9px;
-    font-weight:normal;
-}
-
-.add{
-    width:100%;
-    min-height:39px;
-    margin-top:9px;
-    border:0;
-    border-radius:8px;
-    background:#087b45;
-    color:#fff;
-    font-size:11px;
-    font-weight:bold;
-}
-
-/* ================= CTA ================= */
-
-.cta{
-    margin-top:45px;
-    min-height:220px;
-    border-radius:20px;
-    padding:35px 45px;
-    background:linear-gradient(135deg,#087b45,#056337);
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.cta h2{
-    font-size:31px;
-}
-
-.cta p{
-    color:#d9eee1;
-    font-size:13px;
-    margin:7px 0 17px;
-}
-
-.cta .btn{
-    background:#fff;
-    color:#087b45;
-}
-
-.cta-icon{
-    width:150px;
-    height:150px;
-    border-radius:50%;
-    background:rgba(255,255,255,.1);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:80px;
-}
-
-/* ================= FOOTER ================= */
-
-.footer{
-    margin-top:50px;
-    background:#123b28;
-    color:#fff;
-}
-
-.footer-inner{
-    width:min(1200px,calc(100% - 30px));
-    margin:auto;
-    padding:40px 0;
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr 1fr;
-    gap:30px;
-}
-
-.footer h3{
-    color:#ffd866;
-    font-size:15px;
-    margin-bottom:12px;
-}
-
-.footer p,
-.footer a{
-    color:#d6e3db;
-    font-size:11px;
-    display:block;
-    margin-bottom:7px;
-}
-
-.footer a:hover{
-    color:#ffd866;
-}
-
-.copy{
-    border-top:1px solid rgba(255,255,255,.12);
-    text-align:center;
-    color:#afc0b6;
-    padding:13px;
-    font-size:10px;
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:900px){
-
-    .header-inner{
-        flex-wrap:wrap;
-        padding:10px 0;
-    }
-
-    .logo{
-        min-width:auto;
-        flex:1;
-    }
-
-    .search{
-        order:5;
-        flex-basis:100%;
-    }
-
-    .action-text{
-        display:none;
-    }
-
-    .features{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .categories{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .products{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .footer-inner{
-        grid-template-columns:1fr 1fr;
-    }
-}
-
-@media(max-width:600px){
-
-    .top-inner{
-        width:calc(100% - 20px);
-        justify-content:center;
-    }
-
-    .top-inner span:first-child{
-        display:none;
-    }
-
-    .header-inner{
-        width:calc(100% - 20px);
-        display:grid;
-        grid-template-columns:1fr auto auto;
-        gap:8px;
-    }
-
-    .logo{
-        min-width:0;
-    }
-
-    .logo-box{
-        width:44px;
-        height:44px;
-        border-radius:12px;
-    }
-
-    .logo-text strong{
-        font-size:17px;
-    }
-
-    .logo-text span{
-        font-size:8px;
-    }
-
-    .action-icon{
-        width:38px;
-        height:38px;
-        font-size:17px;
-    }
-
-    .search{
-        width:100%;
-        height:43px;
-    }
-
-    .nav a{
-        padding:0 12px;
-        font-size:11px;
-    }
-
-    .container{
-        width:calc(100% - 20px);
-    }
-
-    .hero{
-        width:100%;
-        min-height:0;
-        display:block;
-        margin-top:12px;
-        border-radius:16px;
-    }
-
-    .hero-content{
-        width:100%;
-        padding:25px 18px 5px;
-    }
-
-    .hero h1{
-        font-size:34px;
-        line-height:1.35;
-    }
-
-    .hero p{
-        font-size:12px;
-        line-height:1.9;
-    }
-
-    .hero-buttons{
-        gap:7px;
-    }
-
-    .btn{
-        min-height:40px;
-        padding:0 14px;
-        font-size:10px;
-    }
-
-    .hero-points{
-        gap:8px;
-        font-size:8px;
-    }
-
-    .hero-art{
-        width:100%;
-        height:220px;
-    }
-
-    .circle{
-        width:155px;
-        height:155px;
-    }
-
-    .basket{
-        width:105px;
-        height:105px;
-        font-size:52px;
-    }
-
-    .food{
-        font-size:34px;
-    }
-
-    .food.a{
-        top:25px;
-        right:23%;
-    }
-
-    .food.b{
-        top:55px;
-        left:19%;
-    }
-
-    .food.c{
-        bottom:25px;
-        right:20%;
-    }
-
-    .food.d{
-        bottom:35px;
-        left:24%;
-    }
-
-    .features{
-        margin-top:10px;
-    }
-
-    .feature{
-        min-height:70px;
-        padding:8px;
-        gap:6px;
-    }
-
-    .feature-icon{
-        width:34px;
-        height:34px;
-        font-size:16px;
-    }
-
-    .feature strong{
-        font-size:10px;
-    }
-
-    .feature span{
-        font-size:8px;
-    }
-
-    .section{
-        margin-top:32px;
-    }
-
-    .section-title h2{
-        font-size:20px;
-    }
-
-    .section-title a{
-        font-size:9px;
-    }
-
-    .categories{
-        gap:8px;
-    }
-
-    .category{
-        padding:8px;
-        gap:7px;
-        border-radius:11px;
-    }
-
-    .category-icon{
-        width:53px;
-        height:53px;
-        font-size:28px;
-    }
-
-    .category h3{
-        font-size:10px;
-    }
-
-    .category p{
-        font-size:8px;
-    }
-
-    .offer-box{
-        min-height:145px;
-        margin-top:30px;
-        padding:20px;
-        border-radius:15px;
-    }
-
-    .offer-box h2{
-        font-size:21px;
-    }
-
-    .offer-box p{
-        font-size:9px;
-    }
-
-    .offer-icon{
-        font-size:48px;
-    }
-
-    .products{
-        gap:8px;
-    }
-
-    .product-image{
-        height:125px;
-        font-size:52px;
-    }
-
-    .product-info{
-        padding:8px;
-    }
-
-    .product h3{
-        font-size:11px;
-    }
-
-    .price{
-        font-size:15px;
-    }
-
-    .price small{
-        font-size:8px;
-    }
-
-    .add{
-        min-height:34px;
-        font-size:9px;
-    }
-
-    .cta{
-        min-height:180px;
-        padding:22px 18px;
-        border-radius:15px;
-    }
-
-    .cta h2{
-        font-size:22px;
-    }
-
-    .cta p{
-        font-size:9px;
-    }
-
-    .cta-icon{
-        width:85px;
-        height:85px;
-        font-size:45px;
-    }
-
-    .footer-inner{
-        grid-template-columns:1fr 1fr;
-        width:calc(100% - 20px);
-        padding:30px 0;
-        gap:22px 15px;
-    }
-
-    .footer-about{
-        grid-column:1/-1;
-    }
-
-    .footer p,
-    .footer a{
-        font-size:9px;
-    }
-
-    .copy{
-        font-size:8px;
-    }
-}
-</style>
+    <link rel="stylesheet"
+          href="style.css">
 </head>
 
 <body>
 
-<!-- الشريط العلوي -->
-<div class="top">
-    <div class="top-inner">
-        <span>🚚 توصيل طلباتك حتى باب البيت</span>
-        <span>📞 خدمة العملاء: 01119511185</span>
+<!-- =====================================================
+     TOP BAR
+===================================================== -->
+
+<div class="top-bar">
+
+    <div class="container top-bar-inner">
+
+        <div class="top-right">
+
+            <span>
+                🚚 توصيل سريع حتى باب منزلك
+            </span>
+
+            <span>
+                🔥 عروض يومية
+            </span>
+
+        </div>
+
+        <div class="top-left">
+
+            <a href="#">
+                خدمة العملاء
+            </a>
+
+            <span>01119511185</span>
+
+        </div>
+
     </div>
+
 </div>
 
-<!-- الهيدر -->
-<header class="header">
 
-    <div class="header-inner">
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-        <a href="index.html" class="logo">
+<header class="main-header">
 
-            <div class="logo-box">
-                البركة
-            </div>
+    <div class="container header-main">
 
-            <div class="logo-text">
-                <strong>مول البركة</strong>
-                <span>كل احتياجات بيتك</span>
-            </div>
+        <!-- LOGO -->
 
-        </a>
+        <a href="index.html"
+           class="logo">
 
-        <form class="search" onsubmit="searchStore(event)">
-            <input
-                id="search"
-                type="search"
-                placeholder="ابحث عن منتج أو قسم..."
-            >
-            <button type="submit">🔍</button>
-        </form>
-
-        <a href="#" class="header-action">
-            <div class="action-icon">👤</div>
-            <div class="action-text">
-                <small>مرحبًا بك</small>
-                <strong>تسجيل الدخول</strong>
-            </div>
-        </a>
-
-        <a href="shop/" class="header-action cart">
-            <div class="action-icon">🛒</div>
-            <div class="action-text">
-                <small>عربة التسوق</small>
-                <strong>السلة</strong>
-            </div>
-            <span class="cart-count" id="cartCount">0</span>
-        </a>
-
-    </div>
-
-</header>
-
-<!-- القائمة -->
-<nav class="nav">
-
-    <div class="nav-inner">
-
-        <a href="shop/" class="active">الرئيسية</a>
-
-        <a href="#categories">
-            ☰ جميع الأقسام
-        </a>
-
-        <a href="#vegetables">
-            🥬 خضروات وفاكهة
-        </a>
-
-        <a href="#meat">
-            🥩 اللحوم والجزارة
-        </a>
-
-        <a href="#chicken">
-            🐔 الدواجن والطيور
-        </a>
-
-        <a href="#market">
-            🛒 الماركت
-        </a>
-
-        <a href="#offers" class="offer">
-            🔥 العروض
-        </a>
-
-    </div>
-
-</nav>
-
-<main>
-
-<div class="container">
-
-<!-- HERO -->
-
-<section class="hero">
-
-    <div class="hero-content">
-
-        <span class="hero-badge">
-            🔥 عروض مول البركة
-        </span>
-
-        <h1>
-            كل احتياجات<br>
-            بيتك <span>بأسعار مميزة</span>
-        </h1>
-
-        <p>
-            خضروات وفاكهة طازجة، لحوم ودواجن،
-            جزارة وماركت — كل ما تحتاجه في مكان واحد.
-        </p>
-
-        <div class="hero-buttons">
-
-            <a href="shop/" class="btn btn-green">
-                تسوق الآن 🛒
-            </a>
-
-            <a href="#categories" class="btn btn-white">
-                مشاهدة الأقسام
-            </a>
-
-        </div>
-
-        <div class="hero-points">
-            <span>✓ منتجات مختارة</span>
-            <span>✓ جودة مضمونة</span>
-            <span>✓ دفع عند الاستلام</span>
-        </div>
-
-    </div>
-
-    <div class="hero-art">
-
-        <div class="circle"></div>
-
-        <div class="basket">
-            🛒
-        </div>
-
-        <span class="food a">🥬</span>
-        <span class="food b">🍎</span>
-        <span class="food c">🥩</span>
-        <span class="food d">🐔</span>
-
-    </div>
-
-</section>
-
-<!-- المميزات -->
-
-<section class="features">
-
-    <div class="feature">
-
-        <div class="feature-icon">🚚</div>
-
-        <div>
-            <strong>توصيل سريع</strong>
-            <span>حتى باب المنزل</span>
-        </div>
-
-    </div>
-
-    <div class="feature">
-
-        <div class="feature-icon">🥬</div>
-
-        <div>
-            <strong>منتجات طازجة</strong>
-            <span>اختيار يومي بعناية</span>
-        </div>
-
-    </div>
-
-    <div class="feature">
-
-        <div class="feature-icon">✓</div>
-
-        <div>
-            <strong>جودة مضمونة</strong>
-            <span>نهتم بكل طلب</span>
-        </div>
-
-    </div>
-
-    <div class="feature">
-
-        <div class="feature-icon">💳</div>
-
-        <div>
-            <strong>الدفع عند الاستلام</strong>
-            <span>ادفع عند وصول الطلب</span>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- الأقسام -->
-
-<section class="section" id="categories">
-
-    <div class="section-title">
-
-        <h2>
-            تسوق حسب <span>الأقسام</span>
-        </h2>
-
-        <a href="shop/">
-            عرض الكل ←
-        </a>
-
-    </div>
-
-    <div class="categories">
-
-        <a href="shop/?category=vegetables" class="category" id="vegetables">
-
-            <div class="category-icon green-bg">
-                🥬
-            </div>
-
-            <div>
-                <h3>الخضروات والفاكهة</h3>
-                <p>طازة يوميًا</p>
-            </div>
-
-        </a>
-
-        <a href="shop/?category=meat" class="category" id="meat">
-
-            <div class="category-icon red-bg">
-                🥩
-            </div>
-
-            <div>
-                <h3>اللحوم والجزارة</h3>
-                <p>اختيار وجودة</p>
-            </div>
-
-        </a>
-
-        <a href="shop/?category=chicken" class="category" id="chicken">
-
-            <div class="category-icon yellow-bg">
-                🐔
-            </div>
-
-            <div>
-                <h3>الدواجن والطيور</h3>
-                <p>طازة ومختارة</p>
-            </div>
-
-        </a>
-
-        <a href="shop/?category=market" class="category" id="market">
-
-            <div class="category-icon blue-bg">
+            <div class="logo-symbol">
                 🛒
             </div>
 
-            <div>
-                <h3>الماركت</h3>
-                <p>مستلزمات البيت</p>
+            <div class="logo-text">
+
+                <strong>
+                    البركة
+                </strong>
+
+                <small>
+                    مول
+                </small>
+
             </div>
+
+        </a>
+
+
+        <!-- LOCATION -->
+
+        <button class="location-button"
+                type="button">
+
+            <span class="location-icon">
+                📍
+            </span>
+
+            <span class="location-content">
+
+                <small>
+                    توصيل إلى
+                </small>
+
+                <strong>
+                    اختر منطقتك
+                </strong>
+
+            </span>
+
+            <span>
+                ▾
+            </span>
+
+        </button>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-wrapper">
+
+            <input
+                id="searchInput"
+                type="search"
+                placeholder="ابحث عن منتج أو قسم..."
+                autocomplete="off"
+            >
+
+            <button
+                id="searchButton"
+                type="button"
+                aria-label="بحث"
+            >
+                🔍
+            </button>
+
+        </div>
+
+
+        <!-- ACCOUNT -->
+
+        <a href="login.html"
+           class="account-button">
+
+            <span class="account-icon">
+                👤
+            </span>
+
+            <span class="account-text">
+
+                <small>
+                    مرحبًا بك
+                </small>
+
+                <strong>
+                    تسجيل الدخول
+                </strong>
+
+            </span>
+
+        </a>
+
+
+        <!-- CART -->
+
+        <a href="cart.html"
+           class="cart-button">
+
+            <span class="cart-icon">
+                🛒
+            </span>
+
+            <span class="cart-text">
+
+                <small>
+                    سلة المشتريات
+                </small>
+
+                <strong>
+                    0 ج.م
+                </strong>
+
+            </span>
+
+            <span id="cartCount"
+                  class="cart-count">
+                0
+            </span>
 
         </a>
 
     </div>
 
-</section>
 
-<!-- العروض -->
+    <!-- =================================================
+         NAVIGATION
+    ================================================== -->
 
-<section class="offer-box" id="offers">
+    <nav class="main-nav">
 
-    <div>
+        <div class="container nav-inner">
 
-        <h2>🔥 عروض مول البركة</h2>
+            <button
+                id="categoriesButton"
+                class="categories-button"
+                type="button"
+            >
 
-        <p>
-            وفر أكتر مع عروضنا وأسعارنا المميزة.
-        </p>
+                ☰
 
-        <a href="shop/" class="btn btn-green">
-            اكتشف العروض
-        </a>
-
-    </div>
-
-    <div class="offer-icon">
-        🛍️
-    </div>
-
-</section>
-
-<!-- المنتجات -->
-
-<section class="section">
-
-    <div class="section-title">
-
-        <h2>
-            الأكثر <span>مبيعًا</span>
-        </h2>
-
-        <a href="shop/">
-            كل المنتجات ←
-        </a>
-
-    </div>
-
-    <div class="products">
-
-        <article class="product">
-
-            <div class="product-image">
-                🍅
-            </div>
-
-            <div class="product-info">
-
-                <span class="product-category">
-                    خضروات
+                <span>
+                    جميع الأقسام
                 </span>
 
-                <h3>طماطم طازة</h3>
+            </button>
 
-                <div class="price">
-                    25 <small>جنيه / كيلو</small>
-                </div>
 
-                <button class="add" onclick="addCart('طماطم طازة')">
-                    أضف للسلة 🛒
-                </button>
+            <div class="nav-links">
 
-            </div>
+                <a href="index.html"
+                   class="active">
+                    الرئيسية
+                </a>
 
-        </article>
+                <a href="#offers">
+                    العروض 🔥
+                </a>
 
-        <article class="product">
+                <a href="#products">
+                    الأكثر مبيعًا
+                </a>
 
-            <div class="product-image">
-                🥔
-            </div>
+                <a href="#categories">
+                    الأقسام
+                </a>
 
-            <div class="product-info">
-
-                <span class="product-category">
-                    خضروات
-                </span>
-
-                <h3>بطاطس</h3>
-
-                <div class="price">
-                    30 <small>جنيه / كيلو</small>
-                </div>
-
-                <button class="add" onclick="addCart('بطاطس')">
-                    أضف للسلة 🛒
-                </button>
+                <a href="#">
+                    منتجات جديدة
+                </a>
 
             </div>
 
-        </article>
 
-        <article class="product">
-
-            <div class="product-image">
-                🍎
+            <div class="nav-offer">
+                خصومات تصل إلى 50% 🔥
             </div>
 
-            <div class="product-info">
+        </div>
 
-                <span class="product-category">
-                    فاكهة
-                </span>
+    </nav>
 
-                <h3>تفاح طازج</h3>
+</header>
 
-                <div class="price">
-                    75 <small>جنيه / كيلو</small>
-                </div>
 
-                <button class="add" onclick="addCart('تفاح طازج')">
-                    أضف للسلة 🛒
-                </button>
+<!-- =====================================================
+     MOBILE SEARCH
+===================================================== -->
 
-            </div>
+<div class="mobile-search">
 
-        </article>
+    <div class="container">
 
-        <article class="product">
+        <div class="search-wrapper">
 
-            <div class="product-image">
-                🥩
-            </div>
+            <input
+                id="mobileSearchInput"
+                type="search"
+                placeholder="ابحث عن منتج..."
+            >
 
-            <div class="product-info">
+            <button
+                id="mobileSearchButton"
+                type="button"
+            >
+                🔍
+            </button>
 
-                <span class="product-category">
-                    اللحوم
-                </span>
-
-                <h3>لحم بلدي</h3>
-
-                <div class="price">
-                    450 <small>جنيه / كيلو</small>
-                </div>
-
-                <button class="add" onclick="addCart('لحم بلدي')">
-                    أضف للسلة 🛒
-                </button>
-
-            </div>
-
-        </article>
+        </div>
 
     </div>
-
-</section>
-
-<!-- دعوة للتسوق -->
-
-<section class="cta">
-
-    <div>
-
-        <h2>
-            كل حاجة للبيت...
-            في طلب واحد!
-        </h2>
-
-        <p>
-            اختار منتجاتك وأضفها للسلة واطلب بسهولة.
-        </p>
-
-        <a href="shop/" class="btn">
-            ابدأ التسوق الآن 🛒
-        </a>
-
-    </div>
-
-    <div class="cta-icon">
-        🛍️
-    </div>
-
-</section>
 
 </div>
 
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="hero-card">
+
+            <div class="hero-content">
+
+                <span class="hero-badge">
+                    🔥 عروض البركة مول
+                </span>
+
+                <h1>
+
+                    كل احتياجات
+                    <br>
+
+                    <strong>
+                        بيتك في مكان واحد
+                    </strong>
+
+                </h1>
+
+                <p>
+                    تسوق الخضروات والفواكه
+                    واللحوم والدواجن والبقالة
+                    والمزيد بأسعار مميزة.
+                </p>
+
+                <div class="hero-actions">
+
+                    <a href="#products"
+                       class="primary-button">
+
+                        تسوق الآن
+
+                        <span>
+                            ←
+                        </span>
+
+                    </a>
+
+                    <a href="#offers"
+                       class="secondary-button">
+
+                        شاهد العروض
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-products">
+
+                <div class="hero-circle">
+
+                    <span class="hero-product hp-1">
+                        🍎
+                    </span>
+
+                    <span class="hero-product hp-2">
+                        🥬
+                    </span>
+
+                    <span class="hero-product hp-3">
+                        🥕
+                    </span>
+
+                    <span class="hero-product hp-4">
+                        🥛
+                    </span>
+
+                    <div class="hero-cart">
+                        🛒
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     QUICK FEATURES
+===================================================== -->
+
+<section class="quick-features">
+
+    <div class="container features-grid">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🚚
+            </div>
+
+            <div>
+                <strong>
+                    توصيل سريع
+                </strong>
+
+                <span>
+                    إلى باب منزلك
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                💳
+            </div>
+
+            <div>
+                <strong>
+                    دفع آمن
+                </strong>
+
+                <span>
+                    طرق دفع متعددة
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                ⭐
+            </div>
+
+            <div>
+                <strong>
+                    منتجات مختارة
+                </strong>
+
+                <span>
+                    جودة نثق بها
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                📞
+            </div>
+
+            <div>
+                <strong>
+                    خدمة العملاء
+                </strong>
+
+                <span>
+                    01119511185
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CATEGORIES
+===================================================== -->
+
+<section id="categories"
+         class="section">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <div>
+
+                <span class="section-label">
+                    تسوق حسب احتياجاتك
+                </span>
+
+                <h2>
+                    الأقسام
+                </h2>
+
+            </div>
+
+            <a href="#products"
+               class="view-all">
+                عرض الكل ←
+            </a>
+
+        </div>
+
+
+        <div id="categoriesGrid"
+             class="categories-grid">
+
+
+            <!-- 1 -->
+
+            <button
+                class="category-card"
+                data-category="grocery"
+            >
+
+                <div class="category-image">
+                    🛒
+                </div>
+
+                <strong>
+                    بقالة
+                </strong>
+
+                <span>
+                    كل الأساسيات
+                </span>
+
+            </button>
+
+
+            <!-- 2 -->
+
+            <button
+                class="category-card"
+                data-category="vegetables"
+            >
+
+                <div class="category-image">
+                    🥬
+                </div>
+
+                <strong>
+                    خضروات وفاكهة
+                </strong>
+
+                <span>
+                    طازجة يوميًا
+                </span>
+
+            </button>
+
+
+            <!-- 3 -->
+
+            <button
+                class="category-card"
+                data-category="meat"
+            >
+
+                <div class="category-image">
+                    🥩
+                </div>
+
+                <strong>
+                    اللحوم
+                </strong>
+
+                <span>
+                    جودة مميزة
+                </span>
+
+            </button>
+
+
+            <!-- 4 -->
+
+            <button
+                class="category-card"
+                data-category="chicken"
+            >
+
+                <div class="category-image">
+                    🍗
+                </div>
+
+                <strong>
+                    دواجن
+                </strong>
+
+                <span>
+                    طازجة
+                </span>
+
+            </button>
+
+
+            <!-- 5 -->
+
+            <button
+                class="category-card"
+                data-category="dairy"
+            >
+
+                <div class="category-image">
+                    🥛
+                </div>
+
+                <strong>
+                    ألبان
+                </strong>
+
+                <span>
+                    منتجات يومية
+                </span>
+
+            </button>
+
+
+            <!-- 6 -->
+
+            <button
+                class="category-card"
+                data-category="drinks"
+            >
+
+                <div class="category-image">
+                    🥤
+                </div>
+
+                <strong>
+                    مشروبات
+                </strong>
+
+                <span>
+                    باردة وساخنة
+                </span>
+
+            </button>
+
+
+            <!-- 7 -->
+
+            <button
+                class="category-card"
+                data-category="cleaning"
+            >
+
+                <div class="category-image">
+                    🧴
+                </div>
+
+                <strong>
+                    منظفات
+                </strong>
+
+                <span>
+                    للمنزل
+                </span>
+
+            </button>
+
+
+            <!-- 8 -->
+
+            <button
+                class="category-card"
+                data-category="bakery"
+            >
+
+                <div class="category-image">
+                    🍞
+                </div>
+
+                <strong>
+                    مخبوزات
+                </strong>
+
+                <span>
+                    طازجة يوميًا
+                </span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     OFFERS
+===================================================== -->
+
+<section id="offers"
+         class="section offers-section">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <div>
+
+                <span class="section-label">
+                    لا تفوت الفرصة
+                </span>
+
+                <h2>
+                    عروض اليوم 🔥
+                </h2>
+
+            </div>
+
+            <a href="#products"
+               class="view-all">
+                كل العروض ←
+            </a>
+
+        </div>
+
+
+        <div class="offers-grid">
+
+            <div class="offer-card offer-one">
+
+                <div class="offer-content">
+
+                    <span>
+                        خصم خاص
+                    </span>
+
+                    <h3>
+                        خضروات وفاكهة
+                    </h3>
+
+                    <strong>
+                        حتى 30%
+                    </strong>
+
+                    <a href="#products">
+                        تسوق الآن ←
+                    </a>
+
+                </div>
+
+                <div class="offer-emoji">
+                    🥦🍎
+                </div>
+
+            </div>
+
+
+            <div class="offer-card offer-two">
+
+                <div class="offer-content">
+
+                    <span>
+                        عرض اليوم
+                    </span>
+
+                    <h3>
+                        منتجات الألبان
+                    </h3>
+
+                    <strong>
+                        أسعار مميزة
+                    </strong>
+
+                    <a href="#products">
+                        اكتشف العرض ←
+                    </a>
+
+                </div>
+
+                <div class="offer-emoji">
+                    🥛🧀
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PRODUCTS
+===================================================== -->
+
+<section id="products"
+         class="section products-section">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <div>
+
+                <span class="section-label">
+                    اختياراتنا لك
+                </span>
+
+                <h2>
+                    الأكثر مبيعًا
+                </h2>
+
+            </div>
+
+            <div class="product-tabs">
+
+                <button
+                    class="product-tab active"
+                    data-category="all"
+                >
+                    الكل
+                </button>
+
+                <button
+                    class="product-tab"
+                    data-category="grocery"
+                >
+                    بقالة
+                </button>
+
+                <button
+                    class="product-tab"
+                    data-category="vegetables"
+                >
+                    خضار
+                </button>
+
+                <button
+                    class="product-tab"
+                    data-category="meat"
+                >
+                    لحوم
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div id="productsGrid"
+             class="products-grid">
+
+            <!-- المنتجات سيتم إنشاؤها بواسطة app.js -->
+
+        </div>
+
+
+        <div id="noProducts"
+             class="no-products"
+             hidden>
+
+            <div>
+                🔍
+            </div>
+
+            <h3>
+                لم نجد منتجات
+            </h3>
+
+            <p>
+                جرّب البحث باسم منتج آخر.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PROMO
+===================================================== -->
+
+<section class="promo-section">
+
+    <div class="container">
+
+        <div class="promo-card">
+
+            <div class="promo-icon">
+                🎁
+            </div>
+
+            <div class="promo-text">
+
+                <span>
+                    عرض خاص للعملاء الجدد
+                </span>
+
+                <h2>
+                    احصل على خصم عند أول طلب
+                </h2>
+
+                <p>
+                    سجل حسابك الآن واستمتع
+                    بعروض البركة مول.
+                </p>
+
+            </div>
+
+            <a href="login.html"
+               class="promo-button">
+
+                إنشاء حساب
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     NEWSLETTER
+===================================================== -->
+
+<section class="newsletter">
+
+    <div class="container newsletter-inner">
+
+        <div>
+
+            <span>
+                📩 ابقَ على اطلاع
+            </span>
+
+            <h2>
+                اشترك ليصلك كل جديد
+            </h2>
+
+            <p>
+                عروض حصرية ومنتجات جديدة
+                مباشرة إليك.
+            </p>
+
+        </div>
+
+
+        <form id="newsletterForm"
+              class="newsletter-form">
+
+            <input
+                type="email"
+                id="newsletterEmail"
+                placeholder="أدخل بريدك الإلكتروني"
+                required
+            >
+
+            <button type="submit">
+                اشتراك
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
 </main>
 
-<!-- FOOTER -->
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <footer class="footer">
 
-    <div class="footer-inner">
+    <div class="container footer-grid">
 
-        <div>
 
-            <h3>مول البركة</h3>
+        <div class="footer-column footer-about">
+
+            <a href="index.html"
+               class="footer-logo">
+
+                🛒
+
+                <span>
+                    البركة مول
+                </span>
+
+            </a>
 
             <p>
                 كل احتياجات بيتك في مكان واحد.
+                تسوق بسهولة واحصل على منتجاتك
+                حتى باب منزلك.
             </p>
 
-            <p>
-                🥬 خضروات وفاكهة
-            </p>
+            <div class="social-links">
 
-            <p>
-                🥩 لحوم وجزارة
-            </p>
+                <a href="#">
+                    Facebook
+                </a>
 
-            <p>
-                🐔 دواجن وطيور
-            </p>
+                <a href="#">
+                    Instagram
+                </a>
 
-            <p>
-                🛒 ماركت
-            </p>
+            </div>
 
         </div>
 
-        <div>
 
-            <h3>روابط سريعة</h3>
+        <div class="footer-column">
 
-            <a href="index.html">الرئيسية</a>
-            <a href="shop/">المتجر</a>
-            <a href="#categories">الأقسام</a>
-            <a href="#offers">العروض</a>
+            <h3>
+                المتجر
+            </h3>
 
-        </div>
-
-        <div>
-
-            <h3>الأقسام</h3>
-
-            <a href="shop/?category=vegetables">
-                الخضروات والفاكهة
+            <a href="#products">
+                المنتجات
             </a>
 
-            <a href="shop/?category=meat">
-                اللحوم والجزارة
+            <a href="#categories">
+                الأقسام
             </a>
 
-            <a href="shop/?category=chicken">
-                الدواجن والطيور
+            <a href="#offers">
+                العروض
             </a>
 
-            <a href="shop/?category=market">
-                الماركت
+            <a href="#">
+                الأكثر مبيعًا
             </a>
 
         </div>
 
-        <div>
 
-            <h3>تواصل معنا</h3>
+        <div class="footer-column">
 
-            <p>📞 01119511185</p>
+            <h3>
+                خدمة العملاء
+            </h3>
 
-            <p>
-                📍 شارع الشيخ عبدالرحمن
-                تاج البنفسج ٩
-            </p>
+            <a href="#">
+                تواصل معنا
+            </a>
 
-            <p>
-                🚚 توصيل للمنزل
-            </p>
+            <a href="#">
+                الأسئلة الشائعة
+            </a>
+
+            <a href="#">
+                سياسة الاسترجاع
+            </a>
+
+            <a href="#">
+                الشروط والأحكام
+            </a>
 
         </div>
 
-    </div>
 
-    <div class="copy">
-        © 2026 مول البركة — جميع الحقوق محفوظة
-    </div>
+        <div class="footer-column">
 
-</footer>
+            <h3>
+                تواصل معنا
+            </h3>
 
-<script>
+            <p>
+                📞 01119511185
+            </p>
 
-let cartCount = 0;
-
-function addCart(product){
-
-    cartCount++;
-
-    document.getElementById("cartCount").textContent = cartCount;
-
-    alert(
-        "تم إضافة " + product + " إلى السلة 🛒"
-    );
-}
-
-function searchStore(event){
-
-    event.preventDefault();
-
-    let value =
-        document.getElementById("search").value.trim();
-
-    if(value === ""){
-
-        alert("اكتب اسم المنتج الذي تبحث عنه");
-
-        return;
-    }
-
-    window.location.href =
-        "shop/?search=" +
-        encodeURIComponent(value);
-}
-
-</script>
-
-</body>
-</html>
+            <p>
+                📍 مص
