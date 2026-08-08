@@ -1,0 +1,185 @@
+name: Update Albaraka Products
+
+on:
+  workflow_dispatch:
+    inputs:
+
+      products:
+        description: "Products JSON"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+
+  update-products:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update products.json
+        env:
+          PRODUCTS_JSON: ${{ inputs.products }}
+        run: |
+
+          python3 - <<'PY'
+
+          import os
+          import json
+
+          raw = os.environ.get("PRODUCTS_JSON", "")
+
+          if not raw:
+              raise SystemExit(
+                  "PRODUCTS_JSON is empty"
+              )
+
+          try:
+
+              data = json.loads(raw)
+
+          except Exception as error:
+
+              raise SystemExit(
+                  "Invalid JSON: " + str(error)
+              )
+
+          if isinstance(data, list):
+
+              products = data
+
+          elif isinstance(data, dict):
+
+              products = data.get(
+                  "products",
+                  []
+              )
+
+          else:
+
+              raise SystemExit(
+                  "Invalid products format"
+              )
+
+          if not isinstance(
+              products,
+              list
+          ):
+
+              raise SystemExit(
+                  "products must be an array"
+              )
+
+          final_data = {
+
+              "products": products
+
+          }
+
+          with open(
+              "products.json",
+              "w",
+              encoding="utf-8"
+          ) as file:
+
+              json.dump(
+                  final_data,
+                  file,
+                  ensure_ascii=False,
+                  indent=2
+              )
+
+          print(
+              "Products updated:",
+              len(products)
+          )
+
+          PY
+
+
+      - name: Validate products.json
+        run: |
+
+          python3 - <<'PY'
+
+          import json
+
+          with open(
+              "products.json",
+              "r",
+              encoding="utf-8"
+          ) as file:
+
+              data = json.load(file)
+
+          if not isinstance(
+              data,
+              dict
+          ):
+
+              raise SystemExit(
+                  "products.json must be an object"
+              )
+
+          if not isinstance(
+              data.get("products"),
+              list
+          ):
+
+              raise SystemExit(
+                  "products must be an array"
+              )
+
+          for product in data["products"]:
+
+              if "id" not in product:
+                  raise SystemExit(
+                      "Product missing id"
+                  )
+
+              if "name" not in product:
+                  raise SystemExit(
+                      "Product missing name"
+                  )
+
+              if "price" not in product:
+                  raise SystemExit(
+                      "Product missing price"
+                  )
+
+          print(
+              "products.json validation OK"
+          )
+
+          PY
+
+
+      - name: Commit products.json
+        run: |
+
+          git config user.name \
+            "Albaraka Store Bot"
+
+          git config user.email \
+            "actions@github.com"
+
+          git add products.json
+
+          if git diff --cached --quiet; then
+
+            echo "No changes detected."
+
+          else
+
+            git commit \
+              -m "Update store products"
+
+            git push
+
+          fi
