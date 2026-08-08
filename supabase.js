@@ -1,23 +1,24 @@
-// ================================
-// مول البركة - Supabase Connection
-// ================================
+// supabase.js
+// اتصال مول البركة بقاعدة Supabase
 
-const SUPABASE_URL = "https://jzxvegxtszdnjrcjagwg.supabase.co";
+(function () {
+  "use strict";
 
-const SUPABASE_KEY =
-  "sb_publishable_wmZ2MTo4Kd962taYU0Oceg_r-jP7Byc";
+  const SUPABASE_URL =
+    "https://jzxvegxtsdznjrcjagwg.supabase.co";
 
-if (!window.supabase) {
-  console.error("Supabase library is not loaded");
-  throw new Error("Supabase library is not loaded");
-}
+  const SUPABASE_KEY =
+    "ضع_هنا_مفتاح_PUBLISHABLE_أو_ANON_من_Supabase";
 
-const supabaseClient = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+  if (!window.supabase) {
+    console.error("Supabase JS library is not loaded.");
+    return;
+  }
 
-// جعل الاتصال متاحاً لكل ملفات الموقع
-window.supabaseClient = supabaseClient;
+  window.albarakaSupabase = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
-console.log("Al Baraka Supabase connected");
+  console.log("Albaraka Supabase initialized");
+})();
