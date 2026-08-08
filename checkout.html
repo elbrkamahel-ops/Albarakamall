@@ -2,866 +2,832 @@
 <html lang="ar" dir="rtl">
 
 <head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>إتمام الطلب | مول البركة</title>
-
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-
-    <style>
-
-        /* ================================
-           CHECKOUT
-        ================================= */
-
-        .checkout-page {
-            max-width: 1240px;
-            margin: 35px auto 70px;
-            padding: 0 15px;
-        }
-
-        .checkout-title {
-            margin-bottom: 25px;
-        }
-
-        .checkout-title span {
-            color: #087f3f;
-            font-size: 13px;
-            font-weight: 900;
-        }
-
-        .checkout-title h1 {
-            margin-top: 4px;
-            font-size: 34px;
-        }
-
-        .checkout-layout {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) 390px;
-            gap: 22px;
-            align-items: start;
-        }
-
-        .checkout-box,
-        .order-box {
-            background: #fff;
-            border: 1px solid #e3ebe6;
-            border-radius: 22px;
-            box-shadow: 0 8px 30px rgba(0,0,0,.04);
-        }
-
-        .checkout-box {
-            padding: 25px;
-        }
-
-        .order-box {
-            padding: 22px;
-            position: sticky;
-            top: 105px;
-        }
-
-        .box-title {
-            margin-bottom: 18px;
-        }
-
-        .box-title h2 {
-            font-size: 21px;
-        }
-
-        .box-title p {
-            color: #7b867f;
-            font-size: 12px;
-            margin-top: 3px;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .form-group.full {
-            grid-column: 1 / -1;
-        }
-
-        .form-group label {
-            font-size: 13px;
-            font-weight: 900;
-        }
-
-        .form-group label span {
-            color: #d34e4e;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            border: 1px solid #dce6e0;
-            background: #f9fbfa;
-            border-radius: 12px;
-            padding: 12px 13px;
-            outline: none;
-            font-size: 14px;
-            color: #18231d;
-            transition: .2s;
-        }
-
-        .form-group textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            background: #fff;
-            border-color: #74bd91;
-            box-shadow: 0 0 0 4px rgba(8,127,63,.07);
-        }
-
-        .payment-title {
-            margin-top: 28px;
-            margin-bottom: 12px;
-            font-size: 18px;
-            font-weight: 900;
-        }
-
-        .payment-methods {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        .payment-option {
-            position: relative;
-        }
-
-        .payment-option input {
-            position: absolute;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .payment-label {
-            min-height: 80px;
-            border: 1px solid #dce6e0;
-            background: #fff;
-            border-radius: 15px;
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            transition: .2s;
-        }
-
-        .payment-label:hover {
-            border-color: #91caa5;
-        }
-
-        .payment-option input:checked + .payment-label {
-            border-color: #087f3f;
-            background: #eff9f2;
-            box-shadow: 0 0 0 3px rgba(8,127,63,.06);
-        }
-
-        .payment-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 13px;
-            background: #eef8f1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 25px;
-            flex-shrink: 0;
-        }
-
-        .payment-label strong {
-            display: block;
-            font-size: 14px;
-        }
-
-        .payment-label small {
-            display: block;
-            color: #7d8881;
-            font-size: 10px;
-            margin-top: 2px;
-        }
-
-        .secure-note {
-            margin-top: 18px;
-            padding: 13px;
-            border-radius: 13px;
-            background: #f1f8f3;
-            color: #5e6c63;
-            font-size: 12px;
-            line-height: 1.8;
-        }
-
-        .order-box h2 {
-            font-size: 21px;
-            margin-bottom: 15px;
-        }
-
-        .order-items {
-            max-height: 390px;
-            overflow-y: auto;
-            padding-left: 3px;
-        }
-
-        .order-item {
-            display: grid;
-            grid-template-columns: 48px minmax(0,1fr) auto;
-            gap: 10px;
-            align-items: center;
-            padding: 11px 0;
-            border-bottom: 1px solid #edf1ee;
-        }
-
-        .order-item-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background: #eff9f2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 25px;
-        }
-
-        .order-item-name {
-            font-size: 13px;
-            font-weight: 800;
-        }
-
-        .order-item-meta {
-            color: #87928b;
-            font-size: 10px;
-        }
-
-        .order-item-total {
-            color: #087f3f;
-            font-size: 12px;
-            font-weight: 900;
-            white-space: nowrap;
-        }
-
-        .order-total-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 17px;
-            padding-top: 15px;
-            border-top: 2px solid #edf1ee;
-        }
-
-        .order-total-row strong:last-child {
-            color: #087f3f;
-            font-size: 24px;
-        }
-
-        .submit-order {
-            width: 100%;
-            min-height: 53px;
-            margin-top: 18px;
-            border: none;
-            border-radius: 14px;
-            background: #087f3f;
-            color: #fff;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: 900;
-            box-shadow: 0 8px 20px rgba(8,127,63,.18);
-            transition: .2s;
-        }
-
-        .submit-order:hover {
-            background: #056d35;
-            transform: translateY(-1px);
-        }
-
-        .submit-order:disabled {
-            opacity: .55;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .back-cart {
-            width: 100%;
-            min-height: 43px;
-            margin-top: 9px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #dce6e0;
-            border-radius: 13px;
-            color: #08783c;
-            font-weight: 900;
-        }
-
-        .empty-checkout {
-            max-width: 600px;
-            margin: 70px auto;
-            padding: 50px 25px;
-            text-align: center;
-            background: #fff;
-            border: 1px solid #e3ebe6;
-            border-radius: 23px;
-        }
-
-        .empty-checkout-icon {
-            font-size: 65px;
-        }
-
-        .empty-checkout h2 {
-            margin: 10px 0 5px;
-        }
-
-        .empty-checkout p {
-            color: #7b867f;
-            margin-bottom: 20px;
-        }
-
-        .empty-checkout a {
-            display: inline-flex;
-            min-height: 45px;
-            padding: 10px 22px;
-            align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-            background: #087f3f;
-            color: #fff;
-            font-weight: 900;
-        }
-
-        .loading-screen {
-            position: fixed;
-            inset: 0;
-            z-index: 99999;
-            background: rgba(255,255,255,.94);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .loading-screen.show {
-            display: flex;
-        }
-
-        .loading-box {
-            background: #fff;
-            border: 1px solid #e1e9e4;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 15px 50px rgba(0,0,0,.12);
-        }
-
-        .loading-icon {
-            font-size: 45px;
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-            50% {
-                transform: scale(1.12);
-            }
-        }
-
-        @media (max-width: 850px) {
-
-            .checkout-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .order-box {
-                position: static;
-            }
-
-        }
-
-        @media (max-width: 600px) {
-
-            .checkout-page {
-                margin-top: 22px;
-            }
-
-            .checkout-title h1 {
-                font-size: 28px;
-            }
-
-            .checkout-box {
-                padding: 18px;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .form-group.full {
-                grid-column: auto;
-            }
-
-            .payment-methods {
-                grid-template-columns: 1fr;
-            }
-
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>إتمام الطلب | مول البركة</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:#f7f9f8;
+    color:#17241c;
+    font-family:Arial,Tahoma,sans-serif;
+}
+
+a{
+    text-decoration:none;
+}
+
+button,
+input,
+textarea,
+select{
+    font-family:inherit;
+}
+
+.top{
+    background:#087f3f;
+    color:#fff;
+    text-align:center;
+    padding:10px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.header{
+    background:#fff;
+    border-bottom:1px solid #e7eee9;
+}
+
+.header-inner{
+    max-width:1150px;
+    margin:auto;
+    min-height:78px;
+    padding:12px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo-icon{
+    width:48px;
+    height:48px;
+    background:#087f3f;
+    color:#fff;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+    font-weight:900;
+}
+
+.logo strong{
+    display:block;
+    color:#087f3f;
+    font-size:20px;
+}
+
+.logo small{
+    color:#89958f;
+    font-size:11px;
+}
+
+.back{
+    background:#eff8f2;
+    color:#087f3f;
+    padding:11px 16px;
+    border-radius:11px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.page{
+    max-width:1150px;
+    margin:auto;
+    padding:25px 18px 70px;
+}
+
+.title{
+    margin-bottom:20px;
+}
+
+.title h1{
+    margin:0;
+    font-size:28px;
+}
+
+.title p{
+    color:#89958f;
+    font-size:13px;
+    margin:7px 0 0;
+}
+
+.layout{
+    display:grid;
+    grid-template-columns:1fr 350px;
+    gap:20px;
+    align-items:start;
+}
+
+.box{
+    background:#fff;
+    border:1px solid #e3ebe6;
+    border-radius:20px;
+    padding:22px;
+}
+
+.section{
+    margin-bottom:24px;
+}
+
+.section:last-child{
+    margin-bottom:0;
+}
+
+.section-title{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    margin-bottom:15px;
+}
+
+.section-number{
+    width:29px;
+    height:29px;
+    border-radius:50%;
+    background:#087f3f;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+    font-size:12px;
+}
+
+.section-title h2{
+    margin:0;
+    font-size:17px;
+}
+
+label{
+    display:block;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.field{
+    margin-bottom:14px;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    border:1px solid #dfe8e2;
+    background:#fafcfb;
+    border-radius:11px;
+    padding:13px;
+    outline:none;
+    font-size:13px;
+    color:#17241c;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:#70b58b;
+    background:#fff;
+}
+
+textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.payment-options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.payment-card{
+    position:relative;
+}
+
+.payment-card input{
+    position:absolute;
+    opacity:0;
+    pointer-events:none;
+}
+
+.payment-label{
+    display:block;
+    border:2px solid #e1e9e4;
+    border-radius:14px;
+    padding:18px 12px;
+    cursor:pointer;
+    text-align:center;
+    transition:.2s;
+}
+
+.payment-label .icon{
+    display:block;
+    font-size:30px;
+    margin-bottom:8px;
+}
+
+.payment-label strong{
+    display:block;
+    font-size:13px;
+}
+
+.payment-label small{
+    display:block;
+    color:#89958f;
+    font-size:10px;
+    margin-top:5px;
+}
+
+.payment-card input:checked + .payment-label{
+    border-color:#087f3f;
+    background:#eff8f2;
+    color:#087f3f;
+}
+
+.note{
+    background:#fff9e8;
+    border:1px solid #f1e2ad;
+    color:#756327;
+    padding:12px;
+    border-radius:11px;
+    font-size:11px;
+    line-height:1.7;
+    margin-top:12px;
+}
+
+.summary{
+    position:sticky;
+    top:15px;
+}
+
+.summary h2{
+    margin:0 0 16px;
+    font-size:19px;
+}
+
+.order-items{
+    max-height:320px;
+    overflow:auto;
+    border-bottom:1px solid #e9efeb;
+    padding-bottom:10px;
+}
+
+.order-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 0;
+}
+
+.order-icon{
+    width:45px;
+    height:45px;
+    border-radius:11px;
+    background:#f3f7f4;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:23px;
+}
+
+.order-info{
+    flex:1;
+}
+
+.order-info strong{
+    display:block;
+    font-size:12px;
+}
+
+.order-info small{
+    color:#929b96;
+    font-size:10px;
+}
+
+.order-price{
+    color:#087f3f;
+    font-weight:900;
+    font-size:12px;
+}
+
+.total-row{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    font-size:13px;
+    color:#647069;
+}
+
+.total-row.final{
+    border-top:1px solid #e7eee9;
+    margin-top:6px;
+    padding-top:17px;
+    color:#17241c;
+    font-size:18px;
+    font-weight:900;
+}
+
+.submit{
+    width:100%;
+    border:0;
+    background:#087f3f;
+    color:#fff;
+    min-height:53px;
+    border-radius:13px;
+    font-size:15px;
+    font-weight:900;
+    cursor:pointer;
+    margin-top:12px;
+}
+
+.submit:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.whatsapp-info{
+    background:#eff8f2;
+    color:#087f3f;
+    border-radius:12px;
+    padding:12px;
+    text-align:center;
+    margin-top:12px;
+    font-size:11px;
+    line-height:1.7;
+}
+
+.empty{
+    background:#fff;
+    border-radius:20px;
+    padding:60px 20px;
+    text-align:center;
+}
+
+.empty div{
+    font-size:60px;
+}
+
+.empty h2{
+    margin:10px 0 5px;
+}
+
+.empty p{
+    color:#89958f;
+    font-size:13px;
+}
+
+.empty a{
+    display:inline-block;
+    background:#087f3f;
+    color:#fff;
+    padding:13px 24px;
+    border-radius:12px;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.success{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:rgba(0,0,0,.45);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.success-box{
+    width:100%;
+    max-width:430px;
+    background:#fff;
+    border-radius:22px;
+    padding:30px;
+    text-align:center;
+}
+
+.success-icon{
+    width:70px;
+    height:70px;
+    margin:auto;
+    border-radius:50%;
+    background:#eff8f2;
+    color:#087f3f;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:35px;
+}
+
+.success h2{
+    margin:15px 0 8px;
+}
+
+.success p{
+    color:#738078;
+    font-size:13px;
+    line-height:1.8;
+}
+
+.success a{
+    display:block;
+    background:#20b85a;
+    color:#fff;
+    padding:13px;
+    border-radius:12px;
+    font-weight:bold;
+    margin-top:15px;
+}
+
+.close-success{
+    border:0;
+    background:#f1f4f2;
+    color:#333;
+    padding:11px 20px;
+    border-radius:10px;
+    margin-top:9px;
+    cursor:pointer;
+}
+
+@media(max-width:800px){
+
+    .layout{
+        grid-template-columns:1fr;
+    }
+
+    .summary{
+        position:static;
+    }
+}
+
+@media(max-width:550px){
+
+    .page{
+        padding:18px 10px 60px;
+    }
+
+    .box{
+        padding:15px;
+        border-radius:16px;
+    }
+
+    .grid,
+    .payment-options{
+        grid-template-columns:1fr;
+    }
+
+    .title h1{
+        font-size:23px;
+    }
+}
+</style>
 </head>
-
 
 <body>
 
-
-<!-- =====================================================
-     TOP BAR
-===================================================== -->
-
-<div class="topbar">
-
-    <div>
-        🚚 توصيل سريع
-    </div>
-
-    <div>
-        💳 كاش أو فيزا
-    </div>
-
-    <div>
-        💬 01119511185
-    </div>
-
+<div class="top">
+    🚚 مول البركة | توصيل سريع | 💳 كاش أو فيزا | 📱 01119511185
 </div>
 
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
 <header class="header">
+    <div class="header-inner">
 
-    <a
-        href="index.html"
-        class="brand"
-    >
+        <a href="index.html" class="logo">
 
-        <div class="brand-mark">
-            ب
-        </div>
-
-        <div class="brand-text">
-
-            <strong>
-                مول البركة
-            </strong>
-
-            <small>
-                أولاد الجارحي
-            </small>
-
-        </div>
-
-    </a>
-
-
-    <div class="search-box">
-
-        <span class="search-icon">
-            🔍
-        </span>
-
-        <input
-            type="text"
-            placeholder="ابحث عن منتج..."
-            onkeydown="
-                if(event.key === 'Enter'){
-                    window.location.href='index.html#products';
-                }
-            "
-        >
-
-    </div>
-
-
-    <a
-        href="index.html"
-        class="header-account"
-    >
-        🏠 الرئيسية
-    </a>
-
-
-    <a
-        href="cart.html"
-        class="cart-button"
-    >
-
-        🛒
-
-        <span>
-            السلة
-        </span>
-
-        <b id="cartCount">
-            0
-        </b>
-
-    </a>
-
-</header>
-
-
-<!-- =====================================================
-     NAV
-===================================================== -->
-
-<nav class="main-nav">
-
-    <a href="index.html">
-        الرئيسية
-    </a>
-
-    <a href="index.html#categories">
-        الأقسام
-    </a>
-
-    <a href="index.html#offers">
-        🔥 العروض
-    </a>
-
-    <a href="index.html#products">
-        المنتجات
-    </a>
-
-    <a href="cart.html">
-        🛒 السلة
-    </a>
-
-</nav>
-
-
-<!-- =====================================================
-     CHECKOUT
-===================================================== -->
-
-<main
-    class="checkout-page"
-    id="checkoutPage"
->
-
-    <div class="checkout-title">
-
-        <span>
-            مول البركة – أولاد الجارحي
-        </span>
-
-        <h1>
-            إتمام الطلب
-        </h1>
-
-    </div>
-
-
-    <div class="checkout-layout">
-
-
-        <!-- =============================================
-             CUSTOMER FORM
-        ============================================== -->
-
-        <section class="checkout-box">
-
-            <div class="box-title">
-
-                <h2>
-                    بيانات التوصيل
-                </h2>
-
-                <p>
-                    من فضلك أدخل بياناتك لإتمام الطلب.
-                </p>
-
+            <div class="logo-icon">
+                ب
             </div>
 
+            <div>
+                <strong>مول البركة</strong>
+                <small>أولاد الجارحي</small>
+            </div>
 
-            <form id="checkoutForm">
+        </a>
+
+        <a href="cart.html" class="back">
+            ← العودة للسلة
+        </a>
+
+    </div>
+</header>
+
+<main class="page">
+
+    <div class="title">
+        <h1>📦 إتمام الطلب</h1>
+        <p>أدخل بياناتك واختر طريقة الدفع ثم أرسل الطلب</p>
+    </div>
+
+    <div id="emptyPage" class="empty" style="display:none">
+
+        <div>🛒</div>
+
+        <h2>
+            السلة فارغة
+        </h2>
+
+        <p>
+            يجب إضافة منتجات قبل إتمام الطلب.
+        </p>
+
+        <a href="index.html">
+            العودة للتسوق
+        </a>
+
+    </div>
 
 
-                <div class="form-grid">
+    <div id="checkoutLayout" class="layout">
+
+        <!-- البيانات -->
+
+        <section class="box">
+
+            <!-- بيانات العميل -->
+
+            <div class="section">
+
+                <div class="section-title">
+
+                    <span class="section-number">
+                        1
+                    </span>
+
+                    <h2>
+                        بيانات العميل
+                    </h2>
+
+                </div>
 
 
-                    <div class="form-group">
+                <div class="field">
 
-                        <label for="customerName">
-                            الاسم بالكامل <span>*</span>
-                        </label>
+                    <label for="customerName">
+                        الاسم بالكامل *
+                    </label>
 
-                        <input
-                            id="customerName"
-                            name="customerName"
-                            type="text"
-                            placeholder="اكتب اسمك بالكامل"
-                            autocomplete="name"
-                            required
-                        >
+                    <input
+                        id="customerName"
+                        type="text"
+                        placeholder="اكتب اسمك بالكامل"
+                        autocomplete="name"
+                    >
 
-                    </div>
+                </div>
 
 
-                    <div class="form-group">
+                <div class="grid">
+
+                    <div class="field">
 
                         <label for="customerPhone">
-                            رقم الهاتف <span>*</span>
+                            رقم الهاتف *
                         </label>
 
                         <input
                             id="customerPhone"
-                            name="customerPhone"
                             type="tel"
-                            placeholder="مثال: 01000000000"
                             inputmode="tel"
+                            placeholder="01xxxxxxxxx"
                             autocomplete="tel"
-                            required
                         >
 
                     </div>
 
 
-                    <div class="form-group full">
+                    <div class="field">
 
-                        <label for="customerAddress">
-                            العنوان بالتفصيل <span>*</span>
-                        </label>
-
-                        <textarea
-                            id="customerAddress"
-                            name="customerAddress"
-                            placeholder="القرية / الشارع / رقم المنزل / علامة مميزة"
-                            autocomplete="street-address"
-                            required
-                        ></textarea>
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="customerArea">
-                            المنطقة
+                        <label for="area">
+                            المنطقة *
                         </label>
 
                         <input
-                            id="customerArea"
-                            name="customerArea"
+                            id="area"
                             type="text"
-                            placeholder="المنطقة أو القرية"
+                            placeholder="أولاد الجارحي"
                         >
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="deliveryTime">
-                            وقت التوصيل المفضل
-                        </label>
-
-                        <select
-                            id="deliveryTime"
-                            name="deliveryTime"
-                        >
-
-                            <option value="">
-                                اختر الوقت
-                            </option>
-
-                            <option value="في أقرب وقت">
-                                في أقرب وقت
-                            </option>
-
-                            <option value="الصباح">
-                                الصباح
-                            </option>
-
-                            <option value="الظهر">
-                                الظهر
-                            </option>
-
-                            <option value="المساء">
-                                المساء
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="form-group full">
-
-                        <label for="customerNotes">
-                            ملاحظات على الطلب
-                        </label>
-
-                        <textarea
-                            id="customerNotes"
-                            name="customerNotes"
-                            placeholder="مثال: أريد اللحمة مفرومة / الاتصال قبل الوصول..."
-                        ></textarea>
 
                     </div>
 
                 </div>
 
+            </div>
 
-                <!-- =====================================
-                     PAYMENT
-                ====================================== -->
 
-                <div class="payment-title">
-                    طريقة الدفع
+            <!-- العنوان -->
+
+            <div class="section">
+
+                <div class="section-title">
+
+                    <span class="section-number">
+                        2
+                    </span>
+
+                    <h2>
+                        عنوان التوصيل
+                    </h2>
+
                 </div>
 
 
-                <div class="payment-methods">
+                <div class="field">
+
+                    <label for="address">
+                        العنوان بالتفصيل *
+                    </label>
+
+                    <textarea
+                        id="address"
+                        placeholder="اسم الشارع، رقم المنزل، علامة مميزة..."
+                    ></textarea>
+
+                </div>
 
 
-                    <div class="payment-option">
+                <div class="field">
+
+                    <label for="notes">
+                        ملاحظات إضافية
+                    </label>
+
+                    <textarea
+                        id="notes"
+                        placeholder="مثلاً: الدور الثالث، بجوار..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+            <!-- الدفع -->
+
+            <div class="section">
+
+                <div class="section-title">
+
+                    <span class="section-number">
+                        3
+                    </span>
+
+                    <h2>
+                        طريقة الدفع
+                    </h2>
+
+                </div>
+
+
+                <div class="payment-options">
+
+                    <div class="payment-card">
 
                         <input
                             type="radio"
-                            id="cashPayment"
-                            name="paymentMethod"
-                            value="كاش عند الاستلام"
+                            name="payment"
+                            id="cash"
+                            value="كاش"
                             checked
                         >
 
                         <label
-                            for="cashPayment"
                             class="payment-label"
+                            for="cash"
                         >
 
-                            <div class="payment-icon">
+                            <span class="icon">
                                 💵
-                            </div>
+                            </span>
 
-                            <div>
+                            <strong>
+                                الدفع كاش
+                            </strong>
 
-                                <strong>
-                                    كاش عند الاستلام
-                                </strong>
-
-                                <small>
-                                    الدفع عند وصول الطلب
-                                </small>
-
-                            </div>
+                            <small>
+                                عند استلام الطلب
+                            </small>
 
                         </label>
 
                     </div>
 
 
-                    <div class="payment-option">
+                    <div class="payment-card">
 
                         <input
                             type="radio"
-                            id="visaPayment"
-                            name="paymentMethod"
+                            name="payment"
+                            id="visa"
                             value="فيزا"
                         >
 
                         <label
-                            for="visaPayment"
                             class="payment-label"
+                            for="visa"
                         >
 
-                            <div class="payment-icon">
+                            <span class="icon">
                                 💳
-                            </div>
+                            </span>
 
-                            <div>
+                            <strong>
+                                الدفع بالفيزا
+                            </strong>
 
-                                <strong>
-                                    فيزا
-                                </strong>
-
-                                <small>
-                                    الدفع بالبطاقة
-                                </small>
-
-                            </div>
+                            <small>
+                                يتم تأكيد طريقة الدفع
+                            </small>
 
                         </label>
 
                     </div>
 
-
                 </div>
 
 
-                <div class="secure-note">
+                <div class="note">
 
-                    🔒 بياناتك تستخدم فقط لتجهيز طلبك والتواصل معك
-                    بخصوص التوصيل.
-
-                    <br>
-
-                    💬 بعد الضغط على
-                    <strong>إرسال الطلب عبر واتساب</strong>
-                    سيتم فتح واتساب وإرسال تفاصيل طلبك إلى
-                    <strong>01119511185</strong>.
+                    🔒 لن نطلب منك بيانات البطاقة البنكية
+                    داخل هذه الصفحة. عند اختيار فيزا سيتم
+                    تسجيل اختيارك في الطلب والتنسيق مع المتجر.
 
                 </div>
 
-
-            </form>
+            </div>
 
         </section>
 
 
-        <!-- =============================================
-             ORDER SUMMARY
-        ============================================== -->
+        <!-- ملخص -->
 
-        <aside class="order-box">
+        <aside class="box summary">
 
             <h2>
-                مراجعة الطلب
+                🧾 مراجعة الطلب
             </h2>
 
-
             <div
-                class="order-items"
                 id="orderItems"
+                class="order-items"
             ></div>
 
 
-            <div class="order-total-row">
+            <div class="total-row">
 
-                <strong>
-                    الإجمالي
+                <span>
+                    عدد المنتجات
+                </span>
+
+                <strong id="orderCount">
+                    0
                 </strong>
 
-                <strong id="orderTotal">
+            </div>
+
+
+            <div class="total-row">
+
+                <span>
+                    قيمة المنتجات
+                </span>
+
+                <strong id="subtotal">
+                    0 ج.م
+                </strong>
+
+            </div>
+
+
+            <div class="total-row">
+
+                <span>
+                    التوصيل
+                </span>
+
+                <strong>
+                    يحدد عند الطلب
+                </strong>
+
+            </div>
+
+
+            <div class="total-row final">
+
+                <span>
+                    الإجمالي
+                </span>
+
+                <strong id="finalTotal">
                     0 ج.م
                 </strong>
 
@@ -869,124 +835,76 @@
 
 
             <button
-                type="button"
-                class="submit-order"
                 id="submitOrder"
+                class="submit"
+                type="button"
             >
-
-                💬 إرسال الطلب عبر واتساب
-
+                تأكيد وإرسال الطلب 💬
             </button>
 
 
-            <a
-                href="cart.html"
-                class="back-cart"
-            >
+            <div class="whatsapp-info">
 
-                ← العودة إلى السلة
+                📱 سيتم تجهيز رسالة الطلب وإرسالها
+                إلى واتساب مول البركة
+                <br>
+                <strong>
+                    01119511185
+                </strong>
 
-            </a>
+            </div>
 
         </aside>
-
 
     </div>
 
 </main>
 
 
-<!-- =====================================================
-     EMPTY
-===================================================== -->
+<!-- نجاح -->
 
 <div
-    id="emptyCheckout"
-    style="display:none;"
+    id="successModal"
+    class="success"
 >
 
-    <div class="empty-checkout">
+    <div class="success-box">
 
-        <div class="empty-checkout-icon">
-            🛒
+        <div class="success-icon">
+            ✓
         </div>
 
         <h2>
-            لا يوجد طلب لإتمامه
+            تم تجهيز طلبك بنجاح
         </h2>
 
         <p>
-            أضف المنتجات إلى السلة أولاً.
+            اضغط على الزر بالأسفل لفتح واتساب
+            وإرسال تفاصيل طلبك إلى مول البركة.
         </p>
 
-        <a href="index.html#products">
-            الذهاب إلى المنتجات
+        <a
+            id="whatsappOrder"
+            href="#"
+            target="_blank"
+            rel="noopener"
+        >
+            💬 إرسال الطلب على واتساب
         </a>
 
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     LOADING
-===================================================== -->
-
-<div
-    class="loading-screen"
-    id="loadingScreen"
->
-
-    <div class="loading-box">
-
-        <div class="loading-icon">
-            💬
-        </div>
-
-        <strong>
-            جاري تجهيز الطلب...
-        </strong>
-
-        <p>
-            سيتم فتح واتساب لإرسال تفاصيل الطلب.
-        </p>
+        <button
+            id="closeSuccess"
+            class="close-success"
+        >
+            العودة للموقع
+        </button>
 
     </div>
 
 </div>
 
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer>
-
-    <strong>
-        مول البركة – أولاد الجارحي
-    </strong>
-
-    <span>
-        خضروات • فواكه • لحوم • طيور • ماركت • عطارة
-    </span>
-
-    <a
-        href="https://wa.me/201119511185"
-        target="_blank"
-        rel="noopener"
-    >
-        💬 واتساب: 01119511185
-    </a>
-
-</footer>
-
-
-<!-- =====================================================
-     APP
-===================================================== -->
 
 <script src="app.js"></script>
-
 
 <script>
 
@@ -994,441 +912,607 @@
 
 
 /* =====================================================
-   ELEMENTS
+   رقم واتساب المتجر
 ===================================================== */
 
-const checkoutForm =
-    document.getElementById("checkoutForm");
-
-const orderItems =
-    document.getElementById("orderItems");
-
-const orderTotal =
-    document.getElementById("orderTotal");
-
-const submitOrder =
-    document.getElementById("submitOrder");
-
-const checkoutPage =
-    document.getElementById("checkoutPage");
-
-const emptyCheckout =
-    document.getElementById("emptyCheckout");
-
-const loadingScreen =
-    document.getElementById("loadingScreen");
+const WHATSAPP_NUMBER =
+    "201119511185";
 
 
 /* =====================================================
-   ESCAPE HTML
+   عناصر الصفحة
 ===================================================== */
 
-function escapeCheckout(value) {
+const orderItems =
+    document.getElementById(
+        "orderItems"
+    );
 
-    return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+const orderCount =
+    document.getElementById(
+        "orderCount"
+    );
+
+const subtotal =
+    document.getElementById(
+        "subtotal"
+    );
+
+const finalTotal =
+    document.getElementById(
+        "finalTotal"
+    );
+
+const submitOrder =
+    document.getElementById(
+        "submitOrder"
+    );
+
+const checkoutLayout =
+    document.getElementById(
+        "checkoutLayout"
+    );
+
+const emptyPage =
+    document.getElementById(
+        "emptyPage"
+    );
+
+const successModal =
+    document.getElementById(
+        "successModal"
+    );
+
+const whatsappOrder =
+    document.getElementById(
+        "whatsappOrder"
+    );
+
+
+/* =====================================================
+   تنظيف النص
+===================================================== */
+
+function safeText(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
 }
 
 
 /* =====================================================
-   RENDER ORDER
+   تحميل الطلب
 ===================================================== */
 
-function renderCheckoutOrder() {
+function renderCheckout(){
 
     const cart =
-        window.getCart();
+        typeof getCart === "function"
+        ? getCart()
+        : [];
 
 
-    if (
+    if(
         !Array.isArray(cart) ||
         cart.length === 0
-    ) {
+    ){
 
-        checkoutPage.style.display =
+        checkoutLayout.style.display =
             "none";
 
-        emptyCheckout.style.display =
+        emptyPage.style.display =
             "block";
 
         return;
-
     }
 
 
-    checkoutPage.style.display =
-        "block";
+    checkoutLayout.style.display =
+        "grid";
 
-    emptyCheckout.style.display =
+    emptyPage.style.display =
         "none";
 
+
+    let html = "";
+
+    let count = 0;
 
     let total = 0;
 
 
+    cart.forEach(item => {
+
+        const quantity =
+            Number(item.quantity) || 1;
+
+        const price =
+            Number(item.price) || 0;
+
+        const itemTotal =
+            quantity * price;
+
+
+        count += quantity;
+
+        total += itemTotal;
+
+
+        html += `
+
+            <div class="order-item">
+
+                <div class="order-icon">
+                    ${safeText(
+                        item.emoji || "🛒"
+                    )}
+                </div>
+
+                <div class="order-info">
+
+                    <strong>
+                        ${safeText(
+                            item.name
+                        )}
+                    </strong>
+
+                    <small>
+                        ${quantity}
+                        ×
+                        ${formatPrice(price)}
+                    </small>
+
+                </div>
+
+                <div class="order-price">
+                    ${formatPrice(itemTotal)}
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
     orderItems.innerHTML =
-        cart.map(item => {
+        html;
+
+    orderCount.textContent =
+        count;
+
+    subtotal.textContent =
+        formatPrice(total);
+
+    finalTotal.textContent =
+        formatPrice(total);
+
+}
+
+
+/* =====================================================
+   التحقق من رقم الهاتف
+===================================================== */
+
+function validPhone(phone){
+
+    const cleaned =
+        String(phone)
+            .replace(/\s+/g,"")
+            .replace(/-/g,"");
+
+
+    return /^01[0-9]{9}$/.test(
+        cleaned
+    );
+}
+
+
+/* =====================================================
+   بناء رسالة واتساب
+===================================================== */
+
+function buildWhatsAppMessage(){
+
+    const cart =
+        getCart();
+
+
+    const name =
+        document
+            .getElementById(
+                "customerName"
+            )
+            .value
+            .trim();
+
+
+    const phone =
+        document
+            .getElementById(
+                "customerPhone"
+            )
+            .value
+            .trim();
+
+
+    const area =
+        document
+            .getElementById(
+                "area"
+            )
+            .value
+            .trim();
+
+
+    const address =
+        document
+            .getElementById(
+                "address"
+            )
+            .value
+            .trim();
+
+
+    const notes =
+        document
+            .getElementById(
+                "notes"
+            )
+            .value
+            .trim();
+
+
+    const payment =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        )?.value ||
+        "كاش";
+
+
+    let total = 0;
+
+    let count = 0;
+
+
+    let message =
+        "🛒 *طلب جديد - مول البركة*";
+
+    message +=
+        "\n\n";
+
+    message +=
+        "👤 *بيانات العميل*";
+
+    message +=
+        "\nالاسم: " +
+        name;
+
+    message +=
+        "\nالهاتف: " +
+        phone;
+
+    message +=
+        "\nالمنطقة: " +
+        area;
+
+    message +=
+        "\nالعنوان: " +
+        address;
+
+
+    message +=
+        "\n\n";
+
+    message +=
+        "🛍️ *المنتجات*";
+
+    message +=
+        "\n";
+
+
+    cart.forEach(
+        (item,index) => {
 
             const quantity =
-                Number(item.quantity || 0);
+                Number(
+                    item.quantity
+                ) || 1;
 
             const price =
-                Number(item.price || 0);
+                Number(
+                    item.price
+                ) || 0;
 
             const itemTotal =
                 quantity * price;
 
 
+            count += quantity;
+
             total += itemTotal;
 
 
-            return `
+            message +=
+                "\n" +
+                (index + 1) +
+                ". " +
+                item.name;
 
-                <div class="order-item">
+            message +=
+                " × " +
+                quantity;
 
-                    <div class="order-item-icon">
-                        ${item.emoji || "🛒"}
-                    </div>
+            message +=
+                " = " +
+                formatPrice(
+                    itemTotal
+                );
 
-                    <div>
-
-                        <div class="order-item-name">
-
-                            ${escapeCheckout(
-                                item.name
-                            )}
-
-                        </div>
-
-                        <div class="order-item-meta">
-
-                            ${quantity}
-                            ×
-                            ${window.formatPrice(price)}
-
-                        </div>
-
-                    </div>
-
-                    <div class="order-item-total">
-
-                        ${window.formatPrice(itemTotal)}
-
-                    </div>
-
-                </div>
-
-            `;
-
-        }).join("");
-
-
-    orderTotal.textContent =
-        window.formatPrice(total);
-
-
-    window.updateCartCount();
-
-}
-
-
-/* =====================================================
-   VALIDATE PHONE
-===================================================== */
-
-function validEgyptianPhone(phone) {
-
-    const clean =
-        String(phone)
-            .replace(/\s+/g, "")
-            .replace(/-/g, "");
-
-
-    return /^(01)(0|1|2|5)[0-9]{8}$/.test(
-        clean
+        }
     );
 
+
+    message +=
+        "\n\n";
+
+    message +=
+        "📦 عدد القطع: " +
+        count;
+
+    message +=
+        "\n💰 إجمالي المنتجات: " +
+        formatPrice(total);
+
+    message +=
+        "\n🚚 التوصيل: يحدد عند الطلب";
+
+    message +=
+        "\n💵 طريقة الدفع: " +
+        payment;
+
+
+    if(notes){
+
+        message +=
+            "\n📝 ملاحظات: " +
+            notes;
+
+    }
+
+
+    message +=
+        "\n\n";
+
+    message +=
+        "🏪 مول البركة - أولاد الجارحي";
+
+    return message;
 }
 
 
 /* =====================================================
-   SUBMIT ORDER
+   إرسال الطلب
 ===================================================== */
 
 submitOrder.addEventListener(
     "click",
-    function() {
-
-
-        if (
-            !checkoutForm.reportValidity()
-        ) {
-
-            return;
-
-        }
-
+    function(){
 
         const cart =
-            window.getCart();
+            getCart();
 
 
-        if (
-            !Array.isArray(cart) ||
+        if(
+            !cart ||
             cart.length === 0
-        ) {
+        ){
 
-            window.showToast(
-                "السلة فارغة"
+            alert(
+                "السلة فارغة. أضف منتجات أولاً."
             );
 
             return;
-
         }
 
 
         const name =
             document
-                .getElementById("customerName")
+                .getElementById(
+                    "customerName"
+                )
                 .value
                 .trim();
 
 
         const phone =
             document
-                .getElementById("customerPhone")
-                .value
-                .trim();
-
-
-        const address =
-            document
-                .getElementById("customerAddress")
+                .getElementById(
+                    "customerPhone"
+                )
                 .value
                 .trim();
 
 
         const area =
             document
-                .getElementById("customerArea")
+                .getElementById(
+                    "area"
+                )
                 .value
                 .trim();
 
 
-        const deliveryTime =
+        const address =
             document
-                .getElementById("deliveryTime")
+                .getElementById(
+                    "address"
+                )
                 .value
                 .trim();
 
 
-        const notes =
-            document
-                .getElementById("customerNotes")
-                .value
-                .trim();
+        /* =============================================
+           التحقق
+        ============================================== */
 
+        if(!name){
 
-        const payment =
-            document.querySelector(
-                'input[name="paymentMethod"]:checked'
-            )?.value ||
-            "كاش عند الاستلام";
-
-
-        if (!validEgyptianPhone(phone)) {
-
-            window.showToast(
-                "من فضلك أدخل رقم هاتف مصري صحيح"
+            alert(
+                "من فضلك اكتب الاسم بالكامل."
             );
 
             document
-                .getElementById("customerPhone")
+                .getElementById(
+                    "customerName"
+                )
                 .focus();
 
             return;
-
         }
 
 
-        /* =============================================
-           BUILD WHATSAPP MESSAGE
-        ============================================== */
+        if(!validPhone(phone)){
 
-        let message =
-            "🛒 *طلب جديد - مول البركة*%0A";
+            alert(
+                "من فضلك اكتب رقم هاتف مصري صحيح مثل 011xxxxxxxx."
+            );
 
-        message +=
-            "━━━━━━━━━━━━━━%0A";
-
-
-        message +=
-            "👤 *الاسم:* " +
-            encodeURIComponent(name) +
-            "%0A";
-
-
-        message +=
-            "📞 *الهاتف:* " +
-            encodeURIComponent(phone) +
-            "%0A";
-
-
-        message +=
-            "📍 *العنوان:* " +
-            encodeURIComponent(address) +
-            "%0A";
-
-
-        if (area) {
-
-            message +=
-                "🏘️ *المنطقة:* " +
-                encodeURIComponent(area) +
-                "%0A";
-
-        }
-
-
-        if (deliveryTime) {
-
-            message +=
-                "🕐 *وقت التوصيل:* " +
-                encodeURIComponent(deliveryTime) +
-                "%0A";
-
-        }
-
-
-        message +=
-            "💳 *طريقة الدفع:* " +
-            encodeURIComponent(payment) +
-            "%0A";
-
-
-        message +=
-            "━━━━━━━━━━━━━━%0A";
-
-
-        message +=
-            "🧺 *تفاصيل المنتجات:*%0A";
-
-
-        cart.forEach(
-            function(item, index) {
-
-                const itemTotal =
-                    Number(item.price || 0) *
-                    Number(item.quantity || 0);
-
-
-                message +=
-                    `${index + 1}. ` +
-                    encodeURIComponent(item.name) +
-                    " × " +
-                    item.quantity +
-                    " = " +
-                    encodeURIComponent(
-                        window.formatPrice(itemTotal)
-                    ) +
-                    "%0A";
-
-            }
-        );
-
-
-        message +=
-            "━━━━━━━━━━━━━━%0A";
-
-
-        message +=
-            "💰 *إجمالي الطلب:* " +
-            encodeURIComponent(
-                window.formatPrice(
-                    window.getCartTotal()
+            document
+                .getElementById(
+                    "customerPhone"
                 )
-            ) +
-            "%0A";
+                .focus();
 
-
-        if (notes) {
-
-            message +=
-                "📝 *ملاحظات:* " +
-                encodeURIComponent(notes) +
-                "%0A";
-
+            return;
         }
 
 
-        message +=
-            "━━━━━━━━━━━━━━%0A";
+        if(!area){
 
-
-        message +=
-            "🏪 مول البركة - أولاد الجارحي";
-
-
-        /* =============================================
-           WHATSAPP URL
-        ============================================== */
-
-        const whatsappURL =
-            "https://wa.me/201119511185?text=" +
-            message;
-
-
-        /* =============================================
-           SAVE CUSTOMER DATA
-        ============================================== */
-
-        try {
-
-            localStorage.setItem(
-                "albaraka_customer",
-                JSON.stringify({
-                    name: name,
-                    phone: phone,
-                    address: address,
-                    area: area
-                })
+            alert(
+                "من فضلك اكتب المنطقة."
             );
 
-        } catch (error) {
+            document
+                .getElementById(
+                    "area"
+                )
+                .focus();
 
-            console.log(
-                "تعذر حفظ بيانات العميل",
-                error
+            return;
+        }
+
+
+        if(!address){
+
+            alert(
+                "من فضلك اكتب عنوان التوصيل بالتفصيل."
             );
 
+            document
+                .getElementById(
+                    "address"
+                )
+                .focus();
+
+            return;
         }
 
 
         /* =============================================
-           OPEN WHATSAPP
+           تعطيل الزر
         ============================================== */
 
-        loadingScreen.classList.add(
-            "show"
+        submitOrder.disabled =
+            true;
+
+        submitOrder.textContent =
+            "جاري تجهيز الطلب...";
+
+
+        /* =============================================
+           حفظ بيانات العميل مؤقتًا
+        ============================================== */
+
+        const customerData = {
+
+            name,
+            phone,
+            area,
+            address,
+
+            notes:
+                document
+                    .getElementById(
+                        "notes"
+                    )
+                    .value
+                    .trim(),
+
+            payment:
+                document.querySelector(
+                    'input[name="payment"]:checked'
+                )?.value || "كاش",
+
+            date:
+                new Date().toISOString()
+
+        };
+
+
+        localStorage.setItem(
+            "albaraka_customer",
+            JSON.stringify(
+                customerData
+            )
         );
 
 
-        submitOrder.disabled = true;
+        /* =============================================
+           إنشاء رابط واتساب
+        ============================================== */
 
+        const message =
+            buildWhatsAppMessage();
+
+
+        const whatsappUrl =
+            "https://wa.me/" +
+            WHATSAPP_NUMBER +
+            "?text=" +
+            encodeURIComponent(
+                message
+            );
+
+
+        whatsappOrder.href =
+            whatsappUrl;
+
+
+        /* =============================================
+           إظهار النجاح
+        ============================================== */
 
         setTimeout(
-            function() {
+            function(){
 
-                window.location.href =
-                    whatsappURL;
+                successModal.style.display =
+                    "flex";
+
+                submitOrder.disabled =
+                    false;
+
+                submitOrder.textContent =
+                    "تأكيد وإرسال الطلب 💬";
 
             },
-            500
+            400
         );
 
     }
@@ -1436,99 +1520,38 @@ submitOrder.addEventListener(
 
 
 /* =====================================================
-   RESTORE CUSTOMER DATA
+   إغلاق نافذة النجاح
 ===================================================== */
 
-function restoreCustomerData() {
+document
+    .getElementById(
+        "closeSuccess"
+    )
+    .addEventListener(
+        "click",
+        function(){
 
-    try {
-
-        const saved =
-            localStorage.getItem(
-                "albaraka_customer"
-            );
-
-
-        if (!saved) {
-            return;
-        }
-
-
-        const customer =
-            JSON.parse(saved);
-
-
-        if (customer.name) {
-
-            document
-                .getElementById("customerName")
-                .value =
-                customer.name;
+            successModal.style.display =
+                "none";
 
         }
-
-
-        if (customer.phone) {
-
-            document
-                .getElementById("customerPhone")
-                .value =
-                customer.phone;
-
-        }
-
-
-        if (customer.address) {
-
-            document
-                .getElementById("customerAddress")
-                .value =
-                customer.address;
-
-        }
-
-
-        if (customer.area) {
-
-            document
-                .getElementById("customerArea")
-                .value =
-                customer.area;
-
-        }
-
-    } catch (error) {
-
-        console.log(
-            "تعذر استرجاع بيانات العميل",
-            error
-        );
-
-    }
-
-}
+    );
 
 
 /* =====================================================
-   START
+   تشغيل
 ===================================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
-    function() {
+    function(){
 
-        window.updateCartCount();
-
-        renderCheckoutOrder();
-
-        restoreCustomerData();
+        renderCheckout();
 
     }
 );
 
 </script>
 
-
 </body>
-
 </html>
