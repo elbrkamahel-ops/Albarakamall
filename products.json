@@ -5,28 +5,35 @@
     "فواكه",
     "خضروات",
     "لحوم",
-    "طيور",
+    "دواجن وطيور",
+    "أسماك",
     "ماركت",
     "عطارة",
-    "ألبان",
+    "ألبان وأجبان",
     "مشروبات",
-    "منظفات"
+    "مجمدات",
+    "منظفات",
+    "مخبوزات",
+    "بقوليات وحبوب",
+    "معلبات",
+    "حلويات وشوكولاتة",
+    "مستلزمات منزلية",
+    "عناية شخصية"
   ],
   "products": [
-
     {
-      "id": "fruit-001",
-      "name": "بطيخ",
+      "id": "p0001",
+      "name": "موز",
       "price": 35,
       "unit": "كيلو",
       "category": "فواكه",
       "image": "",
-      "emoji": "🍉",
-      "offer": true,
+      "emoji": "🍌",
+      "offer": false,
       "active": true
     },
     {
-      "id": "fruit-002",
+      "id": "p0002",
       "name": "تفاح أحمر",
       "price": 65,
       "unit": "كيلو",
@@ -37,97 +44,8 @@
       "active": true
     },
     {
-      "id": "fruit-003",
-      "name": "تفاح أخضر",
-      "price": 70,
-      "unit": "كيلو",
-      "category": "فواكه",
-      "image": "",
-      "emoji": "🍏",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "fruit-004",
-      "name": "موز",
-      "price": 45,
-      "unit": "كيلو",
-      "category": "فواكه",
-      "image": "",
-      "emoji": "🍌",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "fruit-005",
-      "name": "برتقال",
-      "price": 30,
-      "unit": "كيلو",
-      "category": "فواكه",
-      "image": "",
-      "emoji": "🍊",
-      "offer": true,
-      "active": true
-    },
-    {
-      "id": "fruit-006",
-      "name": "يوسفي",
-      "price": 35,
-      "unit": "كيلو",
-      "category": "فواكه",
-      "image": "",
-      "emoji": "🍊",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "fruit-007",
-      "name": "عنب",
-      "price": 55,
-      "unit": "كيلو",
-      "category": "فواكه",
-      "image": "",
-      "emoji": "🍇",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "fruit-008",
-      "name": "فراولة",
-      "price": 60,
-      "unit": "كيلو",
-      "category": "فواكه",
-      "image": "",
-      "emoji": "🍓",
-      "offer": true,
-      "active": true
-    },
-    {
-      "id": "fruit-009",
-      "name": "مانجو",
-      "price": 80,
-      "unit": "كيلو",
-      "category": "فواكه",
-      "image": "",
-      "emoji": "🥭",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "fruit-010",
-      "name": "كمثرى",
-      "price": 70,
-      "unit": "كيلو",
-      "category": "فواكه",
-      "image": "",
-      "emoji": "🍐",
-      "offer": false,
-      "active": true
-    },
-
-    {
-      "id": "veg-001",
-      "name": "طماطم بلدي",
+      "id": "p0003",
+      "name": "طماطم",
       "price": 20,
       "unit": "كيلو",
       "category": "خضروات",
@@ -137,7 +55,7 @@
       "active": true
     },
     {
-      "id": "veg-002",
+      "id": "p0004",
       "name": "بطاطس",
       "price": 25,
       "unit": "كيلو",
@@ -148,151 +66,7 @@
       "active": true
     },
     {
-      "id": "veg-003",
-      "name": "خيار",
-      "price": 30,
-      "unit": "كيلو",
-      "category": "خضروات",
-      "image": "",
-      "emoji": "🥒",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "veg-004",
-      "name": "بصل",
-      "price": 25,
-      "unit": "كيلو",
-      "category": "خضروات",
-      "image": "",
-      "emoji": "🧅",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "veg-005",
-      "name": "جزر",
-      "price": 30,
-      "unit": "كيلو",
-      "category": "خضروات",
-      "image": "",
-      "emoji": "🥕",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "veg-006",
-      "name": "فلفل أخضر",
-      "price": 35,
-      "unit": "كيلو",
-      "category": "خضروات",
-      "image": "",
-      "emoji": "🫑",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "veg-007",
-      "name": "فلفل ألوان",
-      "price": 65,
-      "unit": "كيلو",
-      "category": "خضروات",
-      "image": "",
-      "emoji": "🫑",
-      "offer": true,
-      "active": true
-    },
-    {
-      "id": "veg-008",
-      "name": "كوسة",
-      "price": 35,
-      "unit": "كيلو",
-      "category": "خضروات",
-      "image": "",
-      "emoji": "🥒",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "veg-009",
-      "name": "باذنجان",
-      "price": 25,
-      "unit": "كيلو",
-      "category": "خضروات",
-      "image": "",
-      "emoji": "🍆",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "veg-010",
-      "name": "ملوخية",
-      "price": 25,
-      "unit": "كيلو",
-      "category": "خضروات",
-      "image": "",
-      "emoji": "🌿",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "veg-011",
-      "name": "بامية",
-      "price": 70,
-      "unit": "كيلو",
-      "category": "خضروات",
-      "image": "",
-      "emoji": "🌱",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "veg-012",
-      "name": "ثوم",
-      "price": 80,
-      "unit": "كيلو",
-      "category": "خضروات",
-      "image": "",
-      "emoji": "🧄",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "veg-013",
-      "name": "ليمون",
-      "price": 45,
-      "unit": "كيلو",
-      "category": "خضروات",
-      "image": "",
-      "emoji": "🍋",
-      "offer": true,
-      "active": true
-    },
-    {
-      "id": "veg-014",
-      "name": "كرنب",
-      "price": 25,
-      "unit": "قطعة",
-      "category": "خضروات",
-      "image": "",
-      "emoji": "🥬",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "veg-015",
-      "name": "خس",
-      "price": 15,
-      "unit": "قطعة",
-      "category": "خضروات",
-      "image": "",
-      "emoji": "🥬",
-      "offer": false,
-      "active": true
-    },
-
-    {
-      "id": "meat-001",
+      "id": "p0005",
       "name": "لحم بقري",
       "price": 420,
       "unit": "كيلو",
@@ -303,265 +77,42 @@
       "active": true
     },
     {
-      "id": "meat-002",
-      "name": "لحم ضاني",
-      "price": 450,
-      "unit": "كيلو",
-      "category": "لحوم",
-      "image": "",
-      "emoji": "🥩",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "meat-003",
-      "name": "كبدة",
-      "price": 430,
-      "unit": "كيلو",
-      "category": "لحوم",
-      "image": "",
-      "emoji": "🥩",
-      "offer": true,
-      "active": true
-    },
-    {
-      "id": "meat-004",
-      "name": "مفروم بقري",
-      "price": 400,
-      "unit": "كيلو",
-      "category": "لحوم",
-      "image": "",
-      "emoji": "🥩",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "meat-005",
-      "name": "ستيك",
-      "price": 480,
-      "unit": "كيلو",
-      "category": "لحوم",
-      "image": "",
-      "emoji": "🥩",
-      "offer": false,
-      "active": true
-    },
-
-    {
-      "id": "chicken-001",
+      "id": "p0006",
       "name": "دجاجة كاملة",
-      "price": 150,
-      "unit": "كيلو",
-      "category": "طيور",
-      "image": "",
-      "emoji": "🍗",
-      "offer": true,
-      "active": true
-    },
-    {
-      "id": "chicken-002",
-      "name": "صدور دجاج",
-      "price": 230,
-      "unit": "كيلو",
-      "category": "طيور",
-      "image": "",
-      "emoji": "🍗",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "chicken-003",
-      "name": "وراك دجاج",
-      "price": 170,
-      "unit": "كيلو",
-      "category": "طيور",
-      "image": "",
-      "emoji": "🍗",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "chicken-004",
-      "name": "أجنحة دجاج",
       "price": 130,
       "unit": "كيلو",
-      "category": "طيور",
+      "category": "دواجن وطيور",
       "image": "",
       "emoji": "🍗",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "chicken-005",
-      "name": "بط",
-      "price": 190,
-      "unit": "كيلو",
-      "category": "طيور",
-      "image": "",
-      "emoji": "🦆",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "chicken-006",
-      "name": "حمام",
-      "price": 120,
-      "unit": "زوج",
-      "category": "طيور",
-      "image": "",
-      "emoji": "🐦",
-      "offer": false,
-      "active": true
-    },
-
-    {
-      "id": "market-001",
-      "name": "أرز",
-      "price": 35,
-      "unit": "كيلو",
-      "category": "ماركت",
-      "image": "",
-      "emoji": "🍚",
       "offer": true,
       "active": true
     },
     {
-      "id": "market-002",
-      "name": "مكرونة",
-      "price": 15,
+      "id": "p0007",
+      "name": "أرز",
+      "price": 35,
       "unit": "كيس",
       "category": "ماركت",
       "image": "",
-      "emoji": "🍝",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "market-003",
-      "name": "سكر",
-      "price": 35,
-      "unit": "كيلو",
-      "category": "ماركت",
-      "image": "",
       "emoji": "🍚",
       "offer": false,
       "active": true
     },
     {
-      "id": "market-004",
-      "name": "دقيق",
+      "id": "p0008",
+      "name": "سكر",
       "price": 30,
-      "unit": "كيلو",
+      "unit": "كيس",
       "category": "ماركت",
       "image": "",
-      "emoji": "🌾",
+      "emoji": "🛒",
       "offer": false,
       "active": true
     },
     {
-      "id": "market-005",
-      "name": "زيت طعام",
-      "price": 90,
-      "unit": "لتر",
-      "category": "ماركت",
-      "image": "",
-      "emoji": "🫗",
-      "offer": true,
-      "active": true
-    },
-    {
-      "id": "market-006",
-      "name": "سمنة",
-      "price": 110,
-      "unit": "كيلو",
-      "category": "ماركت",
-      "image": "",
-      "emoji": "🧈",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "market-007",
-      "name": "فول",
-      "price": 45,
-      "unit": "كيلو",
-      "category": "ماركت",
-      "image": "",
-      "emoji": "🫘",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "market-008",
-      "name": "عدس",
-      "price": 70,
-      "unit": "كيلو",
-      "category": "ماركت",
-      "image": "",
-      "emoji": "🫘",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "market-009",
-      "name": "فاصوليا بيضاء",
-      "price": 90,
-      "unit": "كيلو",
-      "category": "ماركت",
-      "image": "",
-      "emoji": "🫘",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "market-010",
-      "name": "تونة",
-      "price": 75,
-      "unit": "علبة",
-      "category": "ماركت",
-      "image": "",
-      "emoji": "🐟",
-      "offer": true,
-      "active": true
-    },
-    {
-      "id": "market-011",
-      "name": "صلصة طماطم",
-      "price": 20,
-      "unit": "علبة",
-      "category": "ماركت",
-      "image": "",
-      "emoji": "🥫",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "market-012",
-      "name": "شاي",
-      "price": 80,
-      "unit": "علبة",
-      "category": "ماركت",
-      "image": "",
-      "emoji": "🍵",
-      "offer": false,
-      "active": true
-    },
-
-    {
-      "id": "spice-001",
-      "name": "كمون",
-      "price": 35,
-      "unit": "100 جرام",
-      "category": "عطارة",
-      "image": "",
-      "emoji": "🌿",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "spice-002",
+      "id": "p0009",
       "name": "فلفل أسود",
-      "price": 40,
+      "price": 80,
       "unit": "100 جرام",
       "category": "عطارة",
       "image": "",
@@ -570,82 +121,15 @@
       "active": true
     },
     {
-      "id": "spice-003",
-      "name": "كركم",
-      "price": 30,
-      "unit": "100 جرام",
-      "category": "عطارة",
-      "image": "",
-      "emoji": "🟡",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "spice-004",
-      "name": "قرفة",
-      "price": 35,
-      "unit": "100 جرام",
-      "category": "عطارة",
-      "image": "",
-      "emoji": "🌿",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "spice-005",
-      "name": "يانسون",
-      "price": 30,
-      "unit": "100 جرام",
-      "category": "عطارة",
-      "image": "",
-      "emoji": "🌿",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "spice-006",
-      "name": "حبهان",
-      "price": 80,
-      "unit": "100 جرام",
-      "category": "عطارة",
-      "image": "",
-      "emoji": "🌿",
-      "offer": true,
-      "active": true
-    },
-
-    {
-      "id": "dairy-001",
+      "id": "p0010",
       "name": "لبن كامل الدسم",
-      "price": 45,
+      "price": 40,
       "unit": "لتر",
-      "category": "ألبان",
+      "category": "ألبان وأجبان",
       "image": "",
       "emoji": "🥛",
       "offer": false,
       "active": true
-    },
-    {
-      "id": "dairy-002",
-      "name": "زبادي",
-      "price": 15,
-      "unit": "علبة",
-      "category": "ألبان",
-      "image": "",
-      "emoji": "🥛",
-      "offer": true,
-      "active": true
-    },
-    {
-      "id": "dairy-003",
-      "name": "جبنة بيضاء",
-      "price": 100,
-      "unit": "كيلو",
-      "category": "ألبان",
-      "image": "",
-      "emoji": "🧀",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "dairy-004",
+    }
+  ]
+}
