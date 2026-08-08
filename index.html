@@ -1,963 +1,2001 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>مول البركة أولاد الجارحي | خضروات وفواكه ولحوم وماركت</title>
+<meta charset="UTF-8">
 
-    <meta name="description"
-          content="مول البركة أولاد الجارحي - خضروات وفواكه ولحوم وطيور وماركت وعطارة">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+<title>مول البركة | أولاد الجارحي</title>
 
-    <!-- ملف المنتجات والمنطق الحالي -->
-    <script defer src="app.js"></script>
-    <script defer src="cart.js"></script>
+<meta name="description"
+      content="مول البركة أولاد الجارحي - خضروات وفواكه ولحوم وطيور وماركت">
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+/* =====================================================
+   MODERN ALBARAKA HOME
+===================================================== */
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:#f8faf9;
+    color:#17231c;
+    font-family:Arial,Tahoma,sans-serif;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+button,
+input{
+    font-family:inherit;
+}
+
+
+/* =====================================================
+   TOP
+===================================================== */
+
+.ab-top{
+    background:#087f3f;
+    color:#fff;
+    min-height:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:35px;
+    font-size:12px;
+    font-weight:700;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.ab-header{
+    background:#fff;
+    border-bottom:1px solid #edf1ee;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.ab-header-inner{
+    max-width:1250px;
+    min-height:82px;
+    margin:auto;
+    padding:12px 18px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.ab-logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    min-width:190px;
+}
+
+.ab-logo-mark{
+    width:52px;
+    height:52px;
+    border-radius:17px;
+    background:#087f3f;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:29px;
+    font-weight:900;
+}
+
+.ab-logo strong{
+    display:block;
+    color:#087f3f;
+    font-size:20px;
+}
+
+.ab-logo small{
+    color:#89958e;
+    font-size:11px;
+}
+
+.ab-search{
+    flex:1;
+    position:relative;
+}
+
+.ab-search input{
+    width:100%;
+    height:48px;
+    border:1px solid #e1e9e4;
+    background:#f7f9f8;
+    border-radius:15px;
+    outline:none;
+    padding:0 48px 0 15px;
+    font-size:14px;
+}
+
+.ab-search input:focus{
+    background:#fff;
+    border-color:#72b98e;
+}
+
+.ab-search-icon{
+    position:absolute;
+    right:16px;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+.ab-location{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:8px;
+    font-size:12px;
+}
+
+.ab-location strong{
+    display:block;
+}
+
+.ab-location small{
+    color:#89958e;
+}
+
+.ab-cart{
+    position:relative;
+    min-width:95px;
+    min-height:45px;
+    border:1px solid #dfe8e2;
+    border-radius:13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    color:#087f3f;
+    font-weight:900;
+    background:#fff;
+}
+
+.ab-cart-count{
+    position:absolute;
+    top:-8px;
+    left:-7px;
+    min-width:22px;
+    height:22px;
+    padding:0 5px;
+    border-radius:50px;
+    background:#f5a623;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:11px;
+}
+
+
+/* =====================================================
+   NAV
+===================================================== */
+
+.ab-nav{
+    background:#fff;
+    border-bottom:1px solid #edf1ee;
+}
+
+.ab-nav-inner{
+    max-width:1250px;
+    margin:auto;
+    padding:0 18px;
+    min-height:48px;
+    display:flex;
+    align-items:center;
+    gap:28px;
+    overflow:auto;
+}
+
+.ab-nav a{
+    white-space:nowrap;
+    color:#4d5a52;
+    font-size:13px;
+    font-weight:800;
+    padding:15px 2px;
+}
+
+.ab-nav a:hover,
+.ab-nav a.active{
+    color:#087f3f;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.ab-page{
+    max-width:1250px;
+    margin:auto;
+    padding:22px 18px 70px;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.ab-hero{
+    min-height:285px;
+    border-radius:26px;
+    overflow:hidden;
+    position:relative;
+    background:
+        radial-gradient(circle at 80% 20%,#d8f2df 0,#d8f2df 18%,transparent 19%),
+        linear-gradient(110deg,#f1faf4,#e0f4e6);
+    display:flex;
+    align-items:center;
+    padding:35px 45px;
+    margin-bottom:28px;
+}
+
+.ab-hero-content{
+    width:58%;
+    position:relative;
+    z-index:2;
+}
+
+.ab-badge{
+    display:inline-flex;
+    padding:7px 12px;
+    background:#fff;
+    color:#087f3f;
+    border-radius:30px;
+    font-size:11px;
+    font-weight:900;
+    margin-bottom:12px;
+}
+
+.ab-hero h1{
+    font-size:39px;
+    line-height:1.25;
+    margin:0 0 9px;
+}
+
+.ab-hero h1 span{
+    color:#087f3f;
+}
+
+.ab-hero p{
+    color:#65736a;
+    max-width:540px;
+    line-height:1.8;
+    margin:0 0 18px;
+    font-size:14px;
+}
+
+.ab-hero-actions{
+    display:flex;
+    gap:10px;
+}
+
+.ab-primary{
+    border:0;
+    background:#087f3f;
+    color:#fff;
+    border-radius:12px;
+    padding:13px 22px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.ab-secondary{
+    background:#fff;
+    color:#087f3f;
+    border:1px solid #dce8e0;
+    border-radius:12px;
+    padding:13px 22px;
+    font-weight:900;
+}
+
+.ab-hero-art{
+    position:absolute;
+    left:25px;
+    bottom:-10px;
+    width:390px;
+    height:280px;
+}
+
+.ab-circle{
+    position:absolute;
+    width:240px;
+    height:240px;
+    left:55px;
+    top:20px;
+    border-radius:50%;
+    background:#c9ead3;
+}
+
+.ab-product-float{
+    position:absolute;
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    background:#fff;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:40px;
+}
+
+.ab-p1{
+    left:45px;
+    top:45px;
+}
+
+.ab-p2{
+    left:215px;
+    top:80px;
+}
+
+.ab-p3{
+    left:110px;
+    top:165px;
+}
+
+.ab-basket{
+    position:absolute;
+    left:135px;
+    top:95px;
+    font-size:100px;
+}
+
+
+/* =====================================================
+   BENEFITS
+===================================================== */
+
+.ab-benefits{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    background:#fff;
+    border:1px solid #e8efeb;
+    border-radius:20px;
+    overflow:hidden;
+    margin-bottom:34px;
+}
+
+.ab-benefit{
+    min-height:90px;
+    padding:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    border-left:1px solid #edf1ee;
+}
+
+.ab-benefit:last-child{
+    border-left:0;
+}
+
+.ab-benefit-icon{
+    width:45px;
+    height:45px;
+    border-radius:13px;
+    background:#eff8f2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:23px;
+}
+
+.ab-benefit strong{
+    display:block;
+    font-size:13px;
+}
+
+.ab-benefit small{
+    color:#89958e;
+    font-size:10px;
+}
+
+
+/* =====================================================
+   SECTION HEAD
+===================================================== */
+
+.ab-section{
+    margin-top:35px;
+}
+
+.ab-section-head{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    margin-bottom:15px;
+}
+
+.ab-section-head h2{
+    margin:0;
+    font-size:24px;
+}
+
+.ab-section-head p{
+    margin:4px 0 0;
+    color:#89958e;
+    font-size:12px;
+}
+
+.ab-see{
+    color:#087f3f;
+    font-size:12px;
+    font-weight:900;
+}
+
+
+/* =====================================================
+   CATEGORIES
+===================================================== */
+
+.ab-categories{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:13px;
+}
+
+.ab-category{
+    background:#fff;
+    border:1px solid #e7eee9;
+    border-radius:18px;
+    padding:17px 10px;
+    text-align:center;
+    transition:.2s;
+}
+
+.ab-category:hover{
+    transform:translateY(-3px);
+    border-color:#b8dac4;
+}
+
+.ab-category-icon{
+    width:75px;
+    height:75px;
+    margin:auto;
+    border-radius:22px;
+    background:#f0f8f3;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:40px;
+}
+
+.ab-category strong{
+    display:block;
+    margin-top:10px;
+    font-size:13px;
+}
+
+.ab-category small{
+    color:#89958e;
+    font-size:10px;
+}
+
+
+/* =====================================================
+   OFFER
+===================================================== */
+
+.ab-offer{
+    margin-top:35px;
+    background:#087f3f;
+    color:#fff;
+    min-height:150px;
+    border-radius:23px;
+    padding:25px 30px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    overflow:hidden;
+    position:relative;
+}
+
+.ab-offer h2{
+    margin:0 0 6px;
+    font-size:25px;
+}
+
+.ab-offer p{
+    margin:0;
+    opacity:.85;
+    font-size:12px;
+}
+
+.ab-offer-button{
+    background:#fff;
+    color:#087f3f;
+    border:0;
+    border-radius:12px;
+    padding:13px 22px;
+    font-weight:900;
+}
+
+.ab-offer-art{
+    position:absolute;
+    left:30%;
+    font-size:75px;
+    opacity:.9;
+}
+
+
+/* =====================================================
+   PRODUCTS
+===================================================== */
+
+.ab-products{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:15px;
+}
+
+.ab-card{
+    background:#fff;
+    border:1px solid #e7eee9;
+    border-radius:18px;
+    padding:12px;
+    position:relative;
+    overflow:hidden;
+    transition:.2s;
+}
+
+.ab-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 35px rgba(0,0,0,.06);
+}
+
+.ab-card-image{
+    height:175px;
+    border-radius:15px;
+    background:#f5f8f6;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:75px;
+    position:relative;
+}
+
+.ab-discount{
+    position:absolute;
+    right:8px;
+    top:8px;
+    background:#e94d4d;
+    color:#fff;
+    border-radius:8px;
+    padding:5px 7px;
+    font-size:10px;
+    font-weight:900;
+}
+
+.ab-card h3{
+    font-size:14px;
+    margin:12px 2px 3px;
+}
+
+.ab-unit{
+    color:#929c96;
+    font-size:10px;
+}
+
+.ab-price{
+    color:#087f3f;
+    font-size:17px;
+    font-weight:900;
+    margin-top:7px;
+}
+
+.ab-old-price{
+    color:#a2aaa5;
+    text-decoration:line-through;
+    font-size:10px;
+    margin-right:4px;
+}
+
+.ab-add{
+    width:100%;
+    min-height:40px;
+    margin-top:10px;
+    border:1px solid #cde2d4;
+    border-radius:11px;
+    background:#eff8f2;
+    color:#087f3f;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.ab-add:hover{
+    background:#087f3f;
+    color:#fff;
+}
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+.ab-whatsapp{
+    position:fixed;
+    left:18px;
+    bottom:18px;
+    z-index:3000;
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    background:#20b85a;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:900px){
+
+    .ab-header-inner{
+        flex-wrap:wrap;
+    }
+
+    .ab-logo{
+        min-width:auto;
+    }
+
+    .ab-search{
+        order:5;
+        flex-basis:100%;
+    }
+
+    .ab-location{
+        display:none;
+    }
+
+    .ab-hero{
+        min-height:330px;
+        padding:25px;
+    }
+
+    .ab-hero-content{
+        width:100%;
+    }
+
+    .ab-hero-art{
+        opacity:.22;
+    }
+
+    .ab-benefits{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .ab-benefit:nth-child(2){
+        border-left:0;
+    }
+
+    .ab-categories{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .ab-products{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+}
+
+@media(max-width:600px){
+
+    .ab-top{
+        gap:10px;
+        font-size:9px;
+    }
+
+    .ab-header-inner{
+        padding:10px;
+        gap:8px;
+    }
+
+    .ab-logo strong{
+        font-size:17px;
+    }
+
+    .ab-logo-mark{
+        width:43px;
+        height:43px;
+        font-size:23px;
+    }
+
+    .ab-cart{
+        min-width:65px;
+    }
+
+    .ab-cart span{
+        display:none;
+    }
+
+    .ab-nav-inner{
+        gap:20px;
+    }
+
+    .ab-page{
+        padding:14px 10px 60px;
+    }
+
+    .ab-hero{
+        min-height:365px;
+        border-radius:20px;
+        padding:22px;
+    }
+
+    .ab-hero h1{
+        font-size:29px;
+    }
+
+    .ab-hero p{
+        font-size:12px;
+    }
+
+    .ab-hero-art{
+        width:100%;
+        left:0;
+        bottom:0;
+    }
+
+    .ab-benefits{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .ab-benefit{
+        min-height:78px;
+        padding:8px;
+    }
+
+    .ab-benefit-icon{
+        width:36px;
+        height:36px;
+        font-size:18px;
+    }
+
+    .ab-benefit strong{
+        font-size:10px;
+    }
+
+    .ab-benefit small{
+        font-size:8px;
+    }
+
+    .ab-section-head h2{
+        font-size:20px;
+    }
+
+    .ab-categories{
+        display:flex;
+        overflow-x:auto;
+        gap:10px;
+        padding-bottom:5px;
+    }
+
+    .ab-category{
+        min-width:105px;
+    }
+
+    .ab-category-icon{
+        width:60px;
+        height:60px;
+        font-size:31px;
+    }
+
+    .ab-products{
+        grid-template-columns:repeat(2,1fr);
+        gap:9px;
+    }
+
+    .ab-card{
+        padding:8px;
+        border-radius:15px;
+    }
+
+    .ab-card-image{
+        height:135px;
+        font-size:58px;
+    }
+
+    .ab-card h3{
+        font-size:12px;
+    }
+
+    .ab-price{
+        font-size:15px;
+    }
+
+    .ab-offer{
+        padding:20px;
+    }
+
+    .ab-offer h2{
+        font-size:20px;
+    }
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-<!-- ================= TOP BAR ================= -->
 
-<div class="top-bar">
-    <div class="container top-bar-inner">
+<!-- =====================================================
+     TOP BAR
+===================================================== -->
 
-        <div>
-            🚚 توصيل سريع حتى باب المنزل
-        </div>
+<div class="ab-top">
 
-        <div>
-            💳 كاش أو فيزا &nbsp; | &nbsp; 📱 اطلب عبر واتساب
-        </div>
+    <span>🚚 توصيل سريع</span>
 
-    </div>
+    <span>🥬 منتجات طازجة يوميًا</span>
+
+    <span>💳 كاش أو فيزا</span>
+
+    <span>💬 01119511185</span>
+
 </div>
 
 
-<!-- ================= HEADER ================= -->
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-<header class="main-header">
+<header class="ab-header">
 
-    <div class="container header-main">
-
-        <!-- LOGO -->
-
-        <a href="index.html" class="logo">
-
-            <div class="logo-symbol">
-                🛒
-            </div>
-
-            <div class="logo-text">
-
-                <strong>مول البركة</strong>
-
-                <small>
-                    أولاد الجارحي
-                </small>
-
-            </div>
-
-        </a>
+<div class="ab-header-inner">
 
 
-        <!-- LOCATION -->
+<a href="index.html" class="ab-logo">
 
-        <button class="location-button" type="button">
-
-            <span class="location-icon">
-                📍
-            </span>
-
-            <span class="location-content">
-
-                <small>
-                    التوصيل إلى
-                </small>
-
-                <strong>
-                    أولاد الجارحي
-                </strong>
-
-            </span>
-
-        </button>
-
-
-        <!-- SEARCH -->
-
-        <div class="search-wrapper">
-
-            <input
-                id="searchInput"
-                type="search"
-                placeholder="ابحث عن خضروات، فواكه، لحوم، ماركت..."
-                autocomplete="off"
-            >
-
-            <button
-                id="searchButton"
-                type="button"
-                aria-label="بحث"
-            >
-                🔍
-            </button>
-
-        </div>
-
-
-        <!-- ACCOUNT -->
-
-        <a href="login.html" class="account-button">
-
-            <span class="account-icon">
-                👤
-            </span>
-
-            <span class="account-text">
-
-                <small>
-                    أهلاً بك
-                </small>
-
-                <strong>
-                    تسجيل الدخول
-                </strong>
-
-            </span>
-
-        </a>
-
-
-        <!-- CART -->
-
-        <a href="cart.html" class="cart-button">
-
-            <span class="cart-icon">
-                🛒
-            </span>
-
-            <span class="cart-text">
-
-                <small>
-                    سلة التسوق
-                </small>
-
-                <strong>
-                    0 ج.م
-                </strong>
-
-            </span>
-
-            <span
-                id="cartCount"
-                class="cart-count"
-            >
-                0
-            </span>
-
-        </a>
-
+    <div class="ab-logo-mark">
+        ب
     </div>
 
-
-    <!-- MOBILE SEARCH -->
-
-    <div class="mobile-search">
-
-        <div class="container">
-
-            <div class="search-wrapper">
-
-                <input
-                    id="mobileSearchInput"
-                    type="search"
-                    placeholder="ابحث عن منتج..."
-                >
-
-                <button
-                    id="mobileSearchButton"
-                    type="button"
-                >
-                    🔍
-                </button>
-
-            </div>
-
-        </div>
-
+    <div>
+        <strong>مول البركة</strong>
+        <small>أولاد الجارحي</small>
     </div>
 
+</a>
 
-    <!-- NAVIGATION -->
 
-    <nav class="main-nav">
+<div class="ab-search">
 
-        <div class="container nav-inner">
+    <span class="ab-search-icon">
+        🔍
+    </span>
 
-            <button
-                class="categories-button"
-                type="button"
-            >
-                ☰
-                جميع الأقسام
-            </button>
+    <input
+        id="homeSearch"
+        type="search"
+        placeholder="بتدور على إيه؟"
+        autocomplete="off"
+    >
 
-            <div class="nav-links">
+</div>
 
-                <a
-                    href="#"
-                    class="active"
-                >
-                    الرئيسية
-                </a>
 
-                <a href="#categories">
-                    الأقسام
-                </a>
+<div class="ab-location">
 
-                <a href="#offers">
-                    🔥 العروض
-                </a>
+    <span>📍</span>
 
-                <a href="#products">
-                    المنتجات
-                </a>
+    <div>
+        <small>التوصيل إلى</small>
+        <strong>أولاد الجارحي</strong>
+    </div>
 
-                <a href="checkout.html">
-                    إتمام الطلب
-                </a>
+</div>
 
-            </div>
 
-            <div class="nav-offer">
-                🎁 عروض يومية وأسعار مميزة
-            </div>
+<a href="cart.html" class="ab-cart">
 
-        </div>
+    🛒
 
-    </nav>
+    <span>
+        السلة
+    </span>
+
+    <b
+        class="ab-cart-count"
+        id="cartCount"
+    >
+        0
+    </b>
+
+</a>
+
+
+</div>
 
 </header>
 
 
-<!-- ================= HERO ================= -->
+<!-- =====================================================
+     NAV
+===================================================== -->
 
-<main>
+<nav class="ab-nav">
 
-<section class="hero">
+<div class="ab-nav-inner">
 
-    <div class="container">
+    <a
+        href="#home"
+        class="active"
+    >
+        الرئيسية
+    </a>
 
-        <div class="hero-card">
+    <a href="#categories">
+        الأقسام
+    </a>
 
-            <div class="hero-content">
+    <a href="#offers">
+        🔥 العروض
+    </a>
 
-                <span class="hero-badge">
-                    🛍️ تسوق بسهولة من مول البركة
-                </span>
+    <a href="#products">
+        المنتجات
+    </a>
 
-                <h1>
-                    كل احتياجات بيتك
-                    <br>
+    <a href="cart.html">
+        🛒 السلة
+    </a>
 
-                    <strong>
-                        في مكان واحد
-                    </strong>
-                </h1>
+</div>
 
-                <p>
-                    خضروات وفواكه طازجة، لحوم، طيور،
-                    ماركت وعطارة، بأسعار مناسبة
-                    وتوصيل حتى باب البيت.
-                </p>
+</nav>
 
-                <div class="hero-actions">
 
-                    <a
-                        href="#products"
-                        class="primary-button"
-                    >
-                        🛒 ابدأ التسوق
-                    </a>
+<!-- =====================================================
+     PAGE
+===================================================== -->
 
-                    <a
-                        href="#categories"
-                        class="secondary-button"
-                    >
-                        تصفح الأقسام
-                    </a>
+<main class="ab-page" id="home">
 
-                </div>
 
-            </div>
+<!-- =====================================================
+     HERO
+===================================================== -->
 
+<section class="ab-hero">
 
-            <div class="hero-products">
+<div class="ab-hero-content">
 
-                <div class="hero-circle">
-
-                    <div class="hero-cart">
-                        🛒
-                    </div>
-
-                    <div class="hero-product hp-1">
-                        🍎
-                    </div>
-
-                    <div class="hero-product hp-2">
-                        🥩
-                    </div>
-
-                    <div class="hero-product hp-3">
-                        🥬
-                    </div>
-
-                    <div class="hero-product hp-4">
-                        🐔
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= FEATURES ================= -->
-
-<section class="quick-features">
-
-    <div class="container">
-
-        <div class="features-grid">
-
-            <div class="feature-card">
-
-                <div class="feature-icon">
-                    🚚
-                </div>
-
-                <div>
-                    <strong>
-                        توصيل سريع
-                    </strong>
-
-                    <span>
-                        حتى باب المنزل
-                    </span>
-                </div>
-
-            </div>
-
-
-            <div class="feature-card">
-
-                <div class="feature-icon">
-                    🥬
-                </div>
-
-                <div>
-                    <strong>
-                        منتجات طازجة
-                    </strong>
-
-                    <span>
-                        اختيار يومي
-                    </span>
-                </div>
-
-            </div>
-
-
-            <div class="feature-card">
-
-                <div class="feature-icon">
-                    💳
-                </div>
-
-                <div>
-                    <strong>
-                        دفع مرن
-                    </strong>
-
-                    <span>
-                        كاش أو فيزا
-                    </span>
-                </div>
-
-            </div>
-
-
-            <div class="feature-card">
-
-                <div class="feature-icon">
-                    📱
-                </div>
-
-                <div>
-                    <strong>
-                        دعم واتساب
-                    </strong>
-
-                    <span>
-                        تواصل معنا بسهولة
-                    </span>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= CATEGORIES ================= -->
-
-<section
-    id="categories"
-    class="section"
->
-
-    <div class="container">
-
-        <div class="section-header">
-
-            <div>
-
-                <span class="section-label">
-                    تسوق حسب القسم
-                </span>
-
-                <h2>
-                    أقسام مول البركة
-                </h2>
-
-            </div>
-
-            <a
-                href="#products"
-                class="view-all"
-            >
-                عرض المنتجات ←
-            </a>
-
-        </div>
-
-
-        <div class="categories-grid">
-
-            <button
-                class="category-card"
-                data-category="vegetables"
-                type="button"
-            >
-
-                <div class="category-image">
-                    🥬
-                </div>
-
-                <strong>
-                    خضروات
-                </strong>
-
-                <span>
-                    طازجة يوميًا
-                </span>
-
-            </button>
-
-
-            <button
-                class="category-card"
-                data-category="vegetables"
-                type="button"
-            >
-
-                <div class="category-image">
-                    🍎
-                </div>
-
-                <strong>
-                    فواكه
-                </strong>
-
-                <span>
-                    أفضل الاختيارات
-                </span>
-
-            </button>
-
-
-            <button
-                class="category-card"
-                data-category="meat"
-                type="button"
-            >
-
-                <div class="category-image">
-                    🥩
-                </div>
-
-                <strong>
-                    اللحوم
-                </strong>
-
-                <span>
-                    لحوم طازجة
-                </span>
-
-            </button>
-
-
-            <button
-                class="category-card"
-                data-category="chicken"
-                type="button"
-            >
-
-                <div class="category-image">
-                    🐔
-                </div>
-
-                <strong>
-                    الطيور
-                </strong>
-
-                <span>
-                    دواجن طازجة
-                </span>
-
-            </button>
-
-
-            <button
-                class="category-card"
-                data-category="grocery"
-                type="button"
-            >
-
-                <div class="category-image">
-                    🛒
-                </div>
-
-                <strong>
-                    ماركت
-                </strong>
-
-                <span>
-                    كل احتياجاتك
-                </span>
-
-            </button>
-
-
-            <button
-                class="category-card"
-                type="button"
-            >
-
-                <div class="category-image">
-                    🌿
-                </div>
-
-                <strong>
-                    عطارة
-                </strong>
-
-                <span>
-                    توابل وأعشاب
-                </span>
-
-            </button>
-
-
-            <button
-                class="category-card"
-                data-category="dairy"
-                type="button"
-            >
-
-                <div class="category-image">
-                    🥛
-                </div>
-
-                <strong>
-                    ألبان
-                </strong>
-
-                <span>
-                    منتجات يومية
-                </span>
-
-            </button>
-
-
-            <button
-                class="category-card"
-                data-category="drinks"
-                type="button"
-            >
-
-                <div class="category-image">
-                    🧃
-                </div>
-
-                <strong>
-                    مشروبات
-                </strong>
-
-                <span>
-                    باردة ومنعشة
-                </span>
-
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= OFFERS ================= -->
-
-<section
-    id="offers"
-    class="section offers-section"
->
-
-    <div class="container">
-
-        <div class="section-header">
-
-            <div>
-
-                <span class="section-label">
-                    لا تفوت الفرصة
-                </span>
-
-                <h2>
-                    عروض مول البركة 🔥
-                </h2>
-
-            </div>
-
-        </div>
-
-
-        <div class="offers-grid">
-
-            <div class="offer-card offer-one">
-
-                <div class="offer-content">
-
-                    <span>
-                        عروض اليوم
-                    </span>
-
-                    <h3>
-                        خضروات وفواكه
-                    </h3>
-
-                    <strong>
-                        أسعار مميزة
-                    </strong>
-
-                    <a href="#products">
-                        تسوق الآن ←
-                    </a>
-
-                </div>
-
-                <div class="offer-emoji">
-                    🍎🥬🍊
-                </div>
-
-            </div>
-
-
-            <div class="offer-card offer-two">
-
-                <div class="offer-content">
-
-                    <span>
-                        عروض خاصة
-                    </span>
-
-                    <h3>
-                        لحوم وطيور
-                    </h3>
-
-                    <strong>
-                        جودة تستحق الثقة
-                    </strong>
-
-                    <a href="#products">
-                        اكتشف العروض ←
-                    </a>
-
-                </div>
-
-                <div class="offer-emoji">
-                    🥩🐔
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= PRODUCTS ================= -->
-
-<section
-    id="products"
-    class="section"
->
-
-    <div class="container">
-
-        <div class="section-header">
-
-            <div>
-
-                <span class="section-label">
-                    منتجاتنا
-                </span>
-
-                <h2>
-                    تسوق منتجات مول البركة
-                </h2>
-
-            </div>
-
-        </div>
-
-
-        <div class="product-tabs">
-
-            <button
-                class="product-tab active"
-                data-category="all"
-                type="button"
-            >
-                الكل
-            </button>
-
-            <button
-                class="product-tab"
-                data-category="vegetables"
-                type="button"
-            >
-                🥬 خضروات وفواكه
-            </button>
-
-            <button
-                class="product-tab"
-                data-category="meat"
-                type="button"
-            >
-                🥩 لحوم
-            </button>
-
-            <button
-                class="product-tab"
-                data-category="chicken"
-                type="button"
-            >
-                🐔 طيور
-            </button>
-
-            <button
-                class="product-tab"
-                data-category="grocery"
-                type="button"
-            >
-                🛒 ماركت
-            </button>
-
-            <button
-                class="product-tab"
-                data-category="dairy"
-                type="button"
-            >
-                🥛 ألبان
-            </button>
-
-            <button
-                class="product-tab"
-                data-category="drinks"
-                type="button"
-            >
-                🧃 مشروبات
-            </button>
-
-        </div>
-
-
-        <div
-            id="productsGrid"
-            class="products-grid"
-        ></div>
-
-
-        <div
-            id="noProducts"
-            class="no-products"
-            hidden
-        >
-            <div>
-                🔍
-            </div>
-
-            <h3>
-                لم نجد منتجات مطابقة
-            </h3>
-
-            <p>
-                جرّب البحث باسم منتج آخر.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= WHATSAPP ================= -->
-
-<a
-    href="https://wa.me/"
-    class="whatsapp-float"
-    target="_blank"
-    rel="noopener"
-    aria-label="تواصل معنا عبر واتساب"
->
-    <span>
-        💬
+    <span class="ab-badge">
+        ✨ كل احتياجات البيت في مكان واحد
     </span>
 
+    <h1>
+        تسوق أسهل...
+        <br>
+        <span>وطلبك عند باب بيتك</span>
+    </h1>
+
+    <p>
+        خضروات وفواكه طازجة، لحوم، طيور،
+        بقالة وماركت وكل احتياجات البيت
+        من مول البركة أولاد الجارحي.
+    </p>
+
+    <div class="ab-hero-actions">
+
+        <a
+            href="#products"
+            class="ab-primary"
+        >
+            ابدأ التسوق 🛒
+        </a>
+
+        <a
+            href="#categories"
+            class="ab-secondary"
+        >
+            تصفح الأقسام
+        </a>
+
+    </div>
+
+</div>
+
+
+<div class="ab-hero-art">
+
+    <div class="ab-circle"></div>
+
+    <div class="ab-product-float ab-p1">
+        🍎
+    </div>
+
+    <div class="ab-product-float ab-p2">
+        🥩
+    </div>
+
+    <div class="ab-product-float ab-p3">
+        🥬
+    </div>
+
+    <div class="ab-basket">
+        🛒
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     BENEFITS
+===================================================== -->
+
+<section class="ab-benefits">
+
+<div class="ab-benefit">
+
+    <div class="ab-benefit-icon">
+        🚚
+    </div>
+
+    <div>
+        <strong>توصيل سريع</strong>
+        <small>لحد باب البيت</small>
+    </div>
+
+</div>
+
+
+<div class="ab-benefit">
+
+    <div class="ab-benefit-icon">
+        🥬
+    </div>
+
+    <div>
+        <strong>منتجات طازجة</strong>
+        <small>اختيار يومي</small>
+    </div>
+
+</div>
+
+
+<div class="ab-benefit">
+
+    <div class="ab-benefit-icon">
+        💳
+    </div>
+
+    <div>
+        <strong>كاش أو فيزا</strong>
+        <small>اختار طريقتك</small>
+    </div>
+
+</div>
+
+
+<div class="ab-benefit">
+
+    <div class="ab-benefit-icon">
+        📱
+    </div>
+
+    <div>
+        <strong>اطلب عبر واتساب</strong>
+        <small>01119511185</small>
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     CATEGORIES
+===================================================== -->
+
+<section
+    class="ab-section"
+    id="categories"
+>
+
+<div class="ab-section-head">
+
+<div>
+
+    <h2>
+        تسوق حسب القسم
+    </h2>
+
+    <p>
+        اختار اللي محتاجه بسرعة
+    </p>
+
+</div>
+
+</div>
+
+
+<div class="ab-categories">
+
+
+<a
+    class="ab-category"
+    href="#products"
+    data-category="خضروات"
+>
+
+    <div class="ab-category-icon">
+        🥬
+    </div>
+
     <strong>
-        واتساب
+        خضروات
     </strong>
+
+    <small>
+        طازجة يوميًا
+    </small>
+
 </a>
 
 
-<!-- ================= TOAST ================= -->
-
-<div
-    id="toast"
-    class="toast"
-    role="status"
-    aria-live="polite"
+<a
+    class="ab-category"
+    href="#products"
+    data-category="فواكه"
 >
 
-    <span id="toastMessage"></span>
+    <div class="ab-category-icon">
+        🍎
+    </div>
+
+    <strong>
+        فواكه
+    </strong>
+
+    <small>
+        أفضل اختيار
+    </small>
+
+</a>
+
+
+<a
+    class="ab-category"
+    href="#products"
+    data-category="لحوم"
+>
+
+    <div class="ab-category-icon">
+        🥩
+    </div>
+
+    <strong>
+        لحوم
+    </strong>
+
+    <small>
+        جودة عالية
+    </small>
+
+</a>
+
+
+<a
+    class="ab-category"
+    href="#products"
+    data-category="طيور"
+>
+
+    <div class="ab-category-icon">
+        🍗
+    </div>
+
+    <strong>
+        طيور
+    </strong>
+
+    <small>
+        طازجة
+    </small>
+
+</a>
+
+
+<a
+    class="ab-category"
+    href="#products"
+    data-category="ماركت"
+>
+
+    <div class="ab-category-icon">
+        🛍️
+    </div>
+
+    <strong>
+        ماركت
+    </strong>
+
+    <small>
+        أساسيات البيت
+    </small>
+
+</a>
+
+
+<a
+    class="ab-category"
+    href="#products"
+    data-category="عطارة"
+>
+
+    <div class="ab-category-icon">
+        🌿
+    </div>
+
+    <strong>
+        عطارة
+    </strong>
+
+    <small>
+        توابل وأعشاب
+    </small>
+
+</a>
 
 </div>
+
+</section>
+
+
+<!-- =====================================================
+     OFFER
+===================================================== -->
+
+<section
+    class="ab-offer"
+    id="offers"
+>
+
+<div>
+
+    <h2>
+        🔥 عروض مول البركة
+    </h2>
+
+    <p>
+        اختيارات مميزة وأسعار مناسبة كل يوم
+    </p>
+
+</div>
+
+<div class="ab-offer-art">
+    🥬 🍎 🥩
+</div>
+
+<a
+    href="#products"
+    class="ab-offer-button"
+>
+    شوف المنتجات
+</a>
+
+</section>
+
+
+<!-- =====================================================
+     PRODUCTS
+===================================================== -->
+
+<section
+    class="ab-section"
+    id="products"
+>
+
+<div class="ab-section-head">
+
+<div>
+
+    <h2>
+        المنتجات المميزة
+    </h2>
+
+    <p>
+        اختار منتجاتك وأضفها للسلة
+    </p>
+
+</div>
+
+<a
+    href="#products"
+    class="ab-see"
+>
+    عرض الكل ←
+</a>
+
+</div>
+
+
+<div
+    class="ab-products"
+    id="homeProducts"
+>
+
+
+<!-- المنتج 1 -->
+
+<article
+    class="ab-card"
+    data-name="طماطم"
+    data-category="خضروات"
+>
+
+<div class="ab-card-image">
+
+    <span class="ab-discount">
+        طازج
+    </span>
+
+    🍅
+
+</div>
+
+<h3>
+    طماطم بلدي
+</h3>
+
+<div class="ab-unit">
+    1 كيلو
+</div>
+
+<div class="ab-price">
+    15 ج.م
+</div>
+
+<button
+    class="ab-add"
+    data-id="1001"
+    data-name="طماطم بلدي"
+    data-price="15"
+    data-unit="كيلو"
+    data-category="خضروات"
+    data-emoji="🍅"
+>
+    + أضف للسلة
+</button>
+
+</article>
+
+
+<!-- المنتج 2 -->
+
+<article
+    class="ab-card"
+    data-name="بطاطس"
+    data-category="خضروات"
+>
+
+<div class="ab-card-image">
+    🥔
+</div>
+
+<h3>
+    بطاطس
+</h3>
+
+<div class="ab-unit">
+    1 كيلو
+</div>
+
+<div class="ab-price">
+    25 ج.م
+</div>
+
+<button
+    class="ab-add"
+    data-id="1002"
+    data-name="بطاطس"
+    data-price="25"
+    data-unit="كيلو"
+    data-category="خضروات"
+    data-emoji="🥔"
+>
+    + أضف للسلة
+</button>
+
+</article>
+
+
+<!-- المنتج 3 -->
+
+<article
+    class="ab-card"
+    data-name="تفاح"
+    data-category="فواكه"
+>
+
+<div class="ab-card-image">
+    🍎
+</div>
+
+<h3>
+    تفاح أحمر
+</h3>
+
+<div class="ab-unit">
+    1 كيلو
+</div>
+
+<div class="ab-price">
+    75 ج.م
+</div>
+
+<button
+    class="ab-add"
+    data-id="1003"
+    data-name="تفاح أحمر"
+    data-price="75"
+    data-unit="كيلو"
+    data-category="فواكه"
+    data-emoji="🍎"
+>
+    + أضف للسلة
+</button>
+
+</article>
+
+
+<!-- المنتج 4 -->
+
+<article
+    class="ab-card"
+    data-name="برتقال"
+    data-category="فواكه"
+>
+
+<div class="ab-card-image">
+    🍊
+</div>
+
+<h3>
+    برتقال
+</h3>
+
+<div class="ab-unit">
+    1 كيلو
+</div>
+
+<div class="ab-price">
+    30 ج.م
+</div>
+
+<button
+    class="ab-add"
+    data-id="1004"
+    data-name="برتقال"
+    data-price="30"
+    data-unit="كيلو"
+    data-category="فواكه"
+    data-emoji="🍊"
+>
+    + أضف للسلة
+</button>
+
+</article>
+
+
+<!-- المنتج 5 -->
+
+<article
+    class="ab-card"
+    data-name="لحم"
+    data-category="لحوم"
+>
+
+<div class="ab-card-image">
+
+    <span class="ab-discount">
+        مميز
+    </span>
+
+    🥩
+
+</div>
+
+<h3>
+    لحم بقري
+</h3>
+
+<div class="ab-unit">
+    1 كيلو
+</div>
+
+<div class="ab-price">
+    420 ج.م
+</div>
+
+<button
+    class="ab-add"
+    data-id="1005"
+    data-name="لحم بقري"
+    data-price="420"
+    data-unit="كيلو"
+    data-category="لحوم"
+    data-emoji="🥩"
+>
+    + أضف للسلة
+</button>
+
+</article>
+
+
+<!-- المنتج 6 -->
+
+<article
+    class="ab-card"
+    data-name="فراخ"
+    data-category="طيور"
+>
+
+<div class="ab-card-image">
+    🍗
+</div>
+
+<h3>
+    فراخ طازجة
+</h3>
+
+<div class="ab-unit">
+    1 كيلو
+</div>
+
+<div class="ab-price">
+    125 ج.م
+</div>
+
+<button
+    class="ab-add"
+    data-id="1006"
+    data-name="فراخ طازجة"
+    data-price="125"
+    data-unit="كيلو"
+    data-category="طيور"
+    data-emoji="🍗"
+>
+    + أضف للسلة
+</button>
+
+</article>
+
+
+<!-- المنتج 7 -->
+
+<article
+    class="ab-card"
+    data-name="أرز"
+    data-category="ماركت"
+>
+
+<div class="ab-card-image">
+    🍚
+</div>
+
+<h3>
+    أرز
+</h3>
+
+<div class="ab-unit">
+    1 كيلو
+</div>
+
+<div class="ab-price">
+    35 ج.م
+</div>
+
+<button
+    class="ab-add"
+    data-id="1007"
+    data-name="أرز"
+    data-price="35"
+    data-unit="كيلو"
+    data-category="ماركت"
+    data-emoji="🍚"
+>
+    + أضف للسلة
+</button>
+
+</article>
+
+
+<!-- المنتج 8 -->
+
+<article
+    class="ab-card"
+    data-name="سكر"
+    data-category="ماركت"
+>
+
+<div class="ab-card-image">
+    🍬
+</div>
+
+<h3>
+    سكر
+</h3>
+
+<div class="ab-unit">
+    1 كيلو
+</div>
+
+<div class="ab-price">
+    30 ج.م
+</div>
+
+<button
+    class="ab-add"
+    data-id="1008"
+    data-name="سكر"
+    data-price="30"
+    data-unit="كيلو"
+    data-category="ماركت"
+    data-emoji="🍬"
+>
+    + أضف للسلة
+</button>
+
+</article>
+
+
+<!-- المنتج 9 -->
+
+<article
+    class="ab-card"
+    data-name="توابل"
+    data-category="عطارة"
+>
+
+<div class="ab-card-image">
+    🌿
+</div>
+
+<h3>
+    خلطة توابل
+</h3>
+
+<div class="ab-unit">
+    100 جرام
+</div>
+
+<div class="ab-price">
+    25 ج.م
+</div>
+
+<button
+    class="ab-add"
+    data-id="1009"
+    data-name="خلطة توابل"
+    data-price="25"
+    data-unit="100 جرام"
+    data-category="عطارة"
+    data-emoji="🌿"
+>
+    + أضف للسلة
+</button>
+
+</article>
+
+
+<!-- المنتج 10 -->
+
+<article
+    class="ab-card"
+    data-name="موز"
+    data-category="فواكه"
+>
+
+<div class="ab-card-image">
+    🍌
+</div>
+
+<h3>
+    موز
+</h3>
+
+<div class="ab-unit">
+    1 كيلو
+</div>
+
+<div class="ab-price">
+    40 ج.م
+</div>
+
+<button
+    class="ab-add"
+    data-id="1010"
+    data-name="موز"
+    data-price="40"
+    data-unit="كيلو"
+    data-category="فواكه"
+    data-emoji="🍌"
+>
+    + أضف للسلة
+</button>
+
+</article>
+
+
+</div>
+
+</section>
 
 
 </main>
 
 
-<!-- ================= FOOTER ================= -->
+<!-- =====================================================
+     WHATSAPP
+===================================================== -->
 
-<footer class="footer">
-
-    <div class="container">
-
-        <div class="footer-main">
-
-            <div>
-
-                <div class="footer-logo">
-                    🛒 مول البركة
-                </div>
-
-                <p>
-                    أولاد الجارحي
-                </p>
-
-                <p>
-                    خضروات وفواكه • لحوم • طيور
-                    • ماركت • عطارة
-                </p>
-
-            </div>
+<a
+    href="https://wa.me/201119511185"
+    target="_blank"
+    rel="noopener"
+    class="ab-whatsapp"
+    aria-label="واتساب مول البركة"
+>
+    💬
+</a>
 
 
-            <div>
+<!-- =====================================================
+     APP
+===================================================== -->
 
-                <h3>
-                    التسوق
-                </h3>
-
-                <a href="#categories">
-                    الأقسام
-                </a>
-
-                <a href="#offers">
-                    العروض
-                </a>
-
-                <a href="#products">
-                    المنتجات
-                </a>
-
-            </div>
+<script src="app.js"></script>
 
 
-            <div>
+<script>
 
-                <h3>
-                    خدمة العملاء
-                </h3>
+/* =====================================================
+   HOME PRODUCTS
+===================================================== */
 
-                <a href="checkout.html">
-                    إتمام الطلب
-                </a>
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
 
-                <a href="#">
-                    سياسة الخصوصية
-                </a>
-
-                <a href="#">
-                    تواصل معنا
-                </a>
-
-            </div>
-
-        </div>
+        if(
+            typeof window.updateCartCount ===
+            "function"
+        ){
+            window.updateCartCount();
+        }
 
 
-        <div class="footer-bottom">
+        document
+        .querySelectorAll(".ab-add")
+        .forEach(
+            function(button){
 
-            <span>
-                © 2026 مول البركة أولاد الجارحي
-            </span>
+                button.addEventListener(
+                    "click",
+                    function(){
 
-            <span>
-                جميع الحقوق محفوظة
-            </span>
+                        const product = {
 
-        </div>
+                            id:
+                                Number(
+                                    button.dataset.id
+                                ),
 
-    </div>
+                            name:
+                                button.dataset.name,
 
-</footer>
+                            price:
+                                Number(
+                                    button.dataset.price
+                                ),
+
+                            unit:
+                                button.dataset.unit,
+
+                            category:
+                                button.dataset.category,
+
+                            emoji:
+                                button.dataset.emoji,
+
+                            quantity:1
+
+                        };
+
+
+                        if(
+                            typeof window.addToCart ===
+                            "function"
+                        ){
+
+                            window.addToCart(
+                                product
+                            );
+
+                        }else{
+
+                            alert(
+                                "ملف app.js غير موجود أو به مشكلة."
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* =============================================
+           SEARCH
+        ============================================== */
+
+        const search =
+            document.getElementById(
+                "homeSearch"
+            );
+
+
+        if(search){
+
+            search.addEventListener(
+                "input",
+                function(){
+
+                    const value =
+                        search.value
+                        .trim()
+                        .toLowerCase();
+
+
+                    document
+                    .querySelectorAll(
+                        ".ab-card"
+                    )
+                    .forEach(
+                        function(card){
+
+                            const name =
+                                (
+                                    card.dataset.name ||
+                                    ""
+                                )
+                                .toLowerCase();
+
+
+                            const category =
+                                (
+                                    card.dataset.category ||
+                                    ""
+                                )
+                                .toLowerCase();
+
+
+                            const found =
+                                !value ||
+                                name.includes(value) ||
+                                category.includes(value);
+
+
+                            card.style.display =
+                                found
+                                ? ""
+                                : "none";
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =============================================
+           CATEGORY FILTER
+        ============================================== */
+
+        document
+        .querySelectorAll(
+            ".ab-category"
+        )
+        .forEach(
+            function(categoryButton){
+
+                categoryButton.addEventListener(
+                    "click",
+                    function(){
+
+                        const category =
+                            (
+                                categoryButton.dataset.category ||
+                                ""
+                            )
+                            .toLowerCase();
+
+
+                        document
+                        .querySelectorAll(
+                            ".ab-card"
+                        )
+                        .forEach(
+                            function(card){
+
+                                const cardCategory =
+                                    (
+                                        card.dataset.category ||
+                                        ""
+                                    )
+                                    .toLowerCase();
+
+
+                                card.style.display =
+                                    cardCategory === category
+                                    ? ""
+                                    : "none";
+
+                            }
+                        );
+
+
+                        document
+                        .getElementById(
+                            "products"
+                        )
+                        .scrollIntoView({
+                            behavior:"smooth"
+                        });
+
+                    }
+                );
+
+            }
+        );
+
+    }
+);
+
+</script>
 
 
 </body>
+
 </html>
