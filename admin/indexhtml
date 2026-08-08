@@ -1,1144 +1,1098 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#087f3f">
+<title>مول البركة | لوحة التحكم PRO</title>
 
-    <meta charset="UTF-8">
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0
+}
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+:root{
+    --primary:#087f3f;
+    --primary2:#0dbb5b;
+    --dark:#10231a;
+    --dark2:#172d23;
+    --bg:#f4f7f5;
+    --card:#fff;
+    --text:#18231e;
+    --muted:#7c8982;
+    --border:#e5ebe7;
+    --danger:#e53935;
+    --warning:#f59e0b;
+    --info:#2563eb;
+    --success:#079447;
+    --shadow:0 10px 35px rgba(16,35,26,.07)
+}
 
-    <title>
-        لوحة التحكم | مول البركة أولاد الجارحي
-    </title>
+body{
+    font-family:Tahoma,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh
+}
 
-    <meta
-        name="description"
-        content="لوحة التحكم الرئيسية لمول البركة أولاد الجارحي"
-    >
+button,input,select{
+    font-family:inherit
+}
 
-    <link
-        rel="stylesheet"
-        href="admin.css"
-    >
+button{
+    cursor:pointer
+}
 
+a{
+    text-decoration:none
+}
+
+/* TOP */
+
+.topbar{
+    position:fixed;
+    z-index:1000;
+    top:0;
+    right:0;
+    left:0;
+    height:74px;
+    background:rgba(255,255,255,.96);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 22px
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px
+}
+
+.logo{
+    width:46px;
+    height:46px;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:23px;
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary2)
+    );
+    box-shadow:0 8px 22px rgba(8,127,63,.22)
+}
+
+.brand h2{
+    color:var(--primary);
+    font-size:16px
+}
+
+.brand p{
+    color:var(--muted);
+    font-size:8px;
+    margin-top:4px
+}
+
+.top-actions{
+    display:flex;
+    align-items:center;
+    gap:8px
+}
+
+.icon-btn{
+    width:42px;
+    height:42px;
+    border:1px solid var(--border);
+    background:#fff;
+    border-radius:12px;
+    font-size:17px;
+    position:relative
+}
+
+.icon-btn:hover{
+    background:#f2f8f4;
+    border-color:#b8d9c5
+}
+
+.dot{
+    position:absolute;
+    top:7px;
+    left:7px;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--danger);
+    border:2px solid white
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    margin-right:8px;
+    padding-right:13px;
+    border-right:1px solid var(--border)
+}
+
+.avatar{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#e5f5ec;
+    color:var(--primary);
+    font-weight:bold
+}
+
+.profile strong{
+    display:block;
+    font-size:10px
+}
+
+.profile small{
+    color:var(--muted);
+    font-size:8px
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    position:fixed;
+    z-index:900;
+    top:74px;
+    right:0;
+    bottom:0;
+    width:255px;
+    padding:18px 12px;
+    background:
+        linear-gradient(
+            180deg,
+            var(--dark),
+            #0c1b14
+        );
+    overflow-y:auto
+}
+
+.menu-title{
+    color:#6e8177;
+    font-size:8px;
+    padding:9px 13px
+}
+
+.menu{
+    list-style:none
+}
+
+.menu li{
+    margin-bottom:4px
+}
+
+.menu a{
+    min-height:45px;
+    padding:0 13px;
+    border-radius:11px;
+    display:flex;
+    align-items:center;
+    gap:11px;
+    color:#d9e5df;
+    font-size:10px;
+    transition:.2s
+}
+
+.menu a:hover{
+    background:rgba(255,255,255,.07)
+}
+
+.menu a.active{
+    color:#fff;
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--primary2)
+        );
+    box-shadow:
+        0 8px 22px rgba(0,0,0,.18)
+}
+
+.menu-icon{
+    width:25px;
+    text-align:center;
+    font-size:16px
+}
+
+.badge{
+    margin-right:auto;
+    min-width:21px;
+    height:21px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--danger);
+    color:white;
+    font-size:8px
+}
+
+.sidebar-bottom{
+    margin-top:20px;
+    padding-top:15px;
+    border-top:1px solid rgba(255,255,255,.08)
+}
+
+/* MAIN */
+
+.main{
+    margin-right:255px;
+    padding-top:74px;
+    min-height:100vh
+}
+
+.content{
+    max-width:1600px;
+    margin:auto;
+    padding:28px
+}
+
+.welcome{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:22px
+}
+
+.welcome h1{
+    font-size:26px;
+    margin-bottom:7px
+}
+
+.welcome p{
+    color:var(--muted);
+    font-size:10px
+}
+
+.date{
+    padding:11px 15px;
+    background:white;
+    border:1px solid var(--border);
+    border-radius:12px;
+    color:var(--muted);
+    font-size:9px
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:
+        repeat(4,1fr);
+    gap:14px;
+    margin-bottom:18px
+}
+
+.stat{
+    position:relative;
+    overflow:hidden;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:17px;
+    padding:18px;
+    box-shadow:var(--shadow)
+}
+
+.stat:after{
+    content:"";
+    position:absolute;
+    width:100px;
+    height:100px;
+    left:-45px;
+    bottom:-50px;
+    border-radius:50%;
+    background:#f0f8f3
+}
+
+.stat-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center
+}
+
+.stat-icon{
+    width:43px;
+    height:43px;
+    border-radius:13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px
+}
+
+.g{
+    background:#e7f7ed
+}
+
+.o{
+    background:#fff3dc
+}
+
+.b{
+    background:#eaf1ff
+}
+
+.r{
+    background:#ffebed
+}
+
+.stat label{
+    color:var(--muted);
+    font-size:9px
+}
+
+.stat h2{
+    font-size:24px;
+    margin-top:12px
+}
+
+.change{
+    margin-top:7px;
+    font-size:8px;
+    color:var(--success)
+}
+
+/* CARDS */
+
+.grid{
+    display:grid;
+    grid-template-columns:
+        minmax(0,1.7fr)
+        minmax(280px,.8fr);
+    gap:17px;
+    margin-bottom:18px
+}
+
+.card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:17px;
+    box-shadow:var(--shadow);
+    overflow:hidden
+}
+
+.card-head{
+    min-height:57px;
+    padding:0 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid var(--border)
+}
+
+.card-head strong{
+    font-size:12px
+}
+
+.card-head a{
+    color:var(--primary);
+    font-size:9px
+}
+
+.card-body{
+    padding:18px
+}
+
+/* SEARCH */
+
+.search-box{
+    display:flex;
+    gap:8px;
+    margin-bottom:15px
+}
+
+.search-box input{
+    flex:1;
+    height:43px;
+    border:1px solid var(--border);
+    border-radius:11px;
+    outline:none;
+    padding:0 13px;
+    font-size:10px
+}
+
+.search-box input:focus{
+    border-color:#91c8a7;
+    box-shadow:0 0 0 3px #eaf7ef
+}
+
+.primary-btn{
+    height:43px;
+    border:0;
+    padding:0 17px;
+    border-radius:11px;
+    color:#fff;
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--primary2)
+        );
+    font-size:9px;
+    font-weight:bold
+}
+
+/* CHART */
+
+.chart{
+    height:255px;
+    display:flex;
+    align-items:flex-end;
+    gap:12px;
+    padding:10px 5px 0
+}
+
+.bar-wrap{
+    flex:1;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-end;
+    gap:7px
+}
+
+.bar-value{
+    color:#68756e;
+    font-size:7px
+}
+
+.bar{
+    width:100%;
+    max-width:36px;
+    min-height:12px;
+    border-radius:8px 8px 3px 3px;
+    background:
+        linear-gradient(
+            to top,
+            var(--primary),
+            var(--primary2)
+        )
+}
+
+.bar-day{
+    color:var(--muted);
+    font-size:8px
+}
+
+/* QUICK */
+
+.quick-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(2,1fr);
+    gap:9px
+}
+
+.quick{
+    border:1px solid var(--border);
+    background:#fafcfb;
+    border-radius:13px;
+    padding:16px 8px;
+    text-align:center;
+    transition:.2s
+}
+
+.quick:hover{
+    transform:translateY(-2px);
+    border-color:#a9d5ba;
+    background:#f3faf5
+}
+
+.quick b{
+    display:block;
+    font-size:22px;
+    margin-bottom:7px
+}
+
+.quick span{
+    color:#5c6862;
+    font-size:8px
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+
+    .stats{
+        grid-template-columns:
+            repeat(2,1fr)
+    }
+
+    .grid{
+        grid-template-columns:1fr
+    }
+}
+
+@media(max-width:760px){
+
+    .sidebar{
+        right:-270px;
+        transition:.25s
+    }
+
+    .sidebar.open{
+        right:0
+    }
+
+    .main{
+        margin-right:0
+    }
+
+    .content{
+        padding:18px 11px
+    }
+
+    .profile{
+        display:none
+    }
+
+    .welcome{
+        align-items:flex-start
+    }
+
+    .welcome h1{
+        font-size:21px
+    }
+
+    .date{
+        display:none
+    }
+
+    .stats{
+        gap:9px
+    }
+
+    .stat{
+        padding:14px
+    }
+
+    .stat h2{
+        font-size:19px
+    }
+
+    .brand p{
+        display:none
+    }
+}
+
+@media(max-width:430px){
+
+    .stats{
+        grid-template-columns:
+            repeat(2,1fr)
+    }
+
+    .stat label{
+        font-size:8px
+    }
+}
+</style>
 </head>
-
 
 <body>
 
+<header class="topbar">
 
-<!-- =====================================================
-     SIDEBAR
-     ===================================================== -->
+    <div class="brand">
 
-<aside class="sidebar">
+        <button
+            class="icon-btn"
+            onclick="toggleSidebar()">
+            ☰
+        </button>
 
+        <div class="logo">🛒</div>
 
-    <div class="sidebar-header">
-
-        <div class="logo">
-            البركة
+        <div>
+            <h2>مول البركة</h2>
+            <p>أولاد الجارحي • الإدارة الاحترافية</p>
         </div>
-
-        <h2>
-            لوحة التحكم
-        </h2>
 
     </div>
 
+    <div class="top-actions">
 
-    <nav class="sidebar-menu">
+        <button
+            class="icon-btn"
+            onclick="openStore()">
+            🏪
+        </button>
 
+        <button
+            class="icon-btn"
+            onclick="notifications()">
+            🔔
+            <i class="dot"></i>
+        </button>
 
-        <a
-            href="index.html"
-            class="active"
-        >
+        <div class="profile">
+            <div class="avatar">م</div>
+            <div>
+                <strong>مدير المتجر</strong>
+                <small>Administrator</small>
+            </div>
+        </div>
 
-            <span>🏠</span>
+    </div>
 
-            الرئيسية
+</header>
 
-        </a>
+<aside class="sidebar" id="sidebar">
 
+    <div class="menu-title">الرئيسية</div>
 
-        <a href="pages/products.html">
+    <ul class="menu">
 
-            <span>📦</span>
+        <li>
+            <a class="active" href="index.html">
+                <span class="menu-icon">🏠</span>
+                لوحة التحكم
+            </a>
+        </li>
 
-            المنتجات
+        <li>
+            <a href="products.html">
+                <span class="menu-icon">📦</span>
+                المنتجات
+            </a>
+        </li>
 
-        </a>
+        <li>
+            <a href="categories.html">
+                <span class="menu-icon">🗂️</span>
+                الأقسام
+            </a>
+        </li>
 
+        <li>
+            <a href="orders.html">
+                <span class="menu-icon">🧾</span>
+                الطلبات
+                <span class="badge">8</span>
+            </a>
+        </li>
 
-        <a href="pages/categories.html">
+        <li>
+            <a href="customers.html">
+                <span class="menu-icon">👥</span>
+                العملاء
+            </a>
+        </li>
 
-            <span>🗂️</span>
+        <li>
+            <a href="inventory.html">
+                <span class="menu-icon">📊</span>
+                المخزون
+            </a>
+        </li>
 
-            الأقسام
+    </ul>
 
-        </a>
+    <div class="menu-title">التجارة</div>
 
+    <ul class="menu">
 
-        <a href="pages/orders.html">
+        <li>
+            <a href="offers.html">
+                <span class="menu-icon">🏷️</span>
+                العروض والكوبونات
+            </a>
+        </li>
 
-            <span>🛒</span>
+        <li>
+            <a href="payments.html">
+                <span class="menu-icon">💳</span>
+                المدفوعات
+            </a>
+        </li>
 
-            الطلبات
+        <li>
+            <a href="reports.html">
+                <span class="menu-icon">📈</span>
+                التقارير والتحليلات
+            </a>
+        </li>
 
-        </a>
+    </ul>
 
+    <div class="menu-title">النظام</div>
 
-        <a href="pages/customers.html">
+    <ul class="menu">
 
-            <span>👥</span>
+        <li>
+            <a href="settings.html">
+                <span class="menu-icon">⚙️</span>
+                إعدادات المتجر
+            </a>
+        </li>
 
-            العملاء
+        <li>
+            <a href="../index.html">
+                <span class="menu-icon">🌐</span>
+                فتح المتجر
+            </a>
+        </li>
 
-        </a>
+    </ul>
 
+    <div class="sidebar-bottom">
 
-        <a href="pages/offers.html">
+        <ul class="menu">
 
-            <span>🏷️</span>
+            <li>
+                <a href="login.html">
+                    <span class="menu-icon">🚪</span>
+                    تسجيل الخروج
+                </a>
+            </li>
 
-            العروض
+        </ul>
 
-        </a>
-
-
-        <a href="pages/settings.html">
-
-            <span>⚙️</span>
-
-            الإعدادات
-
-        </a>
-
-
-        <a href="../index.html">
-
-            <span>🌐</span>
-
-            الموقع الرئيسي
-
-        </a>
-
-
-    </nav>
+    </div>
 
 </aside>
 
+<main class="main">
 
+<div class="content">
 
-<!-- =====================================================
-     MAIN CONTENT
-     ===================================================== -->
+<section class="welcome">
 
-<main class="main-content">
-
-
-    <!-- =================================================
-         TOPBAR
-         ================================================= -->
-
-    <header class="topbar">
-
-
-        <div>
-
-            <h1>
-                لوحة التحكم
-            </h1>
-
-            <p>
-                مرحبًا بك في إدارة مول البركة أولاد الجارحي
-            </p>
-
-        </div>
-
-
-        <div class="admin-user">
-
-            <span>
-                👤
-            </span>
-
-            <strong>
-                المدير
-            </strong>
-
-        </div>
-
-
-    </header>
-
-
-
-    <!-- =================================================
-         WELCOME
-         ================================================= -->
-
-    <section class="dashboard-welcome">
-
-        <h2>
-            أهلاً بك في لوحة إدارة مول البركة 👋
-        </h2>
-
+    <div>
+        <h1>لوحة التحكم 👋</h1>
         <p>
-            من هنا يمكنك إدارة المنتجات والطلبات والعملاء
-            والأقسام والعروض وإعدادات المتجر.
+            إدارة مول البركة بالكامل من مكان واحد
         </p>
+    </div>
 
-    </section>
+    <div class="date" id="date">
+        اليوم
+    </div>
 
+</section>
 
+<section class="stats">
 
-    <!-- =================================================
-         STATISTICS
-         ================================================= -->
+    <div class="stat">
 
-    <section class="stats-grid">
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                🛒
-            </div>
+        <div class="stat-head">
 
             <div>
-
-                <span>
-                    إجمالي الطلبات
-                </span>
-
-                <strong id="totalOrders">
-                    0
-                </strong>
-
+                <label>مبيعات اليوم</label>
+                <h2>12,850 ج.م</h2>
             </div>
 
-        </div>
-
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                📦
-            </div>
-
-            <div>
-
-                <span>
-                    المنتجات
-                </span>
-
-                <strong id="totalProducts">
-                    0
-                </strong>
-
-            </div>
-
-        </div>
-
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                👥
-            </div>
-
-            <div>
-
-                <span>
-                    العملاء
-                </span>
-
-                <strong id="totalCustomers">
-                    0
-                </strong>
-
-            </div>
-
-        </div>
-
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
+            <div class="stat-icon g">
                 💰
             </div>
 
-            <div>
-
-                <span>
-                    إجمالي المبيعات
-                </span>
-
-                <strong id="totalSales">
-                    0 جنيه
-                </strong>
-
-            </div>
-
         </div>
 
+        <div class="change">
+            ↑ 18.5% عن أمس
+        </div>
 
-    </section>
+    </div>
 
+    <div class="stat">
 
-
-    <!-- =================================================
-         QUICK ACTIONS
-         ================================================= -->
-
-    <section class="admin-card">
-
-
-        <div class="card-header">
+        <div class="stat-head">
 
             <div>
+                <label>طلبات اليوم</label>
+                <h2>48</h2>
+            </div>
 
-                <h2>
-                    الإجراءات السريعة
-                </h2>
-
-                <p>
-                    الوصول السريع لأهم وظائف الإدارة
-                </p>
-
+            <div class="stat-icon o">
+                🧾
             </div>
 
         </div>
 
-
-        <div class="form-actions">
-
-
-            <a
-                href="pages/products.html"
-                class="btn btn-primary"
-            >
-                ➕ إضافة منتج
-            </a>
-
-
-            <a
-                href="pages/categories.html"
-                class="btn btn-secondary"
-            >
-                🗂️ إدارة الأقسام
-            </a>
-
-
-            <a
-                href="pages/offers.html"
-                class="btn btn-secondary"
-            >
-                🏷️ إضافة عرض
-            </a>
-
-
-            <a
-                href="pages/orders.html"
-                class="btn btn-secondary"
-            >
-                🛒 عرض الطلبات
-            </a>
-
-
+        <div class="change">
+            ↑ 12% عن أمس
         </div>
 
+    </div>
 
-    </section>
+    <div class="stat">
 
-
-
-    <!-- =================================================
-         RECENT ORDERS
-         ================================================= -->
-
-    <section class="admin-card">
-
-
-        <div class="card-header">
-
+        <div class="stat-head">
 
             <div>
-
-                <h2>
-                    أحدث الطلبات
-                </h2>
-
-                <p>
-                    آخر الطلبات المسجلة في المتجر
-                </p>
-
+                <label>إجمالي العملاء</label>
+                <h2>1,284</h2>
             </div>
 
-
-            <a
-                href="pages/orders.html"
-                class="btn btn-primary btn-small"
-            >
-                عرض الكل
-            </a>
-
+            <div class="stat-icon b">
+                👥
+            </div>
 
         </div>
 
-
-
-        <div class="table-responsive">
-
-
-            <table class="admin-table">
-
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            رقم الطلب
-                        </th>
-
-                        <th>
-                            العميل
-                        </th>
-
-                        <th>
-                            الإجمالي
-                        </th>
-
-                        <th>
-                            الحالة
-                        </th>
-
-                        <th>
-                            التاريخ
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody id="recentOrders">
-
-
-                    <tr>
-
-                        <td colspan="5">
-
-                            <div class="empty-state">
-
-                                <div class="empty-state-icon">
-                                    🛒
-                                </div>
-
-                                <h3>
-                                    لا توجد طلبات حتى الآن
-                                </h3>
-
-                                <p>
-                                    ستظهر الطلبات الجديدة هنا.
-                                </p>
-
-                            </div>
-
-                        </td>
-
-                    </tr>
-
-
-                </tbody>
-
-
-            </table>
-
-
+        <div class="change">
+            ↑ 7.2% هذا الشهر
         </div>
 
+    </div>
 
-    </section>
+    <div class="stat">
 
-
-
-    <!-- =================================================
-         LOW STOCK
-         ================================================= -->
-
-    <section class="admin-card">
-
-
-        <div class="card-header">
-
+        <div class="stat-head">
 
             <div>
-
-                <h2>
-                    المنتجات منخفضة المخزون
-                </h2>
-
-                <p>
-                    المنتجات التي تحتاج إلى إعادة تخزين
-                </p>
-
+                <label>إجمالي المنتجات</label>
+                <h2 id="productsCount">...</h2>
             </div>
 
-
-            <a
-                href="pages/products.html"
-                class="btn btn-primary btn-small"
-            >
-                إدارة المنتجات
-            </a>
-
-
-        </div>
-
-
-
-        <div class="table-responsive">
-
-
-            <table class="admin-table">
-
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            المنتج
-                        </th>
-
-                        <th>
-                            القسم
-                        </th>
-
-                        <th>
-                            السعر
-                        </th>
-
-                        <th>
-                            المخزون
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody id="lowStockProducts">
-
-
-                    <tr>
-
-                        <td colspan="4">
-
-                            <div class="empty-state">
-
-                                <div class="empty-state-icon">
-                                    📦
-                                </div>
-
-                                <h3>
-                                    لا توجد بيانات
-                                </h3>
-
-                                <p>
-                                    ستظهر المنتجات منخفضة المخزون هنا.
-                                </p>
-
-                            </div>
-
-                        </td>
-
-                    </tr>
-
-
-                </tbody>
-
-
-            </table>
-
-
-        </div>
-
-
-    </section>
-
-
-
-    <!-- =================================================
-         QUICK INFORMATION
-         ================================================= -->
-
-    <section class="admin-card">
-
-
-        <div class="card-header">
-
-            <div>
-
-                <h2>
-                    معلومات المتجر
-                </h2>
-
-                <p>
-                    البيانات الأساسية
-                </p>
-
+            <div class="stat-icon r">
+                📦
             </div>
 
         </div>
 
+        <div class="change">
+            من ملف المنتجات
+        </div>
 
-        <div class="admin-form">
+    </div>
 
+</section>
 
-            <div class="form-group">
+<section class="grid">
 
-                <label>
-                    اسم المتجر
-                </label>
+<div class="card">
 
-                <input
-                    type="text"
-                    value="مول البركة أولاد الجارحي"
-                    readonly
-                >
+    <div class="card-head">
 
-            </div>
+        <strong>
+            📈 تحليل المبيعات
+        </strong>
 
+        <a href="reports.html">
+            كل التقارير ←
+        </a>
 
-            <div class="form-group">
+    </div>
 
-                <label>
-                    الهاتف
-                </label>
+    <div class="card-body">
 
-                <input
-                    type="text"
-                    value="01119511185"
-                    readonly
-                >
+        <div class="search-box">
 
-            </div>
+            <input
+                type="text"
+                placeholder="ابحث داخل لوحة التحكم...">
 
-
-            <div class="form-group">
-
-                <label>
-                    العنوان
-                </label>
-
-                <input
-                    type="text"
-                    value="شارع الشيخ عبدالرحمن تاج البنفسج ٩"
-                    readonly
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    الموقع
-                </label>
-
-                <input
-                    type="text"
-                    value="albaraka.io"
-                    readonly
-                >
-
-            </div>
-
+            <button
+                class="primary-btn"
+                onclick="alert('سيتم فتح البحث المتقدم')">
+                بحث
+            </button>
 
         </div>
 
+        <div class="chart">
 
-    </section>
+            <div class="bar-wrap">
+                <span class="bar-value">7.2K</span>
+                <div class="bar" style="height:42%"></div>
+                <span class="bar-day">السبت</span>
+            </div>
 
+            <div class="bar-wrap">
+                <span class="bar-value">9.4K</span>
+                <div class="bar" style="height:55%"></div>
+                <span class="bar-day">الأحد</span>
+            </div>
+
+            <div class="bar-wrap">
+                <span class="bar-value">8.1K</span>
+                <div class="bar" style="height:48%"></div>
+                <span class="bar-day">الإثنين</span>
+            </div>
+
+            <div class="bar-wrap">
+                <span class="bar-value">11.8K</span>
+                <div class="bar" style="height:70%"></div>
+                <span class="bar-day">الثلاثاء</span>
+            </div>
+
+            <div class="bar-wrap">
+                <span class="bar-value">10.3K</span>
+                <div class="bar" style="height:61%"></div>
+                <span class="bar-day">الأربعاء</span>
+            </div>
+
+            <div class="bar-wrap">
+                <span class="bar-value">14.2K</span>
+                <div class="bar" style="height:84%"></div>
+                <span class="bar-day">الخميس</span>
+            </div>
+
+            <div class="bar-wrap">
+                <span class="bar-value">12.8K</span>
+                <div class="bar" style="height:76%"></div>
+                <span class="bar-day">الجمعة</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card">
+
+    <div class="card-head">
+
+        <strong>⚡ إجراءات سريعة</strong>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="quick-grid">
+
+            <button
+                class="quick"
+                onclick="location.href='products.html'">
+                <b>➕</b>
+                <span>إضافة منتج</span>
+            </button>
+
+            <button
+                class="quick"
+                onclick="location.href='orders.html'">
+                <b>🧾</b>
+                <span>إدارة الطلبات</span>
+            </button>
+
+            <button
+                class="quick"
+                onclick="location.href='offers.html'">
+                <b>🏷️</b>
+                <span>إنشاء عرض</span>
+            </button>
+
+            <button
+                class="quick"
+                onclick="location.href='reports.html'">
+                <b>📊</b>
+                <span>التقارير</span>
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+</div>
 
 </main>
 
-
-
-<!-- =====================================================
-     JAVASCRIPT
-     ===================================================== -->
-
-<script src="assets/js/admin.js"></script>
-
-
 <script>
 
-
-/* =====================================================
-   DASHBOARD DATA
-   ===================================================== */
-
-function loadDashboardData() {
-
-
-    /*
-     * في النسخة الحالية نستخدم LocalStorage
-     * كطبقة مؤقتة للبيانات.
-     *
-     * لاحقًا سيتم ربطها بقاعدة البيانات و API.
-     */
-
-
-    const products =
-        JSON.parse(
-            localStorage.getItem(
-                "albaraka_products"
-            )
-        ) || [];
-
-
-    const orders =
-        JSON.parse(
-            localStorage.getItem(
-                "albaraka_orders"
-            )
-        ) || [];
-
-
-    const customers =
-        JSON.parse(
-            localStorage.getItem(
-                "albaraka_customers"
-            )
-        ) || [];
-
-
-
-    /* =================================================
-       PRODUCTS
-       ================================================= */
+function toggleSidebar(){
 
     document
-        .getElementById(
-            "totalProducts"
-        )
-        .textContent =
-        products.length;
+        .getElementById("sidebar")
+        .classList
+        .toggle("open");
 
+}
 
+function openStore(){
 
-    /* =================================================
-       ORDERS
-       ================================================= */
+    location.href="../index.html";
 
-    document
-        .getElementById(
-            "totalOrders"
-        )
-        .textContent =
-        orders.length;
+}
 
+function notifications(){
 
-
-    /* =================================================
-       CUSTOMERS
-       ================================================= */
-
-    document
-        .getElementById(
-            "totalCustomers"
-        )
-        .textContent =
-        customers.length;
-
-
-
-    /* =================================================
-       SALES
-       ================================================= */
-
-    const totalSales =
-        orders.reduce(
-            function (
-                total,
-                order
-            ) {
-
-                return (
-                    total +
-                    Number(
-                        order.total || 0
-                    )
-                );
-
-            },
-            0
-        );
-
-
-    document
-        .getElementById(
-            "totalSales"
-        )
-        .textContent =
-        formatCurrency(
-            totalSales
-        );
-
-
-
-    /* =================================================
-       RECENT ORDERS
-       ================================================= */
-
-    loadRecentOrders(
-        orders
-    );
-
-
-
-    /* =================================================
-       LOW STOCK
-       ================================================= */
-
-    loadLowStockProducts(
-        products
+    alert(
+        "🔔 الإشعارات\n\n" +
+        "8 طلبات جديدة\n" +
+        "7 منتجات منخفضة المخزون"
     );
 
 }
 
+document
+    .getElementById("date")
+    .textContent =
+    new Date().toLocaleDateString(
+        "ar-EG",
+        {
+            weekday:"long",
+            year:"numeric",
+            month:"long",
+            day:"numeric"
+        }
+    );
 
+async function loadProductsCount(){
 
-/* =====================================================
-   RECENT ORDERS
-   ===================================================== */
+    try{
 
-function loadRecentOrders(
-    orders
-) {
-
-
-    const container =
-        document.getElementById(
-            "recentOrders"
-        );
-
-
-    if (!container) {
-
-        return;
-
-    }
-
-
-    if (!orders.length) {
-
-        return;
-
-    }
-
-
-    const recent =
-        [...orders]
-            .sort(
-                function (
-                    a,
-                    b
-                ) {
-
-                    return (
-                        new Date(
-                            b.createdAt || 0
-                        ) -
-                        new Date(
-                            a.createdAt || 0
-                        )
-                    );
-
-                }
-            )
-            .slice(
-                0,
-                5
+        const response =
+            await fetch(
+                "../products.json?v="+Date.now()
             );
 
+        if(!response.ok)
+            throw new Error();
 
-    container.innerHTML =
-        recent
-            .map(
-                function (
-                    order
-                ) {
+        const data =
+            await response.json();
 
-                    const status =
-                        order.status ||
-                        "pending";
+        const products =
+            Array.isArray(data.products)
+                ? data.products
+                : Array.isArray(data)
+                    ? data
+                    : [];
 
+        document
+            .getElementById("productsCount")
+            .textContent =
+            products.length.toLocaleString(
+                "ar-EG"
+            );
 
-                    return `
+    }catch(error){
 
-                        <tr>
+        document
+            .getElementById("productsCount")
+            .textContent="—";
 
-                            <td>
-                                ${
-                                    escapeHTML(
-                                        order.id ||
-                                        "-"
-                                    )
-                                }
-                            </td>
-
-                            <td>
-                                ${
-                                    escapeHTML(
-                                        order.customerName ||
-                                        "عميل"
-                                    )
-                                }
-                            </td>
-
-                            <td>
-
-                                <span class="price">
-
-                                    ${
-                                        formatCurrency(
-                                            order.total || 0
-                                        )
-                                    }
-
-                                </span>
-
-                            </td>
-
-                            <td>
-
-                                <span
-                                    class="status ${escapeHTML(status)}"
-                                >
-
-                                    ${
-                                        getOrderStatusText(
-                                            status
-                                        )
-                                    }
-
-                                </span>
-
-                            </td>
-
-                            <td>
-
-                                ${
-                                    formatDate(
-                                        order.createdAt
-                                    )
-                                }
-
-                            </td>
-
-                        </tr>
-
-                    `;
-
-                }
-            )
-            .join("");
+    }
 
 }
 
-
-
-/* =====================================================
-   LOW STOCK PRODUCTS
-   ===================================================== */
-
-function loadLowStockProducts(
-    products
-) {
-
-
-    const container =
-        document.getElementById(
-            "lowStockProducts"
-        );
-
-
-    if (!container) {
-
-        return;
-
-    }
-
-
-    const lowStock =
-        products
-            .filter(
-                function (
-                    product
-                ) {
-
-                    return (
-                        Number(
-                            product.stock || 0
-                        ) <= 5
-                    );
-
-                }
-            )
-            .slice(
-                0,
-                5
-            );
-
-
-    if (!lowStock.length) {
-
-        container.innerHTML = `
-
-            <tr>
-
-                <td colspan="4">
-
-                    <div class="empty-state">
-
-                        <div class="empty-state-icon">
-                            ✅
-                        </div>
-
-                        <h3>
-                            المخزون جيد
-                        </h3>
-
-                        <p>
-                            لا توجد منتجات منخفضة المخزون حاليًا.
-                        </p>
-
-                    </div>
-
-                </td>
-
-            </tr>
-
-        `;
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        lowStock
-            .map(
-                function (
-                    product
-                ) {
-
-                    return `
-
-                        <tr>
-
-                            <td>
-
-                                <strong>
-                                    ${
-                                        escapeHTML(
-                                            product.name ||
-                                            "-"
-                                        )
-                                    }
-                                </strong>
-
-                            </td>
-
-                            <td>
-
-                                ${
-                                    escapeHTML(
-                                        product.category ||
-                                        "-"
-                                    )
-                                }
-
-                            </td>
-
-                            <td>
-
-                                <span class="price">
-
-                                    ${
-                                        formatCurrency(
-                                            product.price || 0
-                                        )
-                                    }
-
-                                </span>
-
-                            </td>
-
-                            <td>
-
-                                <span
-                                    class="status ${
-                                        Number(
-                                            product.stock || 0
-                                        ) === 0
-                                            ? "cancelled"
-                                            : "pending"
-                                    }"
-                                >
-
-                                    ${
-                                        formatNumber(
-                                            product.stock || 0
-                                        )
-                                    }
-
-                                </span>
-
-                            </td>
-
-                        </tr>
-
-                    `;
-
-                }
-            )
-            .join("");
-
-}
-
-
-
-/* =====================================================
-   INITIALIZE
-   ===================================================== */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-        loadDashboardData();
-
-    }
-);
-
+loadProductsCount();
 
 </script>
 
-
 </body>
-
 </html>
