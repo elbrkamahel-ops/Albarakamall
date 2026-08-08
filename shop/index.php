@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>متجر مول البركة</title>
+<title>مول البركة | المتجر</title>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 
 body{
 font-family:Tahoma,Arial,sans-serif;
-background:#f5f8f6;
+background:#f5f7f6;
 color:#222;
 line-height:1.7
 }
@@ -23,8 +23,8 @@ cursor:pointer
 }
 
 .topbar{
-background:#f0f6f2;
-color:#555;
+background:#087f4e;
+color:#fff;
 padding:8px 5%;
 font-size:13px
 }
@@ -39,7 +39,10 @@ justify-content:space-between
 .header{
 background:#fff;
 padding:15px 5%;
-border-bottom:1px solid #e5e5e5
+border-bottom:1px solid #e5e5e5;
+position:sticky;
+top:0;
+z-index:100
 }
 
 .header-inner{
@@ -58,26 +61,26 @@ gap:12px
 }
 
 .logo-box{
-width:58px;
-height:58px;
-border-radius:16px;
+width:55px;
+height:55px;
+border-radius:15px;
 background:#087f4e;
 color:#fff;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:29px;
+font-size:28px;
 font-weight:bold
 }
 
 .logo h1{
-font-size:25px;
+font-size:24px;
 color:#087f4e
 }
 
 .logo p{
-color:#777;
-font-size:13px
+font-size:12px;
+color:#777
 }
 
 .actions{
@@ -86,10 +89,10 @@ gap:10px
 }
 
 .action{
-background:#f1f6f3;
+background:#eef7f2;
 color:#087f4e;
 padding:10px 15px;
-border-radius:12px;
+border-radius:10px;
 font-weight:bold
 }
 
@@ -106,6 +109,1225 @@ color:#fff;
 width:24px;
 height:24px;
 border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:12px
+}
+
+.nav{
+background:#075d3a;
+color:#fff
+}
+
+.nav-inner{
+max-width:1200px;
+margin:auto;
+display:flex;
+overflow-x:auto
+}
+
+.nav a{
+padding:13px 18px;
+white-space:nowrap;
+font-weight:bold
+}
+
+.nav a:hover{
+background:#064c30
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:25px 15px
+}
+
+/* HERO */
+
+.hero{
+background:linear-gradient(135deg,#e8f8ef,#fff5d7);
+border-radius:25px;
+padding:40px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:25px;
+margin-bottom:35px
+}
+
+.hero-text{
+max-width:650px
+}
+
+.badge{
+display:inline-block;
+background:#fff;
+color:#087f4e;
+padding:7px 14px;
+border-radius:30px;
+font-weight:bold;
+margin-bottom:12px
+}
+
+.hero h2{
+font-size:40px;
+line-height:1.4;
+color:#087f4e
+}
+
+.hero p{
+color:#666;
+font-size:17px;
+margin-top:10px
+}
+
+.hero-art{
+width:210px;
+height:210px;
+border-radius:50%;
+background:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:95px
+}
+
+/* TITLES */
+
+.section-title{
+text-align:center;
+margin:35px 0 20px
+}
+
+.section-title h2{
+font-size:29px;
+color:#087f4e
+}
+
+.section-title p{
+color:#777
+}
+
+/* CATEGORIES */
+
+.categories{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px
+}
+
+.category{
+background:#fff;
+border:1px solid #e3ebe6;
+border-radius:18px;
+padding:25px 12px;
+text-align:center;
+transition:.2s
+}
+
+.category:hover{
+transform:translateY(-4px);
+box-shadow:0 10px 25px rgba(0,0,0,.08)
+}
+
+.category-icon{
+font-size:50px
+}
+
+.category h3{
+color:#087f4e;
+margin-top:5px
+}
+
+.category p{
+font-size:13px;
+color:#888;
+margin:3px 0 13px
+}
+
+.shop-btn{
+display:inline-block;
+background:#087f4e;
+color:#fff;
+padding:8px 15px;
+border-radius:9px;
+font-size:13px
+}
+
+/* PRODUCTS */
+
+.products{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px
+}
+
+.product{
+background:#fff;
+border:1px solid #e3ebe6;
+border-radius:18px;
+padding:13px;
+overflow:hidden
+}
+
+.product-image{
+height:145px;
+border-radius:14px;
+background:#f0f7f3;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:68px;
+margin-bottom:12px
+}
+
+.product h3{
+font-size:17px
+}
+
+.product p{
+font-size:13px;
+color:#888
+}
+
+.price{
+font-size:18px;
+font-weight:bold;
+color:#087f4e;
+margin:7px 0
+}
+
+.add-btn{
+width:100%;
+border:0;
+background:#087f4e;
+color:#fff;
+padding:10px;
+border-radius:10px;
+font-weight:bold
+}
+
+.add-btn:hover{
+background:#06683f
+}
+
+/* CART */
+
+.cart-section{
+margin-top:45px;
+background:#fff;
+border:1px solid #e3ebe6;
+border-radius:20px;
+padding:25px
+}
+
+.cart-head{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:15px
+}
+
+.cart-head h2{
+color:#087f4e
+}
+
+.clear-btn{
+border:0;
+background:#eee;
+color:#555;
+padding:8px 13px;
+border-radius:9px
+}
+
+.cart-empty{
+text-align:center;
+color:#888;
+padding:25px
+}
+
+.cart-item{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:15px;
+padding:13px 0;
+border-bottom:1px solid #eee
+}
+
+.cart-info{
+display:flex;
+align-items:center;
+gap:10px
+}
+
+.cart-icon{
+width:50px;
+height:50px;
+border-radius:10px;
+background:#f0f7f3;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:27px
+}
+
+.cart-name{
+font-weight:bold
+}
+
+.cart-price{
+color:#087f4e;
+font-weight:bold
+}
+
+.quantity{
+display:flex;
+align-items:center;
+gap:7px
+}
+
+.quantity button{
+width:31px;
+height:31px;
+border:0;
+border-radius:7px;
+background:#087f4e;
+color:#fff;
+font-size:18px
+}
+
+.quantity span{
+min-width:25px;
+text-align:center;
+font-weight:bold
+}
+
+.cart-total{
+display:flex;
+justify-content:space-between;
+padding-top:20px;
+font-size:21px;
+font-weight:bold;
+color:#087f4e
+}
+
+.checkout-btn{
+width:100%;
+border:0;
+background:#f2a900;
+color:#fff;
+padding:14px;
+border-radius:11px;
+font-size:17px;
+font-weight:bold;
+margin-top:18px
+}
+
+.checkout-btn:hover{
+background:#d89400
+}
+
+.info{
+margin-top:40px;
+background:#fff;
+border-radius:18px;
+padding:25px;
+text-align:center;
+border:1px solid #e3ebe6
+}
+
+.info h2{
+color:#087f4e
+}
+
+.footer{
+margin-top:50px;
+background:#075d3a;
+color:#fff;
+text-align:center;
+padding:30px 15px
+}
+
+.footer p{
+color:#dcefe5;
+margin-top:5px
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.categories,
+.products{
+grid-template-columns:repeat(2,1fr)
+}
+
+.hero h2{
+font-size:32px
+}
+
+.hero-art{
+width:160px;
+height:160px;
+font-size:70px
+}
+
+}
+
+@media(max-width:600px){
+
+.topbar-inner{
+flex-direction:column;
+align-items:center;
+gap:3px
+}
+
+.header-inner{
+flex-direction:column
+}
+
+.actions{
+width:100%;
+justify-content:center
+}
+
+.hero{
+flex-direction:column;
+text-align:center;
+padding:30px 18px
+}
+
+.hero h2{
+font-size:28px
+}
+
+.hero-art{
+width:135px;
+height:135px;
+font-size:58px
+}
+
+.container{
+padding:18px 10px
+}
+
+.categories,
+.products{
+grid-template-columns:1fr 1fr;
+gap:9px
+}
+
+.category{
+padding:17px 7px
+}
+
+.category-icon{
+font-size:40px
+}
+
+.product{
+padding:9px
+}
+
+.product-image{
+height:105px;
+font-size:45px
+}
+
+.cart-item{
+flex-wrap:wrap
+}
+
+.cart-head{
+flex-direction:column;
+gap:10px
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+<div class="topbar-inner">
+<span>🚚 توصيل حتى باب البيت</span>
+<span>📞 01119511185</span>
+</div>
+</div>
+
+
+<header class="header">
+
+<div class="header-inner">
+
+<a href="../" class="logo">
+
+<div class="logo-box">ب</div>
+
+<div>
+<h1>مول البركة</h1>
+<p>كل احتياجات بيتك</p>
+</div>
+
+</a>
+
+
+<div class="actions">
+
+<a href="../" class="action">
+الرئيسية
+</a>
+
+<a href="#cart" class="action cart">
+🛒 السلة
+<span id="cartCount" class="cart-count">0</span>
+</a>
+
+</div>
+
+</div>
+
+</header>
+
+
+<nav class="nav">
+
+<div class="nav-inner">
+
+<a href="../">الرئيسية</a>
+<a href="#categories">الأقسام</a>
+<a href="#vegetables">🥬 خضروات وفاكهة</a>
+<a href="#meat">🥩 اللحوم</a>
+<a href="#chicken">🍗 الدواجن</a>
+<a href="#market">🛒 الماركت</a>
+<a href="#cart">🛒 السلة</a>
+
+</div>
+
+</nav>
+
+
+<main class="container">
+
+
+<section class="hero">
+
+<div class="hero-text">
+
+<span class="badge">
+🔥 عروض مول البركة
+</span>
+
+<h2>
+كل احتياجات بيتك
+<br>
+في مكان واحد
+</h2>
+
+<p>
+خضروات وفاكهة طازجة،
+لحوم، دواجن، جزارة وماركت
+بسهولة من متجر مول البركة.
+</p>
+
+</div>
+
+<div class="hero-art">
+🛒🍎
+</div>
+
+</section>
+
+
+<section id="categories">
+
+<div class="section-title">
+
+<h2>تسوق حسب القسم</h2>
+
+<p>اختر القسم الذي تريده</p>
+
+</div>
+
+
+<div class="categories">
+
+
+<a class="category" href="#vegetables">
+
+<div class="category-icon">🥬</div>
+
+<h3>الخضروات والفاكهة</h3>
+
+<p>طازجة يومياً</p>
+
+<span class="shop-btn">تسوق الآن</span>
+
+</a>
+
+
+<a class="category" href="#meat">
+
+<div class="category-icon">🥩</div>
+
+<h3>اللحوم والجزارة</h3>
+
+<p>لحوم مختارة</p>
+
+<span class="shop-btn">تسوق الآن</span>
+
+</a>
+
+
+<a class="category" href="#chicken">
+
+<div class="category-icon">🍗</div>
+
+<h3>الدواجن والطيور</h3>
+
+<p>طازة ومختارة</p>
+
+<span class="shop-btn">تسوق الآن</span>
+
+</a>
+
+
+<a class="category" href="#market">
+
+<div class="category-icon">🛒</div>
+
+<h3>الماركت</h3>
+
+<p>مستلزمات البيت</p>
+
+<span class="shop-btn">تسوق الآن</span>
+
+</a>
+
+
+</div>
+
+</section>
+
+
+<section id="vegetables">
+
+<div class="section-title">
+
+<h2>🥬 الخضروات والفاكهة</h2>
+
+<p>منتجات طازجة</p>
+
+</div>
+
+
+<div class="products">
+
+
+<div class="product">
+
+<div class="product-image">🍎</div>
+
+<h3>تفاح طازج</h3>
+
+<p>جودة ممتازة</p>
+
+<div class="price">25 جنيه</div>
+
+<button class="add-btn"
+onclick="addToCart('تفاح طازج','🍎',25)">
+أضف للسلة
+</button>
+
+</div>
+
+
+<div class="product">
+
+<div class="product-image">🍅</div>
+
+<h3>طماطم</h3>
+
+<p>طازجة يومياً</p>
+
+<div class="price">15 جنيه</div>
+
+<button class="add-btn"
+onclick="addToCart('طماطم','🍅',15)">
+أضف للسلة
+</button>
+
+</div>
+
+
+<div class="product">
+
+<div class="product-image">🥒</div>
+
+<h3>خيار</h3>
+
+<p>طازج ومختار</p>
+
+<div class="price">20 جنيه</div>
+
+<button class="add-btn"
+onclick="addToCart('خيار','🥒',20)">
+أضف للسلة
+</button>
+
+</div>
+
+
+<div class="product">
+
+<div class="product-image">🥔</div>
+
+<h3>بطاطس</h3>
+
+<p>جودة ممتازة</p>
+
+<div class="price">18 جنيه</div>
+
+<button class="add-btn"
+onclick="addToCart('بطاطس','🥔',18)">
+أضف للسلة
+</button>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<section id="meat">
+
+<div class="section-title">
+
+<h2>🥩 اللحوم والجزارة</h2>
+
+<p>لحوم مختارة بعناية</p>
+
+</div>
+
+
+<div class="products">
+
+
+<div class="product">
+
+<div class="product-image">🥩</div>
+
+<h3>لحوم بلدي</h3>
+
+<p>تجهيز حسب الطلب</p>
+
+<div class="price">450 جنيه</div>
+
+<button class="add-btn"
+onclick="addToCart('لحوم بلدي','🥩',450)">
+أضف للسلة
+</button>
+
+</div>
+
+
+<div class="product">
+
+<div class="product-image">🍖</div>
+
+<h3>لحمة مفرومة</h3>
+
+<p>طازجة ومجهزة</p>
+
+<div class="price">400 جنيه</div>
+
+<button class="add-btn"
+onclick="addToCart('لحمة مفرومة','🍖',400)">
+أضف للسلة
+</button>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<section id="chicken">
+
+<div class="section-title">
+
+<h2>🍗 الدواجن والطيور</h2>
+
+<p>طازة ومختارة</p>
+
+</div>
+
+
+<div class="products">
+
+
+<div class="product">
+
+<div class="product-image">🐔</div>
+
+<h3>دجاج طازج</h3>
+
+<p>تجهيز حسب الطلب</p>
+
+<div class="price">120 جنيه</div>
+
+<button class="add-btn"
+onclick="addToCart('دجاج طازج','🐔',120)">
+أضف للسلة
+</button>
+
+</div>
+
+
+<div class="product">
+
+<div class="product-image">🥚</div>
+
+<h3>بيض</h3>
+
+<p>عبوة 30 بيضة</p>
+
+<div class="price">150 جنيه</div>
+
+<button class="add-btn"
+onclick="addToCart('بيض','🥚',150)">
+أضف للسلة
+</button>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<section id="market">
+
+<div class="section-title">
+
+<h2>🛒 الماركت</h2>
+
+<p>كل مستلزمات البيت</p>
+
+</div>
+
+
+<div class="products">
+
+
+<div class="product">
+
+<div class="product-image">🥫</div>
+
+<h3>منتجات غذائية</h3>
+
+<p>اختيارات متنوعة</p>
+
+<div class="price">50 جنيه</div>
+
+<button class="add-btn"
+onclick="addToCart('منتجات غذائية','🥫',50)">
+أضف للسلة
+</button>
+
+</div>
+
+
+<div class="product">
+
+<div class="product-image">🧃</div>
+
+<h3>مشروبات</h3>
+
+<p>اختيارات متنوعة</p>
+
+<div class="price">30 جنيه</div>
+
+<button class="add-btn"
+onclick="addToCart('مشروبات','🧃',30)">
+أضف للسلة
+</button>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- CART -->
+
+<section class="cart-section" id="cart">
+
+<div class="cart-head">
+
+<h2>🛒 سلة المشتريات</h2>
+
+<button class="clear-btn" onclick="clearCart()">
+تفريغ السلة
+</button>
+
+</div>
+
+
+<div id="cartItems">
+
+<div class="cart-empty">
+السلة فارغة حالياً.
+</div>
+
+</div>
+
+
+<div class="cart-total">
+
+<span>الإجمالي</span>
+
+<span>
+<span id="cartTotal">0</span>
+جنيه
+</span>
+
+</div>
+
+
+<button class="checkout-btn" onclick="checkout()">
+إتمام الطلب
+</button>
+
+</section>
+
+
+<section class="info">
+
+<h2>📞 اطلب بسهولة</h2>
+
+<p>
+خدمة العملاء:
+<strong>01119511185</strong>
+</p>
+
+<p>
+📍 شارع الشيخ عبدالرحمن تاج البنفسج 9
+</p>
+
+</section>
+
+
+</main>
+
+
+<footer class="footer">
+
+<h2>مول البركة</h2>
+
+<p>كل احتياجات بيتك في مكان واحد</p>
+
+<p>📞 01119511185</p>
+
+<p>© 2026 مول البركة - جميع الحقوق محفوظة</p>
+
+</footer>
+
+
+<script>
+
+let cart = [];
+
+
+/* إضافة منتج */
+
+function addToCart(name,icon,price){
+
+let existing =
+cart.find(function(item){
+return item.name === name;
+});
+
+
+if(existing){
+
+existing.quantity++;
+
+}else{
+
+cart.push({
+name:name,
+icon:icon,
+price:Number(price),
+quantity:1
+});
+
+}
+
+
+saveCart();
+
+renderCart();
+
+document.getElementById("cart").scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* زيادة */
+
+function increase(index){
+
+cart[index].quantity++;
+
+saveCart();
+
+renderCart();
+
+}
+
+
+/* نقص */
+
+function decrease(index){
+
+if(cart[index].quantity > 1){
+
+cart[index].quantity--;
+
+}else{
+
+cart.splice(index,1);
+
+}
+
+saveCart();
+
+renderCart();
+
+}
+
+
+/* حذف */
+
+function removeItem(index){
+
+cart.splice(index,1);
+
+saveCart();
+
+renderCart();
+
+}
+
+
+/* تفريغ */
+
+function clearCart(){
+
+cart=[];
+
+saveCart();
+
+renderCart();
+
+}
+
+
+/* عرض السلة */
+
+function renderCart(){
+
+let container =
+document.getElementById("cartItems");
+
+let countElement =
+document.getElementById("cartCount");
+
+let totalElement =
+document.getElementById("cartTotal");
+
+
+if(cart.length === 0){
+
+container.innerHTML =
+'<div class="cart-empty">السلة فارغة حالياً.</div>';
+
+countElement.textContent="0";
+
+totalElement.textContent="0";
+
+return;
+
+}
+
+
+let html="";
+
+let total=0;
+
+let count=0;
+
+
+cart.forEach(function(item,index){
+
+let itemTotal =
+item.price * item.quantity;
+
+total += itemTotal;
+
+count += item.quantity;
+
+
+html += `
+
+<div class="cart-item">
+
+<div class="cart-info">
+
+<div class="cart-icon">
+${item.icon}
+</div>
+
+<div>
+
+<div class="cart-name">
+${item.name}
+</div>
+
+<div>
+${item.price} جنيه
+</div>
+
+</div>
+
+</div>
+
+
+<div class="quantity">
+
+<button onclick="decrease(${index})">
+−
+</button>
+
+<span>
+${item.quantity}
+</span>
+
+<button onclick="increase(${index})">
++
+</button>
+
+</div>
+
+
+<div class="cart-price">
+${itemTotal} جنيه
+</div>
+
+
+<button
+class="clear-btn"
+onclick="removeItem(${index})">
+حذف
+</button>
+
+</div>
+
+`;
+
+});
+
+
+container.innerHTML=html;
+
+countElement.textContent=count;
+
+totalElement.textContent=total;
+
+}
+
+
+/* حفظ */
+
+function saveCart(){
+
+localStorage.setItem(
+"albaraka_cart",
+JSON.stringify(cart)
+);
+
+}
+
+
+/* تحميل */
+
+function loadCart(){
+
+let saved =
+localStorage.getItem("albaraka_cart");
+
+
+if(saved){
+
+try{
+
+cart=JSON.parse(saved);
+
+}catch(error){
+
+cart=[];
+
+}
+
+}
+
+
+renderCart();
+
+}
+
+
+/* إتمام الطلب */
+
+function checkout(){
+
+if(cart.length === 0){
+
+alert("السلة فارغة. أضف منتجاً أولاً.");
+
+return;
+
+}
+
+
+/* الانتقال إلى صفحة الطلب */
+
+window.location.href="checkout.html";
+
+}
+
+
+/* تشغيل */
+
+loadCart();
+
+</script>
+
+</body>
+</html>border-radius:50%;
 font-size:12px;
 display:flex;
 align-items:center;
