@@ -3,109 +3,633 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>متجر مول البركة</title>
-
-<meta name="description" content="متجر مول البركة للخضروات والفاكهة واللحوم والدواجن والماركت">
+<title>مول البركة | المتجر</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
-    font-family:Tahoma,Arial,sans-serif;
-    background:#f5f8f6;
-    color:#222;
-    line-height:1.7;
+font-family:Tahoma,Arial,sans-serif;
+background:#f5f7f6;
+color:#222;
+line-height:1.7
 }
 
-a{
-    text-decoration:none;
-    color:inherit;
-}
+a{text-decoration:none;color:inherit}
 
 button{
-    font-family:inherit;
-    cursor:pointer;
+font-family:inherit;
+cursor:pointer
 }
 
-/* TOP BAR */
-
 .topbar{
-    background:#f0f6f2;
-    color:#555;
-    padding:8px 5%;
-    font-size:13px;
+background:#087f4e;
+color:#fff;
+padding:8px 5%;
+font-size:13px
 }
 
 .topbar-inner{
-    max-width:1200px;
-    margin:auto;
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
+max-width:1200px;
+margin:auto;
+display:flex;
+justify-content:space-between
 }
 
-/* HEADER */
-
 .header{
-    background:#fff;
-    padding:15px 5%;
-    border-bottom:1px solid #e5e5e5;
+background:#fff;
+padding:15px 5%;
+border-bottom:1px solid #e5e5e5;
+position:sticky;
+top:0;
+z-index:100
 }
 
 .header-inner{
-    max-width:1200px;
-    margin:auto;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
+max-width:1200px;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:20px
 }
 
 .logo{
-    display:flex;
-    align-items:center;
-    gap:12px;
+display:flex;
+align-items:center;
+gap:12px
 }
 
 .logo-box{
-    width:58px;
-    height:58px;
-    border-radius:16px;
-    background:#087f4e;
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:29px;
-    font-weight:bold;
+width:55px;
+height:55px;
+border-radius:15px;
+background:#087f4e;
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+font-weight:bold
 }
 
 .logo h1{
-    font-size:25px;
-    color:#087f4e;
+font-size:24px;
+color:#087f4e
 }
 
 .logo p{
-    color:#777;
-    font-size:13px;
+font-size:12px;
+color:#777
 }
 
 .actions{
-    display:flex;
-    align-items:center;
-    gap:10px;
+display:flex;
+gap:10px
 }
 
 .action{
-    background:#f1f6f3;
-    color:#087f4e;
-    padding:10px 15px;
-    border-radius:12px;
+background:#eef7f2;
+color:#087f4e;
+padding:10px 15px;
+border-radius:10px;
+font-weight:bold
+}
+
+.cart{
+position:relative
+}
+
+.cart-count{
+position:absolute;
+top:-9px;
+left:-8px;
+background:#f2a900;
+color:#fff;
+width:24px;
+height:24px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:12px
+}
+
+.nav{
+background:#075d3a;
+color:#fff
+}
+
+.nav-inner{
+max-width:1200px;
+margin:auto;
+display:flex;
+overflow-x:auto
+}
+
+.nav a{
+padding:13px 18px;
+white-space:nowrap;
+font-weight:bold
+}
+
+.nav a:hover{
+background:#064c30
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:25px 15px
+}
+
+/* HERO */
+
+.hero{
+background:linear-gradient(135deg,#e8f8ef,#fff5d7);
+border-radius:25px;
+padding:40px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:25px;
+margin-bottom:35px
+}
+
+.hero-text{
+max-width:650px
+}
+
+.badge{
+display:inline-block;
+background:#fff;
+color:#087f4e;
+padding:7px 14px;
+border-radius:30px;
+font-weight:bold;
+margin-bottom:12px
+}
+
+.hero h2{
+font-size:40px;
+line-height:1.4;
+color:#087f4e
+}
+
+.hero p{
+color:#666;
+font-size:17px;
+margin-top:10px
+}
+
+.hero-art{
+width:210px;
+height:210px;
+border-radius:50%;
+background:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:95px
+}
+
+/* TITLES */
+
+.section-title{
+text-align:center;
+margin:35px 0 20px
+}
+
+.section-title h2{
+font-size:29px;
+color:#087f4e
+}
+
+.section-title p{
+color:#777
+}
+
+/* CATEGORIES */
+
+.categories{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px
+}
+
+.category{
+background:#fff;
+border:1px solid #e3ebe6;
+border-radius:18px;
+padding:25px 12px;
+text-align:center;
+transition:.2s
+}
+
+.category:hover{
+transform:translateY(-4px);
+box-shadow:0 10px 25px rgba(0,0,0,.08)
+}
+
+.category-icon{
+font-size:50px
+}
+
+.category h3{
+color:#087f4e;
+margin-top:5px
+}
+
+.category p{
+font-size:13px;
+color:#888;
+margin:3px 0 13px
+}
+
+.shop-btn{
+display:inline-block;
+background:#087f4e;
+color:#fff;
+padding:8px 15px;
+border-radius:9px;
+font-size:13px
+}
+
+/* PRODUCTS */
+
+.products{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px
+}
+
+.product{
+background:#fff;
+border:1px solid #e3ebe6;
+border-radius:18px;
+padding:13px;
+overflow:hidden
+}
+
+.product-image{
+height:145px;
+border-radius:14px;
+background:#f0f7f3;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:68px;
+margin-bottom:12px
+}
+
+.product h3{
+font-size:17px
+}
+
+.product p{
+font-size:13px;
+color:#888
+}
+
+.price{
+font-size:18px;
+font-weight:bold;
+color:#087f4e;
+margin:7px 0
+}
+
+.add-btn{
+width:100%;
+border:0;
+background:#087f4e;
+color:#fff;
+padding:10px;
+border-radius:10px;
+font-weight:bold
+}
+
+.add-btn:hover{
+background:#06683f
+}
+
+/* CART */
+
+.cart-section{
+margin-top:45px;
+background:#fff;
+border:1px solid #e3ebe6;
+border-radius:20px;
+padding:25px
+}
+
+.cart-head{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:15px
+}
+
+.cart-head h2{
+color:#087f4e
+}
+
+.clear-btn{
+border:0;
+background:#eee;
+color:#555;
+padding:8px 13px;
+border-radius:9px
+}
+
+.cart-empty{
+text-align:center;
+color:#888;
+padding:25px
+}
+
+.cart-item{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:15px;
+padding:13px 0;
+border-bottom:1px solid #eee
+}
+
+.cart-info{
+display:flex;
+align-items:center;
+gap:10px
+}
+
+.cart-icon{
+width:50px;
+height:50px;
+border-radius:10px;
+background:#f0f7f3;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:27px
+}
+
+.cart-name{
+font-weight:bold
+}
+
+.cart-price{
+color:#087f4e;
+font-weight:bold
+}
+
+.quantity{
+display:flex;
+align-items:center;
+gap:7px
+}
+
+.quantity button{
+width:31px;
+height:31px;
+border:0;
+border-radius:7px;
+background:#087f4e;
+color:#fff;
+font-size:18px
+}
+
+.quantity span{
+min-width:25px;
+text-align:center;
+font-weight:bold
+}
+
+.cart-total{
+display:flex;
+justify-content:space-between;
+padding-top:20px;
+font-size:21px;
+font-weight:bold;
+color:#087f4e
+}
+
+.checkout-btn{
+width:100%;
+border:0;
+background:#f2a900;
+color:#fff;
+padding:14px;
+border-radius:11px;
+font-size:17px;
+font-weight:bold;
+margin-top:18px
+}
+
+.checkout-btn:hover{
+background:#d89400
+}
+
+.info{
+margin-top:40px;
+background:#fff;
+border-radius:18px;
+padding:25px;
+text-align:center;
+border:1px solid #e3ebe6
+}
+
+.info h2{
+color:#087f4e
+}
+
+.footer{
+margin-top:50px;
+background:#075d3a;
+color:#fff;
+text-align:center;
+padding:30px 15px
+}
+
+.footer p{
+color:#dcefe5;
+margin-top:5px
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.categories,
+.products{
+grid-template-columns:repeat(2,1fr)
+}
+
+.hero h2{
+font-size:32px
+}
+
+.hero-art{
+width:160px;
+height:160px;
+font-size:70px
+}
+
+}
+
+@media(max-width:600px){
+
+.topbar-inner{
+flex-direction:column;
+align-items:center;
+gap:3px
+}
+
+.header-inner{
+flex-direction:column
+}
+
+.actions{
+width:100%;
+justify-content:center
+}
+
+.hero{
+flex-direction:column;
+text-align:center;
+padding:30px 18px
+}
+
+.hero h2{
+font-size:28px
+}
+
+.hero-art{
+width:135px;
+height:135px;
+font-size:58px
+}
+
+.container{
+padding:18px 10px
+}
+
+.categories,
+.products{
+grid-template-columns:1fr 1fr;
+gap:9px
+}
+
+.category{
+padding:17px 7px
+}
+
+.category-icon{
+font-size:40px
+}
+
+.product{
+padding:9px
+}
+
+.product-image{
+height:105px;
+font-size:45px
+}
+
+.cart-item{
+flex-wrap:wrap
+}
+
+.cart-head{
+flex-direction:column;
+gap:10px
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+<div class="topbar-inner">
+<span>🚚 توصيل حتى باب البيت</span>
+<span>📞 01119511185</span>
+</div>
+</div>
+
+
+<header class="header">
+
+<div class="header-inner">
+
+<a href="../" class="logo">
+
+<div class="logo-box">ب</div>
+
+<div>
+<h1>مول البركة</h1>
+<p>كل احتياجات بيتك</p>
+</div>
+
+</a>
+
+
+<div class="actions">
+
+<a href="../" class="action">
+الرئيسية
+</a>
+
+<a href="#cart" class="action cart">
+🛒 السلة
+<span id="cartCount" class="cart-count">0</span>
+</a>
+
+</div>
+
+</div>
+
+</header>
+
+
+<nav class="nav">
+
+<div class="nav-inner">
+
+<a href="../">الرئيسية</a>
+<a href="#categories">الأقسام</a>
+<a href="#vegetables">🥬 خضروات وفاكهة</a>
+<a href="#meat">🥩 اللحوم</a>
+<a href="#chicken">🍗 الدواجن</a>
+<a href="#market">🛒 الماركت</a>
+<a href="#cart">🛒 السلة</a>
+
+</div>
+
+</nav>
+
+
+<main class="container">
+
+
+<section class="hero">
+
+<div class="hero-text">
+
+<span class="badge">
+🔥 عروض مول البركة
+</span>
+
+<h2>
+كل احتياجات بيتك
+<br>
+في مكان واحد
+</h2>
+
+<p>
+خضروات وفاكهة طازجة،
+لحوم، دوا    border-radius:12px;
     font-weight:bold;
 }
 
