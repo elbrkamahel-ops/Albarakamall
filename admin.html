@@ -10,28 +10,20 @@
 *{
     box-sizing:border-box;
     margin:0;
-    padding:0;
+    padding:0
 }
 
 body{
-    font-family:
-        Tahoma,
-        Arial,
-        sans-serif;
+    font-family:Tahoma,Arial,sans-serif;
     background:#f4f7f5;
-    color:#17221c;
+    color:#17221c
 }
-
-/* ================= HEADER ================= */
 
 .header{
     background:#087f3f;
-    color:#fff;
-    padding:18px 20px;
-    position:sticky;
-    top:0;
-    z-index:1000;
-    box-shadow:0 4px 20px rgba(0,0,0,.12);
+    color:white;
+    padding:18px;
+    box-shadow:0 4px 20px rgba(0,0,0,.12)
 }
 
 .header-inner{
@@ -40,217 +32,207 @@ body{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:15px;
+    gap:15px
 }
 
 .logo{
     font-size:24px;
-    font-weight:900;
+    font-weight:900
 }
 
-.logo span{
-    color:#ffd447;
+.logo small{
+    font-size:13px;
+    opacity:.9
 }
 
 .header-actions{
     display:flex;
     gap:8px;
-    flex-wrap:wrap;
+    flex-wrap:wrap
+}
+
+button{
+    font-family:inherit
 }
 
 .header-btn{
     border:0;
-    background:#fff;
+    background:white;
     color:#087f3f;
-    padding:10px 15px;
+    padding:11px 16px;
     border-radius:12px;
-    font-weight:800;
-    cursor:pointer;
+    font-weight:900;
+    cursor:pointer
 }
-
-/* ================= LAYOUT ================= */
 
 .layout{
     max-width:1400px;
     margin:auto;
-    padding:20px;
+    padding:20px
 }
 
-.dashboard{
+.stats{
     display:grid;
-    grid-template-columns:
-        repeat(4,1fr);
+    grid-template-columns:repeat(4,1fr);
     gap:15px;
-    margin-bottom:20px;
+    margin-bottom:20px
 }
 
 .stat{
-    background:#fff;
-    border-radius:18px;
+    background:white;
     padding:20px;
-    box-shadow:
-        0 5px 20px rgba(0,0,0,.06);
+    border-radius:18px;
+    box-shadow:0 5px 20px rgba(0,0,0,.06)
 }
 
 .stat-icon{
-    font-size:30px;
+    font-size:30px
 }
 
 .stat-title{
-    color:#66736b;
-    margin-top:8px;
+    color:#68756d;
+    margin-top:6px
 }
 
 .stat-number{
+    color:#087f3f;
     font-size:30px;
     font-weight:900;
-    color:#087f3f;
-    margin-top:5px;
+    margin-top:5px
 }
 
-/* ================= TOOLBAR ================= */
-
 .toolbar{
-    background:#fff;
-    border-radius:18px;
+    background:white;
     padding:15px;
+    border-radius:18px;
     margin-bottom:18px;
-    box-shadow:
-        0 5px 20px rgba(0,0,0,.06);
+    box-shadow:0 5px 20px rgba(0,0,0,.06)
 }
 
 .toolbar-row{
     display:flex;
     gap:10px;
-    flex-wrap:wrap;
+    flex-wrap:wrap
+}
+
+.search,
+.select{
+    border:1px solid #d6ded9;
+    border-radius:12px;
+    padding:13px;
+    font-size:15px;
+    outline:none
 }
 
 .search{
     flex:1;
-    min-width:220px;
-    border:1px solid #d8dfda;
-    border-radius:12px;
-    padding:13px;
-    font-size:16px;
-    outline:none;
-}
-
-.search:focus{
-    border-color:#087f3f;
+    min-width:220px
 }
 
 .select{
-    border:1px solid #d8dfda;
-    border-radius:12px;
-    padding:13px;
-    background:#fff;
     min-width:180px;
+    background:white
 }
 
-.primary{
-    background:#087f3f;
-    color:#fff;
-    border:0;
-    border-radius:12px;
-    padding:13px 20px;
-    font-weight:900;
-    cursor:pointer;
+.search:focus,
+.select:focus,
+input:focus{
+    border-color:#087f3f
 }
 
+.primary,
 .secondary{
-    background:#eef4f0;
-    color:#087f3f;
     border:0;
     border-radius:12px;
     padding:13px 18px;
     font-weight:900;
-    cursor:pointer;
+    cursor:pointer
 }
 
-/* ================= PRODUCTS ================= */
+.primary{
+    background:#087f3f;
+    color:white
+}
+
+.secondary{
+    background:#eaf3ed;
+    color:#087f3f
+}
 
 .products-box{
-    background:#fff;
+    background:white;
     border-radius:18px;
-    box-shadow:
-        0 5px 20px rgba(0,0,0,.06);
     overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,.06)
 }
 
 .products-header{
     padding:18px;
-    border-bottom:1px solid #edf0ee;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:10px;
-}
-
-.products-header h2{
-    font-size:21px;
+    border-bottom:1px solid #edf0ee
 }
 
 .table-wrap{
-    overflow-x:auto;
+    overflow-x:auto
 }
 
 table{
     width:100%;
-    border-collapse:collapse;
-    min-width:850px;
+    min-width:900px;
+    border-collapse:collapse
 }
 
 th{
     background:#f7faf8;
-    color:#536158;
-    font-size:14px;
     padding:15px;
     text-align:right;
+    color:#59665e
 }
 
 td{
     padding:14px;
-    border-top:1px solid #edf0ee;
-    vertical-align:middle;
+    border-top:1px solid #edf0ee
 }
 
 .product-cell{
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:10px
 }
 
 .product-image{
     width:55px;
     height:55px;
     border-radius:12px;
-    background:#f1f5f2;
+    background:#f0f4f1;
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     overflow:hidden;
-    font-size:30px;
+    font-size:28px
 }
 
 .product-image img{
     width:100%;
     height:100%;
-    object-fit:cover;
+    object-fit:cover
 }
 
 .product-name{
-    font-weight:900;
+    font-weight:900
 }
 
 .product-id{
     font-size:12px;
-    color:#89958e;
-    margin-top:4px;
+    color:#8a958e;
+    margin-top:4px
 }
 
 .price{
-    font-weight:900;
     color:#087f3f;
+    font-weight:900
 }
 
 .badge{
@@ -258,48 +240,47 @@ td{
     padding:6px 10px;
     border-radius:20px;
     font-size:12px;
-    font-weight:900;
+    font-weight:900
 }
 
-.badge.active{
-    background:#dff6e8;
-    color:#087f3f;
+.active{
+    background:#dcf5e6;
+    color:#087f3f
 }
 
-.badge.off{
-    background:#ffe5e5;
-    color:#c62828;
+.inactive{
+    background:#ffe4e4;
+    color:#c62828
 }
 
 .actions{
     display:flex;
     gap:6px;
+    flex-wrap:wrap
 }
 
 .action{
     border:0;
     border-radius:9px;
-    padding:8px 11px;
+    padding:8px 10px;
     cursor:pointer;
-    font-weight:800;
+    font-weight:800
 }
 
 .edit{
     background:#e8f1ff;
-    color:#1261a0;
-}
-
-.delete{
-    background:#ffe7e7;
-    color:#c62828;
+    color:#1261a0
 }
 
 .toggle{
-    background:#fff3d7;
-    color:#a66a00;
+    background:#fff1d5;
+    color:#986000
 }
 
-/* ================= MODAL ================= */
+.delete{
+    background:#ffe6e6;
+    color:#c62828
+}
 
 .modal{
     position:fixed;
@@ -309,32 +290,32 @@ td{
     align-items:center;
     justify-content:center;
     padding:15px;
-    z-index:5000;
+    z-index:9999
 }
 
 .modal.show{
-    display:flex;
+    display:flex
 }
 
 .modal-box{
-    background:#fff;
     width:100%;
     max-width:650px;
-    max-height:92vh;
+    max-height:94vh;
     overflow:auto;
+    background:white;
     border-radius:22px;
-    padding:22px;
+    padding:22px
 }
 
 .modal-head{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    margin-bottom:20px;
+    margin-bottom:20px
 }
 
 .modal-head h2{
-    color:#087f3f;
+    color:#087f3f
 }
 
 .close{
@@ -342,168 +323,155 @@ td{
     height:40px;
     border:0;
     border-radius:50%;
-    background:#f1f3f2;
-    font-size:20px;
-    cursor:pointer;
+    background:#f0f2f1;
+    font-size:22px;
+    cursor:pointer
 }
 
 .form-grid{
     display:grid;
-    grid-template-columns:
-        repeat(2,1fr);
-    gap:14px;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px
 }
 
 .field{
     display:flex;
     flex-direction:column;
-    gap:7px;
+    gap:7px
 }
 
-.field.full{
-    grid-column:1/-1;
+.full{
+    grid-column:1/-1
 }
 
 .field label{
-    font-weight:800;
+    font-weight:800
 }
 
 .field input,
 .field select{
-    width:100%;
     padding:13px;
-    border:1px solid #d6ddd8;
+    border:1px solid #d6ded9;
     border-radius:11px;
     font-size:15px;
-    outline:none;
+    outline:none
 }
 
-.field input:focus,
-.field select:focus{
-    border-color:#087f3f;
-}
-
-.check-row{
+.checks{
     display:flex;
     gap:20px;
-    flex-wrap:wrap;
-    margin-top:5px;
+    flex-wrap:wrap
 }
 
 .check{
     display:flex;
     align-items:center;
     gap:7px;
-    font-weight:800;
+    font-weight:800
 }
 
 .modal-footer{
     display:flex;
     gap:10px;
-    margin-top:20px;
+    margin-top:20px
 }
 
 .modal-footer button{
-    flex:1;
+    flex:1
 }
-
-/* ================= EMPTY ================= */
 
 .empty{
     padding:60px 20px;
     text-align:center;
-    color:#78837d;
+    color:#78837d
 }
 
 .empty-icon{
     font-size:55px;
-    margin-bottom:10px;
+    margin-bottom:10px
 }
-
-/* ================= TOAST ================= */
 
 .toast{
     position:fixed;
-    left:20px;
     bottom:20px;
+    left:20px;
+    z-index:99999;
     background:#087f3f;
-    color:#fff;
+    color:white;
     padding:14px 20px;
     border-radius:13px;
     box-shadow:0 10px 30px rgba(0,0,0,.2);
-    z-index:99999;
     opacity:0;
     transform:translateY(20px);
-    transition:.25s;
-    font-weight:800;
+    transition:.25s
 }
 
 .toast.show{
     opacity:1;
-    transform:translateY(0);
+    transform:translateY(0)
 }
 
-/* ================= MOBILE ================= */
+@media(max-width:850px){
 
-@media(max-width:900px){
-
-    .dashboard{
-        grid-template-columns:
-            repeat(2,1fr);
+    .stats{
+        grid-template-columns:repeat(2,1fr)
     }
 
 }
 
 @media(max-width:600px){
 
-    .header{
-        padding:14px;
+    .header-inner{
+        flex-direction:column;
+        align-items:stretch
     }
 
-    .header-inner{
-        align-items:flex-start;
-        flex-direction:column;
+    .header-actions{
+        display:grid;
+        grid-template-columns:1fr 1fr
+    }
+
+    .header-btn{
+        width:100%
     }
 
     .layout{
-        padding:12px;
+        padding:12px
     }
 
-    .dashboard{
-        grid-template-columns:
-            repeat(2,1fr);
-        gap:10px;
+    .stats{
+        gap:10px
     }
 
     .stat{
-        padding:15px;
+        padding:14px
     }
 
     .stat-number{
-        font-size:24px;
-    }
-
-    .form-grid{
-        grid-template-columns:1fr;
-    }
-
-    .field.full{
-        grid-column:auto;
-    }
-
-    .modal-box{
-        padding:17px;
+        font-size:24px
     }
 
     .toolbar-row{
-        flex-direction:column;
+        flex-direction:column
     }
 
     .search,
     .select,
     .primary,
     .secondary{
-        width:100%;
+        width:100%
+    }
+
+    .form-grid{
+        grid-template-columns:1fr
+    }
+
+    .full{
+        grid-column:auto
+    }
+
+    .modal-box{
+        padding:16px
     }
 }
 </style>
@@ -511,30 +479,28 @@ td{
 
 <body>
 
-<!-- ================= HEADER ================= -->
-
 <header class="header">
 
 <div class="header-inner">
 
 <div class="logo">
-🛒 <span>مول البركة</span>
+🛒 مول البركة
 <br>
-<small>لوحة التحكم</small>
+<small>لوحة إدارة المنتجات والأسعار</small>
 </div>
 
 <div class="header-actions">
 
 <button
 class="header-btn"
-onclick="window.location.href='../index.html'">
+onclick="location.href='../index.html'">
 🏪 المتجر
 </button>
 
 <button
 class="header-btn"
-onclick="exportProducts()">
-⬇️ تصدير المنتجات
+onclick="downloadJSON()">
+⬇️ تنزيل المنتجات
 </button>
 
 </div>
@@ -546,54 +512,34 @@ onclick="exportProducts()">
 
 <main class="layout">
 
-<!-- ================= STATS ================= -->
-
-<section class="dashboard">
+<section class="stats">
 
 <div class="stat">
 <div class="stat-icon">📦</div>
-<div class="stat-title">إجمالي المنتجات</div>
-<div
-class="stat-number"
-id="totalProducts">
-0
-</div>
+<div class="stat-title">كل المنتجات</div>
+<div id="totalProducts" class="stat-number">0</div>
 </div>
 
 <div class="stat">
 <div class="stat-icon">✅</div>
 <div class="stat-title">منتجات نشطة</div>
-<div
-class="stat-number"
-id="activeProducts">
-0
-</div>
+<div id="activeProducts" class="stat-number">0</div>
 </div>
 
 <div class="stat">
 <div class="stat-icon">⛔</div>
-<div class="stat-title">منتجات متوقفة</div>
-<div
-class="stat-number"
-id="inactiveProducts">
-0
-</div>
+<div class="stat-title">متوقفة</div>
+<div id="inactiveProducts" class="stat-number">0</div>
 </div>
 
 <div class="stat">
 <div class="stat-icon">🏷️</div>
 <div class="stat-title">الأقسام</div>
-<div
-class="stat-number"
-id="totalCategories">
-0
-</div>
+<div id="categoriesCount" class="stat-number">0</div>
 </div>
 
 </section>
 
-
-<!-- ================= TOOLBAR ================= -->
 
 <section class="toolbar">
 
@@ -603,11 +549,11 @@ id="totalCategories">
 id="search"
 class="search"
 type="search"
-placeholder="🔎 ابحث باسم المنتج أو الكود..."
+placeholder="🔎 ابحث عن منتج أو كود..."
 >
 
 <select
-id="categoryFilter"
+id="category"
 class="select">
 
 <option value="الكل">
@@ -618,47 +564,29 @@ class="select">
 
 <button
 class="primary"
-onclick="openAddModal()">
-
+onclick="openAdd()">
 ➕ إضافة منتج
-
 </button>
-
-<button
-class="secondary"
-onclick="document.getElementById('fileInput').click()">
-
-📂 استيراد JSON
-
-</button>
-
-<input
-id="fileInput"
-type="file"
-accept=".json,application/json"
-style="display:none"
->
 
 </div>
 
 </section>
 
 
-<!-- ================= PRODUCTS ================= -->
-
 <section class="products-box">
 
 <div class="products-header">
 
 <h2>
-📦 إدارة المنتجات
+📦 المنتجات
 </h2>
 
-<span id="resultCount">
-0 منتج
-</span>
+<strong id="resultCount">
+0
+</strong>
 
 </div>
+
 
 <div class="table-wrap">
 
@@ -667,26 +595,17 @@ style="display:none"
 <thead>
 
 <tr>
-
 <th>المنتج</th>
-
 <th>القسم</th>
-
 <th>السعر</th>
-
 <th>الوحدة</th>
-
 <th>الحالة</th>
-
 <th>الإجراءات</th>
-
 </tr>
 
 </thead>
 
-<tbody id="productsTable">
-
-</tbody>
+<tbody id="productsTable"></tbody>
 
 </table>
 
@@ -697,11 +616,9 @@ style="display:none"
 </main>
 
 
-<!-- ================= MODAL ================= -->
-
 <div
-class="modal"
-id="productModal">
+id="modal"
+class="modal">
 
 <div class="modal-box">
 
@@ -733,14 +650,12 @@ value="-1"
 
 <div class="field">
 
-<label>
-كود المنتج
-</label>
+<label>كود المنتج</label>
 
 <input
-id="productId"
+id="id"
 required
-placeholder="مثال: p1001"
+placeholder="veg001"
 >
 
 </div>
@@ -748,14 +663,12 @@ placeholder="مثال: p1001"
 
 <div class="field">
 
-<label>
-اسم المنتج
-</label>
+<label>اسم المنتج</label>
 
 <input
-id="productName"
+id="name"
 required
-placeholder="مثال: طماطم"
+placeholder="طماطم"
 >
 
 </div>
@@ -763,17 +676,15 @@ placeholder="مثال: طماطم"
 
 <div class="field">
 
-<label>
-السعر
-</label>
+<label>السعر بالجنيه</label>
 
 <input
-id="productPrice"
+id="price"
 type="number"
 min="0"
 step="0.01"
 required
-placeholder="35"
+placeholder="25"
 >
 
 </div>
@@ -781,43 +692,18 @@ placeholder="35"
 
 <div class="field">
 
-<label>
-الوحدة
-</label>
+<label>الوحدة</label>
 
-<select id="productUnit">
+<select id="unit">
 
-<option value="كيلو">
-كيلو
-</option>
-
-<option value="قطعة">
-قطعة
-</option>
-
-<option value="كرتونة">
-كرتونة
-</option>
-
-<option value="علبة">
-علبة
-</option>
-
-<option value="زجاجة">
-زجاجة
-</option>
-
-<option value="كيس">
-كيس
-</option>
-
-<option value="عبوة">
-عبوة
-</option>
-
-<option value="رغيف">
-رغيف
-</option>
+<option>كيلو</option>
+<option>قطعة</option>
+<option>كرتونة</option>
+<option>علبة</option>
+<option>زجاجة</option>
+<option>كيس</option>
+<option>عبوة</option>
+<option>رغيف</option>
 
 </select>
 
@@ -826,9 +712,7 @@ placeholder="35"
 
 <div class="field">
 
-<label>
-القسم
-</label>
+<label>القسم</label>
 
 <input
 id="productCategory"
@@ -841,12 +725,10 @@ placeholder="خضروات"
 
 <div class="field">
 
-<label>
-الإيموجي
-</label>
+<label>الإيموجي</label>
 
 <input
-id="productEmoji"
+id="emoji"
 placeholder="🍅"
 >
 
@@ -855,12 +737,10 @@ placeholder="🍅"
 
 <div class="field full">
 
-<label>
-رابط صورة المنتج
-</label>
+<label>رابط صورة المنتج</label>
 
 <input
-id="productImage"
+id="image"
 placeholder="https://..."
 >
 
@@ -869,12 +749,12 @@ placeholder="https://..."
 
 <div class="field full">
 
-<div class="check-row">
+<div class="checks">
 
 <label class="check">
 
 <input
-id="productOffer"
+id="offer"
 type="checkbox"
 >
 
@@ -886,12 +766,12 @@ type="checkbox"
 <label class="check">
 
 <input
-id="productActive"
+id="active"
 type="checkbox"
 checked
 >
 
-✅ المنتج نشط
+✅ نشط
 
 </label>
 
@@ -905,16 +785,16 @@ checked
 <div class="modal-footer">
 
 <button
-type="submit"
-class="primary">
+class="primary"
+type="submit">
 
 💾 حفظ المنتج
 
 </button>
 
 <button
-type="button"
 class="secondary"
+type="button"
 onclick="closeModal()">
 
 إلغاء
@@ -930,69 +810,97 @@ onclick="closeModal()">
 </div>
 
 
-<div
-id="toast"
-class="toast">
-تم
-</div>
+<div id="toast" class="toast"></div>
 
 
 <script>
 
-/* =========================================================
-   مول البركة
-   ADMIN PANEL
-   ========================================================= */
-
 "use strict";
 
 
-const PRODUCTS_FILE = "../products.json";
+/*
+=========================================================
+إعدادات
+=========================================================
+*/
+
+const PRODUCTS_FILE =
+    "../products.json";
 
 let products = [];
 
-let filteredProducts = [];
 
+/*
+=========================================================
+أداة
+=========================================================
+*/
 
-/* =========================================================
-   عناصر الصفحة
-   ========================================================= */
-
-const $ = id =>
-    document.getElementById(id);
-
-
-/* =========================================================
-   رسالة
-   ========================================================= */
-
-function toast(message){
-
-    const element =
-        $("toast");
-
-    element.textContent =
-        message;
-
-    element.classList.add("show");
-
-    clearTimeout(
-        element.timer
-    );
-
-    element.timer =
-        setTimeout(
-            () => {
-                element.classList.remove("show");
-            },
-            2500
-        );
+function $(id){
+    return document.getElementById(id);
 }
 
 
-/* =========================================================
-   تحميل المنتجات
-   ========================================================= */
+/*
+=========================================================
+رسالة
+=========================================================
+*/
+
+function showToast(message){
+
+    const toast =
+        $("toast");
+
+    toast.textContent =
+        message;
+
+    toast.classList.add("show");
+
+    clearTimeout(
+        toast.timer
+    );
+
+    toast.timer =
+        setTimeout(
+            function(){
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2500
+        );
+
+}
+
+
+/*
+=========================================================
+حماية HTML
+=========================================================
+*/
+
+function escapeHTML(value){
+
+    return String(
+        value ?? ""
+    )
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/*
+=========================================================
+تحميل products.json
+=========================================================
+*/
 
 async function loadProducts(){
 
@@ -1028,7 +936,9 @@ async function loadProducts(){
 
         }
         else if(
-            Array.isArray(data.products)
+            Array.isArray(
+                data.products
+            )
         ){
 
             products =
@@ -1041,7 +951,7 @@ async function loadProducts(){
 
         }
 
-        renderAll();
+        render();
 
     }
     catch(error){
@@ -1058,12 +968,13 @@ async function loadProducts(){
                         </div>
 
                         <h3>
-                            تعذر تحميل المنتجات
+                            لم يتم العثور على المنتجات
                         </h3>
 
                         <p>
-                            تأكد أن products.json
-                            موجود في المجلد الرئيسي للموقع.
+                            تأكد من وجود
+                            products.json
+                            في المجلد الرئيسي.
                         </p>
 
                     </div>
@@ -1071,7 +982,7 @@ async function loadProducts(){
             </tr>
         `;
 
-        toast(
+        showToast(
             "تعذر تحميل products.json"
         );
 
@@ -1080,40 +991,11 @@ async function loadProducts(){
 }
 
 
-/* =========================================================
-   Escape
-   ========================================================= */
-
-function escapeHTML(value){
-
-    return String(value ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-
-}
-
-
-/* =========================================================
-   عرض الكل
-   ========================================================= */
-
-function renderAll(){
-
-    updateStats();
-
-    updateCategories();
-
-    applyFilters();
-
-}
-
-
-/* =========================================================
-   الإحصائيات
-   ========================================================= */
+/*
+=========================================================
+الإحصائيات
+=========================================================
+*/
 
 function updateStats(){
 
@@ -1129,8 +1011,10 @@ function updateStats(){
     const categories =
         new Set(
             products
-                .map(p => p.category)
-                .filter(Boolean)
+            .map(
+                p => p.category
+            )
+            .filter(Boolean)
         );
 
     $("totalProducts")
@@ -1145,42 +1029,48 @@ function updateStats(){
         .textContent =
         inactive;
 
-    $("totalCategories")
+    $("categoriesCount")
         .textContent =
         categories.size;
 
 }
 
 
-/* =========================================================
-   الأقسام
-   ========================================================= */
+/*
+=========================================================
+الأقسام
+=========================================================
+*/
 
 function updateCategories(){
 
     const select =
-        $("categoryFilter");
+        $("category");
 
-    const current =
+    const selected =
         select.value;
 
     const categories =
         [
             ...new Set(
                 products
-                    .map(p => p.category)
-                    .filter(Boolean)
+                .map(
+                    p => p.category
+                )
+                .filter(Boolean)
             )
-        ].sort();
+        ]
+        .sort();
 
-    select.innerHTML = `
+    select.innerHTML =
+        `
         <option value="الكل">
             كل الأقسام
         </option>
-    `;
+        `;
 
     categories.forEach(
-        category => {
+        function(category){
 
             const option =
                 document.createElement(
@@ -1201,106 +1091,103 @@ function updateCategories(){
     );
 
     if(
-        categories.includes(current)
+        categories.includes(
+            selected
+        )
     ){
 
         select.value =
-            current;
+            selected;
 
     }
 
 }
 
 
-/* =========================================================
-   الفلترة
-   ========================================================= */
+/*
+=========================================================
+عرض المنتجات
+=========================================================
+*/
 
-function applyFilters(){
+function render(){
+
+    updateStats();
+
+    updateCategories();
 
     const search =
         $("search")
-            .value
-            .trim()
-            .toLowerCase();
+        .value
+        .trim()
+        .toLowerCase();
 
     const category =
-        $("categoryFilter")
-            .value;
+        $("category")
+        .value;
 
-    filteredProducts =
+
+    const list =
         products.filter(
-            product => {
+            function(product){
 
                 const text =
                     (
-                        String(
-                            product.name || ""
-                        ) +
-                        " " +
-                        String(
-                            product.id || ""
-                        ) +
-                        " " +
-                        String(
-                            product.category || ""
-                        )
-                    )
-                    .toLowerCase();
+                        product.id || ""
+                    ) +
+                    " " +
+                    (
+                        product.name || ""
+                    ) +
+                    " " +
+                    (
+                        product.category || ""
+                    );
 
-                const matchSearch =
+                const matchesSearch =
                     !search ||
-                    text.includes(search);
+                    text
+                    .toLowerCase()
+                    .includes(
+                        search
+                    );
 
-                const matchCategory =
+                const matchesCategory =
                     category === "الكل" ||
                     product.category === category;
 
                 return (
-                    matchSearch &&
-                    matchCategory
+                    matchesSearch &&
+                    matchesCategory
                 );
 
             }
         );
 
-    renderTable();
 
-}
+    $("resultCount")
+        .textContent =
+        list.length +
+        " منتج";
 
-
-/* =========================================================
-   جدول المنتجات
-   ========================================================= */
-
-function renderTable(){
 
     const table =
         $("productsTable");
 
-    $("resultCount")
-        .textContent =
-        filteredProducts.length +
-        " منتج";
 
-    if(!filteredProducts.length){
+    if(!list.length){
 
         table.innerHTML = `
             <tr>
                 <td colspan="6">
-
                     <div class="empty">
-
                         <div class="empty-icon">
                             📦
                         </div>
-
                         <h3>
                             لا توجد منتجات
                         </h3>
-
                     </div>
-
                 </td>
             </tr>
         `;
@@ -1311,207 +1198,210 @@ function renderTable(){
 
 
     table.innerHTML =
-        filteredProducts
-            .map(
-                (product) => {
+        list.map(
+            function(product){
 
-                    const realIndex =
-                        products.indexOf(
-                            product
-                        );
+                const index =
+                    products.indexOf(
+                        product
+                    );
 
-                    const image =
-                        product.image
-                            ? `
-                                <img
-                                    src="${escapeHTML(product.image)}"
-                                    alt=""
-                                    onerror="this.style.display='none'"
-                                >
-                              `
-                            :
-                              escapeHTML(
-                                  product.emoji ||
-                                  "🛒"
-                              );
+                const active =
+                    product.active !== false;
 
-                    const active =
-                        product.active !== false;
+                const picture =
+                    product.image
+                    ?
+                    `
+                    <img
+                        src="${escapeHTML(product.image)}"
+                        alt=""
+                        onerror="this.style.display='none'"
+                    >
+                    `
+                    :
+                    escapeHTML(
+                        product.emoji ||
+                        "🛒"
+                    );
 
-                    return `
-                        <tr>
 
-                            <td>
+                return `
+                <tr>
 
-                                <div class="product-cell">
+                    <td>
 
-                                    <div class="product-image">
-                                        ${image}
-                                    </div>
+                        <div class="product-cell">
 
-                                    <div>
+                            <div class="product-image">
+                                ${picture}
+                            </div>
 
-                                        <div class="product-name">
-                                            ${escapeHTML(
-                                                product.name ||
-                                                "بدون اسم"
-                                            )}
-                                        </div>
+                            <div>
 
-                                        <div class="product-id">
-                                            ${escapeHTML(
-                                                product.id ||
-                                                ""
-                                            )}
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </td>
-
-                            <td>
-                                ${escapeHTML(
-                                    product.category ||
-                                    "-"
-                                )}
-                            </td>
-
-                            <td>
-
-                                <span class="price">
-                                    ${Number(
-                                        product.price || 0
-                                    ).toLocaleString(
-                                        "ar-EG"
+                                <div class="product-name">
+                                    ${escapeHTML(
+                                        product.name ||
+                                        "بدون اسم"
                                     )}
-                                    جنيه
-                                </span>
-
-                            </td>
-
-                            <td>
-                                ${escapeHTML(
-                                    product.unit ||
-                                    "قطعة"
-                                )}
-                            </td>
-
-                            <td>
-
-                                <span class="badge ${
-                                    active
-                                        ? "active"
-                                        : "off"
-                                }">
-
-                                    ${
-                                        active
-                                            ? "نشط"
-                                            : "متوقف"
-                                    }
-
-                                </span>
-
-                            </td>
-
-                            <td>
-
-                                <div class="actions">
-
-                                    <button
-                                        class="action edit"
-                                        onclick="editProduct(${realIndex})">
-
-                                        ✏️ تعديل
-
-                                    </button>
-
-                                    <button
-                                        class="action toggle"
-                                        onclick="toggleProduct(${realIndex})">
-
-                                        ${
-                                            active
-                                                ? "⛔ إيقاف"
-                                                : "✅ تشغيل"
-                                        }
-
-                                    </button>
-
-                                    <button
-                                        class="action delete"
-                                        onclick="deleteProduct(${realIndex})">
-
-                                        🗑️ حذف
-
-                                    </button>
-
                                 </div>
 
-                            </td>
+                                <div class="product-id">
+                                    ${escapeHTML(
+                                        product.id ||
+                                        ""
+                                    )}
+                                </div>
 
-                        </tr>
-                    `;
+                            </div>
 
-                }
-            )
-            .join("");
+                        </div>
+
+                    </td>
+
+
+                    <td>
+                        ${escapeHTML(
+                            product.category ||
+                            "-"
+                        )}
+                    </td>
+
+
+                    <td>
+
+                        <span class="price">
+
+                            ${Number(
+                                product.price || 0
+                            ).toLocaleString(
+                                "ar-EG"
+                            )}
+
+                            جنيه
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+                        ${escapeHTML(
+                            product.unit ||
+                            "قطعة"
+                        )}
+                    </td>
+
+
+                    <td>
+
+                        <span class="badge ${
+                            active
+                            ? "active"
+                            : "inactive"
+                        }">
+
+                            ${
+                                active
+                                ? "نشط"
+                                : "متوقف"
+                            }
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="action edit"
+                                onclick="editProduct(${index})">
+
+                                ✏️ تعديل
+
+                            </button>
+
+
+                            <button
+                                class="action toggle"
+                                onclick="toggleProduct(${index})">
+
+                                ${
+                                    active
+                                    ? "⛔ إيقاف"
+                                    : "✅ تشغيل"
+                                }
+
+                            </button>
+
+
+                            <button
+                                class="action delete"
+                                onclick="deleteProduct(${index})">
+
+                                🗑️ حذف
+
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+                `;
+
+            }
+        )
+        .join("");
 
 }
 
 
-/* =========================================================
-   فتح إضافة
-   ========================================================= */
+/*
+=========================================================
+فتح إضافة
+=========================================================
+*/
 
-function openAddModal(){
+function openAdd(){
 
     $("productForm").reset();
 
-    $("editIndex").value =
+    $("editIndex")
+        .value =
         "-1";
 
     $("modalTitle")
         .textContent =
         "إضافة منتج";
 
-    $("productActive")
+    $("active")
         .checked =
         true;
 
-    $("productEmoji")
+    $("emoji")
         .value =
         "🛒";
 
-    $("productUnit")
+    $("unit")
         .value =
         "كيلو";
 
-    $("productModal")
+    $("modal")
         .classList
         .add("show");
 
 }
 
 
-/* =========================================================
-   إغلاق
-   ========================================================= */
-
-function closeModal(){
-
-    $("productModal")
-        .classList
-        .remove("show");
-
-}
-
-
-/* =========================================================
-   تعديل
-   ========================================================= */
+/*
+=========================================================
+تعديل
+=========================================================
+*/
 
 function editProduct(index){
 
@@ -1521,23 +1411,24 @@ function editProduct(index){
     if(!product)
         return;
 
+
     $("editIndex")
         .value =
-        String(index);
+        index;
 
-    $("productId")
+    $("id")
         .value =
         product.id || "";
 
-    $("productName")
+    $("name")
         .value =
         product.name || "";
 
-    $("productPrice")
+    $("price")
         .value =
         product.price || 0;
 
-    $("productUnit")
+    $("unit")
         .value =
         product.unit || "قطعة";
 
@@ -1545,21 +1436,21 @@ function editProduct(index){
         .value =
         product.category || "";
 
-    $("productEmoji")
+    $("emoji")
         .value =
         product.emoji || "🛒";
 
-    $("productImage")
+    $("image")
         .value =
         product.image || "";
 
-    $("productOffer")
+    $("offer")
         .checked =
         Boolean(
             product.offer
         );
 
-    $("productActive")
+    $("active")
         .checked =
         product.active !== false;
 
@@ -1567,16 +1458,18 @@ function editProduct(index){
         .textContent =
         "تعديل المنتج";
 
-    $("productModal")
+    $("modal")
         .classList
         .add("show");
 
 }
 
 
-/* =========================================================
-   حفظ
-   ========================================================= */
+/*
+=========================================================
+حفظ
+=========================================================
+*/
 
 $("productForm")
 .addEventListener(
@@ -1585,56 +1478,59 @@ $("productForm")
 
         event.preventDefault();
 
+
         const index =
             Number(
-                $("editIndex").value
+                $("editIndex")
+                .value
             );
+
 
         const product = {
 
             id:
-                $("productId")
-                    .value
-                    .trim(),
+                $("id")
+                .value
+                .trim(),
 
             name:
-                $("productName")
-                    .value
-                    .trim(),
+                $("name")
+                .value
+                .trim(),
 
             price:
                 Number(
-                    $("productPrice")
-                        .value
+                    $("price")
+                    .value
                 ),
 
             unit:
-                $("productUnit")
-                    .value,
+                $("unit")
+                .value,
 
             category:
                 $("productCategory")
-                    .value
-                    .trim(),
-
-            image:
-                $("productImage")
-                    .value
-                    .trim(),
+                .value
+                .trim(),
 
             emoji:
-                $("productEmoji")
-                    .value
-                    .trim() ||
+                $("emoji")
+                .value
+                .trim() ||
                 "🛒",
 
+            image:
+                $("image")
+                .value
+                .trim(),
+
             offer:
-                $("productOffer")
-                    .checked,
+                $("offer")
+                .checked,
 
             active:
-                $("productActive")
-                    .checked
+                $("active")
+                .checked
 
         };
 
@@ -1645,7 +1541,7 @@ $("productForm")
             !product.category
         ){
 
-            toast(
+            showToast(
                 "أكمل بيانات المنتج"
             );
 
@@ -1656,18 +1552,24 @@ $("productForm")
 
         const duplicate =
             products.findIndex(
-                (item,i) =>
-                    i !== index &&
-                    String(item.id) ===
-                    String(product.id)
+                function(item,i){
+
+                    return (
+                        i !== index &&
+                        String(item.id) ===
+                        String(product.id)
+                    );
+
+                }
             );
+
 
         if(
             duplicate !== -1
         ){
 
-            toast(
-                "كود المنتج موجود بالفعل"
+            showToast(
+                "كود المنتج مستخدم بالفعل"
             );
 
             return;
@@ -1681,7 +1583,7 @@ $("productForm")
                 product
             );
 
-            toast(
+            showToast(
                 "تمت إضافة المنتج"
             );
 
@@ -1691,7 +1593,7 @@ $("productForm")
             products[index] =
                 product;
 
-            toast(
+            showToast(
                 "تم تعديل المنتج"
             );
 
@@ -1700,15 +1602,33 @@ $("productForm")
 
         closeModal();
 
-        renderAll();
+        render();
+
+
+        /*
+        =====================================================
+        مهم
+        =====================================================
+
+        التعديل الآن موجود في الصفحة الحالية.
+
+        اضغط "تنزيل المنتجات"
+        لتحصل على products.json الجديد
+        وترفعه إلى GitHub.
+
+        لن نضع GitHub Token هنا.
+        =====================================================
+        */
 
     }
 );
 
 
-/* =========================================================
-   تشغيل / إيقاف
-   ========================================================= */
+/*
+=========================================================
+تفعيل / إيقاف
+=========================================================
+*/
 
 function toggleProduct(index){
 
@@ -1718,20 +1638,22 @@ function toggleProduct(index){
     products[index].active =
         products[index].active === false;
 
-    renderAll();
+    render();
 
-    toast(
+    showToast(
         products[index].active
-            ? "تم تشغيل المنتج"
-            : "تم إيقاف المنتج"
+        ? "تم تشغيل المنتج"
+        : "تم إيقاف المنتج"
     );
 
 }
 
 
-/* =========================================================
-   حذف
-   ========================================================= */
+/*
+=========================================================
+حذف
+=========================================================
+*/
 
 function deleteProduct(index){
 
@@ -1741,48 +1663,59 @@ function deleteProduct(index){
     if(!product)
         return;
 
-    const confirmed =
-        confirm(
-            "هل تريد حذف المنتج:\n\n" +
-            product.name +
-            "\n\nلا يمكن التراجع عن الحذف داخل الصفحة."
-        );
 
-    if(!confirmed)
+    if(
+        !confirm(
+            "هل تريد حذف:\n\n" +
+            product.name +
+            "\n\n؟"
+        )
+    ){
+
         return;
+
+    }
+
 
     products.splice(
         index,
         1
     );
 
-    renderAll();
 
-    toast(
+    render();
+
+    showToast(
         "تم حذف المنتج"
     );
 
 }
 
 
-/* =========================================================
-   تصدير JSON
-   ========================================================= */
+/*
+=========================================================
+إغلاق
+=========================================================
+*/
 
-function exportProducts(){
+function closeModal(){
+
+    $("modal")
+        .classList
+        .remove("show");
+
+}
+
+
+/*
+=========================================================
+تنزيل products.json
+=========================================================
+*/
+
+function downloadJSON(){
 
     const data = {
-
-        categories:
-            [
-                ...new Set(
-                    products
-                        .map(
-                            p => p.category
-                        )
-                        .filter(Boolean)
-                )
-            ],
 
         products:
             products
@@ -1837,116 +1770,47 @@ function exportProducts(){
         url
     );
 
-    toast(
-        "تم تجهيز products.json"
+
+    showToast(
+        "تم تنزيل products.json"
     );
 
 }
 
 
-/* =========================================================
-   استيراد JSON
-   ========================================================= */
-
-$("fileInput")
-.addEventListener(
-    "change",
-    function(){
-
-        const file =
-            this.files[0];
-
-        if(!file)
-            return;
-
-        const reader =
-            new FileReader();
-
-        reader.onload =
-            function(){
-
-                try{
-
-                    const data =
-                        JSON.parse(
-                            reader.result
-                        );
-
-                    const imported =
-                        Array.isArray(data)
-                            ? data
-                            : data.products;
-
-                    if(
-                        !Array.isArray(
-                            imported
-                        )
-                    ){
-
-                        throw new Error(
-                            "صيغة JSON غير صحيحة"
-                        );
-
-                    }
-
-                    products =
-                        imported;
-
-                    renderAll();
-
-                    toast(
-                        "تم استيراد المنتجات"
-                    );
-
-                }
-                catch(error){
-
-                    toast(
-                        "ملف JSON غير صحيح"
-                    );
-
-                }
-
-            };
-
-        reader.readAsText(
-            file,
-            "UTF-8"
-        );
-
-        this.value = "";
-
-    }
-);
-
-
-/* =========================================================
-   البحث
-   ========================================================= */
+/*
+=========================================================
+بحث
+=========================================================
+*/
 
 $("search")
 .addEventListener(
     "input",
-    applyFilters
+    render
 );
 
 
-/* =========================================================
-   القسم
-   ========================================================= */
+/*
+=========================================================
+الأقسام
+=========================================================
+*/
 
-$("categoryFilter")
+$("category")
 .addEventListener(
     "change",
-    applyFilters
+    render
 );
 
 
-/* =========================================================
-   إغلاق عند الضغط خارج النافذة
-   ========================================================= */
+/*
+=========================================================
+إغلاق النافذة
+=========================================================
+*/
 
-$("productModal")
+$("modal")
 .addEventListener(
     "click",
     function(event){
@@ -1964,14 +1828,13 @@ $("productModal")
 );
 
 
-/* =========================================================
-   تشغيل
-   ========================================================= */
+/*
+=========================================================
+بدء الصفحة
+=========================================================
+*/
 
-document.addEventListener(
-    "DOMContentLoaded",
-    loadProducts
-);
+loadProducts();
 
 </script>
 
