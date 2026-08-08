@@ -1,720 +1,584 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-    <meta charset="UTF-8">
+<title>السلة | مول البركة</title>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<style>
+*{
+    box-sizing:border-box;
+}
 
-    <title>سلة المشتريات | مول البركة</title>
+body{
+    margin:0;
+    background:#f7f9f8;
+    color:#18251e;
+    font-family:Arial,Tahoma,sans-serif;
+}
 
-    <meta
-        name="description"
-        content="سلة مشتريات مول البركة أولاد الجارحي"
-    >
+button,
+a,
+input{
+    font-family:inherit;
+}
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+a{
+    text-decoration:none;
+}
 
-    <style>
+.top{
+    background:#087f3f;
+    color:#fff;
+    padding:10px 15px;
+    text-align:center;
+    font-size:12px;
+    font-weight:bold;
+}
 
-        /* =================================================
-           CART PAGE
-        ================================================= */
+.header{
+    background:#fff;
+    border-bottom:1px solid #e8eee9;
+}
 
-        .cart-page {
-            max-width: 1240px;
-            margin: 35px auto 70px;
-            padding: 0 15px;
-        }
+.header-inner{
+    max-width:1150px;
+    margin:auto;
+    min-height:78px;
+    padding:12px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
 
-        .cart-title {
-            margin-bottom: 25px;
-        }
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
 
-        .cart-title span {
-            color: #087f3f;
-            font-size: 13px;
-            font-weight: 900;
-        }
+.logo-icon{
+    width:48px;
+    height:48px;
+    background:#087f3f;
+    color:#fff;
+    border-radius:15px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:25px;
+    font-weight:900;
+}
 
-        .cart-title h1 {
-            margin-top: 4px;
-            font-size: 34px;
-        }
+.logo strong{
+    color:#087f3f;
+    font-size:20px;
+    display:block;
+}
 
-        .cart-layout {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) 350px;
-            gap: 20px;
-            align-items: start;
-        }
+.logo small{
+    color:#87928c;
+    font-size:11px;
+}
 
-        .cart-items-box,
-        .cart-summary {
-            background: #fff;
-            border: 1px solid #e3ebe6;
-            border-radius: 22px;
-            box-shadow: 0 8px 30px rgba(0,0,0,.04);
-        }
+.back{
+    color:#087f3f;
+    font-size:13px;
+    font-weight:bold;
+    background:#eff8f2;
+    padding:11px 16px;
+    border-radius:12px;
+}
 
-        .cart-items-box {
-            overflow: hidden;
-        }
+.page{
+    max-width:1150px;
+    margin:auto;
+    padding:25px 18px 70px;
+}
 
-        .cart-item {
-            display: grid;
-            grid-template-columns: 90px minmax(0,1fr) auto;
-            align-items: center;
-            gap: 18px;
-            padding: 18px;
-            border-bottom: 1px solid #edf1ee;
-        }
+.title{
+    margin-bottom:20px;
+}
 
-        .cart-item:last-child {
-            border-bottom: none;
-        }
+.title h1{
+    margin:0;
+    font-size:28px;
+}
 
-        .cart-item-image {
-            width: 90px;
-            height: 90px;
-            border-radius: 18px;
-            background: #eff9f2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 45px;
-        }
+.title p{
+    margin:7px 0 0;
+    color:#87928c;
+    font-size:13px;
+}
 
-        .cart-item-info h3 {
-            font-size: 17px;
-            margin-bottom: 2px;
-        }
+.layout{
+    display:grid;
+    grid-template-columns:1fr 340px;
+    gap:20px;
+    align-items:start;
+}
 
-        .cart-item-info small {
-            color: #89948e;
-            font-size: 11px;
-        }
+.box{
+    background:#fff;
+    border:1px solid #e4ebe6;
+    border-radius:20px;
+    padding:20px;
+}
 
-        .cart-item-price {
-            margin-top: 5px;
-            color: #087f3f;
-            font-weight: 900;
-        }
+.box-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #edf1ee;
+    padding-bottom:15px;
+    margin-bottom:10px;
+}
 
-        .quantity-box {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 10px;
-        }
+.box-title h2{
+    margin:0;
+    font-size:18px;
+}
 
-        .quantity-box button {
-            width: 31px;
-            height: 31px;
-            border: 1px solid #dce7e0;
-            background: #fff;
-            border-radius: 9px;
-            cursor: pointer;
-            font-size: 17px;
-            font-weight: 900;
-        }
+.clear{
+    border:0;
+    background:#fff1f1;
+    color:#d84242;
+    padding:8px 12px;
+    border-radius:9px;
+    cursor:pointer;
+    font-size:11px;
+    font-weight:bold;
+}
 
-        .quantity-box button:hover {
-            background: #087f3f;
-            color: #fff;
-        }
+.item{
+    display:grid;
+    grid-template-columns:90px 1fr auto;
+    gap:15px;
+    align-items:center;
+    padding:16px 0;
+    border-bottom:1px solid #edf1ee;
+}
 
-        .quantity-box strong {
-            min-width: 28px;
-            text-align: center;
-        }
+.item:last-child{
+    border-bottom:0;
+}
 
-        .cart-item-total {
-            text-align: left;
-            font-weight: 900;
-            color: #17221b;
-            min-width: 100px;
-        }
+.item-image{
+    width:90px;
+    height:90px;
+    background:#f5f8f6;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:45px;
+}
 
-        .remove-item {
-            border: none;
-            background: transparent;
-            color: #b14d4d;
-            cursor: pointer;
-            margin-top: 8px;
-            font-size: 12px;
-        }
+.item-info h3{
+    margin:0 0 5px;
+    font-size:15px;
+}
 
-        .remove-item:hover {
-            text-decoration: underline;
-        }
+.item-unit{
+    color:#929b96;
+    font-size:11px;
+}
 
-        .cart-summary {
-            padding: 22px;
-            position: sticky;
-            top: 105px;
-        }
+.item-price{
+    color:#087f3f;
+    font-size:16px;
+    font-weight:900;
+    margin-top:8px;
+}
 
-        .cart-summary h2 {
-            font-size: 21px;
-            margin-bottom: 18px;
-        }
+.controls{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:10px;
+}
 
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            padding: 10px 0;
-            color: #65726a;
-            border-bottom: 1px dashed #e1e8e3;
-        }
+.qty-btn{
+    width:32px;
+    height:32px;
+    border:1px solid #dbe6df;
+    background:#fff;
+    border-radius:9px;
+    color:#087f3f;
+    font-size:18px;
+    cursor:pointer;
+}
 
-        .summary-row strong {
-            color: #17221b;
-        }
+.qty{
+    min-width:28px;
+    text-align:center;
+    font-weight:bold;
+}
 
-        .summary-total {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 17px;
-            padding-top: 15px;
-            border-top: 2px solid #edf1ee;
-        }
+.remove{
+    margin-top:8px;
+    border:0;
+    background:none;
+    color:#d84242;
+    font-size:10px;
+    cursor:pointer;
+}
 
-        .summary-total span {
-            font-weight: 900;
-        }
+.item-total{
+    text-align:left;
+    font-size:16px;
+    font-weight:900;
+}
 
-        .summary-total strong {
-            color: #087f3f;
-            font-size: 25px;
-        }
+.empty{
+    text-align:center;
+    padding:55px 15px;
+}
 
-        .checkout-button {
-            width: 100%;
-            margin-top: 18px;
-            min-height: 50px;
-            border: none;
-            border-radius: 13px;
-            background: #087f3f;
-            color: #fff;
-            cursor: pointer;
-            font-weight: 900;
-            font-size: 15px;
-        }
+.empty-icon{
+    font-size:65px;
+    margin-bottom:10px;
+}
 
-        .checkout-button:hover {
-            background: #056d35;
-        }
+.empty h2{
+    margin:0 0 8px;
+}
 
-        .continue-button {
-            width: 100%;
-            margin-top: 9px;
-            min-height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #dce7e0;
-            border-radius: 13px;
-            color: #08783c;
-            background: #fff;
-            font-weight: 900;
-        }
+.empty p{
+    color:#89948e;
+    font-size:13px;
+}
 
-        .clear-cart-button {
-            width: 100%;
-            margin-top: 9px;
-            min-height: 40px;
-            border: none;
-            background: transparent;
-            color: #a24b4b;
-            cursor: pointer;
-            font-weight: 700;
-        }
+.shop{
+    display:inline-block;
+    background:#087f3f;
+    color:#fff;
+    padding:13px 25px;
+    border-radius:12px;
+    font-weight:bold;
+    margin-top:10px;
+}
 
-        .empty-cart {
-            padding: 65px 20px;
-            text-align: center;
-        }
+.summary{
+    position:sticky;
+    top:15px;
+}
 
-        .empty-cart-icon {
-            font-size: 65px;
-            margin-bottom: 10px;
-        }
+.summary h2{
+    margin:0 0 18px;
+    font-size:19px;
+}
 
-        .empty-cart h2 {
-            font-size: 25px;
-            margin-bottom: 5px;
-        }
+.row{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    color:#647069;
+    font-size:13px;
+}
 
-        .empty-cart p {
-            color: #7b867f;
-            margin-bottom: 20px;
-        }
+.row.total{
+    border-top:1px solid #e8eee9;
+    margin-top:8px;
+    padding-top:17px;
+    color:#18251e;
+    font-size:18px;
+    font-weight:900;
+}
 
-        .empty-cart a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 45px;
-            padding: 10px 22px;
-            background: #087f3f;
-            color: #fff;
-            border-radius: 12px;
-            font-weight: 900;
-        }
+.delivery{
+    background:#eff8f2;
+    color:#087f3f;
+    padding:13px;
+    border-radius:12px;
+    margin:15px 0;
+    font-size:11px;
+    line-height:1.7;
+}
 
-        .cart-note {
-            margin-top: 15px;
-            padding: 13px;
-            border-radius: 12px;
-            background: #eff9f2;
-            color: #526158;
-            font-size: 12px;
-            line-height: 1.8;
-        }
+.checkout{
+    width:100%;
+    min-height:50px;
+    border:0;
+    border-radius:13px;
+    background:#087f3f;
+    color:#fff;
+    font-size:15px;
+    font-weight:900;
+    cursor:pointer;
+}
 
-        @media (max-width: 800px) {
+.checkout:hover{
+    background:#066b35;
+}
 
-            .cart-layout {
-                grid-template-columns: 1fr;
-            }
+.whatsapp{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:7px;
+    margin-top:10px;
+    width:100%;
+    min-height:45px;
+    border-radius:12px;
+    background:#20b85a;
+    color:#fff;
+    font-size:13px;
+    font-weight:bold;
+}
 
-            .cart-summary {
-                position: static;
-            }
+.payment{
+    display:flex;
+    gap:8px;
+    margin-top:15px;
+}
 
-        }
+.payment span{
+    flex:1;
+    background:#f7f9f8;
+    border:1px solid #e7eee9;
+    border-radius:9px;
+    padding:10px 5px;
+    text-align:center;
+    font-size:10px;
+}
 
-        @media (max-width: 560px) {
+@media(max-width:800px){
 
-            .cart-page {
-                margin-top: 22px;
-            }
+    .layout{
+        grid-template-columns:1fr;
+    }
 
-            .cart-title h1 {
-                font-size: 28px;
-            }
+    .summary{
+        position:static;
+    }
+}
 
-            .cart-item {
-                grid-template-columns: 65px minmax(0,1fr);
-                gap: 12px;
-                padding: 13px;
-            }
+@media(max-width:550px){
 
-            .cart-item-image {
-                width: 65px;
-                height: 65px;
-                font-size: 34px;
-            }
+    .page{
+        padding:18px 10px 60px;
+    }
 
-            .cart-item-info h3 {
-                font-size: 14px;
-            }
+    .box{
+        padding:13px;
+        border-radius:16px;
+    }
 
-            .cart-item-total {
-                grid-column: 2;
-                text-align: right;
-                min-width: auto;
-            }
+    .item{
+        grid-template-columns:65px 1fr;
+        gap:10px;
+    }
 
-            .remove-item {
-                display: block;
-            }
+    .item-image{
+        width:65px;
+        height:65px;
+        font-size:32px;
+        grid-row:span 2;
+    }
 
-        }
+    .item-total{
+        grid-column:2;
+        text-align:right;
+    }
 
-    </style>
-
+    .item-info h3{
+        font-size:13px;
+    }
+}
+</style>
 </head>
-
 
 <body>
 
-
-<!-- =====================================================
-     TOP BAR
-===================================================== -->
-
-<div class="topbar">
-
-    <div>
-        🚚 توصيل سريع
-    </div>
-
-    <div>
-        💳 كاش أو فيزا
-    </div>
-
-    <div>
-        💬 01119511185
-    </div>
-
+<div class="top">
+    🚚 توصيل سريع | 💳 كاش أو فيزا | 📱 واتساب 01119511185
 </div>
 
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
 <header class="header">
+    <div class="header-inner">
 
-    <a
-        href="index.html"
-        class="brand"
-    >
+        <a href="index.html" class="logo">
+            <div class="logo-icon">ب</div>
 
-        <div class="brand-mark">
-            ب
-        </div>
+            <div>
+                <strong>مول البركة</strong>
+                <small>أولاد الجارحي</small>
+            </div>
+        </a>
 
-        <div class="brand-text">
-
-            <strong>
-                مول البركة
-            </strong>
-
-            <small>
-                أولاد الجارحي
-            </small>
-
-        </div>
-
-    </a>
-
-
-    <div class="search-box">
-
-        <span class="search-icon">
-            🔍
-        </span>
-
-        <input
-            type="text"
-            placeholder="ابحث عن منتج..."
-            onkeydown="
-                if(event.key === 'Enter'){
-                    window.location.href =
-                    'index.html#products';
-                }
-            "
-        >
+        <a href="index.html" class="back">
+            ← متابعة التسوق
+        </a>
 
     </div>
-
-
-    <a
-        href="index.html"
-        class="header-account"
-    >
-        🏠 الرئيسية
-    </a>
-
-
-    <a
-        href="cart.html"
-        class="cart-button"
-    >
-
-        🛒
-
-        <span>
-            السلة
-        </span>
-
-        <b id="cartCount">
-            0
-        </b>
-
-    </a>
-
 </header>
 
+<main class="page">
 
-<!-- =====================================================
-     NAV
-===================================================== -->
-
-<nav class="main-nav">
-
-    <a href="index.html">
-        الرئيسية
-    </a>
-
-    <a href="index.html#categories">
-        الأقسام
-    </a>
-
-    <a href="index.html#offers">
-        🔥 العروض
-    </a>
-
-    <a href="index.html#products">
-        المنتجات
-    </a>
-
-    <a
-        href="cart.html"
-        class="active"
-    >
-        🛒 السلة
-    </a>
-
-</nav>
-
-
-<!-- =====================================================
-     CART
-===================================================== -->
-
-<main class="cart-page">
-
-
-    <div class="cart-title">
-
-        <span>
-            مول البركة
-        </span>
-
-        <h1>
-            🛒 سلة المشتريات
-        </h1>
-
+    <div class="title">
+        <h1>🛒 سلة المشتريات</h1>
+        <p>راجع منتجاتك قبل إتمام الطلب</p>
     </div>
 
+    <div class="layout">
 
-    <div class="cart-layout">
+        <!-- السلة -->
 
+        <section class="box">
 
-        <!-- =============================================
-             ITEMS
-        ============================================== -->
+            <div class="box-title">
+                <h2 id="itemsTitle">
+                    منتجات السلة
+                </h2>
 
-        <section
-            class="cart-items-box"
-            id="cartItems"
-        >
+                <button
+                    class="clear"
+                    id="clearCart"
+                >
+                    حذف الكل
+                </button>
+            </div>
+
+            <div id="cartItems"></div>
 
         </section>
 
 
-        <!-- =============================================
-             SUMMARY
-        ============================================== -->
+        <!-- ملخص الطلب -->
 
-        <aside
-            class="cart-summary"
-            id="cartSummary"
-        >
+        <aside class="box summary">
 
-            <h2>
-                ملخص الطلب
-            </h2>
+            <h2>ملخص الطلب</h2>
 
-
-            <div class="summary-row">
-
-                <span>
-                    عدد المنتجات
-                </span>
-
-                <strong id="summaryItems">
-                    0
-                </strong>
-
+            <div class="row">
+                <span>عدد المنتجات</span>
+                <strong id="summaryCount">0</strong>
             </div>
 
-
-            <div class="summary-row">
-
-                <span>
-                    إجمالي المنتجات
-                </span>
-
-                <strong id="summarySubtotal">
-                    0 ج.م
-                </strong>
-
+            <div class="row">
+                <span>إجمالي المنتجات</span>
+                <strong id="summarySubtotal">0 ج.م</strong>
             </div>
 
-
-            <div class="summary-row">
-
-                <span>
-                    التوصيل
-                </span>
-
-                <strong>
-                    يتم تحديده
-                </strong>
-
+            <div class="row">
+                <span>التوصيل</span>
+                <strong id="deliveryPrice">يحدد عند الطلب</strong>
             </div>
 
-
-            <div class="summary-total">
-
-                <span>
-                    الإجمالي
-                </span>
-
-                <strong id="summaryTotal">
-                    0 ج.م
-                </strong>
-
+            <div class="row total">
+                <span>الإجمالي</span>
+                <strong id="summaryTotal">0 ج.م</strong>
             </div>
 
-
-            <a
-                href="checkout.html"
-                class="checkout-button"
-                id="checkoutButton"
-            >
-
-                إكمال الطلب ←
-
-            </a>
-
-
-            <a
-                href="index.html#products"
-                class="continue-button"
-            >
-
-                مواصلة التسوق
-
-            </a>
-
+            <div class="delivery">
+                🚚 سيتم تأكيد بيانات التوصيل والتكلفة النهائية
+                معك قبل إرسال الطلب.
+            </div>
 
             <button
-                type="button"
-                class="clear-cart-button"
-                id="clearCartButton"
+                class="checkout"
+                id="checkoutBtn"
             >
-
-                🗑️ تفريغ السلة
-
+                إكمال الطلب →
             </button>
 
+            <a
+                class="whatsapp"
+                href="https://wa.me/201119511185"
+                target="_blank"
+                rel="noopener"
+            >
+                💬 التواصل عبر واتساب
+            </a>
 
-            <div class="cart-note">
-
-                💬 بعد إتمام البيانات،
-                سيتم تجهيز رسالة الطلب
-                وإرسالها إلى واتساب
-                <strong>01119511185</strong>.
-
+            <div class="payment">
+                <span>💵 كاش</span>
+                <span>💳 فيزا</span>
             </div>
 
         </aside>
-
 
     </div>
 
 </main>
 
 
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer>
-
-    <strong>
-        مول البركة – أولاد الجارحي
-    </strong>
-
-    <span>
-        خضروات • فواكه • لحوم • طيور • ماركت • عطارة
-    </span>
-
-    <a
-        href="https://wa.me/201119511185"
-        target="_blank"
-        rel="noopener"
-    >
-        💬 واتساب: 01119511185
-    </a>
-
-</footer>
-
-
-<!-- =====================================================
-     APP
-===================================================== -->
-
 <script src="app.js"></script>
-
 
 <script>
 
 "use strict";
 
+/* =========================================
+   رسم السلة
+========================================= */
 
-/* =====================================================
-   CART PAGE RENDER
-===================================================== */
+function renderCart(){
 
-function renderCartPage() {
+    const cart =
+        typeof getCart === "function"
+        ? getCart()
+        : [];
 
-    const cartItems =
-        document.getElementById("cartItems");
+    const container =
+        document.getElementById(
+            "cartItems"
+        );
 
-    const summaryItems =
-        document.getElementById("summaryItems");
+    const count =
+        document.getElementById(
+            "summaryCount"
+        );
 
-    const summarySubtotal =
-        document.getElementById("summarySubtotal");
+    const subtotal =
+        document.getElementById(
+            "summarySubtotal"
+        );
 
-    const summaryTotal =
-        document.getElementById("summaryTotal");
+    const total =
+        document.getElementById(
+            "summaryTotal"
+        );
 
-    const checkoutButton =
-        document.getElementById("checkoutButton");
-
-
-    if (!cartItems) {
-        return;
-    }
-
-
-    const currentCart =
-        window.getCart();
+    const title =
+        document.getElementById(
+            "itemsTitle"
+        );
 
 
-    /* ================================================
-       EMPTY CART
-    ================================================= */
+    if(!container) return;
 
-    if (
-        !Array.isArray(currentCart) ||
-        currentCart.length === 0
-    ) {
 
-        cartItems.innerHTML = `
+    /* ===============================
+       السلة فارغة
+    =============================== */
 
-            <div class="empty-cart">
+    if(cart.length === 0){
 
-                <div class="empty-cart-icon">
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
                     🛒
                 </div>
 
                 <h2>
-                    السلة فارغة
+                    السلة فاضية
                 </h2>
 
                 <p>
-                    لم تضف أي منتجات إلى السلة حتى الآن.
+                    لسه مفيش منتجات في سلتك.
+                    ابدأ التسوق وأضف احتياجاتك.
                 </p>
 
-                <a href="index.html#products">
+                <a
+                    href="index.html"
+                    class="shop"
+                >
                     ابدأ التسوق
                 </a>
 
@@ -722,231 +586,268 @@ function renderCartPage() {
 
         `;
 
+        count.textContent = "0";
+        subtotal.textContent = "0 ج.م";
+        total.textContent = "0 ج.م";
 
-        summaryItems.textContent = "0";
-
-        summarySubtotal.textContent =
-            "0 ج.م";
-
-        summaryTotal.textContent =
-            "0 ج.م";
-
-
-        checkoutButton.style.pointerEvents =
-            "none";
-
-        checkoutButton.style.opacity =
-            "0.5";
-
+        title.textContent =
+            "منتجات السلة";
 
         return;
-
     }
 
 
-    /* ================================================
-       ACTIVE CART
-    ================================================= */
+    /* ===============================
+       المنتجات
+    =============================== */
 
-    checkoutButton.style.pointerEvents =
-        "auto";
-
-    checkoutButton.style.opacity =
-        "1";
-
+    let html = "";
 
     let totalItems = 0;
 
     let totalPrice = 0;
 
 
-    cartItems.innerHTML =
-        currentCart.map(item => {
+    cart.forEach(item => {
 
-            const quantity =
-                Number(item.quantity || 0);
+        const quantity =
+            Number(item.quantity) || 1;
 
-            const price =
-                Number(item.price || 0);
+        const price =
+            Number(item.price) || 0;
 
-            const itemTotal =
-                quantity * price;
+        const itemTotal =
+            quantity * price;
 
+        totalItems += quantity;
 
-            totalItems += quantity;
-
-            totalPrice += itemTotal;
+        totalPrice += itemTotal;
 
 
-            return `
+        html += `
 
-                <article class="cart-item">
+            <article
+                class="item"
+            >
+
+                <div class="item-image">
+                    ${escapeHtml(
+                        item.emoji || "🛒"
+                    )}
+                </div>
 
 
-                    <div class="cart-item-image">
+                <div class="item-info">
 
-                        ${item.emoji || "🛒"}
+                    <h3>
+                        ${escapeHtml(
+                            item.name
+                        )}
+                    </h3>
 
+                    <div class="item-unit">
+                        ${escapeHtml(
+                            item.unit || "قطعة"
+                        )}
+                    </div>
+
+                    <div class="item-price">
+                        ${formatPrice(price)}
                     </div>
 
 
-                    <div class="cart-item-info">
-
-                        <small>
-                            ${escapeCartHTML(
-                                item.category || ""
-                            )}
-                        </small>
-
-                        <h3>
-                            ${escapeCartHTML(
-                                item.name || ""
-                            )}
-                        </h3>
-
-                        <div class="cart-item-price">
-
-                            ${window.formatPrice(price)}
-
-                            <small>
-                                / ${escapeCartHTML(
-                                    item.unit || ""
-                                )}
-                            </small>
-
-                        </div>
-
-
-                        <div class="quantity-box">
-
-                            <button
-                                type="button"
-                                onclick="
-                                    decreaseQuantity(${item.id})
-                                "
-                                aria-label="تقليل الكمية"
-                            >
-                                −
-                            </button>
-
-
-                            <strong>
-                                ${quantity}
-                            </strong>
-
-
-                            <button
-                                type="button"
-                                onclick="
-                                    increaseQuantity(${item.id})
-                                "
-                                aria-label="زيادة الكمية"
-                            >
-                                +
-                            </button>
-
-                        </div>
-
+                    <div class="controls">
 
                         <button
-                            type="button"
-                            class="remove-item"
-                            onclick="
-                                removeFromCart(${item.id})
-                            "
+                            class="qty-btn"
+                            data-action="minus"
+                            data-id="${escapeHtml(
+                                item.id
+                            )}"
                         >
+                            −
+                        </button>
 
-                            🗑️ حذف المنتج
+                        <span class="qty">
+                            ${quantity}
+                        </span>
 
+                        <button
+                            class="qty-btn"
+                            data-action="plus"
+                            data-id="${escapeHtml(
+                                item.id
+                            )}"
+                        >
+                            +
                         </button>
 
                     </div>
 
 
-                    <div class="cart-item-total">
+                    <button
+                        class="remove"
+                        data-action="remove"
+                        data-id="${escapeHtml(
+                            item.id
+                        )}"
+                    >
+                        حذف المنتج
+                    </button>
 
-                        ${window.formatPrice(itemTotal)}
-
-                    </div>
+                </div>
 
 
-                </article>
+                <div class="item-total">
+                    ${formatPrice(itemTotal)}
+                </div>
 
-            `;
+            </article>
 
-        }).join("");
+        `;
+
+    });
 
 
-    summaryItems.textContent =
+    container.innerHTML =
+        html;
+
+
+    count.textContent =
         totalItems;
 
 
-    summarySubtotal.textContent =
-        window.formatPrice(totalPrice);
+    subtotal.textContent =
+        formatPrice(totalPrice);
 
 
-    summaryTotal.textContent =
-        window.formatPrice(totalPrice);
-
-}
+    total.textContent =
+        formatPrice(totalPrice);
 
 
-/* =====================================================
-   ESCAPE
-===================================================== */
-
-function escapeCartHTML(value) {
-
-    return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+    title.textContent =
+        "منتجات السلة (" +
+        totalItems +
+        ")";
 
 }
 
 
-/* =====================================================
-   CLEAR CART
-===================================================== */
+/* =========================================
+   حماية النصوص
+========================================= */
+
+function escapeHtml(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================
+   أزرار السلة
+========================================= */
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        const button =
+            event.target.closest(
+                "[data-action]"
+            );
+
+        if(!button) return;
+
+
+        const action =
+            button.dataset.action;
+
+        const id =
+            button.dataset.id;
+
+
+        if(action === "plus"){
+
+            changeCartQuantity(
+                id,
+                1
+            );
+
+            renderCart();
+
+        }
+
+
+        if(action === "minus"){
+
+            changeCartQuantity(
+                id,
+                -1
+            );
+
+            renderCart();
+
+        }
+
+
+        if(action === "remove"){
+
+            removeFromCart(id);
+
+            renderCart();
+
+            showToast(
+                "تم حذف المنتج من السلة"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   حذف الكل
+========================================= */
 
 document
-    .getElementById("clearCartButton")
+    .getElementById("clearCart")
     .addEventListener(
         "click",
-        function() {
+        function(){
 
-            const currentCart =
-                window.getCart();
+            const cart =
+                getCart();
 
-
-            if (
-                !Array.isArray(currentCart) ||
-                currentCart.length === 0
-            ) {
+            if(cart.length === 0){
 
                 return;
-
             }
 
 
             const confirmed =
-                window.confirm(
-                    "هل تريد تفريغ السلة بالكامل؟"
+                confirm(
+                    "هل تريد حذف جميع المنتجات من السلة؟"
                 );
 
 
-            if (!confirmed) {
+            if(!confirmed){
+
                 return;
             }
 
 
-            window.clearCart();
+            clearCart();
 
-            renderCartPage();
+            renderCart();
 
-            window.showToast(
+            showToast(
                 "تم تفريغ السلة"
             );
 
@@ -954,32 +855,73 @@ document
     );
 
 
-/* =====================================================
-   UPDATE AFTER CART CHANGE
-===================================================== */
+/* =========================================
+   إكمال الطلب
+========================================= */
 
-window.renderCartPage =
-    renderCartPage;
+document
+    .getElementById("checkoutBtn")
+    .addEventListener(
+        "click",
+        function(){
+
+            const cart =
+                getCart();
 
 
-/* =====================================================
-   START
-===================================================== */
+            if(
+                !Array.isArray(cart) ||
+                cart.length === 0
+            ){
+
+                showToast(
+                    "أضف منتجات للسلة أولاً"
+                );
+
+                return;
+            }
+
+
+            window.location.href =
+                "checkout.html";
+
+        }
+    );
+
+
+/* =========================================
+   تحديث السلة
+========================================= */
+
+window.addEventListener(
+    "cartUpdated",
+    function(){
+
+        renderCart();
+
+    }
+);
+
 
 document.addEventListener(
     "DOMContentLoaded",
-    function() {
+    function(){
 
-        window.updateCartCount();
+        renderCart();
 
-        renderCartPage();
+        if(
+            typeof updateCartCount ===
+            "function"
+        ){
+
+            updateCartCount();
+
+        }
 
     }
 );
 
 </script>
 
-
 </body>
-
 </html>
