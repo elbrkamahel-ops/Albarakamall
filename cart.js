@@ -1,402 +1,848 @@
-/* =========================================================
-   مول البركة - نظام السلة
-   يعمل بدون PHP
-   ========================================================= */
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 
-(function () {
+<head>
 
-    "use strict";
+    <meta charset="UTF-8">
 
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    /* -----------------------------------------------------
-       أسماء أماكن التخزين التي نحاول قراءتها
-       ----------------------------------------------------- */
+    <title>سلة المشتريات | مول البركة</title>
 
-    const CART_KEYS = [
-        "albaraka_cart",
-        "shopping_cart",
-        "cart"
-    ];
+    <meta
+        name="description"
+        content="سلة مشتريات مول البركة أولاد الجارحي"
+    >
 
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
-    /* -----------------------------------------------------
-       معرفة مكان السلة
-       ----------------------------------------------------- */
+    <style>
 
-    function findCartKey() {
+        /* =================================================
+           CART PAGE
+        ================================================= */
 
-        for (const key of CART_KEYS) {
+        .cart-page {
+            max-width: 1240px;
+            margin: 35px auto 70px;
+            padding: 0 15px;
+        }
 
-            const value = localStorage.getItem(key);
+        .cart-title {
+            margin-bottom: 25px;
+        }
 
-            if (value !== null) {
-                return key;
+        .cart-title span {
+            color: #087f3f;
+            font-size: 13px;
+            font-weight: 900;
+        }
+
+        .cart-title h1 {
+            margin-top: 4px;
+            font-size: 34px;
+        }
+
+        .cart-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 350px;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .cart-items-box,
+        .cart-summary {
+            background: #fff;
+            border: 1px solid #e3ebe6;
+            border-radius: 22px;
+            box-shadow: 0 8px 30px rgba(0,0,0,.04);
+        }
+
+        .cart-items-box {
+            overflow: hidden;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 90px minmax(0,1fr) auto;
+            align-items: center;
+            gap: 18px;
+            padding: 18px;
+            border-bottom: 1px solid #edf1ee;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-image {
+            width: 90px;
+            height: 90px;
+            border-radius: 18px;
+            background: #eff9f2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+        }
+
+        .cart-item-info h3 {
+            font-size: 17px;
+            margin-bottom: 2px;
+        }
+
+        .cart-item-info small {
+            color: #89948e;
+            font-size: 11px;
+        }
+
+        .cart-item-price {
+            margin-top: 5px;
+            color: #087f3f;
+            font-weight: 900;
+        }
+
+        .quantity-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .quantity-box button {
+            width: 31px;
+            height: 31px;
+            border: 1px solid #dce7e0;
+            background: #fff;
+            border-radius: 9px;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 900;
+        }
+
+        .quantity-box button:hover {
+            background: #087f3f;
+            color: #fff;
+        }
+
+        .quantity-box strong {
+            min-width: 28px;
+            text-align: center;
+        }
+
+        .cart-item-total {
+            text-align: left;
+            font-weight: 900;
+            color: #17221b;
+            min-width: 100px;
+        }
+
+        .remove-item {
+            border: none;
+            background: transparent;
+            color: #b14d4d;
+            cursor: pointer;
+            margin-top: 8px;
+            font-size: 12px;
+        }
+
+        .remove-item:hover {
+            text-decoration: underline;
+        }
+
+        .cart-summary {
+            padding: 22px;
+            position: sticky;
+            top: 105px;
+        }
+
+        .cart-summary h2 {
+            font-size: 21px;
+            margin-bottom: 18px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 10px 0;
+            color: #65726a;
+            border-bottom: 1px dashed #e1e8e3;
+        }
+
+        .summary-row strong {
+            color: #17221b;
+        }
+
+        .summary-total {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 17px;
+            padding-top: 15px;
+            border-top: 2px solid #edf1ee;
+        }
+
+        .summary-total span {
+            font-weight: 900;
+        }
+
+        .summary-total strong {
+            color: #087f3f;
+            font-size: 25px;
+        }
+
+        .checkout-button {
+            width: 100%;
+            margin-top: 18px;
+            min-height: 50px;
+            border: none;
+            border-radius: 13px;
+            background: #087f3f;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 900;
+            font-size: 15px;
+        }
+
+        .checkout-button:hover {
+            background: #056d35;
+        }
+
+        .continue-button {
+            width: 100%;
+            margin-top: 9px;
+            min-height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #dce7e0;
+            border-radius: 13px;
+            color: #08783c;
+            background: #fff;
+            font-weight: 900;
+        }
+
+        .clear-cart-button {
+            width: 100%;
+            margin-top: 9px;
+            min-height: 40px;
+            border: none;
+            background: transparent;
+            color: #a24b4b;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .empty-cart {
+            padding: 65px 20px;
+            text-align: center;
+        }
+
+        .empty-cart-icon {
+            font-size: 65px;
+            margin-bottom: 10px;
+        }
+
+        .empty-cart h2 {
+            font-size: 25px;
+            margin-bottom: 5px;
+        }
+
+        .empty-cart p {
+            color: #7b867f;
+            margin-bottom: 20px;
+        }
+
+        .empty-cart a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 45px;
+            padding: 10px 22px;
+            background: #087f3f;
+            color: #fff;
+            border-radius: 12px;
+            font-weight: 900;
+        }
+
+        .cart-note {
+            margin-top: 15px;
+            padding: 13px;
+            border-radius: 12px;
+            background: #eff9f2;
+            color: #526158;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 800px) {
+
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-summary {
+                position: static;
             }
 
         }
 
-        return "albaraka_cart";
-    }
+        @media (max-width: 560px) {
 
-
-    let CART_KEY = findCartKey();
-
-
-    /* -----------------------------------------------------
-       قراءة السلة
-       ----------------------------------------------------- */
-
-    function getCart() {
-
-        try {
-
-            const data = localStorage.getItem(CART_KEY);
-
-            if (!data) {
-                return [];
+            .cart-page {
+                margin-top: 22px;
             }
 
-            const parsed = JSON.parse(data);
-
-            if (Array.isArray(parsed)) {
-                return parsed;
+            .cart-title h1 {
+                font-size: 28px;
             }
 
-            if (typeof parsed === "object" && parsed !== null) {
-
-                return Object.values(parsed);
-
+            .cart-item {
+                grid-template-columns: 65px minmax(0,1fr);
+                gap: 12px;
+                padding: 13px;
             }
 
-            return [];
+            .cart-item-image {
+                width: 65px;
+                height: 65px;
+                font-size: 34px;
+            }
 
-        } catch (error) {
+            .cart-item-info h3 {
+                font-size: 14px;
+            }
 
-            console.error("Cart read error:", error);
+            .cart-item-total {
+                grid-column: 2;
+                text-align: right;
+                min-width: auto;
+            }
 
-            return [];
+            .remove-item {
+                display: block;
+            }
 
         }
 
-    }
+    </style>
+
+</head>
 
 
-    /* -----------------------------------------------------
-       حفظ السلة
-       ----------------------------------------------------- */
-
-    function saveCart(cart) {
-
-        localStorage.setItem(
-            CART_KEY,
-            JSON.stringify(cart)
-        );
-
-        /* نحاول الحفاظ على التوافق مع المشروع القديم */
-
-        localStorage.setItem(
-            "albaraka_cart",
-            JSON.stringify(cart)
-        );
-
-    }
+<body>
 
 
-    /* -----------------------------------------------------
-       تنظيف بيانات المنتجات
-       ----------------------------------------------------- */
+<!-- =====================================================
+     TOP BAR
+===================================================== -->
 
-    function normalizeProduct(item) {
+<div class="topbar">
 
-        if (!item) {
-            return null;
-        }
+    <div>
+        🚚 توصيل سريع
+    </div>
 
+    <div>
+        💳 كاش أو فيزا
+    </div>
 
-        const id =
-            item.id ??
-            item.product_id ??
-            item.productId ??
-            item.code;
+    <div>
+        💬 01119511185
+    </div>
 
-
-        const name =
-            item.name ??
-            item.product_name ??
-            item.title ??
-            "منتج";
+</div>
 
 
-        const price =
-            Number(
-                item.price ??
-                item.sale_price ??
-                item.product_price ??
-                0
-            );
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <a
+        href="index.html"
+        class="brand"
+    >
+
+        <div class="brand-mark">
+            ب
+        </div>
+
+        <div class="brand-text">
+
+            <strong>
+                مول البركة
+            </strong>
+
+            <small>
+                أولاد الجارحي
+            </small>
+
+        </div>
+
+    </a>
 
 
-        const quantity =
-            Number(
-                item.quantity ??
-                item.qty ??
-                item.count ??
-                1
-            );
+    <div class="search-box">
+
+        <span class="search-icon">
+            🔍
+        </span>
+
+        <input
+            type="text"
+            placeholder="ابحث عن منتج..."
+            onkeydown="
+                if(event.key === 'Enter'){
+                    window.location.href =
+                    'index.html#products';
+                }
+            "
+        >
+
+    </div>
 
 
-        const image =
-            item.image ??
-            item.image_url ??
-            item.photo ??
-            item.thumbnail ??
-            "";
+    <a
+        href="index.html"
+        class="header-account"
+    >
+        🏠 الرئيسية
+    </a>
 
 
-        return {
+    <a
+        href="cart.html"
+        class="cart-button"
+    >
 
-            id: String(
-                id ?? Date.now()
-            ),
+        🛒
 
-            name: String(name),
+        <span>
+            السلة
+        </span>
 
-            price: isNaN(price)
-                ? 0
-                : price,
-
-            quantity:
-                quantity > 0
-                    ? quantity
-                    : 1,
-
-            image: image
-
-        };
-
-    }
-
-
-    /* -----------------------------------------------------
-       الحصول على المنتجات
-       ----------------------------------------------------- */
-
-    function getProducts() {
-
-        return getCart()
-            .map(normalizeProduct)
-            .filter(Boolean);
-
-    }
-
-
-    /* -----------------------------------------------------
-       حفظ المنتجات
-       ----------------------------------------------------- */
-
-    function setProducts(products) {
-
-        saveCart(products);
-
-    }
-
-
-    /* -----------------------------------------------------
-       تنسيق السعر
-       ----------------------------------------------------- */
-
-    function money(value) {
-
-        return Number(value || 0)
-            .toLocaleString("ar-EG") +
-            " جنيه";
-
-    }
-
-
-    /* -----------------------------------------------------
-       إجمالي عدد المنتجات
-       ----------------------------------------------------- */
-
-    function getCount(products) {
-
-        return products.reduce(
-            function (total, item) {
-
-                return total +
-                    Number(item.quantity || 0);
-
-            },
+        <b id="cartCount">
             0
-        );
+        </b>
 
+    </a>
+
+</header>
+
+
+<!-- =====================================================
+     NAV
+===================================================== -->
+
+<nav class="main-nav">
+
+    <a href="index.html">
+        الرئيسية
+    </a>
+
+    <a href="index.html#categories">
+        الأقسام
+    </a>
+
+    <a href="index.html#offers">
+        🔥 العروض
+    </a>
+
+    <a href="index.html#products">
+        المنتجات
+    </a>
+
+    <a
+        href="cart.html"
+        class="active"
+    >
+        🛒 السلة
+    </a>
+
+</nav>
+
+
+<!-- =====================================================
+     CART
+===================================================== -->
+
+<main class="cart-page">
+
+
+    <div class="cart-title">
+
+        <span>
+            مول البركة
+        </span>
+
+        <h1>
+            🛒 سلة المشتريات
+        </h1>
+
+    </div>
+
+
+    <div class="cart-layout">
+
+
+        <!-- =============================================
+             ITEMS
+        ============================================== -->
+
+        <section
+            class="cart-items-box"
+            id="cartItems"
+        >
+
+        </section>
+
+
+        <!-- =============================================
+             SUMMARY
+        ============================================== -->
+
+        <aside
+            class="cart-summary"
+            id="cartSummary"
+        >
+
+            <h2>
+                ملخص الطلب
+            </h2>
+
+
+            <div class="summary-row">
+
+                <span>
+                    عدد المنتجات
+                </span>
+
+                <strong id="summaryItems">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    إجمالي المنتجات
+                </span>
+
+                <strong id="summarySubtotal">
+                    0 ج.م
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    التوصيل
+                </span>
+
+                <strong>
+                    يتم تحديده
+                </strong>
+
+            </div>
+
+
+            <div class="summary-total">
+
+                <span>
+                    الإجمالي
+                </span>
+
+                <strong id="summaryTotal">
+                    0 ج.م
+                </strong>
+
+            </div>
+
+
+            <a
+                href="checkout.html"
+                class="checkout-button"
+                id="checkoutButton"
+            >
+
+                إكمال الطلب ←
+
+            </a>
+
+
+            <a
+                href="index.html#products"
+                class="continue-button"
+            >
+
+                مواصلة التسوق
+
+            </a>
+
+
+            <button
+                type="button"
+                class="clear-cart-button"
+                id="clearCartButton"
+            >
+
+                🗑️ تفريغ السلة
+
+            </button>
+
+
+            <div class="cart-note">
+
+                💬 بعد إتمام البيانات،
+                سيتم تجهيز رسالة الطلب
+                وإرسالها إلى واتساب
+                <strong>01119511185</strong>.
+
+            </div>
+
+        </aside>
+
+
+    </div>
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <strong>
+        مول البركة – أولاد الجارحي
+    </strong>
+
+    <span>
+        خضروات • فواكه • لحوم • طيور • ماركت • عطارة
+    </span>
+
+    <a
+        href="https://wa.me/201119511185"
+        target="_blank"
+        rel="noopener"
+    >
+        💬 واتساب: 01119511185
+    </a>
+
+</footer>
+
+
+<!-- =====================================================
+     APP
+===================================================== -->
+
+<script src="app.js"></script>
+
+
+<script>
+
+"use strict";
+
+
+/* =====================================================
+   CART PAGE RENDER
+===================================================== */
+
+function renderCartPage() {
+
+    const cartItems =
+        document.getElementById("cartItems");
+
+    const summaryItems =
+        document.getElementById("summaryItems");
+
+    const summarySubtotal =
+        document.getElementById("summarySubtotal");
+
+    const summaryTotal =
+        document.getElementById("summaryTotal");
+
+    const checkoutButton =
+        document.getElementById("checkoutButton");
+
+
+    if (!cartItems) {
+        return;
     }
 
 
-    /* -----------------------------------------------------
-       إجمالي السعر
-       ----------------------------------------------------- */
-
-    function getTotal(products) {
-
-        return products.reduce(
-            function (total, item) {
-
-                return total +
-                    (
-                        Number(item.price || 0) *
-                        Number(item.quantity || 0)
-                    );
-
-            },
-            0
-        );
-
-    }
+    const currentCart =
+        window.getCart();
 
 
-    /* -----------------------------------------------------
-       رسم السلة
-       ----------------------------------------------------- */
+    /* ================================================
+       EMPTY CART
+    ================================================= */
 
-    function renderCart() {
+    if (
+        !Array.isArray(currentCart) ||
+        currentCart.length === 0
+    ) {
 
-        const area =
-            document.getElementById("cartArea");
+        cartItems.innerHTML = `
 
+            <div class="empty-cart">
 
-        if (!area) {
-            return;
-        }
-
-
-        const products =
-            getProducts();
-
-
-        /* السلة فارغة */
-
-        if (products.length === 0) {
-
-            area.innerHTML = `
-
-                <div class="box empty">
-
-                    <div class="empty-icon">
-                        🛒
-                    </div>
-
-                    <h2>
-                        السلة فارغة
-                    </h2>
-
-                    <p>
-                        لم تضف أي منتجات إلى السلة بعد.
-                    </p>
-
-                    <a
-                        href="index.html"
-                        class="shop">
-
-                        ابدأ التسوق
-
-                    </a>
-
+                <div class="empty-cart-icon">
+                    🛒
                 </div>
 
-            `;
+                <h2>
+                    السلة فارغة
+                </h2>
 
-            updateCartBadges(0);
+                <p>
+                    لم تضف أي منتجات إلى السلة حتى الآن.
+                </p>
 
-            return;
-        }
+                <a href="index.html#products">
+                    ابدأ التسوق
+                </a>
+
+            </div>
+
+        `;
 
 
-        let itemsHTML = "";
+        summaryItems.textContent = "0";
+
+        summarySubtotal.textContent =
+            "0 ج.م";
+
+        summaryTotal.textContent =
+            "0 ج.م";
 
 
-        products.forEach(function (item, index) {
+        checkoutButton.style.pointerEvents =
+            "none";
+
+        checkoutButton.style.opacity =
+            "0.5";
+
+
+        return;
+
+    }
+
+
+    /* ================================================
+       ACTIVE CART
+    ================================================= */
+
+    checkoutButton.style.pointerEvents =
+        "auto";
+
+    checkoutButton.style.opacity =
+        "1";
+
+
+    let totalItems = 0;
+
+    let totalPrice = 0;
+
+
+    cartItems.innerHTML =
+        currentCart.map(item => {
 
             const quantity =
-                Number(item.quantity || 1);
+                Number(item.quantity || 0);
+
+            const price =
+                Number(item.price || 0);
+
+            const itemTotal =
+                quantity * price;
 
 
-            const subtotal =
-                Number(item.price || 0) *
-                quantity;
+            totalItems += quantity;
+
+            totalPrice += itemTotal;
 
 
-            const imageHTML =
-                item.image
+            return `
 
-                    ? `
-                        <img
-                            src="${escapeHTML(item.image)}"
-                            class="item-image"
-                            alt="${escapeHTML(item.name)}"
-                            onerror="this.style.display='none';">
-                      `
-
-                    : `
-                        <div
-                            class="item-image"
-                            style="
-                                display:flex;
-                                align-items:center;
-                                justify-content:center;
-                                font-size:40px;
-                            ">
-                            🛒
-                        </div>
-                      `;
+                <article class="cart-item">
 
 
-            itemsHTML += `
+                    <div class="cart-item-image">
 
-                <div class="cart-item">
-
-                    ${imageHTML}
-
-                    <div class="item-info">
-
-                        <div class="item-name">
-                            ${escapeHTML(item.name)}
-                        </div>
-
-                        <div class="item-price">
-                            ${money(item.price)}
-                        </div>
-
-                        <div class="item-total">
-                            الإجمالي:
-                            ${money(subtotal)}
-                        </div>
+                        ${item.emoji || "🛒"}
 
                     </div>
 
 
-                    <div>
+                    <div class="cart-item-info">
 
-                        <div class="quantity">
+                        <small>
+                            ${escapeCartHTML(
+                                item.category || ""
+                            )}
+                        </small>
+
+                        <h3>
+                            ${escapeCartHTML(
+                                item.name || ""
+                            )}
+                        </h3>
+
+                        <div class="cart-item-price">
+
+                            ${window.formatPrice(price)}
+
+                            <small>
+                                / ${escapeCartHTML(
+                                    item.unit || ""
+                                )}
+                            </small>
+
+                        </div>
+
+
+                        <div class="quantity-box">
 
                             <button
                                 type="button"
-                                onclick="window.cartPlus('${escapeAttribute(item.id)}')">
-
-                                +
-
+                                onclick="
+                                    decreaseQuantity(${item.id})
+                                "
+                                aria-label="تقليل الكمية"
+                            >
+                                −
                             </button>
 
-                            <span>
+
+                            <strong>
                                 ${quantity}
-                            </span>
+                            </strong>
+
 
                             <button
                                 type="button"
-                                onclick="window.cartMinus('${escapeAttribute(item.id)}')">
-
-                                −
-
+                                onclick="
+                                    increaseQuantity(${item.id})
+                                "
+                                aria-label="زيادة الكمية"
+                            >
+                                +
                             </button>
 
                         </div>
@@ -404,411 +850,136 @@
 
                         <button
                             type="button"
-                            class="remove"
-                            onclick="window.cartRemove('${escapeAttribute(item.id)}')">
+                            class="remove-item"
+                            onclick="
+                                removeFromCart(${item.id})
+                            "
+                        >
 
-                            🗑 حذف
+                            🗑️ حذف المنتج
 
                         </button>
 
                     </div>
 
-                </div>
+
+                    <div class="cart-item-total">
+
+                        ${window.formatPrice(itemTotal)}
+
+                    </div>
+
+
+                </article>
 
             `;
 
-        });
+        }).join("");
 
 
-        const count =
-            getCount(products);
+    summaryItems.textContent =
+        totalItems;
 
 
-        const total =
-            getTotal(products);
+    summarySubtotal.textContent =
+        window.formatPrice(totalPrice);
 
 
-        area.innerHTML = `
+    summaryTotal.textContent =
+        window.formatPrice(totalPrice);
 
-            <div class="layout">
+}
 
 
-                <div class="box">
+/* =====================================================
+   ESCAPE
+===================================================== */
 
-                    ${itemsHTML}
+function escapeCartHTML(value) {
 
-                </div>
+    return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
 
+}
 
-                <div class="box summary">
 
-                    <h2>
-                        ملخص الطلب
-                    </h2>
+/* =====================================================
+   CLEAR CART
+===================================================== */
 
+document
+    .getElementById("clearCartButton")
+    .addEventListener(
+        "click",
+        function() {
 
-                    <div class="summary-row">
+            const currentCart =
+                window.getCart();
 
-                        <span>
-                            عدد المنتجات
-                        </span>
 
-                        <strong>
-                            ${count}
-                        </strong>
+            if (
+                !Array.isArray(currentCart) ||
+                currentCart.length === 0
+            ) {
 
-                    </div>
-
-
-                    <div class="summary-row">
-
-                        <span>
-                            قيمة المنتجات
-                        </span>
-
-                        <strong>
-                            ${money(total)}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="summary-row">
-
-                        <span>
-                            التوصيل
-                        </span>
-
-                        <strong>
-                            يحدد عند إتمام الطلب
-                        </strong>
-
-                    </div>
-
-
-                    <div class="total">
-
-                        <span>
-                            الإجمالي
-                        </span>
-
-                        <span>
-                            ${money(total)}
-                        </span>
-
-                    </div>
-
-
-                    <a
-                        href="checkout.html"
-                        class="checkout"
-                        id="checkoutButton">
-
-                        إتمام الطلب
-
-                    </a>
-
-
-                    <button
-                        type="button"
-                        class="clear"
-                        onclick="window.clearCart()">
-
-                        🗑 تفريغ السلة بالكامل
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        `;
-
-
-        updateCartBadges(count);
-
-    }
-
-
-    /* -----------------------------------------------------
-       زيادة الكمية
-       ----------------------------------------------------- */
-
-    window.cartPlus = function (id) {
-
-        const products =
-            getProducts();
-
-
-        const item =
-            products.find(
-                product =>
-                    String(product.id) === String(id)
-            );
-
-
-        if (item) {
-
-            item.quantity =
-                Number(item.quantity || 0) + 1;
-
-        }
-
-
-        setProducts(products);
-
-        renderCart();
-
-    };
-
-
-    /* -----------------------------------------------------
-       تقليل الكمية
-       ----------------------------------------------------- */
-
-    window.cartMinus = function (id) {
-
-        let products =
-            getProducts();
-
-
-        const item =
-            products.find(
-                product =>
-                    String(product.id) === String(id)
-            );
-
-
-        if (!item) {
-            return;
-        }
-
-
-        item.quantity =
-            Number(item.quantity || 1) - 1;
-
-
-        if (item.quantity <= 0) {
-
-            products =
-                products.filter(
-                    product =>
-                        String(product.id) !== String(id)
-                );
-
-        }
-
-
-        setProducts(products);
-
-        renderCart();
-
-    };
-
-
-    /* -----------------------------------------------------
-       حذف منتج
-       ----------------------------------------------------- */
-
-    window.cartRemove = function (id) {
-
-        let products =
-            getProducts();
-
-
-        products =
-            products.filter(
-                product =>
-                    String(product.id) !== String(id)
-            );
-
-
-        setProducts(products);
-
-        renderCart();
-
-    };
-
-
-    /* -----------------------------------------------------
-       تفريغ السلة
-       ----------------------------------------------------- */
-
-    window.clearCart = function () {
-
-        const answer =
-            confirm(
-                "هل تريد تفريغ السلة بالكامل؟"
-            );
-
-
-        if (!answer) {
-            return;
-        }
-
-
-        localStorage.removeItem(
-            "albaraka_cart"
-        );
-
-        localStorage.removeItem(
-            "shopping_cart"
-        );
-
-        localStorage.removeItem(
-            "cart"
-        );
-
-
-        CART_KEY =
-            "albaraka_cart";
-
-
-        renderCart();
-
-    };
-
-
-    /* -----------------------------------------------------
-       تحديث عداد السلة في الموقع
-       ----------------------------------------------------- */
-
-    function updateCartBadges(count) {
-
-        const selectors = [
-
-            ".cart-count",
-
-            "#cartCount",
-
-            "#cart-count",
-
-            "[data-cart-count]"
-
-        ];
-
-
-        selectors.forEach(function (selector) {
-
-            document
-                .querySelectorAll(selector)
-                .forEach(function (element) {
-
-                    element.textContent =
-                        count;
-
-                });
-
-        });
-
-    }
-
-
-    /* -----------------------------------------------------
-       إرسال السلة إلى checkout
-       ----------------------------------------------------- */
-
-    function prepareCheckout() {
-
-        const button =
-            document.getElementById(
-                "checkoutButton"
-            );
-
-
-        if (!button) {
-            return;
-        }
-
-
-        button.addEventListener(
-            "click",
-            function () {
-
-                const products =
-                    getProducts();
-
-
-                if (products.length === 0) {
-
-                    alert(
-                        "السلة فارغة"
-                    );
-
-                    return;
-
-                }
-
-
-                /* حفظ نسخة مؤكدة */
-
-                sessionStorage.setItem(
-                    "checkout_cart",
-                    JSON.stringify(products)
-                );
+                return;
 
             }
-        );
-
-    }
 
 
-    /* -----------------------------------------------------
-       حماية النصوص
-       ----------------------------------------------------- */
-
-    function escapeHTML(value) {
-
-        return String(value)
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-
-    }
+            const confirmed =
+                window.confirm(
+                    "هل تريد تفريغ السلة بالكامل؟"
+                );
 
 
-    function escapeAttribute(value) {
-
-        return String(value)
-            .replace(/\\/g, "\\\\")
-            .replace(/'/g, "\\'");
-
-    }
+            if (!confirmed) {
+                return;
+            }
 
 
-    /* -----------------------------------------------------
-       مزامنة لو السلة اتغيرت من صفحة أخرى
-       ----------------------------------------------------- */
+            window.clearCart();
 
-    window.addEventListener(
-        "storage",
-        function () {
+            renderCartPage();
 
-            CART_KEY =
-                findCartKey();
-
-            renderCart();
+            window.showToast(
+                "تم تفريغ السلة"
+            );
 
         }
     );
 
 
-    /* -----------------------------------------------------
-       بدء التشغيل
-       ----------------------------------------------------- */
+/* =====================================================
+   UPDATE AFTER CART CHANGE
+===================================================== */
 
-    document.addEventListener(
-        "DOMContentLoaded",
-        function () {
-
-            renderCart();
-
-            prepareCheckout();
-
-        }
-    );
+window.renderCartPage =
+    renderCartPage;
 
 
-})();
+/* =====================================================
+   START
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        window.updateCartCount();
+
+        renderCartPage();
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
