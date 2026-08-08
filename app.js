@@ -1,217 +1,153 @@
-/* =========================================
-   MOL ALBARAKA - MAIN STORE JAVASCRIPT
-========================================= */
+/* =====================================================
+   ALBARAKA MALL
+   Store Main JavaScript
+===================================================== */
 
-const PRODUCTS = [
+const products = [
 
     {
         id: 1,
-        name: "طماطم بلدي",
-        category: "vegetables",
-        price: 25,
-        oldPrice: 30,
-        unit: "كيلو",
-        image: "🍅",
-        sale: true
+        name: "أرز فاخر 1 كيلو",
+        category: "grocery",
+        categoryName: "بقالة",
+        price: 35,
+        oldPrice: 42,
+        unit: "للكيلو",
+        image: "🍚",
+        rating: 4.8,
+        badge: "خصم"
     },
 
     {
         id: 2,
-        name: "بطاطس",
+        name: "طماطم طازجة",
         category: "vegetables",
-        price: 22,
-        oldPrice: 27,
-        unit: "كيلو",
-        image: "🥔",
-        sale: true
+        categoryName: "خضروات وفاكهة",
+        price: 25,
+        oldPrice: 30,
+        unit: "للكيلو",
+        image: "🍅",
+        rating: 4.9,
+        badge: "عرض"
     },
 
     {
         id: 3,
         name: "تفاح أحمر",
         category: "vegetables",
+        categoryName: "خضروات وفاكهة",
         price: 65,
         oldPrice: 75,
-        unit: "كيلو",
+        unit: "للكيلو",
         image: "🍎",
-        sale: true
+        rating: 4.8,
+        badge: "خصم"
     },
 
     {
         id: 4,
-        name: "موز",
+        name: "موز طازج",
         category: "vegetables",
+        categoryName: "خضروات وفاكهة",
         price: 35,
         oldPrice: 40,
-        unit: "كيلو",
+        unit: "للكيلو",
         image: "🍌",
-        sale: false
+        rating: 4.7,
+        badge: ""
     },
 
     {
         id: 5,
-        name: "لحمة كندوز",
-        category: "meat",
-        price: 420,
-        oldPrice: 450,
-        unit: "كيلو",
-        image: "🥩",
-        sale: true
+        name: "برتقال طازج",
+        category: "vegetables",
+        categoryName: "خضروات وفاكهة",
+        price: 30,
+        oldPrice: 38,
+        unit: "للكيلو",
+        image: "🍊",
+        rating: 4.7,
+        badge: "عرض"
     },
 
     {
         id: 6,
-        name: "لحمة مفرومة",
+        name: "لحمة بقري طازجة",
         category: "meat",
+        categoryName: "اللحوم",
         price: 390,
-        oldPrice: 420,
-        unit: "كيلو",
+        oldPrice: 430,
+        unit: "للكيلو",
         image: "🥩",
-        sale: true
+        rating: 4.9,
+        badge: "خصم"
     },
 
     {
         id: 7,
         name: "فراخ كاملة",
         category: "chicken",
-        price: 135,
-        oldPrice: 150,
-        unit: "كيلو",
-        image: "🐔",
-        sale: true
+        categoryName: "دواجن",
+        price: 145,
+        oldPrice: 160,
+        unit: "للكيلو",
+        image: "🍗",
+        rating: 4.8,
+        badge: "عرض"
     },
 
     {
         id: 8,
-        name: "وراك فراخ",
-        category: "chicken",
-        price: 145,
-        oldPrice: 160,
-        unit: "كيلو",
-        image: "🍗",
-        sale: false
+        name: "لبن كامل الدسم",
+        category: "dairy",
+        categoryName: "ألبان",
+        price: 38,
+        oldPrice: 42,
+        unit: "1 لتر",
+        image: "🥛",
+        rating: 4.8,
+        badge: ""
     },
 
     {
         id: 9,
-        name: "أرز فاخر",
-        category: "market",
-        price: 38,
-        oldPrice: 42,
-        unit: "كيلو",
-        image: "🍚",
-        sale: true
+        name: "جبنة بيضاء",
+        category: "dairy",
+        categoryName: "ألبان",
+        price: 75,
+        oldPrice: 85,
+        unit: "500 جرام",
+        image: "🧀",
+        rating: 4.7,
+        badge: "خصم"
     },
 
     {
         id: 10,
-        name: "زيت طعام",
-        category: "market",
-        price: 85,
-        oldPrice: 95,
-        unit: "زجاجة",
-        image: "🫒",
-        sale: true
+        name: "عصير برتقال",
+        category: "drinks",
+        categoryName: "مشروبات",
+        price: 30,
+        oldPrice: 35,
+        unit: "1 لتر",
+        image: "🧃",
+        rating: 4.6,
+        badge: ""
     },
 
     {
         id: 11,
-        name: "سكر أبيض",
-        category: "market",
-        price: 35,
-        oldPrice: 38,
-        unit: "كيلو",
-        image: "🧂",
-        sale: false
+        name: "مياه معدنية",
+        category: "drinks",
+        categoryName: "مشروبات",
+        price: 8,
+        oldPrice: 10,
+        unit: "1.5 لتر",
+        image: "💧",
+        rating: 4.8,
+        badge: "عرض"
     },
 
     {
         id: 12,
-        name: "لبن كامل الدسم",
-        category: "market",
-        price: 42,
-        oldPrice: 46,
-        unit: "عبوة",
-        image: "🥛",
-        sale: false
-    }
-
-];
-
-
-/* =========================================
-   CART
-========================================= */
-
-function getCart(){
-
-    try{
-
-        return JSON.parse(
-            localStorage.getItem("baraka_cart") || "[]"
-        );
-
-    }catch(error){
-
-        return [];
-
-    }
-
-}
-
-
-function saveCart(cart){
-
-    localStorage.setItem(
-        "baraka_cart",
-        JSON.stringify(cart)
-    );
-
-}
-
-
-/* =========================================
-   MONEY
-========================================= */
-
-function money(value){
-
-    return Number(value).toLocaleString("ar-EG")
-        + " ج.م";
-
-}
-
-
-/* =========================================
-   CART COUNT
-========================================= */
-
-function updateCartCount(){
-
-    const cart = getCart();
-
-    const count = cart.reduce(
-        (total,item) => total + Number(item.qty || 0),
-        0
-    );
-
-    document
-        .querySelectorAll("#count")
-        .forEach(element => {
-
-            element.textContent = count;
-
-        });
-
-}
-
-
-/* =========================================
-   ADD PRODUCT
-========================================= */
-
-function addToCart(productId){
-
-    const cart = getCart();
-
-    const existing
+        name
