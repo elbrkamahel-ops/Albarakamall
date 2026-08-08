@@ -1,681 +1,1122 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>مول البركة | كل احتياجات بيتك</title>
-
-    <meta name="description"
-          content="مول البركة للخضروات والفواكه واللحوم والدواجن والطيور والماركت والجزارة">
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, Tahoma, sans-serif;
-            background: #f5f6f7;
-            color: #222;
-            line-height: 1.6;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        button {
-            font-family: inherit;
-            cursor: pointer;
-        }
-
-        /* ===== TOP BAR ===== */
-
-        .top-bar {
-            background: #087f3f;
-            color: white;
-            font-size: 13px;
-            padding: 8px 20px;
-        }
-
-        .top-inner {
-            max-width: 1200px;
-            margin: auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-        }
-
-        /* ===== HEADER ===== */
-
-        header {
-            background: white;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,.08);
-        }
-
-        .header-main {
-            max-width: 1200px;
-            margin: auto;
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            gap: 25px;
-        }
-
-        .logo {
-            min-width: 190px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo-icon {
-            width: 48px;
-            height: 48px;
-            background: #087f3f;
-            color: #ffd400;
-            border-radius: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 27px;
-        }
-
-        .logo-text strong {
-            display: block;
-            font-size: 23px;
-            color: #087f3f;
-        }
-
-        .logo-text span {
-            color: #777;
-            font-size: 12px;
-        }
-
-        .search {
-            flex: 1;
-            display: flex;
-            background: #f3f4f5;
-            border: 1px solid #ddd;
-            border-radius: 9px;
-            overflow: hidden;
-            height: 46px;
-        }
-
-        .search input {
-            flex: 1;
-            border: none;
-            background: transparent;
-            outline: none;
-            padding: 0 15px;
-            font-size: 15px;
-        }
-
-        .search button {
-            width: 55px;
-            border: none;
-            background: #ffd400;
-            font-size: 20px;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .action {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 9px;
-            padding: 9px 12px;
-            font-size: 13px;
-            white-space: nowrap;
-        }
-
-        .action:hover {
-            border-color: #087f3f;
-            color: #087f3f;
-        }
-
-        .cart {
-            position: relative;
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -7px;
-            right: -7px;
-            background: #e31d1a;
-            color: white;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            font-size: 11px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* ===== NAV ===== */
-
-        .nav {
-            background: #087f3f;
-            color: white;
-        }
-
-        .nav-inner {
-            max-width: 1200px;
-            margin: auto;
-            display: flex;
-            align-items: center;
-            overflow-x: auto;
-        }
-
-        .nav a {
-            padding: 13px 18px;
-            white-space: nowrap;
-            font-size: 14px;
-        }
-
-        .nav a:hover {
-            background: #066832;
-        }
-
-        .nav .special {
-            color: #ffd400;
-            font-weight: bold;
-        }
-
-        /* ===== HERO ===== */
-
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 0 20px;
-        }
-
-        .hero {
-            margin-top: 25px;
-            min-height: 330px;
-            border-radius: 18px;
-            overflow: hidden;
-            background:
-                linear-gradient(90deg, rgba(0,80,40,.95), rgba(0,128,64,.65)),
-                linear-gradient(135deg, #087f3f, #35a95f);
-            color: white;
-            display: flex;
-            align-items: center;
-            padding: 45px;
-            position: relative;
-        }
-
-        .hero:after {
-            content: "🛒";
-            position: absolute;
-            left: 50px;
-            bottom: 10px;
-            font-size: 170px;
-            opacity: .15;
-        }
-
-        .hero-content {
-            max-width: 650px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero small {
-            color: #ffd400;
-            font-size: 17px;
-            font-weight: bold;
-        }
-
-        .hero h1 {
-            font-size: clamp(34px, 5vw, 58px);
-            margin: 10px 0;
-        }
-
-        .hero p {
-            font-size: 18px;
-            opacity: .95;
-            margin-bottom: 25px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            border: none;
-            border-radius: 8px;
-            padding: 13px 25px;
-            font-size: 15px;
-            font-weight: bold;
-        }
-
-        .btn-yellow {
-            background: #ffd400;
-            color: #222;
-        }
-
-        .btn-white {
-            background: white;
-            color: #087f3f;
-        }
-
-        /* ===== FEATURES ===== */
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin: 20px 0 35px;
-        }
-
-        .feature {
-            background: white;
-            border-radius: 12px;
-            padding: 18px;
-            display: flex;
-            align-items: center;
-            gap: 13px;
-            box-shadow: 0 2px 8px rgba(0,0,0,.05);
-        }
-
-        .feature-icon {
-            font-size: 29px;
-        }
-
-        .feature strong {
-            display: block;
-            font-size: 14px;
-        }
-
-        .feature span {
-            color: #777;
-            font-size: 12px;
-        }
-
-        /* ===== SECTION ===== */
-
-        .section {
-            margin-bottom: 40px;
-        }
-
-        .section-head {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 18px;
-        }
-
-        .section-title {
-            font-size: 25px;
-            color: #222;
-        }
-
-        .section-title span {
-            color: #087f3f;
-        }
-
-        .view-all {
-            color: #087f3f;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        /* ===== CATEGORIES ===== */
-
-        .categories {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 15px;
-        }
-
-        .category {
-            background: white;
-            border-radius: 14px;
-            padding: 22px 15px;
-            text-align: center;
-            border: 1px solid #eee;
-            transition: .2s;
-        }
-
-        .category:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0,0,0,.1);
-        }
-
-        .category-icon {
-            height: 90px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 58px;
-        }
-
-        .category h3 {
-            margin-top: 10px;
-            color: #087f3f;
-            font-size: 17px;
-        }
-
-        .category p {
-            color: #888;
-            font-size: 12px;
-        }
-
-        /* ===== PRODUCTS ===== */
-
-        .products {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 18px;
-        }
-
-        .product {
-            background: white;
-            border-radius: 14px;
-            overflow: hidden;
-            border: 1px solid #eee;
-            transition: .2s;
-            position: relative;
-        }
-
-        .product:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0,0,0,.1);
-        }
-
-        .product-image {
-            height: 190px;
-            background: #f4f6f4;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 80px;
-        }
-
-        .product-info {
-            padding: 15px;
-        }
-
-        .product-category {
-            font-size: 11px;
-            color: #888;
-        }
-
-        .product h3 {
-            margin: 5px 0;
-            font-size: 16px;
-        }
-
-        .product-price {
-            color: #087f3f;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .product-price small {
-            font-size: 11px;
-            color: #777;
-        }
-
-        .add-cart {
-            width: 100%;
-            margin-top: 10px;
-            padding: 10px;
-            background: #087f3f;
-            color: white;
-            border: none;
-            border-radius: 7px;
-            font-weight: bold;
-        }
-
-        .add-cart:hover {
-            background: #066832;
-        }
-
-        /* ===== OFFER ===== */
-
-        .offer {
-            background: linear-gradient(135deg, #ffd400, #ffea63);
-            border-radius: 18px;
-            padding: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .offer h2 {
-            font-size: 30px;
-        }
-
-        .offer p {
-            margin-top: 5px;
-        }
-
-        .offer-icon {
-            font-size: 100px;
-        }
-
-        /* ===== FOOTER ===== */
-
-        footer {
-            background: #123b28;
-            color: white;
-            margin-top: 50px;
-        }
-
-        .footer-main {
-            max-width: 1200px;
-            margin: auto;
-            padding: 45px 20px;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 35px;
-        }
-
-        footer h3 {
-            color: #ffd400;
-            margin-bottom: 15px;
-        }
-
-        footer p,
-        footer a {
-            color: #d8e5dd;
-            font-size: 14px;
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        footer a:hover {
-            color: #ffd400;
-        }
-
-        .copyright {
-            border-top: 1px solid rgba(255,255,255,.12);
-            padding: 15px 20px;
-            text-align: center;
-            color: #b8c8bf;
-            font-size: 12px;
-        }
-
-        /* ===== MOBILE ===== */
-
-        @media (max-width: 900px) {
-
-            .header-main {
-                flex-wrap: wrap;
-            }
-
-            .logo {
-                min-width: auto;
-            }
-
-            .search {
-                order: 3;
-                flex-basis: 100%;
-            }
-
-            .features {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .categories {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .products {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .footer-main {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 600px) {
-
-            .top-inner {
-                justify-content: center;
-                text-align: center;
-            }
-
-            .header-main {
-                padding: 12px;
-                gap: 10px;
-            }
-
-            .logo-text strong {
-                font-size: 19px;
-            }
-
-            .header-actions .login {
-                display: none;
-            }
-
-            .nav a {
-                padding: 11px 13px;
-                font-size: 13px;
-            }
-
-            .container {
-                padding: 0 12px;
-            }
-
-            .hero {
-                min-height: 390px;
-                padding: 30px 22px;
-            }
-
-            .hero h1 {
-                font-size: 35px;
-            }
-
-            .hero p {
-                font-size: 15px;
-            }
-
-            .features {
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
-            }
-
-            .feature {
-                padding: 12px 8px;
-            }
-
-            .feature-icon {
-                font-size: 23px;
-            }
-
-            .feature strong {
-                font-size: 12px;
-            }
-
-            .categories {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .products {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-
-            .product-image {
-                height: 140px;
-                font-size: 60px;
-            }
-
-            .product-info {
-                padding: 10px;
-            }
-
-            .product h3 {
-                font-size: 14px;
-            }
-
-            .product-price {
-                font-size: 17px;
-            }
-
-            .offer {
-                padding: 22px;
-            }
-
-            .offer            <a href="shop.html?cat=meat">
-                اللحوم والجزارة
-            </a>
-
-            <a href="shop.html?cat=chicken">
-                الدواجن والطيور
-            </a>
-
-            <a href="shop.html?cat=market">
-                الماركت
-            </a>
-
-            <a href="shop.html?sale=1" class="offers">
-                🔥 العروض
-            </a>
-
-        </div>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مول البركة | كل احتياجات بيتك</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html,body{
+    width:100%;
+    overflow-x:hidden;
+}
+
+body{
+    font-family:Tahoma,Arial,sans-serif;
+    background:#f5f7f6;
+    color:#202522;
+    line-height:1.7;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+button,input{
+    font-family:inherit;
+}
+
+/* ================= TOP ================= */
+
+.top{
+    background:#f0f5f2;
+    border-bottom:1px solid #e3e9e5;
+    color:#52615a;
+    font-size:12px;
+}
+
+.top-inner{
+    width:min(1200px,calc(100% - 30px));
+    margin:auto;
+    min-height:36px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+    background:#fff;
+}
+
+.header-inner{
+    width:min(1200px,calc(100% - 30px));
+    margin:auto;
+    min-height:92px;
+    display:flex;
+    align-items:center;
+    gap:22px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    min-width:205px;
+}
+
+.logo-box{
+    width:58px;
+    height:58px;
+    border-radius:16px;
+    background:#087b45;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    font-size:14px;
+    box-shadow:0 5px 18px rgba(8,123,69,.2);
+}
+
+.logo-text strong{
+    display:block;
+    color:#087b45;
+    font-size:22px;
+    line-height:1.2;
+}
+
+.logo-text span{
+    display:block;
+    color:#77817c;
+    font-size:11px;
+    margin-top:4px;
+}
+
+.search{
+    flex:1;
+    height:48px;
+    display:flex;
+    border:2px solid #087b45;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.search input{
+    width:100%;
+    min-width:0;
+    border:0;
+    outline:0;
+    padding:0 15px;
+    font-size:14px;
+}
+
+.search button{
+    width:55px;
+    border:0;
+    background:#087b45;
+    color:#fff;
+    font-size:19px;
+}
+
+.header-action{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    white-space:nowrap;
+}
+
+.action-icon{
+    width:43px;
+    height:43px;
+    border-radius:50%;
+    background:#eaf6ef;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+}
+
+.action-text small{
+    display:block;
+    color:#8a948f;
+    font-size:10px;
+}
+
+.action-text strong{
+    font-size:13px;
+}
+
+.cart{
+    position:relative;
+}
+
+.cart-count{
+    position:absolute;
+    top:-7px;
+    right:-7px;
+    width:21px;
+    height:21px;
+    border-radius:50%;
+    background:#f2a900;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:10px;
+}
+
+/* ================= NAV ================= */
+
+.nav{
+    background:#087b45;
+    color:#fff;
+}
+
+.nav-inner{
+    width:min(1200px,100%);
+    margin:auto;
+    min-height:48px;
+    display:flex;
+    overflow-x:auto;
+    scrollbar-width:none;
+}
+
+.nav-inner::-webkit-scrollbar{
+    display:none;
+}
+
+.nav a{
+    min-height:48px;
+    padding:0 18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    white-space:nowrap;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.nav a:hover,
+.nav a.active{
+    background:#056337;
+}
+
+.nav .offer{
+    color:#ffe06b;
+}
+
+/* ================= MAIN ================= */
+
+.container{
+    width:min(1200px,calc(100% - 30px));
+    margin:auto;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    margin-top:20px;
+    min-height:430px;
+    border-radius:22px;
+    overflow:hidden;
+    position:relative;
+    background:linear-gradient(120deg,#eaf8ef,#f8fbf7 60%,#fff5d9);
+    display:flex;
+    align-items:center;
+}
+
+.hero-content{
+    width:55%;
+    padding:50px;
+    position:relative;
+    z-index:3;
+}
+
+.hero-badge{
+    display:inline-block;
+    background:#fff;
+    color:#087b45;
+    border-radius:20px;
+    padding:8px 15px;
+    font-size:12px;
+    font-weight:bold;
+    box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+
+.hero h1{
+    margin:18px 0 12px;
+    font-size:55px;
+    line-height:1.35;
+    font-weight:900;
+}
+
+.hero h1 span{
+    color:#087b45;
+}
+
+.hero p{
+    color:#66736c;
+    font-size:15px;
+    max-width:570px;
+    line-height:2;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:10px;
+    margin-top:22px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    min-height:45px;
+    padding:0 22px;
+    border-radius:9px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.btn-green{
+    background:#087b45;
+    color:#fff;
+}
+
+.btn-white{
+    background:#fff;
+    border:1px solid #dfe6e1;
+    color:#087b45;
+}
+
+.hero-points{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    margin-top:20px;
+    color:#52615a;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.hero-art{
+    width:45%;
+    height:430px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.circle{
+    width:285px;
+    height:285px;
+    border-radius:50%;
+    background:#d5eddd;
+    position:absolute;
+}
+
+.basket{
+    width:175px;
+    height:175px;
+    border-radius:50%;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:90px;
+    position:relative;
+    z-index:2;
+    box-shadow:0 18px 45px rgba(0,0,0,.09);
+}
+
+.food{
+    position:absolute;
+    z-index:3;
+    font-size:55px;
+}
+
+.food.a{
+    top:65px;
+    right:70px;
+}
+
+.food.b{
+    top:110px;
+    left:55px;
+}
+
+.food.c{
+    bottom:55px;
+    right:55px;
+}
+
+.food.d{
+    bottom:70px;
+    left:75px;
+}
+
+/* ================= FEATURES ================= */
+
+.features{
+    margin-top:15px;
+    background:#fff;
+    border:1px solid #e2e8e4;
+    border-radius:14px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    overflow:hidden;
+}
+
+.feature{
+    min-height:85px;
+    padding:15px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border-left:1px solid #e2e8e4;
+}
+
+.feature:last-child{
+    border-left:0;
+}
+
+.feature-icon{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#eaf6ef;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    flex-shrink:0;
+}
+
+.feature strong{
+    display:block;
+    font-size:13px;
+}
+
+.feature span{
+    display:block;
+    color:#7b8580;
+    font-size:10px;
+}
+
+/* ================= SECTION ================= */
+
+.section{
+    margin-top:45px;
+}
+
+.section-title{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    margin-bottom:18px;
+}
+
+.section-title h2{
+    font-size:27px;
+}
+
+.section-title h2 span{
+    color:#087b45;
+}
+
+.section-title a{
+    color:#087b45;
+    font-size:12px;
+    font-weight:bold;
+}
+
+/* ================= CATEGORIES ================= */
+
+.categories{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.category{
+    background:#fff;
+    border:1px solid #e2e8e4;
+    border-radius:15px;
+    padding:13px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    transition:.2s;
+}
+
+.category:hover{
+    transform:translateY(-4px);
+    box-shadow:0 8px 25px rgba(0,0,0,.07);
+}
+
+.category-icon{
+    width:82px;
+    height:82px;
+    border-radius:13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:45px;
+    flex-shrink:0;
+}
+
+.green-bg{
+    background:#eaf7ef;
+}
+
+.red-bg{
+    background:#fff0ed;
+}
+
+.yellow-bg{
+    background:#fff7dc;
+}
+
+.blue-bg{
+    background:#edf3ff;
+}
+
+.category h3{
+    font-size:13px;
+    margin-bottom:4px;
+}
+
+.category p{
+    color:#818a85;
+    font-size:10px;
+}
+
+/* ================= OFFER ================= */
+
+.offer-box{
+    margin-top:40px;
+    min-height:190px;
+    border-radius:20px;
+    background:linear-gradient(135deg,#fff2c9,#fffaf0);
+    border:1px solid #f0dfa9;
+    padding:30px 40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.offer-box h2{
+    font-size:29px;
+}
+
+.offer-box p{
+    color:#716951;
+    font-size:13px;
+    margin:5px 0 15px;
+}
+
+.offer-icon{
+    font-size:90px;
+}
+
+/* ================= PRODUCTS ================= */
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.product{
+    background:#fff;
+    border:1px solid #e2e8e4;
+    border-radius:15px;
+    overflow:hidden;
+    transition:.2s;
+}
+
+.product:hover{
+    transform:translateY(-4px);
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+.product-image{
+    height:175px;
+    background:#f2f7f3;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:70px;
+}
+
+.product-info{
+    padding:13px;
+}
+
+.product-category{
+    color:#8a948f;
+    font-size:10px;
+}
+
+.product h3{
+    font-size:14px;
+    margin:4px 0;
+}
+
+.price{
+    color:#087b45;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.price small{
+    color:#7c8681;
+    font-size:9px;
+    font-weight:normal;
+}
+
+.add{
+    width:100%;
+    min-height:39px;
+    margin-top:9px;
+    border:0;
+    border-radius:8px;
+    background:#087b45;
+    color:#fff;
+    font-size:11px;
+    font-weight:bold;
+}
+
+/* ================= CTA ================= */
+
+.cta{
+    margin-top:45px;
+    min-height:220px;
+    border-radius:20px;
+    padding:35px 45px;
+    background:linear-gradient(135deg,#087b45,#056337);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.cta h2{
+    font-size:31px;
+}
+
+.cta p{
+    color:#d9eee1;
+    font-size:13px;
+    margin:7px 0 17px;
+}
+
+.cta .btn{
+    background:#fff;
+    color:#087b45;
+}
+
+.cta-icon{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    background:rgba(255,255,255,.1);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:80px;
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+    margin-top:50px;
+    background:#123b28;
+    color:#fff;
+}
+
+.footer-inner{
+    width:min(1200px,calc(100% - 30px));
+    margin:auto;
+    padding:40px 0;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:30px;
+}
+
+.footer h3{
+    color:#ffd866;
+    font-size:15px;
+    margin-bottom:12px;
+}
+
+.footer p,
+.footer a{
+    color:#d6e3db;
+    font-size:11px;
+    display:block;
+    margin-bottom:7px;
+}
+
+.footer a:hover{
+    color:#ffd866;
+}
+
+.copy{
+    border-top:1px solid rgba(255,255,255,.12);
+    text-align:center;
+    color:#afc0b6;
+    padding:13px;
+    font-size:10px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:900px){
+
+    .header-inner{
+        flex-wrap:wrap;
+        padding:10px 0;
+    }
+
+    .logo{
+        min-width:auto;
+        flex:1;
+    }
+
+    .search{
+        order:5;
+        flex-basis:100%;
+    }
+
+    .action-text{
+        display:none;
+    }
+
+    .features{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .categories{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .products{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .footer-inner{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    .top-inner{
+        width:calc(100% - 20px);
+        justify-content:center;
+    }
+
+    .top-inner span:first-child{
+        display:none;
+    }
+
+    .header-inner{
+        width:calc(100% - 20px);
+        display:grid;
+        grid-template-columns:1fr auto auto;
+        gap:8px;
+    }
+
+    .logo{
+        min-width:0;
+    }
+
+    .logo-box{
+        width:44px;
+        height:44px;
+        border-radius:12px;
+    }
+
+    .logo-text strong{
+        font-size:17px;
+    }
+
+    .logo-text span{
+        font-size:8px;
+    }
+
+    .action-icon{
+        width:38px;
+        height:38px;
+        font-size:17px;
+    }
+
+    .search{
+        width:100%;
+        height:43px;
+    }
+
+    .nav a{
+        padding:0 12px;
+        font-size:11px;
+    }
+
+    .container{
+        width:calc(100% - 20px);
+    }
+
+    .hero{
+        width:100%;
+        min-height:0;
+        display:block;
+        margin-top:12px;
+        border-radius:16px;
+    }
+
+    .hero-content{
+        width:100%;
+        padding:25px 18px 5px;
+    }
+
+    .hero h1{
+        font-size:34px;
+        line-height:1.35;
+    }
+
+    .hero p{
+        font-size:12px;
+        line-height:1.9;
+    }
+
+    .hero-buttons{
+        gap:7px;
+    }
+
+    .btn{
+        min-height:40px;
+        padding:0 14px;
+        font-size:10px;
+    }
+
+    .hero-points{
+        gap:8px;
+        font-size:8px;
+    }
+
+    .hero-art{
+        width:100%;
+        height:220px;
+    }
+
+    .circle{
+        width:155px;
+        height:155px;
+    }
+
+    .basket{
+        width:105px;
+        height:105px;
+        font-size:52px;
+    }
+
+    .food{
+        font-size:34px;
+    }
+
+    .food.a{
+        top:25px;
+        right:23%;
+    }
+
+    .food.b{
+        top:55px;
+        left:19%;
+    }
+
+    .food.c{
+        bottom:25px;
+        right:20%;
+    }
+
+    .food.d{
+        bottom:35px;
+        left:24%;
+    }
+
+    .features{
+        margin-top:10px;
+    }
+
+    .feature{
+        min-height:70px;
+        padding:8px;
+        gap:6px;
+    }
+
+    .feature-icon{
+        width:34px;
+        height:34px;
+        font-size:16px;
+    }
+
+    .feature strong{
+        font-size:10px;
+    }
+
+    .feature span{
+        font-size:8px;
+    }
+
+    .section{
+        margin-top:32px;
+    }
+
+    .section-title h2{
+        font-size:20px;
+    }
+
+    .section-title a{
+        font-size:9px;
+    }
+
+    .categories{
+        gap:8px;
+    }
+
+    .category{
+        padding:8px;
+        gap:7px;
+        border-radius:11px;
+    }
+
+    .category-icon{
+        width:53px;
+        height:53px;
+        font-size:28px;
+    }
+
+    .category h3{
+        font-size:10px;
+    }
+
+    .category p{
+        font-size:8px;
+    }
+
+    .offer-box{
+        min-height:145px;
+        margin-top:30px;
+        padding:20px;
+        border-radius:15px;
+    }
+
+    .offer-box h2{
+        font-size:21px;
+    }
+
+    .offer-box p{
+        font-size:9px;
+    }
+
+    .offer-icon{
+        font-size:48px;
+    }
+
+    .products{
+        gap:8px;
+    }
+
+    .product-image{
+        height:125px;
+        font-size:52px;
+    }
+
+    .product-info{
+        padding:8px;
+    }
+
+    .product h3{
+        font-size:11px;
+    }
+
+    .price{
+        font-size:15px;
+    }
+
+    .price small{
+        font-size:8px;
+    }
+
+    .add{
+        min-height:34px;
+        font-size:9px;
+    }
+
+    .cta{
+        min-height:180px;
+        padding:22px 18px;
+        border-radius:15px;
+    }
+
+    .cta h2{
+        font-size:22px;
+    }
+
+    .cta p{
+        font-size:9px;
+    }
+
+    .cta-icon{
+        width:85px;
+        height:85px;
+        font-size:45px;
+    }
+
+    .footer-inner{
+        grid-template-columns:1fr 1fr;
+        width:calc(100% - 20px);
+        padding:30px 0;
+        gap:22px 15px;
+    }
+
+    .footer-about{
+        grid-column:1/-1;
+    }
+
+    .footer p,
+    .footer a{
+        font-size:9px;
+    }
+
+    .copy{
+        font-size:8px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- الشريط العلوي -->
+<div class="top">
+    <div class="top-inner">
+        <span>🚚 توصيل طلباتك حتى باب البيت</span>
+        <span>📞 خدمة العملاء: 01119511185</span>
+    </div>
+</div>
+
+<!-- الهيدر -->
+<header class="header">
+
+    <div class="header-inner">
+
+        <a href="index.html" class="logo">
+
+            <div class="logo-box">
+                البركة
+            </div>
+
+            <div class="logo-text">
+                <strong>مول البركة</strong>
+                <span>كل احتياجات بيتك</span>
+            </div>
+
+        </a>
+
+        <form class="search" onsubmit="searchStore(event)">
+            <input
+                id="search"
+                type="search"
+                placeholder="ابحث عن منتج أو قسم..."
+            >
+            <button type="submit">🔍</button>
+        </form>
+
+        <a href="#" class="header-action">
+            <div class="action-icon">👤</div>
+            <div class="action-text">
+                <small>مرحبًا بك</small>
+                <strong>تسجيل الدخول</strong>
+            </div>
+        </a>
+
+        <a href="shop/" class="header-action cart">
+            <div class="action-icon">🛒</div>
+            <div class="action-text">
+                <small>عربة التسوق</small>
+                <strong>السلة</strong>
+            </div>
+            <span class="cart-count" id="cartCount">0</span>
+        </a>
 
     </div>
 
 </header>
 
+<!-- القائمة -->
+<nav class="nav">
 
-<!-- MAIN -->
+    <div class="nav-inner">
+
+        <a href="shop/" class="active">الرئيسية</a>
+
+        <a href="#categories">
+            ☰ جميع الأقسام
+        </a>
+
+        <a href="#vegetables">
+            🥬 خضروات وفاكهة
+        </a>
+
+        <a href="#meat">
+            🥩 اللحوم والجزارة
+        </a>
+
+        <a href="#chicken">
+            🐔 الدواجن والطيور
+        </a>
+
+        <a href="#market">
+            🛒 الماركت
+        </a>
+
+        <a href="#offers" class="offer">
+            🔥 العروض
+        </a>
+
+    </div>
+
+</nav>
+
 <main>
 
+<div class="container">
 
 <!-- HERO -->
-<section class="container hero-section">
+
+<section class="hero">
 
     <div class="hero-content">
 
-        <div class="hero-label">
+        <span class="hero-badge">
             🔥 عروض مول البركة
-        </div>
+        </span>
 
         <h1>
-            كل احتياجات بيتك
-            <br>
-            <span>بأسعار مميزة</span>
+            كل احتياجات<br>
+            بيتك <span>بأسعار مميزة</span>
         </h1>
 
         <p>
@@ -683,356 +1124,470 @@
             جزارة وماركت — كل ما تحتاجه في مكان واحد.
         </p>
 
-        <div class="hero-actions">
+        <div class="hero-buttons">
 
-            <a href="shop.html" class="primary-btn">
-                تسوق الآن
-                ←
+            <a href="shop/" class="btn btn-green">
+                تسوق الآن 🛒
             </a>
 
-            <a href="shop.html?sale=1" class="outline-btn">
-                مشاهدة العروض
+            <a href="#categories" class="btn btn-white">
+                مشاهدة الأقسام
             </a>
 
         </div>
 
         <div class="hero-points">
-
             <span>✓ منتجات مختارة</span>
             <span>✓ جودة مضمونة</span>
             <span>✓ دفع عند الاستلام</span>
-
         </div>
 
     </div>
 
+    <div class="hero-art">
 
-    <div class="hero-products">
+        <div class="circle"></div>
 
-        <div class="hero-circle"></div>
-
-        <div class="food food-1">🥬</div>
-        <div class="food food-2">🍎</div>
-        <div class="food food-3">🥩</div>
-        <div class="food food-4">🐔</div>
-
-        <div class="hero-shopping">
+        <div class="basket">
             🛒
         </div>
 
+        <span class="food a">🥬</span>
+        <span class="food b">🍎</span>
+        <span class="food c">🥩</span>
+        <span class="food d">🐔</span>
+
     </div>
 
 </section>
 
+<!-- المميزات -->
 
-<!-- BENEFITS -->
-<section class="container benefits">
+<section class="features">
 
-    <div class="benefit">
-        <div>🚚</div>
-        <section>
-            <strong>توصيل للمنزل</strong>
-            <small>طلبك عند باب بيتك</small>
-        </section>
-    </div>
+    <div class="feature">
 
-    <div class="benefit">
-        <div>🥬</div>
-        <section>
-            <strong>منتجات طازجة</strong>
-            <small>اختيار يومي بعناية</small>
-        </section>
-    </div>
-
-    <div class="benefit">
-        <div>🛡️</div>
-        <section>
-            <strong>جودة مضمونة</strong>
-            <small>نهتم بكل طلب</small>
-        </section>
-    </div>
-
-    <div class="benefit">
-        <div>💵</div>
-        <section>
-            <strong>دفع عند الاستلام</strong>
-            <small>ادفع عند وصول الطلب</small>
-        </section>
-    </div>
-
-</section>
-
-
-<!-- CATEGORIES -->
-<section class="container section">
-
-    <div class="section-head">
+        <div class="feature-icon">🚚</div>
 
         <div>
-            <small>اختار القسم</small>
-            <h2>تسوق حسب الأقسام</h2>
+            <strong>توصيل سريع</strong>
+            <span>حتى باب المنزل</span>
         </div>
 
-        <a href="shop.html">
-            عرض الكل →
+    </div>
+
+    <div class="feature">
+
+        <div class="feature-icon">🥬</div>
+
+        <div>
+            <strong>منتجات طازجة</strong>
+            <span>اختيار يومي بعناية</span>
+        </div>
+
+    </div>
+
+    <div class="feature">
+
+        <div class="feature-icon">✓</div>
+
+        <div>
+            <strong>جودة مضمونة</strong>
+            <span>نهتم بكل طلب</span>
+        </div>
+
+    </div>
+
+    <div class="feature">
+
+        <div class="feature-icon">💳</div>
+
+        <div>
+            <strong>الدفع عند الاستلام</strong>
+            <span>ادفع عند وصول الطلب</span>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- الأقسام -->
+
+<section class="section" id="categories">
+
+    <div class="section-title">
+
+        <h2>
+            تسوق حسب <span>الأقسام</span>
+        </h2>
+
+        <a href="shop/">
+            عرض الكل ←
         </a>
 
     </div>
 
+    <div class="categories">
 
-    <div class="category-grid">
+        <a href="shop/?category=vegetables" class="category" id="vegetables">
 
-        <a href="shop.html?cat=vegetables" class="category-card">
-
-            <div class="category-image vegetables">
+            <div class="category-icon green-bg">
                 🥬
             </div>
 
-            <div class="category-info">
+            <div>
                 <h3>الخضروات والفاكهة</h3>
-                <p>طازة يومياً</p>
+                <p>طازة يوميًا</p>
             </div>
-
-            <span>←</span>
 
         </a>
 
+        <a href="shop/?category=meat" class="category" id="meat">
 
-        <a href="shop.html?cat=meat" class="category-card">
-
-            <div class="category-image meat">
+            <div class="category-icon red-bg">
                 🥩
             </div>
 
-            <div class="category-info">
+            <div>
                 <h3>اللحوم والجزارة</h3>
                 <p>اختيار وجودة</p>
             </div>
 
-            <span>←</span>
-
         </a>
 
+        <a href="shop/?category=chicken" class="category" id="chicken">
 
-        <a href="shop.html?cat=chicken" class="category-card">
-
-            <div class="category-image chicken">
+            <div class="category-icon yellow-bg">
                 🐔
             </div>
 
-            <div class="category-info">
+            <div>
                 <h3>الدواجن والطيور</h3>
                 <p>طازة ومختارة</p>
             </div>
 
-            <span>←</span>
-
         </a>
 
+        <a href="shop/?category=market" class="category" id="market">
 
-        <a href="shop.html?cat=market" class="category-card">
-
-            <div class="category-image market">
+            <div class="category-icon blue-bg">
                 🛒
             </div>
 
-            <div class="category-info">
+            <div>
                 <h3>الماركت</h3>
                 <p>مستلزمات البيت</p>
             </div>
 
-            <span>←</span>
-
         </a>
 
     </div>
 
 </section>
 
+<!-- العروض -->
 
-<!-- OFFER BANNER -->
-<section class="container offer-section">
-
-    <div class="offer-content">
-
-        <div class="offer-tag">
-            🔥 عرض خاص
-        </div>
-
-        <h2>
-            وفر أكتر مع مول البركة
-        </h2>
-
-        <p>
-            اكتشف المنتجات والعروض المتاحة الآن.
-        </p>
-
-        <a href="shop.html?sale=1">
-            اكتشف العروض ←
-        </a>
-
-    </div>
-
-    <div class="offer-icons">
-        🍎 🥩 🥬 🛒
-    </div>
-
-</section>
-
-
-<!-- PRODUCTS -->
-<section class="container section">
-
-    <div class="section-head">
-
-        <div>
-            <small>اختيارات العملاء</small>
-            <h2>الأكثر مبيعاً</h2>
-        </div>
-
-        <a href="shop.html">
-            كل المنتجات →
-        </a>
-
-    </div>
-
-    <div id="products" class="products"></div>
-
-</section>
-
-
-<!-- BIG CTA -->
-<section class="container cta">
+<section class="offer-box" id="offers">
 
     <div>
 
-        <small>مول البركة أونلاين</small>
+        <h2>🔥 عروض مول البركة</h2>
+
+        <p>
+            وفر أكتر مع عروضنا وأسعارنا المميزة.
+        </p>
+
+        <a href="shop/" class="btn btn-green">
+            اكتشف العروض
+        </a>
+
+    </div>
+
+    <div class="offer-icon">
+        🛍️
+    </div>
+
+</section>
+
+<!-- المنتجات -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <h2>
+            الأكثر <span>مبيعًا</span>
+        </h2>
+
+        <a href="shop/">
+            كل المنتجات ←
+        </a>
+
+    </div>
+
+    <div class="products">
+
+        <article class="product">
+
+            <div class="product-image">
+                🍅
+            </div>
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    خضروات
+                </span>
+
+                <h3>طماطم طازة</h3>
+
+                <div class="price">
+                    25 <small>جنيه / كيلو</small>
+                </div>
+
+                <button class="add" onclick="addCart('طماطم طازة')">
+                    أضف للسلة 🛒
+                </button>
+
+            </div>
+
+        </article>
+
+        <article class="product">
+
+            <div class="product-image">
+                🥔
+            </div>
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    خضروات
+                </span>
+
+                <h3>بطاطس</h3>
+
+                <div class="price">
+                    30 <small>جنيه / كيلو</small>
+                </div>
+
+                <button class="add" onclick="addCart('بطاطس')">
+                    أضف للسلة 🛒
+                </button>
+
+            </div>
+
+        </article>
+
+        <article class="product">
+
+            <div class="product-image">
+                🍎
+            </div>
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    فاكهة
+                </span>
+
+                <h3>تفاح طازج</h3>
+
+                <div class="price">
+                    75 <small>جنيه / كيلو</small>
+                </div>
+
+                <button class="add" onclick="addCart('تفاح طازج')">
+                    أضف للسلة 🛒
+                </button>
+
+            </div>
+
+        </article>
+
+        <article class="product">
+
+            <div class="product-image">
+                🥩
+            </div>
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    اللحوم
+                </span>
+
+                <h3>لحم بلدي</h3>
+
+                <div class="price">
+                    450 <small>جنيه / كيلو</small>
+                </div>
+
+                <button class="add" onclick="addCart('لحم بلدي')">
+                    أضف للسلة 🛒
+                </button>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+<!-- دعوة للتسوق -->
+
+<section class="cta">
+
+    <div>
 
         <h2>
             كل حاجة للبيت...
-            <br>
             في طلب واحد!
         </h2>
 
         <p>
-            اختار منتجاتك، أضفها للسلة،
-            وابدأ طلبك الآن.
+            اختار منتجاتك وأضفها للسلة واطلب بسهولة.
         </p>
 
-        <a href="shop.html">
-            ابدأ التسوق
-            ←
+        <a href="shop/" class="btn">
+            ابدأ التسوق الآن 🛒
         </a>
 
     </div>
 
-    <div class="cta-cart">
-        🛒
+    <div class="cta-icon">
+        🛍️
     </div>
 
 </section>
 
+</div>
 
 </main>
 
-
 <!-- FOOTER -->
-<footer>
 
-    <div class="container footer-grid">
+<footer class="footer">
 
-        <div class="footer-about">
+    <div class="footer-inner">
 
-            <div class="footer-logo">
-                البركة
-            </div>
+        <div>
 
             <h3>مول البركة</h3>
 
             <p>
                 كل احتياجات بيتك في مكان واحد.
-                خضروات وفاكهة، لحوم، دواجن،
-                جزارة وماركت.
+            </p>
+
+            <p>
+                🥬 خضروات وفاكهة
+            </p>
+
+            <p>
+                🥩 لحوم وجزارة
+            </p>
+
+            <p>
+                🐔 دواجن وطيور
+            </p>
+
+            <p>
+                🛒 ماركت
             </p>
 
         </div>
 
-
         <div>
 
-            <h4>روابط سريعة</h4>
+            <h3>روابط سريعة</h3>
 
             <a href="index.html">الرئيسية</a>
-            <a href="shop.html">المنتجات</a>
-            <a href="cart.html">السلة</a>
-            <a href="login.html">تسجيل الدخول</a>
+            <a href="shop/">المتجر</a>
+            <a href="#categories">الأقسام</a>
+            <a href="#offers">العروض</a>
 
         </div>
 
-
         <div>
 
-            <h4>الأقسام</h4>
+            <h3>الأقسام</h3>
 
-            <a href="shop.html?cat=vegetables">
-                خضروات وفاكهة
+            <a href="shop/?category=vegetables">
+                الخضروات والفاكهة
             </a>
 
-            <a href="shop.html?cat=meat">
+            <a href="shop/?category=meat">
                 اللحوم والجزارة
             </a>
 
-            <a href="shop.html?cat=chicken">
+            <a href="shop/?category=chicken">
                 الدواجن والطيور
             </a>
 
-            <a href="shop.html?cat=market">
+            <a href="shop/?category=market">
                 الماركت
             </a>
 
         </div>
 
-
         <div>
 
-            <h4>تواصل معنا</h4>
+            <h3>تواصل معنا</h3>
 
             <p>📞 01119511185</p>
 
             <p>
                 📍 شارع الشيخ عبدالرحمن
-                <br>
-                تاج البنفسج 9
+                تاج البنفسج ٩
+            </p>
+
+            <p>
+                🚚 توصيل للمنزل
             </p>
 
         </div>
 
     </div>
 
-
-    <div class="copyright">
+    <div class="copy">
         © 2026 مول البركة — جميع الحقوق محفوظة
     </div>
 
 </footer>
 
-
-<script src="assets/js/app.js"></script>
-
 <script>
 
-function goSearch(){
+let cartCount = 0;
 
-    const q = document.getElementById("q").value.trim();
+function addCart(product){
 
-    if(q){
-        window.location.href =
-        "shop.html?search=" +
-        encodeURIComponent(q);
-    }else{
-        window.location.href = "shop.html";
+    cartCount++;
+
+    document.getElementById("cartCount").textContent = cartCount;
+
+    alert(
+        "تم إضافة " + product + " إلى السلة 🛒"
+    );
+}
+
+function searchStore(event){
+
+    event.preventDefault();
+
+    let value =
+        document.getElementById("search").value.trim();
+
+    if(value === ""){
+
+        alert("اكتب اسم المنتج الذي تبحث عنه");
+
+        return;
     }
 
+    window.location.href =
+        "shop/?search=" +
+        encodeURIComponent(value);
 }
 
 </script>
