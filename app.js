@@ -1,1174 +1,538 @@
-/* =========================================================
-   مول البركة - أولاد الجارحي
-   APP.JS
-========================================================= */
-
 "use strict";
 
-
 /* =========================================================
-   WHATSAPP
+   مول البركة - APP.JS
+   السلة + المنتجات + الأسعار + الكميات + التخزين
 ========================================================= */
 
-const WHATSAPP_NUMBER = "201119511185";
+const CART_KEY = "albaraka_cart";
+
+/* =========================================================
+   أدوات عامة
+========================================================= */
+
+function formatPrice(value) {
+    const number = Number(value) || 0;
+    return number.toLocaleString("ar-EG") + " ج.م";
+}
+
+window.formatPrice = formatPrice;
 
 
 /* =========================================================
-   PRODUCTS
+   قراءة السلة
 ========================================================= */
 
-const products = [
+function getCart() {
+    try {
+        const saved = localStorage.getItem(CART_KEY);
 
-    /* ================= خضروات وفواكه ================= */
+        if (!saved) return [];
 
-    {
-        id: 1,
-        name: "طماطم",
-        category: "خضروات وفواكه",
-        price: 25,
-        unit: "كيلو",
-        emoji: "🍅"
-    },
+        const cart = JSON.parse(saved);
 
-    {
-        id: 2,
-        name: "بطاطس",
-        category: "خضروات وفواكه",
-        price: 22,
-        unit: "كيلو",
-        emoji: "🥔"
-    },
+        return Array.isArray(cart) ? cart : [];
 
-    {
-        id: 3,
-        name: "خيار",
-        category: "خضروات وفواكه",
-        price: 30,
-        unit: "كيلو",
-        emoji: "🥒"
-    },
-
-    {
-        id: 4,
-        name: "جزر",
-        category: "خضروات وفواكه",
-        price: 25,
-        unit: "كيلو",
-        emoji: "🥕"
-    },
-
-    {
-        id: 5,
-        name: "بصل",
-        category: "خضروات وفواكه",
-        price: 20,
-        unit: "كيلو",
-        emoji: "🧅"
-    },
-
-    {
-        id: 6,
-        name: "فلفل أخضر",
-        category: "خضروات وفواكه",
-        price: 35,
-        unit: "كيلو",
-        emoji: "🫑"
-    },
-
-    {
-        id: 7,
-        name: "تفاح",
-        category: "خضروات وفواكه",
-        price: 65,
-        unit: "كيلو",
-        emoji: "🍎"
-    },
-
-    {
-        id: 8,
-        name: "موز",
-        category: "خضروات وفواكه",
-        price: 35,
-        unit: "كيلو",
-        emoji: "🍌"
-    },
-
-    {
-        id: 9,
-        name: "برتقال",
-        category: "خضروات وفواكه",
-        price: 30,
-        unit: "كيلو",
-        emoji: "🍊"
-    },
-
-    {
-        id: 10,
-        name: "فراولة",
-        category: "خضروات وفواكه",
-        price: 55,
-        unit: "كيلو",
-        emoji: "🍓"
-    },
-
-
-    /* ================= اللحوم ================= */
-
-    {
-        id: 11,
-        name: "لحم بقري",
-        category: "لحوم",
-        price: 420,
-        unit: "كيلو",
-        emoji: "🥩"
-    },
-
-    {
-        id: 12,
-        name: "لحم مفروم",
-        category: "لحوم",
-        price: 390,
-        unit: "كيلو",
-        emoji: "🥩"
-    },
-
-    {
-        id: 13,
-        name: "كبدة",
-        category: "لحوم",
-        price: 450,
-        unit: "كيلو",
-        emoji: "🥩"
-    },
-
-    {
-        id: 14,
-        name: "ستيك",
-        category: "لحوم",
-        price: 480,
-        unit: "كيلو",
-        emoji: "🥩"
-    },
-
-
-    /* ================= الطيور ================= */
-
-    {
-        id: 15,
-        name: "دجاج كامل",
-        category: "طيور",
-        price: 145,
-        unit: "كيلو",
-        emoji: "🐔"
-    },
-
-    {
-        id: 16,
-        name: "صدور دجاج",
-        category: "طيور",
-        price: 220,
-        unit: "كيلو",
-        emoji: "🍗"
-    },
-
-    {
-        id: 17,
-        name: "وراك دجاج",
-        category: "طيور",
-        price: 165,
-        unit: "كيلو",
-        emoji: "🍗"
-    },
-
-    {
-        id: 18,
-        name: "بط",
-        category: "طيور",
-        price: 190,
-        unit: "كيلو",
-        emoji: "🦆"
-    },
-
-
-    /* ================= ماركت ================= */
-
-    {
-        id: 19,
-        name: "أرز",
-        category: "ماركت",
-        price: 35,
-        unit: "كيلو",
-        emoji: "🍚"
-    },
-
-    {
-        id: 20,
-        name: "سكر",
-        category: "ماركت",
-        price: 35,
-        unit: "كيلو",
-        emoji: "🧂"
-    },
-
-    {
-        id: 21,
-        name: "زيت طعام",
-        category: "ماركت",
-        price: 75,
-        unit: "زجاجة",
-        emoji: "🫗"
-    },
-
-    {
-        id: 22,
-        name: "مكرونة",
-        category: "ماركت",
-        price: 18,
-        unit: "عبوة",
-        emoji: "🍝"
-    },
-
-    {
-        id: 23,
-        name: "لبن",
-        category: "ماركت",
-        price: 42,
-        unit: "عبوة",
-        emoji: "🥛"
-    },
-
-    {
-        id: 24,
-        name: "جبنة",
-        category: "ماركت",
-        price: 65,
-        unit: "عبوة",
-        emoji: "🧀"
-    },
-
-
-    /* ================= عطارة ================= */
-
-    {
-        id: 25,
-        name: "فلفل أسود",
-        category: "عطارة",
-        price: 45,
-        unit: "100 جرام",
-        emoji: "🌶️"
-    },
-
-    {
-        id: 26,
-        name: "كمون",
-        category: "عطارة",
-        price: 40,
-        unit: "100 جرام",
-        emoji: "🌿"
-    },
-
-    {
-        id: 27,
-        name: "كركم",
-        category: "عطارة",
-        price: 35,
-        unit: "100 جرام",
-        emoji: "🌿"
-    },
-
-    {
-        id: 28,
-        name: "قرفة",
-        category: "عطارة",
-        price: 50,
-        unit: "100 جرام",
-        emoji: "🌿"
+    } catch (error) {
+        console.error("Cart read error:", error);
+        return [];
     }
+}
 
-];
-
-
-/* =========================================================
-   CART
-========================================================= */
-
-let cart = loadCart();
+window.getCart = getCart;
 
 
 /* =========================================================
-   DOM
+   حفظ السلة
 ========================================================= */
 
-const productGrid =
-    document.getElementById("productGrid");
-
-const cartCount =
-    document.getElementById("cartCount");
-
-const searchInput =
-    document.getElementById("searchInput");
-
-
-/* =========================================================
-   SAVE CART
-========================================================= */
-
-function saveCart() {
+function saveCart(cart) {
 
     try {
 
         localStorage.setItem(
-            "albaraka_cart",
+            CART_KEY,
             JSON.stringify(cart)
         );
 
-    } catch (error) {
+        updateCartCount();
 
-        console.error(
-            "تعذر حفظ السلة:",
-            error
+        window.dispatchEvent(
+            new CustomEvent("cartUpdated")
         );
 
-    }
-
-}
-
-
-/* =========================================================
-   LOAD CART
-========================================================= */
-
-function loadCart() {
-
-    try {
-
-        const saved =
-            localStorage.getItem(
-                "albaraka_cart"
-            );
-
-        if (!saved) {
-            return [];
-        }
-
-        const parsed =
-            JSON.parse(saved);
-
-        if (!Array.isArray(parsed)) {
-            return [];
-        }
-
-        return parsed;
+        return true;
 
     } catch (error) {
 
-        console.error(
-            "تعذر قراءة السلة:",
-            error
-        );
+        console.error("Cart save error:", error);
 
-        return [];
+        showToast("تعذر حفظ السلة");
 
+        return false;
     }
-
 }
 
 
 /* =========================================================
-   CART COUNT
+   عدد المنتجات
 ========================================================= */
 
-function updateCartCount() {
+function getCartCount() {
 
-    if (!cartCount) {
-        return;
-    }
-
-    const count =
-        cart.reduce(
-            (total, item) =>
-                total + Number(item.quantity || 0),
-            0
-        );
-
-    cartCount.textContent = count;
-
-}
-
-
-/* =========================================================
-   FORMAT PRICE
-========================================================= */
-
-function formatPrice(price) {
-
-    return Number(price).toLocaleString(
-        "ar-EG"
-    ) + " ج.م";
-
-}
-
-
-/* =========================================================
-   RENDER PRODUCTS
-========================================================= */
-
-function renderProducts(
-    category = "الكل",
-    search = ""
-) {
-
-    if (!productGrid) {
-        return;
-    }
-
-    const query =
-        String(search)
-            .trim()
-            .toLowerCase();
-
-    const filtered =
-        products.filter(product => {
-
-            const categoryMatch =
-                category === "الكل" ||
-                product.category === category;
-
-            const searchMatch =
-                !query ||
-                product.name
-                    .toLowerCase()
-                    .includes(query) ||
-                product.category
-                    .toLowerCase()
-                    .includes(query);
-
-            return categoryMatch &&
-                   searchMatch;
-
-        });
-
-
-    if (filtered.length === 0) {
-
-        productGrid.innerHTML = `
-            <div class="empty-products">
-                <div style="font-size:45px;margin-bottom:10px;">
-                    🔎
-                </div>
-
-                <strong>
-                    لا توجد منتجات مطابقة
-                </strong>
-
-                <p style="margin-top:5px;">
-                    جرب البحث باسم منتج آخر.
-                </p>
-            </div>
-        `;
-
-        return;
-
-    }
-
-
-    productGrid.innerHTML =
-        filtered.map(product => {
-
-            return `
-
-                <article
-                    class="product-card"
-                    data-product-id="${product.id}"
-                >
-
-                    <div class="product-image">
-
-                        ${product.emoji}
-
-                    </div>
-
-
-                    <div class="product-info">
-
-                        <span class="product-category">
-                            ${escapeHTML(product.category)}
-                        </span>
-
-
-                        <h3>
-                            ${escapeHTML(product.name)}
-                        </h3>
-
-
-                        <div class="product-price">
-
-                            ${formatPrice(product.price)}
-
-                            <small>
-                                / ${escapeHTML(product.unit)}
-                            </small>
-
-                        </div>
-
-
-                        <button
-                            class="add-cart"
-                            type="button"
-                            onclick="addToCart(${product.id})"
-                        >
-
-                            🛒 أضف للسلة
-
-                        </button>
-
-                    </div>
-
-                </article>
-
-            `;
-
-        }).join("");
-
-}
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHTML(value) {
-
-    return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-
-}
-
-
-/* =========================================================
-   ADD TO CART
-========================================================= */
-
-function addToCart(productId) {
-
-    const product =
-        products.find(
-            item => item.id === Number(productId)
-        );
-
-    if (!product) {
-        return;
-    }
-
-
-    const existing =
-        cart.find(
-            item =>
-                Number(item.id) ===
-                Number(productId)
-        );
-
-
-    if (existing) {
-
-        existing.quantity =
-            Number(existing.quantity || 0) + 1;
-
-    } else {
-
-        cart.push({
-
-            id: product.id,
-
-            name: product.name,
-
-            category: product.category,
-
-            price: product.price,
-
-            unit: product.unit,
-
-            emoji: product.emoji,
-
-            quantity: 1
-
-        });
-
-    }
-
-
-    saveCart();
-
-    updateCartCount();
-
-    showToast(
-        `تم إضافة ${product.name} إلى السلة 🛒`
-    );
-
-}
-
-
-/* =========================================================
-   REMOVE FROM CART
-========================================================= */
-
-function removeFromCart(productId) {
-
-    cart =
-        cart.filter(
-            item =>
-                Number(item.id) !==
-                Number(productId)
-        );
-
-    saveCart();
-
-    updateCartCount();
-
-    if (
-        typeof window.renderCartPage ===
-        "function"
-    ) {
-
-        window.renderCartPage();
-
-    }
-
-}
-
-
-/* =========================================================
-   INCREASE
-========================================================= */
-
-function increaseQuantity(productId) {
-
-    const item =
-        cart.find(
-            item =>
-                Number(item.id) ===
-                Number(productId)
-        );
-
-    if (!item) {
-        return;
-    }
-
-    item.quantity =
-        Number(item.quantity || 0) + 1;
-
-    saveCart();
-
-    updateCartCount();
-
-    if (
-        typeof window.renderCartPage ===
-        "function"
-    ) {
-
-        window.renderCartPage();
-
-    }
-
-}
-
-
-/* =========================================================
-   DECREASE
-========================================================= */
-
-function decreaseQuantity(productId) {
-
-    const item =
-        cart.find(
-            item =>
-                Number(item.id) ===
-                Number(productId)
-        );
-
-    if (!item) {
-        return;
-    }
-
-
-    item.quantity =
-        Number(item.quantity || 0) - 1;
-
-
-    if (item.quantity <= 0) {
-
-        removeFromCart(productId);
-
-        return;
-
-    }
-
-
-    saveCart();
-
-    updateCartCount();
-
-    if (
-        typeof window.renderCartPage ===
-        "function"
-    ) {
-
-        window.renderCartPage();
-
-    }
-
-}
-
-
-/* =========================================================
-   CART TOTAL
-========================================================= */
-
-function getCartTotal() {
-
-    return cart.reduce(
-        (total, item) => {
-
-            return total +
-                Number(item.price || 0) *
-                Number(item.quantity || 0);
-
-        },
-        0
-    );
-
-}
-
-
-/* =========================================================
-   CART ITEMS COUNT
-========================================================= */
-
-function getCartItemsCount() {
-
-    return cart.reduce(
+    return getCart().reduce(
         (total, item) =>
             total + Number(item.quantity || 0),
         0
     );
+}
 
+window.getCartCount = getCartCount;
+
+
+/* =========================================================
+   إجمالي السلة
+========================================================= */
+
+function getCartTotal() {
+
+    return getCart().reduce(
+        (total, item) => {
+
+            const price =
+                Number(item.price) || 0;
+
+            const quantity =
+                Number(item.quantity) || 0;
+
+            return total + price * quantity;
+
+        },
+        0
+    );
+}
+
+window.getCartTotal = getCartTotal;
+
+
+/* =========================================================
+   تحديث عداد السلة
+========================================================= */
+
+function updateCartCount() {
+
+    const count = getCartCount();
+
+    document
+        .querySelectorAll("#cartCount, .cart-count, .ab-cart-count")
+        .forEach(element => {
+
+            element.textContent = count;
+
+        });
+}
+
+window.updateCartCount = updateCartCount;
+
+
+/* =========================================================
+   تنظيف المنتج
+========================================================= */
+
+function normalizeProduct(product) {
+
+    return {
+
+        id:
+            String(
+                product.id ??
+                Date.now()
+            ),
+
+        name:
+            String(
+                product.name ??
+                "منتج"
+            ),
+
+        price:
+            Number(
+                product.price
+            ) || 0,
+
+        unit:
+            String(
+                product.unit ??
+                "قطعة"
+            ),
+
+        category:
+            String(
+                product.category ??
+                "عام"
+            ),
+
+        emoji:
+            String(
+                product.emoji ??
+                "🛒"
+            ),
+
+        quantity:
+            Math.max(
+                1,
+                Number(product.quantity) || 1
+            )
+
+    };
 }
 
 
 /* =========================================================
-   CLEAR CART
+   إضافة للسلة
+========================================================= */
+
+function addToCart(product) {
+
+    const cleanProduct =
+        normalizeProduct(product);
+
+    const cart =
+        getCart();
+
+    const existing =
+        cart.find(
+            item =>
+                String(item.id) ===
+                String(cleanProduct.id)
+        );
+
+    if (existing) {
+
+        existing.quantity =
+            Number(existing.quantity || 0) +
+            Number(cleanProduct.quantity || 1);
+
+    } else {
+
+        cart.push(cleanProduct);
+
+    }
+
+    saveCart(cart);
+
+    showToast(
+        "تمت إضافة " +
+        cleanProduct.name +
+        " إلى السلة 🛒"
+    );
+
+    return cart;
+}
+
+window.addToCart = addToCart;
+
+
+/* =========================================================
+   حذف منتج
+========================================================= */
+
+function removeFromCart(id) {
+
+    const cart =
+        getCart().filter(
+            item =>
+                String(item.id) !==
+                String(id)
+        );
+
+    saveCart(cart);
+
+    return cart;
+}
+
+window.removeFromCart = removeFromCart;
+
+
+/* =========================================================
+   تغيير الكمية
+========================================================= */
+
+function changeCartQuantity(id, amount) {
+
+    const cart =
+        getCart();
+
+    const item =
+        cart.find(
+            product =>
+                String(product.id) ===
+                String(id)
+        );
+
+    if (!item) return;
+
+    item.quantity =
+        Number(item.quantity || 0) +
+        Number(amount || 0);
+
+    if (item.quantity <= 0) {
+
+        removeFromCart(id);
+
+        return;
+    }
+
+    saveCart(cart);
+}
+
+window.changeCartQuantity =
+    changeCartQuantity;
+
+
+/* =========================================================
+   تعيين كمية مباشرة
+========================================================= */
+
+function setCartQuantity(id, quantity) {
+
+    const cart =
+        getCart();
+
+    const item =
+        cart.find(
+            product =>
+                String(product.id) ===
+                String(id)
+        );
+
+    if (!item) return;
+
+    const newQuantity =
+        Math.floor(
+            Number(quantity)
+        );
+
+    if (
+        !Number.isFinite(newQuantity) ||
+        newQuantity <= 0
+    ) {
+
+        removeFromCart(id);
+
+        return;
+    }
+
+    item.quantity =
+        newQuantity;
+
+    saveCart(cart);
+}
+
+window.setCartQuantity =
+    setCartQuantity;
+
+
+/* =========================================================
+   تفريغ السلة
 ========================================================= */
 
 function clearCart() {
 
-    cart = [];
+    try {
 
-    saveCart();
+        localStorage.removeItem(
+            CART_KEY
+        );
 
-    updateCartCount();
+        updateCartCount();
 
+        window.dispatchEvent(
+            new CustomEvent("cartUpdated")
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Clear cart error:",
+            error
+        );
+    }
 }
+
+window.clearCart = clearCart;
 
 
 /* =========================================================
-   TOAST
+   إشعار صغير
 ========================================================= */
 
 function showToast(message) {
 
-    const oldToast =
-        document.querySelector(".toast");
+    let toast =
+        document.getElementById(
+            "albarakaToast"
+        );
 
-    if (oldToast) {
-        oldToast.remove();
+    if (!toast) {
+
+        toast =
+            document.createElement("div");
+
+        toast.id =
+            "albarakaToast";
+
+        toast.style.cssText = `
+            position:fixed;
+            right:18px;
+            bottom:20px;
+            z-index:99999;
+            max-width:330px;
+            background:#087f3f;
+            color:#fff;
+            padding:13px 18px;
+            border-radius:13px;
+            box-shadow:0 10px 35px rgba(0,0,0,.18);
+            font-family:Arial,Tahoma,sans-serif;
+            font-size:13px;
+            font-weight:800;
+            transform:translateY(20px);
+            opacity:0;
+            transition:.25s;
+        `;
+
+        document.body.appendChild(toast);
     }
-
-
-    const toast =
-        document.createElement("div");
-
-    toast.className = "toast";
 
     toast.textContent = message;
 
-    document.body.appendChild(toast);
+    clearTimeout(
+        window.albarakaToastTimer
+    );
 
+    requestAnimationFrame(() => {
 
-    setTimeout(() => {
-
-        toast.style.opacity = "0";
-
+        toast.style.opacity = "1";
         toast.style.transform =
-            "translateY(10px)";
-
-        setTimeout(() => {
-
-            toast.remove();
-
-        }, 250);
-
-    }, 2200);
-
-}
-
-
-/* =========================================================
-   FILTERS
-========================================================= */
-
-document.addEventListener(
-    "click",
-    function(event) {
-
-        const filter =
-            event.target.closest(
-                ".filter"
-            );
-
-
-        if (!filter) {
-            return;
-        }
-
-
-        document
-            .querySelectorAll(".filter")
-            .forEach(button => {
-
-                button.classList.remove(
-                    "active"
-                );
-
-            });
-
-
-        filter.classList.add(
-            "active"
-        );
-
-
-        const category =
-            filter.dataset.filter ||
-            "الكل";
-
-
-        renderProducts(
-            category,
-            searchInput
-                ? searchInput.value
-                : ""
-        );
-
-    }
-);
-
-
-/* =========================================================
-   CATEGORY BUTTONS
-========================================================= */
-
-document.addEventListener(
-    "click",
-    function(event) {
-
-        const categoryButton =
-            event.target.closest(
-                ".category-card"
-            );
-
-
-        if (!categoryButton) {
-            return;
-        }
-
-
-        const category =
-            categoryButton.dataset.category;
-
-
-        document
-            .querySelectorAll(".filter")
-            .forEach(button => {
-
-                button.classList.toggle(
-                    "active",
-                    button.dataset.filter ===
-                    category
-                );
-
-            });
-
-
-        renderProducts(
-            category,
-            searchInput
-                ? searchInput.value
-                : ""
-        );
-
-
-        const productsSection =
-            document.getElementById(
-                "products"
-            );
-
-
-        if (productsSection) {
-
-            productsSection.scrollIntoView({
-                behavior: "smooth"
-            });
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-if (searchInput) {
-
-    searchInput.addEventListener(
-        "input",
-        function() {
-
-            const activeFilter =
-                document.querySelector(
-                    ".filter.active"
-                );
-
-
-            const category =
-                activeFilter
-                    ? activeFilter.dataset.filter
-                    : "الكل";
-
-
-            renderProducts(
-                category,
-                searchInput.value
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   CART BUTTON ANIMATION
-========================================================= */
-
-function animateCart() {
-
-    const button =
-        document.querySelector(
-            ".cart-button"
-        );
-
-    if (!button) {
-        return;
-    }
-
-
-    button.animate(
-        [
-            {
-                transform:
-                    "scale(1)"
-            },
-
-            {
-                transform:
-                    "scale(1.08)"
-            },
-
-            {
-                transform:
-                    "scale(1)"
-            }
-        ],
-        {
-            duration: 300
-        }
-    );
-
-}
-
-
-/* =========================================================
-   OVERRIDE ADD TO CART FOR ANIMATION
-========================================================= */
-
-const originalAddToCart =
-    window.addToCart;
-
-
-window.addToCart = function(productId) {
-
-    originalAddToCart(productId);
-
-    animateCart();
-
-};
-
-
-/* =========================================================
-   WHATSAPP ORDER LINK
-========================================================= */
-
-function createWhatsAppLink(
-    customer = {},
-    payment = "كاش"
-) {
-
-    let message =
-        "طلب جديد من مول البركة%0A%0A";
-
-
-    message +=
-        "🛒 المنتجات:%0A";
-
-
-    cart.forEach(item => {
-
-        message +=
-            `• ${encodeURIComponent(item.name)}` +
-            ` × ${item.quantity}` +
-            ` = ${encodeURIComponent(
-                formatPrice(
-                    item.price *
-                    item.quantity
-                )
-            )}%0A`;
+            "translateY(0)";
 
     });
 
+    window.albarakaToastTimer =
+        setTimeout(() => {
 
-    message +=
-        `%0A💰 الإجمالي: ` +
-        encodeURIComponent(
-            formatPrice(
-                getCartTotal()
-            )
-        );
+            toast.style.opacity = "0";
+            toast.style.transform =
+                "translateY(20px)";
 
+        }, 2200);
+}
 
-    message +=
-        `%0A💳 طريقة الدفع: ` +
-        encodeURIComponent(payment);
+window.showToast = showToast;
 
 
-    if (customer.name) {
+/* =========================================================
+   زر إضافة للسلة تلقائيًا
+   لأي زر يحمل data-id
+========================================================= */
 
-        message +=
-            `%0A👤 الاسم: ` +
-            encodeURIComponent(
-                customer.name
+function initializeAddButtons() {
+
+    document
+        .querySelectorAll(
+            "[data-id][data-name][data-price]"
+        )
+        .forEach(button => {
+
+            if (
+                button.dataset.cartReady ===
+                "true"
+            ) {
+                return;
+            }
+
+            button.dataset.cartReady =
+                "true";
+
+            button.addEventListener(
+                "click",
+                function(event) {
+
+                    event.preventDefault();
+
+                    const product = {
+
+                        id:
+                            button.dataset.id,
+
+                        name:
+                            button.dataset.name,
+
+                        price:
+                            button.dataset.price,
+
+                        unit:
+                            button.dataset.unit,
+
+                        category:
+                            button.dataset.category,
+
+                        emoji:
+                            button.dataset.emoji,
+
+                        quantity:
+                            1
+
+                    };
+
+                    addToCart(product);
+
+                }
             );
 
-    }
-
-
-    if (customer.phone) {
-
-        message +=
-            `%0A📞 الهاتف: ` +
-            encodeURIComponent(
-                customer.phone
-            );
-
-    }
-
-
-    if (customer.address) {
-
-        message +=
-            `%0A📍 العنوان: ` +
-            encodeURIComponent(
-                customer.address
-            );
-
-    }
-
-
-    if (customer.notes) {
-
-        message +=
-            `%0A📝 ملاحظات: ` +
-            encodeURIComponent(
-                customer.notes
-            );
-
-    }
-
-
-    return (
-        "https://wa.me/" +
-        WHATSAPP_NUMBER +
-        "?text=" +
-        message
-    );
-
+        });
 }
 
 
 /* =========================================================
-   GLOBAL EXPORTS
+   منع الضغط المزدوج على الأزرار
 ========================================================= */
 
-window.products =
-    products;
+document.addEventListener(
+    "click",
+    function(event) {
 
-window.getCart =
-    () => cart;
+        const button =
+            event.target.closest(
+                "button[data-id]"
+            );
 
-window.saveCart =
-    saveCart;
+        if (!button) return;
 
-window.updateCartCount =
-    updateCartCount;
+        if (
+            button.dataset.busy ===
+            "true"
+        ) {
+            return;
+        }
 
-window.addToCart =
-    window.addToCart;
+        button.dataset.busy =
+            "true";
 
-window.removeFromCart =
-    removeFromCart;
+        setTimeout(
+            () => {
+                button.dataset.busy =
+                    "false";
+            },
+            300
+        );
 
-window.increaseQuantity =
-    increaseQuantity;
-
-window.decreaseQuantity =
-    decreaseQuantity;
-
-window.getCartTotal =
-    getCartTotal;
-
-window.getCartItemsCount =
-    getCartItemsCount;
-
-window.clearCart =
-    clearCart;
-
-window.formatPrice =
-    formatPrice;
-
-window.createWhatsAppLink =
-    createWhatsAppLink;
-
-window.showToast =
-    showToast;
+    }
+);
 
 
 /* =========================================================
-   START
+   تشغيل التطبيق
 ========================================================= */
 
 document.addEventListener(
@@ -1177,7 +541,68 @@ document.addEventListener(
 
         updateCartCount();
 
-        renderProducts();
+        initializeAddButtons();
 
     }
 );
+
+
+/* =========================================================
+   تحديث العداد عند الرجوع للصفحة
+========================================================= */
+
+window.addEventListener(
+    "storage",
+    function(event) {
+
+        if (
+            event.key === CART_KEY
+        ) {
+
+            updateCartCount();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   تحديث عند ظهور الصفحة
+========================================================= */
+
+document.addEventListener(
+    "visibilitychange",
+    function() {
+
+        if (
+            document.visibilityState ===
+            "visible"
+        ) {
+
+            updateCartCount();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   API عام
+========================================================= */
+
+window.AlbarakaStore = {
+
+    getCart,
+    saveCart,
+    getCartCount,
+    getCartTotal,
+    addToCart,
+    removeFromCart,
+    changeCartQuantity,
+    setCartQuantity,
+    clearCart,
+    formatPrice
+
+};
