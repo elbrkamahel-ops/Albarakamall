@@ -17,6 +17,17 @@
   ],
   "products": [
     {
+      "id": "p100",
+      "name": "بطيخ",
+      "price": 35,
+      "unit": "كيلو",
+      "category": "فواكه",
+      "image": "",
+      "emoji": "🍉",
+      "offer": false,
+      "active": true
+    },
+    {
       "id": "p001",
       "name": "طماطم بلدي",
       "price": 20,
@@ -226,4 +237,4 @@
       "active": true
     }
   ]
-    }
+}
