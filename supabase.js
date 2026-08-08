@@ -1,9 +1,9 @@
-import { createClient } from "@supabase/supabase-js";
+const SUPABASE_URL = "https://jzxvegxtszdnjrcjagwg.supabase.co";
 
-const supabaseUrl = "ضع_رابط_مشروعك_هنا";
-const supabaseAnonKey = "ضع_مفتاح_anon_هنا";
+const SUPABASE_KEY =
+  "sb_publishable_wmZ2MTo4Kd962taYU0Oceg_r-jP7Byc";
 
-export const supabase = createClient(
-  supabaseUrl,
-  supabaseAnonKey
+const supabase = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
 );
