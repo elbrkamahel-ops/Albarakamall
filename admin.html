@@ -4,40 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>لوحة تحكم مول البركة</title>
+<title>إدارة مول البركة</title>
 
 <style>
-
 *{
     box-sizing:border-box;
-    margin:0;
-    padding:0;
 }
 
 body{
+    margin:0;
     font-family:Arial,Tahoma,sans-serif;
     background:#f4f7f5;
-    color:#17251d;
-}
-
-button,
-input,
-select{
-    font-family:inherit;
-}
-
-button{
-    cursor:pointer;
+    color:#18251e;
 }
 
 .header{
     background:#087f3f;
-    color:#fff;
+    color:white;
     padding:18px;
-    position:sticky;
-    top:0;
-    z-index:100;
-    box-shadow:0 4px 15px rgba(0,0,0,.12);
 }
 
 .header-inner{
@@ -58,13 +42,13 @@ button{
 .logo-icon{
     width:48px;
     height:48px;
-    background:#fff;
+    background:white;
     color:#087f3f;
     border-radius:14px;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:24px;
+    font-size:25px;
     font-weight:900;
 }
 
@@ -75,17 +59,15 @@ button{
 
 .logo small{
     opacity:.8;
-    font-size:10px;
 }
 
 .back{
-    background:#fff;
+    background:white;
     color:#087f3f;
-    padding:11px 16px;
-    border-radius:11px;
     text-decoration:none;
-    font-weight:900;
-    font-size:12px;
+    padding:11px 17px;
+    border-radius:10px;
+    font-weight:bold;
 }
 
 .container{
@@ -94,76 +76,48 @@ button{
     padding:0 15px;
 }
 
-.title{
+.top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
     margin-bottom:20px;
 }
 
-.title h1{
-    font-size:27px;
-}
-
-.title p{
-    color:#7d8982;
-    margin-top:6px;
-    font-size:12px;
-}
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:13px;
-    margin-bottom:20px;
-}
-
-.stat{
-    background:#fff;
-    border:1px solid #e1e9e4;
-    border-radius:16px;
-    padding:18px;
-}
-
-.stat span{
-    color:#849088;
-    display:block;
-    font-size:11px;
-    margin-bottom:8px;
-}
-
-.stat strong{
-    color:#087f3f;
+.top h1{
+    margin:0;
     font-size:25px;
 }
 
+.top p{
+    margin:7px 0 0;
+    color:#7c8981;
+    font-size:12px;
+}
+
+.add{
+    border:0;
+    background:#087f3f;
+    color:white;
+    padding:13px 18px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
 .card{
-    background:#fff;
-    border:1px solid #e1e9e4;
+    background:white;
+    border:1px solid #e0e8e3;
     border-radius:18px;
     padding:20px;
     margin-bottom:20px;
 }
 
-.card-title{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
+.form-title{
+    font-size:18px;
     margin-bottom:18px;
 }
 
-.card-title h2{
-    font-size:18px;
-}
-
-.add-new{
-    border:0;
-    background:#087f3f;
-    color:#fff;
-    padding:12px 18px;
-    border-radius:11px;
-    font-weight:900;
-}
-
-.form-grid{
+.grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:14px;
@@ -175,50 +129,59 @@ button{
     gap:7px;
 }
 
-.field.full{
-    grid-column:1/-1;
-}
-
 .field label{
-    font-size:11px;
-    font-weight:900;
+    font-size:12px;
+    font-weight:bold;
 }
 
 .field input,
 .field select{
+    width:100%;
     height:45px;
-    border:1px solid #dce6df;
+    border:1px solid #dbe5df;
     border-radius:10px;
     padding:0 12px;
     outline:none;
+    font-size:13px;
     background:#fafcfb;
 }
 
 .field input:focus,
 .field select:focus{
     border-color:#087f3f;
-    background:#fff;
+    background:white;
 }
 
-.actions{
+.full{
+    grid-column:1/-1;
+}
+
+.check{
     display:flex;
+    align-items:center;
     gap:8px;
-    margin-top:15px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.buttons{
+    display:flex;
+    gap:10px;
+    margin-top:18px;
 }
 
 .save{
     border:0;
     background:#087f3f;
-    color:#fff;
+    color:white;
     padding:12px 25px;
     border-radius:10px;
-    font-weight:900;
+    font-weight:bold;
 }
 
 .cancel{
     border:0;
     background:#edf1ee;
-    color:#49564e;
     padding:12px 20px;
     border-radius:10px;
     font-weight:bold;
@@ -227,35 +190,35 @@ button{
 .products{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:12px;
+    gap:13px;
 }
 
 .product{
-    border:1px solid #e2e9e4;
+    border:1px solid #e1e8e3;
     border-radius:15px;
     overflow:hidden;
-    background:#fff;
+    background:white;
 }
 
-.product-image{
-    height:120px;
-    background:#f3f7f4;
+.product-top{
+    height:125px;
+    background:#f2f6f3;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:55px;
+    font-size:52px;
     position:relative;
 }
 
-.offer{
+.badge{
     position:absolute;
     top:8px;
     right:8px;
-    background:#e64c3c;
-    color:#fff;
+    background:#e84b3c;
+    color:white;
     padding:5px 8px;
-    border-radius:6px;
-    font-size:9px;
+    border-radius:7px;
+    font-size:10px;
 }
 
 .product-body{
@@ -263,102 +226,97 @@ button{
 }
 
 .product-body h3{
-    font-size:13px;
-    margin-bottom:6px;
+    margin:0 0 7px;
+    font-size:14px;
 }
 
-.product-category{
-    color:#8b968f;
+.info{
+    color:#818d85;
     font-size:10px;
 }
 
 .price{
     color:#087f3f;
+    font-size:17px;
     font-weight:900;
     margin-top:8px;
 }
 
-.product-actions{
+.actions{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:7px;
     margin-top:12px;
 }
 
+.edit,
+.remove{
+    border:0;
+    padding:9px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
 .edit{
-    border:0;
-    background:#eef7f1;
+    background:#edf8f1;
     color:#087f3f;
-    padding:9px;
-    border-radius:8px;
-    font-weight:900;
 }
 
-.delete{
-    border:0;
+.remove{
     background:#fff0ef;
-    color:#d34438;
-    padding:9px;
-    border-radius:8px;
-    font-weight:900;
+    color:#d44337;
 }
 
-.empty{
-    text-align:center;
-    padding:40px;
-    color:#89948e;
-    grid-column:1/-1;
+.hidden{
+    display:none;
 }
 
-.toast{
+.message{
     position:fixed;
     left:20px;
     bottom:20px;
     background:#087f3f;
-    color:#fff;
+    color:white;
     padding:13px 18px;
-    border-radius:11px;
+    border-radius:10px;
     font-size:12px;
     font-weight:bold;
     opacity:0;
-    transform:translateY(20px);
+    transform:translateY(15px);
     transition:.25s;
-    z-index:999;
 }
 
-.toast.show{
+.message.show{
     opacity:1;
     transform:translateY(0);
 }
 
-@media(max-width:900px){
+.empty{
+    grid-column:1/-1;
+    text-align:center;
+    padding:40px;
+    color:#87938b;
+}
 
+@media(max-width:900px){
     .products{
         grid-template-columns:repeat(3,1fr);
     }
-
-    .stats{
-        grid-template-columns:repeat(2,1fr);
-    }
-
 }
 
-@media(max-width:600px){
+@media(max-width:650px){
 
-    .header-inner{
+    .header-inner,
+    .top{
         flex-direction:column;
         align-items:stretch;
     }
 
-    .back{
-        text-align:center;
-    }
-
-    .form-grid{
+    .grid{
         grid-template-columns:1fr;
     }
 
-    .field.full{
+    .full{
         grid-column:auto;
     }
 
@@ -366,8 +324,11 @@ button{
         grid-template-columns:repeat(2,1fr);
     }
 
+    .back,
+    .add{
+        text-align:center;
+    }
 }
-
 </style>
 </head>
 
@@ -379,19 +340,17 @@ button{
 
 <div class="logo">
 
-<div class="logo-icon">
-ب
-</div>
+<div class="logo-icon">ب</div>
 
 <div>
-<strong>مول البركة</strong>
-<small>لوحة إدارة المتجر</small>
+<strong>مول البركة أولاد الجارحي</strong>
+<small>لوحة إدارة المنتجات</small>
 </div>
 
 </div>
 
-<a href="index.html" class="back">
-← العودة للمتجر
+<a class="back" href="index.html">
+العودة للمتجر
 </a>
 
 </div>
@@ -401,82 +360,41 @@ button{
 
 <main class="container">
 
-<div class="title">
+<div class="top">
 
-<h1>
-لوحة تحكم المنتجات
-</h1>
+<div>
+<h1>إدارة المنتجات</h1>
 
 <p>
-أضف المنتجات وعدّل الأسعار والأقسام والوحدات بسهولة
+إضافة المنتجات وتعديل الأسعار والأقسام
 </p>
-
 </div>
 
-
-<div class="stats">
-
-<div class="stat">
-<span>إجمالي المنتجات</span>
-<strong id="totalProducts">0</strong>
-</div>
-
-<div class="stat">
-<span>الخضروات</span>
-<strong id="vegetablesCount">0</strong>
-</div>
-
-<div class="stat">
-<span>الفواكه</span>
-<strong id="fruitsCount">0</strong>
-</div>
-
-<div class="stat">
-<span>العروض</span>
-<strong id="offersCount">0</strong>
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="card-title">
-
-<h2 id="formTitle">
-إضافة منتج جديد
-</h2>
-
-<button
-type="button"
-class="add-new"
-id="newProduct"
->
-+ منتج جديد
+<button class="add" id="newProduct">
++ إضافة منتج
 </button>
 
 </div>
 
 
+<section class="card hidden" id="editor">
+
+<h2 class="form-title" id="editorTitle">
+إضافة منتج جديد
+</h2>
+
 <form id="productForm">
 
-<input
-type="hidden"
-id="productId"
->
+<input type="hidden" id="productId">
 
-
-<div class="form-grid">
-
+<div class="grid">
 
 <div class="field">
 
-<label>
-اسم المنتج
-</label>
+<label>اسم المنتج</label>
 
 <input
-id="productName"
+id="name"
 type="text"
 placeholder="مثال: طماطم بلدي"
 required
@@ -487,16 +405,14 @@ required
 
 <div class="field">
 
-<label>
-السعر بالجنيه
-</label>
+<label>السعر</label>
 
 <input
-id="productPrice"
+id="price"
 type="number"
 min="0"
 step="0.01"
-placeholder="مثال: 25"
+placeholder="20"
 required
 >
 
@@ -505,47 +421,19 @@ required
 
 <div class="field">
 
-<label>
-القسم
-</label>
+<label>القسم</label>
 
-<select id="productCategory">
+<select id="category">
 
-<option value="خضروات">
-🥬 خضروات
-</option>
-
-<option value="فواكه">
-🍎 فواكه
-</option>
-
-<option value="لحوم">
-🥩 لحوم
-</option>
-
-<option value="طيور">
-🐔 طيور
-</option>
-
-<option value="ماركت">
-🛒 ماركت
-</option>
-
-<option value="عطارة">
-🌿 عطارة
-</option>
-
-<option value="ألبان">
-🥛 ألبان
-</option>
-
-<option value="مشروبات">
-🧃 مشروبات
-</option>
-
-<option value="منظفات">
-🧼 منظفات
-</option>
+<option>خضروات</option>
+<option>فواكه</option>
+<option>لحوم</option>
+<option>طيور</option>
+<option>ماركت</option>
+<option>عطارة</option>
+<option>ألبان</option>
+<option>مشروبات</option>
+<option>منظفات</option>
 
 </select>
 
@@ -554,57 +442,43 @@ required
 
 <div class="field">
 
-<label>
-وحدة البيع
-</label>
+<label>الوحدة</label>
 
-<select id="productUnit">
+<select id="unit">
 
-<option value="كيلو">
-كيلو
-</option>
-
-<option value="قطعة">
-قطعة
-</option>
-
-<option value="عبوة">
-عبوة
-</option>
-
-<option value="كرتونة">
-كرتونة
-</option>
-
-<option value="زجاجة">
-زجاجة
-</option>
-
-<option value="كيس">
-كيس
-</option>
-
-<option value="علبة">
-علبة
-</option>
-
-<option value="100 جرام">
-100 جرام
-</option>
+<option>كيلو</option>
+<option>قطعة</option>
+<option>عبوة</option>
+<option>كرتونة</option>
+<option>زجاجة</option>
+<option>كيس</option>
+<option>علبة</option>
+<option>100 جرام</option>
 
 </select>
 
 </div>
 
 
-<div class="field">
+<div class="field full">
 
-<label>
-الإيموجي / رمز المنتج
-</label>
+<label>رابط صورة المنتج</label>
 
 <input
-id="productEmoji"
+id="image"
+type="url"
+placeholder="https://..."
+>
+
+</div>
+
+
+<div class="field">
+
+<label>رمز المنتج</label>
+
+<input
+id="emoji"
 type="text"
 placeholder="🍅"
 maxlength="4"
@@ -615,18 +489,16 @@ maxlength="4"
 
 <div class="field">
 
-<label>
-حالة المنتج
-</label>
+<label>الحالة</label>
 
-<select id="productOffer">
+<select id="active">
 
-<option value="no">
-منتج عادي
+<option value="true">
+متاح للبيع
 </option>
 
-<option value="yes">
-🔥 عرض
+<option value="false">
+غير متاح
 </option>
 
 </select>
@@ -634,22 +506,37 @@ maxlength="4"
 </div>
 
 
+<div class="field full">
+
+<label class="check">
+
+<input
+id="offer"
+type="checkbox"
+>
+
+🔥 المنتج عرض
+
+</label>
+
+</div>
+
 </div>
 
 
-<div class="actions">
+<div class="buttons">
 
 <button
-type="submit"
 class="save"
+type="submit"
 >
 حفظ المنتج
 </button>
 
 <button
-type="button"
 class="cancel"
-id="cancelEdit"
+type="button"
+id="cancel"
 >
 إلغاء
 </button>
@@ -658,274 +545,63 @@ id="cancelEdit"
 
 </form>
 
-</div>
+</section>
 
 
-<div class="card">
+<section class="card">
 
-<div class="card-title">
-
-<h2>
-المنتجات الحالية
+<h2 class="form-title">
+المنتجات
 </h2>
-
-</div>
-
 
 <div
 class="products"
-id="productsList"
+id="products"
 >
+<div class="empty">
+جاري تحميل المنتجات...
+</div>
 </div>
 
-</div>
+</section>
 
 </main>
 
 
-<div
-class="toast"
-id="toast"
-></div>
+<div class="message" id="message"></div>
 
 
 <script>
 
-"use strict";
+const PRODUCTS_URL = "products.json";
+
+let products = [];
+
+let editingId = null;
 
 
-const STORAGE_KEY =
-"albaraka_products_v1";
-
-
-const defaultProducts = [
-
-{
-id:"p1",
-name:"طماطم بلدي",
-price:20,
-category:"خضروات",
-unit:"كيلو",
-emoji:"🍅",
-offer:false
-},
-
-{
-id:"p2",
-name:"بطاطس",
-price:25,
-category:"خضروات",
-unit:"كيلو",
-emoji:"🥔",
-offer:false
-},
-
-{
-id:"p3",
-name:"خيار",
-price:30,
-category:"خضروات",
-unit:"كيلو",
-emoji:"🥒",
-offer:false
-},
-
-{
-id:"p4",
-name:"موز",
-price:35,
-category:"فواكه",
-unit:"كيلو",
-emoji:"🍌",
-offer:false
-},
-
-{
-id:"p5",
-name:"تفاح",
-price:70,
-category:"فواكه",
-unit:"كيلو",
-emoji:"🍎",
-offer:true
-},
-
-{
-id:"p6",
-name:"برتقال",
-price:30,
-category:"فواكه",
-unit:"كيلو",
-emoji:"🍊",
-offer:false
-},
-
-{
-id:"p7",
-name:"لحمة بلدي",
-price:420,
-category:"لحوم",
-unit:"كيلو",
-emoji:"🥩",
-offer:false
-},
-
-{
-id:"p8",
-name:"فراخ",
-price:115,
-category:"طيور",
-unit:"كيلو",
-emoji:"🐔",
-offer:false
-},
-
-{
-id:"p9",
-name:"سكر",
-price:35,
-category:"ماركت",
-unit:"كيلو",
-emoji:"🛍️",
-offer:false
-},
-
-{
-id:"p10",
-name:"بهارات مشكلة",
-price:25,
-category:"عطارة",
-unit:"100 جرام",
-emoji:"🌿",
-offer:false
-}
-
-];
-
+const editor =
+document.getElementById("editor");
 
 const form =
-document.getElementById(
-"productForm"
-);
+document.getElementById("productForm");
 
-const productId =
-document.getElementById(
-"productId"
-);
-
-const productName =
-document.getElementById(
-"productName"
-);
-
-const productPrice =
-document.getElementById(
-"productPrice"
-);
-
-const productCategory =
-document.getElementById(
-"productCategory"
-);
-
-const productUnit =
-document.getElementById(
-"productUnit"
-);
-
-const productEmoji =
-document.getElementById(
-"productEmoji"
-);
-
-const productOffer =
-document.getElementById(
-"productOffer"
-);
-
-const productsList =
-document.getElementById(
-"productsList"
-);
-
-const toast =
-document.getElementById(
-"toast"
-);
+const list =
+document.getElementById("products");
 
 
-function getProducts(){
+function message(text){
 
-try{
+const box =
+document.getElementById("message");
 
-const saved =
-localStorage.getItem(
-STORAGE_KEY
-);
+box.textContent = text;
 
-if(!saved){
+box.classList.add("show");
 
-localStorage.setItem(
-STORAGE_KEY,
-JSON.stringify(
-defaultProducts
-)
-);
-
-return [...defaultProducts];
-
-}
-
-const data =
-JSON.parse(saved);
-
-return Array.isArray(data)
-? data
-: [...defaultProducts];
-
-}catch(error){
-
-return [...defaultProducts];
-
-}
-
-}
-
-
-function saveProducts(products){
-
-localStorage.setItem(
-STORAGE_KEY,
-JSON.stringify(products)
-);
-
-}
-
-
-function showToast(message){
-
-toast.textContent =
-message;
-
-toast.classList.add(
-"show"
-);
-
-clearTimeout(
-window.toastTimer
-);
-
-window.toastTimer =
-setTimeout(
-function(){
-
-toast.classList.remove(
-"show"
-);
-
-},
-2200
-);
+setTimeout(()=>{
+box.classList.remove("show");
+},2500);
 
 }
 
@@ -933,60 +609,60 @@ toast.classList.remove(
 function escapeHTML(value){
 
 return String(value ?? "")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+
+async function loadProducts(){
+
+try{
+
+const response =
+await fetch(
+PRODUCTS_URL + "?v=" + Date.now()
+);
+
+if(!response.ok){
+throw new Error();
+}
+
+const data =
+await response.json();
+
+products =
+Array.isArray(data.products)
+? data.products
+: [];
+
+render();
+
+}catch(error){
+
+list.innerHTML = `
+<div class="empty">
+تعذر تحميل المنتجات.
+<br><br>
+تأكد من وجود products.json
+</div>
+`;
+
+}
 
 }
 
 
 function render(){
 
-const products =
-getProducts();
+if(!products.length){
 
-
-// الإحصائيات
-
-document.getElementById(
-"totalProducts"
-).textContent =
-products.length;
-
-
-document.getElementById(
-"vegetablesCount"
-).textContent =
-products.filter(
-p => p.category === "خضروات"
-).length;
-
-
-document.getElementById(
-"fruitsCount"
-).textContent =
-products.filter(
-p => p.category === "فواكه"
-).length;
-
-
-document.getElementById(
-"offersCount"
-).textContent =
-products.filter(
-p => p.offer === true
-).length;
-
-
-// المنتجات
-
-if(products.length === 0){
-
-productsList.innerHTML = `
+list.innerHTML = `
 <div class="empty">
-لا توجد منتجات حاليًا
+لا توجد منتجات.
 </div>
 `;
 
@@ -995,21 +671,35 @@ return;
 }
 
 
-productsList.innerHTML =
-products.map(
-product => `
+list.innerHTML =
+products
+.filter(product => product.active !== false)
+.map(product => {
 
-<div class="product">
+return `
 
-<div class="product-image">
+<article class="product">
 
-${escapeHTML(
-product.emoji || "🛒"
-)}
+<div class="product-top">
 
-${product.offer
-? `<span class="offer">🔥 عرض</span>`
-: ""
+${
+product.image
+?
+`<img
+src="${escapeHTML(product.image)}"
+alt="${escapeHTML(product.name)}"
+style="width:100%;height:100%;object-fit:cover"
+>`
+:
+escapeHTML(product.emoji || "🛒")
+}
+
+${
+product.offer
+?
+`<span class="badge">🔥 عرض</span>`
+:
+""
 }
 
 </div>
@@ -1018,49 +708,33 @@ ${product.offer
 <div class="product-body">
 
 <h3>
-${escapeHTML(
-product.name
-)}
+${escapeHTML(product.name)}
 </h3>
 
-<div class="product-category">
-
-${escapeHTML(
-product.category
-)}
-•
-${escapeHTML(
-product.unit
-)}
-
+<div class="info">
+${escapeHTML(product.category)}
+ •
+ ${escapeHTML(product.unit)}
 </div>
 
 <div class="price">
-
-${Number(
-product.price
-).toLocaleString("ar-EG")}
- ج.م
-
+${Number(product.price).toLocaleString("ar-EG")}
+ جنيه
 </div>
 
 
-<div class="product-actions">
+<div class="actions">
 
 <button
 class="edit"
-data-edit="${escapeHTML(
-product.id
-)}"
+onclick="editProduct('${escapeHTML(product.id)}')"
 >
 ✏️ تعديل
 </button>
 
 <button
-class="delete"
-data-delete="${escapeHTML(
-product.id
-)}"
+class="remove"
+onclick="deleteProduct('${escapeHTML(product.id)}')"
 >
 🗑️ حذف
 </button>
@@ -1069,96 +743,114 @@ product.id
 
 </div>
 
-</div>
+</article>
 
-`
-).join("");
+`;
+
+}).join("");
 
 }
 
 
-function resetForm(){
+function openEditor(product=null){
+
+editor.classList.remove("hidden");
+
+if(product){
+
+editingId =
+product.id;
+
+document.getElementById("editorTitle")
+.textContent =
+"تعديل المنتج";
+
+document.getElementById("productId")
+.value =
+product.id;
+
+document.getElementById("name")
+.value =
+product.name || "";
+
+document.getElementById("price")
+.value =
+product.price || "";
+
+document.getElementById("category")
+.value =
+product.category || "خضروات";
+
+document.getElementById("unit")
+.value =
+product.unit || "كيلو";
+
+document.getElementById("image")
+.value =
+product.image || "";
+
+document.getElementById("emoji")
+.value =
+product.emoji || "🛒";
+
+document.getElementById("active")
+.value =
+product.active === false
+? "false"
+: "true";
+
+document.getElementById("offer")
+.checked =
+product.offer === true;
+
+}else{
+
+editingId = null;
+
+document.getElementById("editorTitle")
+.textContent =
+"إضافة منتج جديد";
 
 form.reset();
 
-productId.value = "";
+document.getElementById("emoji")
+.value = "🛒";
 
-productOffer.value =
-"no";
-
-document.getElementById(
-"formTitle"
-).textContent =
-"إضافة منتج جديد";
+document.getElementById("active")
+.value = "true";
 
 }
 
-
-function editProduct(id){
-
-const products =
-getProducts();
-
-const product =
-products.find(
-p =>
-String(p.id) ===
-String(id)
-);
-
-if(!product){
-return;
-}
-
-
-productId.value =
-product.id;
-
-productName.value =
-product.name;
-
-productPrice.value =
-product.price;
-
-productCategory.value =
-product.category;
-
-productUnit.value =
-product.unit;
-
-productEmoji.value =
-product.emoji || "";
-
-productOffer.value =
-product.offer
-? "yes"
-: "no";
-
-
-document.getElementById(
-"formTitle"
-).textContent =
-"تعديل المنتج";
-
-
-window.scrollTo({
-top:0,
+editor.scrollIntoView({
 behavior:"smooth"
 });
 
 }
 
 
-function deleteProduct(id){
-
-const products =
-getProducts();
+function editProduct(id){
 
 const product =
 products.find(
-p =>
-String(p.id) ===
-String(id)
+item =>
+String(item.id) === String(id)
+);
+
+if(product){
+
+openEditor(product);
+
+}
+
+}
+
+
+function deleteProduct(id){
+
+const product =
+products.find(
+item =>
+String(item.id) === String(id)
 );
 
 if(!product){
@@ -1166,37 +858,53 @@ return;
 }
 
 
-const confirmed =
+const ok =
 confirm(
-"هل تريد حذف المنتج: " +
+"هل تريد حذف " +
 product.name +
-" ؟"
+"؟"
 );
 
-if(!confirmed){
+if(!ok){
 return;
 }
 
 
-const newProducts =
-products.filter(
-p =>
-String(p.id) !==
-String(id)
-);
+/*
+|--------------------------------------------------------------------------
+| مهم
+|--------------------------------------------------------------------------
+| الحذف الحقيقي من GitHub سيتم في الخطوة التالية
+| عن طريق GitHub Actions.
+|--------------------------------------------------------------------------
+*/
 
-
-saveProducts(
-newProducts
-);
-
-render();
-
-showToast(
-"تم حذف المنتج"
+message(
+"تم تحديد المنتج للحذف. سنربطه بالحفظ على GitHub في الخطوة التالية."
 );
 
 }
+
+
+document
+.getElementById("newProduct")
+.addEventListener(
+"click",
+()=>{
+openEditor();
+}
+);
+
+
+document
+.getElementById("cancel")
+.addEventListener(
+"click",
+()=>{
+editor.classList.add("hidden");
+editingId = null;
+}
+);
 
 
 form.addEventListener(
@@ -1206,34 +914,53 @@ function(event){
 event.preventDefault();
 
 
-const name =
-productName.value.trim();
+const product = {
 
-const price =
+id:
+editingId ||
+"p-" +
+Date.now(),
+
+name:
+document.getElementById("name")
+.value.trim(),
+
+price:
 Number(
-productPrice.value
-);
+document.getElementById("price")
+.value
+),
 
-const category =
-productCategory.value;
+category:
+document.getElementById("category")
+.value,
 
-const unit =
-productUnit.value;
+unit:
+document.getElementById("unit")
+.value,
 
-const emoji =
-productEmoji.value.trim()
-|| "🛒";
+image:
+document.getElementById("image")
+.value.trim(),
 
-const offer =
-productOffer.value ===
-"yes";
+emoji:
+document.getElementById("emoji")
+.value.trim() || "🛒",
+
+offer:
+document.getElementById("offer")
+.checked,
+
+active:
+document.getElementById("active")
+.value === "true"
+
+};
 
 
-if(!name){
+if(!product.name){
 
-showToast(
-"اكتب اسم المنتج"
-);
+message("اكتب اسم المنتج");
 
 return;
 
@@ -1241,176 +968,38 @@ return;
 
 
 if(
-!Number.isFinite(price) ||
-price < 0
+!Number.isFinite(product.price) ||
+product.price < 0
 ){
 
-showToast(
-"اكتب سعرًا صحيحًا"
-);
+message("أدخل سعرًا صحيحًا");
 
 return;
 
 }
 
 
-const products =
-getProducts();
+/*
+|--------------------------------------------------------------------------
+| هنا لن نستخدم localStorage
+|--------------------------------------------------------------------------
+| البيانات سترسل إلى GitHub Actions في الخطوة التالية.
+|--------------------------------------------------------------------------
+*/
 
-
-const id =
-productId.value;
-
-
-if(id){
-
-const index =
-products.findIndex(
-p =>
-String(p.id) ===
-String(id)
+console.log(
+"PRODUCT_TO_SAVE",
+product
 );
 
-
-if(index === -1){
-
-showToast(
-"المنتج غير موجود"
+message(
+"البيانات جاهزة للحفظ على GitHub"
 );
 
-return;
-
-}
-
-
-products[index] = {
-
-...products[index],
-
-name,
-price,
-category,
-unit,
-emoji,
-offer
-
-};
-
-
-showToast(
-"تم تعديل المنتج بنجاح"
-);
-
-}else{
-
-
-const newProduct = {
-
-id:
-"p-" +
-Date.now(),
-
-name,
-price,
-category,
-unit,
-emoji,
-offer
-
-};
-
-
-products.unshift(
-newProduct
-);
-
-
-showToast(
-"تم إضافة المنتج بنجاح"
-);
-
-}
-
-
-saveProducts(
-products
-);
-
-resetForm();
-
-render();
-
-}
-);
-
-
-document.getElementById(
-"newProduct"
-).addEventListener(
-"click",
-function(){
-
-resetForm();
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
 });
 
-}
-);
 
-
-document.getElementById(
-"cancelEdit"
-).addEventListener(
-"click",
-function(){
-
-resetForm();
-
-}
-);
-
-
-productsList.addEventListener(
-"click",
-function(event){
-
-const editButton =
-event.target.closest(
-"[data-edit]"
-);
-
-if(editButton){
-
-editProduct(
-editButton.dataset.edit
-);
-
-return;
-
-}
-
-
-const deleteButton =
-event.target.closest(
-"[data-delete]"
-);
-
-if(deleteButton){
-
-deleteProduct(
-deleteButton.dataset.delete
-);
-
-}
-
-}
-);
-
-
-render();
+loadProducts();
 
 </script>
 
