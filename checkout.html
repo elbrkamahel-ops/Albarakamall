@@ -1,1222 +1,1534 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-<title>إتمام الطلب - مول البركة</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <title>إتمام الطلب | مول البركة</title>
 
-<style>
-*{
-    box-sizing:border-box;
-}
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
-body{
-    margin:0;
-    font-family:Tahoma,Arial,sans-serif;
-    background:#f5fff7;
-    color:#222;
-}
+    <style>
 
-header{
-    background:linear-gradient(135deg,#087d27,#10aa3b);
-    color:#fff;
-    padding:18px 5%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
+        /* ================================
+           CHECKOUT
+        ================================= */
 
-.logo{
-    font-size:25px;
-    font-weight:900;
-}
+        .checkout-page {
+            max-width: 1240px;
+            margin: 35px auto 70px;
+            padding: 0 15px;
+        }
 
-.back{
-    color:#fff;
-    text-decoration:none;
-    background:rgba(255,255,255,.18);
-    padding:12px 18px;
-    border-radius:14px;
-    font-weight:bold;
-}
+        .checkout-title {
+            margin-bottom: 25px;
+        }
 
-main{
-    width:94%;
-    max-width:1050px;
-    margin:35px auto;
-}
+        .checkout-title span {
+            color: #087f3f;
+            font-size: 13px;
+            font-weight: 900;
+        }
 
-h1{
-    text-align:center;
-    color:#087d27;
-    margin-bottom:30px;
-}
+        .checkout-title h1 {
+            margin-top: 4px;
+            font-size: 34px;
+        }
 
-.grid{
-    display:grid;
-    grid-template-columns:1.3fr .7fr;
-    gap:22px;
-}
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 390px;
+            gap: 22px;
+            align-items: start;
+        }
 
-.box{
-    background:#fff;
-    padding:25px;
-    border-radius:22px;
-    box-shadow:0 8px 30px rgba(0,0,0,.07);
-}
+        .checkout-box,
+        .order-box {
+            background: #fff;
+            border: 1px solid #e3ebe6;
+            border-radius: 22px;
+            box-shadow: 0 8px 30px rgba(0,0,0,.04);
+        }
 
-h2{
-    color:#087d27;
-    margin-top:0;
-}
+        .checkout-box {
+            padding: 25px;
+        }
 
-label{
-    display:block;
-    font-weight:bold;
-    margin:15px 0 7px;
-}
+        .order-box {
+            padding: 22px;
+            position: sticky;
+            top: 105px;
+        }
 
-input,textarea{
-    width:100%;
-    padding:15px;
-    border:1px solid #dce6df;
-    border-radius:13px;
-    font-family:inherit;
-    font-size:16px;
-    outline:none;
-}
+        .box-title {
+            margin-bottom: 18px;
+        }
 
-textarea{
-    min-height:110px;
-    resize:vertical;
-}
+        .box-title h2 {
+            font-size: 21px;
+        }
 
-input:focus,textarea:focus{
-    border-color:#07872a;
-}
+        .box-title p {
+            color: #7b867f;
+            font-size: 12px;
+            margin-top: 3px;
+        }
 
-.payment{
-    background:#f6fff8;
-    padding:15px;
-    border-radius:13px;
-    margin-top:10px;
-}
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
 
-.payment input{
-    width:auto;
-}
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
 
-button{
-    width:100%;
-    border:0;
-    padding:17px;
-    margin-top:20px;
-    border-radius:15px;
-    background:linear-gradient(135deg,#087d27,#10aa3b);
-    color:white;
-    font-size:18px;
-    font-weight:900;
-    cursor:pointer;
-}
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
 
-button:disabled{
-    opacity:.6;
-}
+        .form-group label {
+            font-size: 13px;
+            font-weight: 900;
+        }
 
-.message{
-    display:none;
-    padding:16px;
-    margin-bottom:20px;
-    border-radius:14px;
-    font-weight:bold;
-}
+        .form-group label span {
+            color: #d34e4e;
+        }
 
-.error{
-    display:block;
-    background:#fff0f0;
-    color:#a00000;
-}
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            border: 1px solid #dce6e0;
+            background: #f9fbfa;
+            border-radius: 12px;
+            padding: 12px 13px;
+            outline: none;
+            font-size: 14px;
+            color: #18231d;
+            transition: .2s;
+        }
 
-.success{
-    display:block;
-    background:#edfff2;
-    color:#087d27;
-}
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
 
-.product{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    padding:13px 0;
-    border-bottom:1px solid #eee;
-}
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            background: #fff;
+            border-color: #74bd91;
+            box-shadow: 0 0 0 4px rgba(8,127,63,.07);
+        }
 
-.product-name{
-    font-weight:bold;
-}
+        .payment-title {
+            margin-top: 28px;
+            margin-bottom: 12px;
+            font-size: 18px;
+            font-weight: 900;
+        }
 
-.product small{
-    color:#777;
-}
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
 
-.price{
-    color:#087d27;
-    font-weight:bold;
-    white-space:nowrap;
-}
+        .payment-option {
+            position: relative;
+        }
 
-.total{
-    display:flex;
-    justify-content:space-between;
-    font-size:20px;
-    font-weight:900;
-    color:#087d27;
-    margin-top:20px;
-    padding-top:17px;
-    border-top:2px solid #eee;
-}
+        .payment-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
 
-#successScreen{
-    display:none;
-    text-align:center;
-}
+        .payment-label {
+            min-height: 80px;
+            border: 1px solid #dce6e0;
+            background: #fff;
+            border-radius: 15px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: .2s;
+        }
 
-.successIcon{
-    font-size:70px;
-    margin-bottom:15px;
-}
+        .payment-label:hover {
+            border-color: #91caa5;
+        }
 
-.orderNumber{
-    margin:25px auto;
-    max-width:400px;
-    background:#f1fff4;
-    border:1px solid #ccebd5;
-    border-radius:18px;
-    padding:20px;
-}
+        .payment-option input:checked + .payment-label {
+            border-color: #087f3f;
+            background: #eff9f2;
+            box-shadow: 0 0 0 3px rgba(8,127,63,.06);
+        }
 
-.orderNumber span{
-    display:block;
-    color:#777;
-    margin-bottom:8px;
-}
+        .payment-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 13px;
+            background: #eef8f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            flex-shrink: 0;
+        }
 
-.orderNumber strong{
-    display:block;
-    color:#087d27;
-    font-size:27px;
-    direction:ltr;
-}
+        .payment-label strong {
+            display: block;
+            font-size: 14px;
+        }
 
-.successButtons{
-    display:flex;
-    justify-content:center;
-    gap:12px;
-    flex-wrap:wrap;
-    margin-top:25px;
-}
+        .payment-label small {
+            display: block;
+            color: #7d8881;
+            font-size: 10px;
+            margin-top: 2px;
+        }
 
-.successButtons a{
-    text-decoration:none;
-    padding:14px 22px;
-    border-radius:14px;
-    font-weight:bold;
-}
+        .secure-note {
+            margin-top: 18px;
+            padding: 13px;
+            border-radius: 13px;
+            background: #f1f8f3;
+            color: #5e6c63;
+            font-size: 12px;
+            line-height: 1.8;
+        }
 
-.shop{
-    background:#087d27;
-    color:#fff;
-}
+        .order-box h2 {
+            font-size: 21px;
+            margin-bottom: 15px;
+        }
 
-.newOrder{
-    background:#eef7f0;
-    color:#087d27;
-}
+        .order-items {
+            max-height: 390px;
+            overflow-y: auto;
+            padding-left: 3px;
+        }
 
-@media(max-width:800px){
+        .order-item {
+            display: grid;
+            grid-template-columns: 48px minmax(0,1fr) auto;
+            gap: 10px;
+            align-items: center;
+            padding: 11px 0;
+            border-bottom: 1px solid #edf1ee;
+        }
 
-    .grid{
-        grid-template-columns:1fr;
-    }
+        .order-item-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: #eff9f2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+        }
 
-    header{
-        padding:15px 4%;
-    }
+        .order-item-name {
+            font-size: 13px;
+            font-weight: 800;
+        }
 
-    .logo{
-        font-size:20px;
-    }
+        .order-item-meta {
+            color: #87928b;
+            font-size: 10px;
+        }
 
-    .back{
-        padding:10px 12px;
-        font-size:13px;
-    }
+        .order-item-total {
+            color: #087f3f;
+            font-size: 12px;
+            font-weight: 900;
+            white-space: nowrap;
+        }
 
-    .box{
-        padding:20px;
-    }
-}
-</style>
+        .order-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 17px;
+            padding-top: 15px;
+            border-top: 2px solid #edf1ee;
+        }
+
+        .order-total-row strong:last-child {
+            color: #087f3f;
+            font-size: 24px;
+        }
+
+        .submit-order {
+            width: 100%;
+            min-height: 53px;
+            margin-top: 18px;
+            border: none;
+            border-radius: 14px;
+            background: #087f3f;
+            color: #fff;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 900;
+            box-shadow: 0 8px 20px rgba(8,127,63,.18);
+            transition: .2s;
+        }
+
+        .submit-order:hover {
+            background: #056d35;
+            transform: translateY(-1px);
+        }
+
+        .submit-order:disabled {
+            opacity: .55;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .back-cart {
+            width: 100%;
+            min-height: 43px;
+            margin-top: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #dce6e0;
+            border-radius: 13px;
+            color: #08783c;
+            font-weight: 900;
+        }
+
+        .empty-checkout {
+            max-width: 600px;
+            margin: 70px auto;
+            padding: 50px 25px;
+            text-align: center;
+            background: #fff;
+            border: 1px solid #e3ebe6;
+            border-radius: 23px;
+        }
+
+        .empty-checkout-icon {
+            font-size: 65px;
+        }
+
+        .empty-checkout h2 {
+            margin: 10px 0 5px;
+        }
+
+        .empty-checkout p {
+            color: #7b867f;
+            margin-bottom: 20px;
+        }
+
+        .empty-checkout a {
+            display: inline-flex;
+            min-height: 45px;
+            padding: 10px 22px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: #087f3f;
+            color: #fff;
+            font-weight: 900;
+        }
+
+        .loading-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: rgba(255,255,255,.94);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .loading-screen.show {
+            display: flex;
+        }
+
+        .loading-box {
+            background: #fff;
+            border: 1px solid #e1e9e4;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 50px rgba(0,0,0,.12);
+        }
+
+        .loading-icon {
+            font-size: 45px;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            50% {
+                transform: scale(1.12);
+            }
+        }
+
+        @media (max-width: 850px) {
+
+            .checkout-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .order-box {
+                position: static;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .checkout-page {
+                margin-top: 22px;
+            }
+
+            .checkout-title h1 {
+                font-size: 28px;
+            }
+
+            .checkout-box {
+                padding: 18px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-<header>
 
-    <div class="logo">
-        🛒 مول البركة
+<!-- =====================================================
+     TOP BAR
+===================================================== -->
+
+<div class="topbar">
+
+    <div>
+        🚚 توصيل سريع
     </div>
 
-    <a href="cart.html" class="back">
-        ← السلة
+    <div>
+        💳 كاش أو فيزا
+    </div>
+
+    <div>
+        💬 01119511185
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <a
+        href="index.html"
+        class="brand"
+    >
+
+        <div class="brand-mark">
+            ب
+        </div>
+
+        <div class="brand-text">
+
+            <strong>
+                مول البركة
+            </strong>
+
+            <small>
+                أولاد الجارحي
+            </small>
+
+        </div>
+
+    </a>
+
+
+    <div class="search-box">
+
+        <span class="search-icon">
+            🔍
+        </span>
+
+        <input
+            type="text"
+            placeholder="ابحث عن منتج..."
+            onkeydown="
+                if(event.key === 'Enter'){
+                    window.location.href='index.html#products';
+                }
+            "
+        >
+
+    </div>
+
+
+    <a
+        href="index.html"
+        class="header-account"
+    >
+        🏠 الرئيسية
+    </a>
+
+
+    <a
+        href="cart.html"
+        class="cart-button"
+    >
+
+        🛒
+
+        <span>
+            السلة
+        </span>
+
+        <b id="cartCount">
+            0
+        </b>
+
     </a>
 
 </header>
 
 
-<main>
+<!-- =====================================================
+     NAV
+===================================================== -->
 
-<h1>
-    إتمام الطلب
-</h1>
+<nav class="main-nav">
 
+    <a href="index.html">
+        الرئيسية
+    </a>
 
-<div id="message" class="message"></div>
+    <a href="index.html#categories">
+        الأقسام
+    </a>
 
+    <a href="index.html#offers">
+        🔥 العروض
+    </a>
 
-<!-- =========================
-     صفحة الطلب
-========================= -->
+    <a href="index.html#products">
+        المنتجات
+    </a>
 
-<div id="checkoutScreen">
+    <a href="cart.html">
+        🛒 السلة
+    </a>
 
-<div class="grid">
+</nav>
 
 
-<!-- بيانات العميل -->
+<!-- =====================================================
+     CHECKOUT
+===================================================== -->
 
-<div class="box">
+<main
+    class="checkout-page"
+    id="checkoutPage"
+>
 
-<h2>
-    📋 بيانات العميل
-</h2>
+    <div class="checkout-title">
 
-<form id="checkoutForm">
+        <span>
+            مول البركة – أولاد الجارحي
+        </span>
 
-<label>
-    الاسم بالكامل *
-</label>
+        <h1>
+            إتمام الطلب
+        </h1>
 
-<input
-    id="name"
-    type="text"
-    placeholder="الاسم بالكامل"
-    required>
+    </div>
 
 
-<label>
-    رقم الهاتف *
-</label>
+    <div class="checkout-layout">
 
-<input
-    id="phone"
-    type="tel"
-    inputmode="tel"
-    placeholder="011xxxxxxxx"
-    required>
 
+        <!-- =============================================
+             CUSTOMER FORM
+        ============================================== -->
 
-<label>
-    العنوان بالتفصيل *
-</label>
+        <section class="checkout-box">
 
-<textarea
-    id="address"
-    placeholder="المنطقة - الشارع - رقم المنزل - علامة مميزة"
-    required></textarea>
+            <div class="box-title">
 
+                <h2>
+                    بيانات التوصيل
+                </h2>
 
-<label>
-    طريقة الدفع
-</label>
+                <p>
+                    من فضلك أدخل بياناتك لإتمام الطلب.
+                </p>
 
-<div class="payment">
+            </div>
 
-<input
-    type="radio"
-    name="payment"
-    value="cash"
-    checked>
 
-الدفع عند الاستلام 💵
+            <form id="checkoutForm">
 
-</div>
 
+                <div class="form-grid">
 
-<label>
-    ملاحظات الطلب
-</label>
 
-<textarea
-    id="notes"
-    placeholder="أي ملاحظات خاصة بالطلب"></textarea>
+                    <div class="form-group">
 
+                        <label for="customerName">
+                            الاسم بالكامل <span>*</span>
+                        </label>
 
-<button
-    id="submitButton"
-    type="submit">
+                        <input
+                            id="customerName"
+                            name="customerName"
+                            type="text"
+                            placeholder="اكتب اسمك بالكامل"
+                            autocomplete="name"
+                            required
+                        >
 
-    تأكيد الطلب
+                    </div>
 
-</button>
 
-</form>
+                    <div class="form-group">
 
-</div>
+                        <label for="customerPhone">
+                            رقم الهاتف <span>*</span>
+                        </label>
 
+                        <input
+                            id="customerPhone"
+                            name="customerPhone"
+                            type="tel"
+                            placeholder="مثال: 01000000000"
+                            inputmode="tel"
+                            autocomplete="tel"
+                            required
+                        >
 
-<!-- ملخص الطلب -->
+                    </div>
 
-<div class="box">
 
-<h2>
-    🧾 ملخص الطلب
-</h2>
+                    <div class="form-group full">
 
-<div id="products">
-    جاري تحميل السلة...
-</div>
+                        <label for="customerAddress">
+                            العنوان بالتفصيل <span>*</span>
+                        </label>
 
-<div class="total">
+                        <textarea
+                            id="customerAddress"
+                            name="customerAddress"
+                            placeholder="القرية / الشارع / رقم المنزل / علامة مميزة"
+                            autocomplete="street-address"
+                            required
+                        ></textarea>
 
-<span>
-    الإجمالي
-</span>
+                    </div>
 
-<span>
-    <span id="total">0.00</span>
-    جنيه
-</span>
 
-</div>
+                    <div class="form-group">
 
-</div>
+                        <label for="customerArea">
+                            المنطقة
+                        </label>
 
-</div>
+                        <input
+                            id="customerArea"
+                            name="customerArea"
+                            type="text"
+                            placeholder="المنطقة أو القرية"
+                        >
 
-</div>
+                    </div>
 
 
-<!-- =========================
-     شاشة النجاح
-========================= -->
+                    <div class="form-group">
 
-<div id="successScreen" class="box">
+                        <label for="deliveryTime">
+                            وقت التوصيل المفضل
+                        </label>
 
-<div class="successIcon">
-    ✅
-</div>
+                        <select
+                            id="deliveryTime"
+                            name="deliveryTime"
+                        >
 
-<h2>
-    تم تسجيل طلبك بنجاح
-</h2>
+                            <option value="">
+                                اختر الوقت
+                            </option>
 
-<p>
-    شكرًا لثقتك في مول البركة ❤️
-</p>
+                            <option value="في أقرب وقت">
+                                في أقرب وقت
+                            </option>
 
+                            <option value="الصباح">
+                                الصباح
+                            </option>
 
-<div class="orderNumber">
+                            <option value="الظهر">
+                                الظهر
+                            </option>
 
-<span>
-    رقم الطلب
-</span>
+                            <option value="المساء">
+                                المساء
+                            </option>
 
-<strong id="orderNumber">
-    -
-</strong>
+                        </select>
 
-</div>
+                    </div>
 
 
-<div>
-    إجمالي الطلب:
-    <strong
-        id="successTotal"
-        style="color:#087d27">
-        0.00 جنيه
-    </strong>
-</div>
+                    <div class="form-group full">
 
+                        <label for="customerNotes">
+                            ملاحظات على الطلب
+                        </label>
 
-<div class="successButtons">
+                        <textarea
+                            id="customerNotes"
+                            name="customerNotes"
+                            placeholder="مثال: أريد اللحمة مفرومة / الاتصال قبل الوصول..."
+                        ></textarea>
 
-<a
-    href="index.html"
-    class="shop">
+                    </div>
 
-    🛍️ العودة للمتجر
+                </div>
 
-</a>
 
-<a
-    href="cart.html"
-    class="newOrder">
+                <!-- =====================================
+                     PAYMENT
+                ====================================== -->
 
-    🛒 طلب جديد
+                <div class="payment-title">
+                    طريقة الدفع
+                </div>
 
-</a>
 
-</div>
+                <div class="payment-methods">
 
-</div>
+
+                    <div class="payment-option">
+
+                        <input
+                            type="radio"
+                            id="cashPayment"
+                            name="paymentMethod"
+                            value="كاش عند الاستلام"
+                            checked
+                        >
+
+                        <label
+                            for="cashPayment"
+                            class="payment-label"
+                        >
+
+                            <div class="payment-icon">
+                                💵
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    كاش عند الاستلام
+                                </strong>
+
+                                <small>
+                                    الدفع عند وصول الطلب
+                                </small>
+
+                            </div>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="payment-option">
+
+                        <input
+                            type="radio"
+                            id="visaPayment"
+                            name="paymentMethod"
+                            value="فيزا"
+                        >
+
+                        <label
+                            for="visaPayment"
+                            class="payment-label"
+                        >
+
+                            <div class="payment-icon">
+                                💳
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    فيزا
+                                </strong>
+
+                                <small>
+                                    الدفع بالبطاقة
+                                </small>
+
+                            </div>
+
+                        </label>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="secure-note">
+
+                    🔒 بياناتك تستخدم فقط لتجهيز طلبك والتواصل معك
+                    بخصوص التوصيل.
+
+                    <br>
+
+                    💬 بعد الضغط على
+                    <strong>إرسال الطلب عبر واتساب</strong>
+                    سيتم فتح واتساب وإرسال تفاصيل طلبك إلى
+                    <strong>01119511185</strong>.
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+
+        <!-- =============================================
+             ORDER SUMMARY
+        ============================================== -->
+
+        <aside class="order-box">
+
+            <h2>
+                مراجعة الطلب
+            </h2>
+
+
+            <div
+                class="order-items"
+                id="orderItems"
+            ></div>
+
+
+            <div class="order-total-row">
+
+                <strong>
+                    الإجمالي
+                </strong>
+
+                <strong id="orderTotal">
+                    0 ج.م
+                </strong>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="submit-order"
+                id="submitOrder"
+            >
+
+                💬 إرسال الطلب عبر واتساب
+
+            </button>
+
+
+            <a
+                href="cart.html"
+                class="back-cart"
+            >
+
+                ← العودة إلى السلة
+
+            </a>
+
+        </aside>
+
+
+    </div>
 
 </main>
 
 
+<!-- =====================================================
+     EMPTY
+===================================================== -->
+
+<div
+    id="emptyCheckout"
+    style="display:none;"
+>
+
+    <div class="empty-checkout">
+
+        <div class="empty-checkout-icon">
+            🛒
+        </div>
+
+        <h2>
+            لا يوجد طلب لإتمامه
+        </h2>
+
+        <p>
+            أضف المنتجات إلى السلة أولاً.
+        </p>
+
+        <a href="index.html#products">
+            الذهاب إلى المنتجات
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     LOADING
+===================================================== -->
+
+<div
+    class="loading-screen"
+    id="loadingScreen"
+>
+
+    <div class="loading-box">
+
+        <div class="loading-icon">
+            💬
+        </div>
+
+        <strong>
+            جاري تجهيز الطلب...
+        </strong>
+
+        <p>
+            سيتم فتح واتساب لإرسال تفاصيل الطلب.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <strong>
+        مول البركة – أولاد الجارحي
+    </strong>
+
+    <span>
+        خضروات • فواكه • لحوم • طيور • ماركت • عطارة
+    </span>
+
+    <a
+        href="https://wa.me/201119511185"
+        target="_blank"
+        rel="noopener"
+    >
+        💬 واتساب: 01119511185
+    </a>
+
+</footer>
+
+
+<!-- =====================================================
+     APP
+===================================================== -->
+
+<script src="app.js"></script>
+
+
 <script>
 
-/* =====================================================
-   إعداد Supabase
-===================================================== */
-
-const SUPABASE_URL =
-    "ضع_رابط_مشروعك_هنا";
-
-const SUPABASE_KEY =
-    "ضع_مفتاح_Publishable_أو_Anon_هنا";
+"use strict";
 
 
 /* =====================================================
-   الاتصال
+   ELEMENTS
 ===================================================== */
 
-let supabaseClient = null;
+const checkoutForm =
+    document.getElementById("checkoutForm");
 
-try{
+const orderItems =
+    document.getElementById("orderItems");
 
-    if(
-        SUPABASE_URL &&
-        SUPABASE_KEY &&
-        !SUPABASE_URL.includes("ضع_") &&
-        !SUPABASE_KEY.includes("ضع_")
-    ){
+const orderTotal =
+    document.getElementById("orderTotal");
 
-        supabaseClient =
-            window.supabase.createClient(
-                SUPABASE_URL,
-                SUPABASE_KEY
-            );
+const submitOrder =
+    document.getElementById("submitOrder");
 
-    }
+const checkoutPage =
+    document.getElementById("checkoutPage");
 
-}catch(error){
+const emptyCheckout =
+    document.getElementById("emptyCheckout");
 
-    console.error(error);
+const loadingScreen =
+    document.getElementById("loadingScreen");
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeCheckout(value) {
+
+    return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
 
 }
 
 
 /* =====================================================
-   العناصر
+   RENDER ORDER
 ===================================================== */
 
-const form =
-    document.getElementById(
-        "checkoutForm"
-    );
+function renderCheckoutOrder() {
 
-const productsBox =
-    document.getElementById(
-        "products"
-    );
-
-const totalBox =
-    document.getElementById(
-        "total"
-    );
-
-const messageBox =
-    document.getElementById(
-        "message"
-    );
-
-const submitButton =
-    document.getElementById(
-        "submitButton"
-    );
-
-const checkoutScreen =
-    document.getElementById(
-        "checkoutScreen"
-    );
-
-const successScreen =
-    document.getElementById(
-        "successScreen"
-    );
+    const cart =
+        window.getCart();
 
 
-/* =====================================================
-   الرسائل
-===================================================== */
+    if (
+        !Array.isArray(cart) ||
+        cart.length === 0
+    ) {
 
-function message(text,type){
+        checkoutPage.style.display =
+            "none";
 
-    messageBox.className =
-        "message " + type;
-
-    messageBox.textContent =
-        text;
-
-    messageBox.style.display =
-        "block";
-
-}
-
-
-/* =====================================================
-   قراءة السلة
-===================================================== */
-
-function loadCart(){
-
-    const possibleKeys = [
-
-        "cart",
-        "albaraka_cart",
-        "shopping_cart",
-        "AlBarakaCart",
-        "cartItems"
-
-    ];
-
-    for(
-        const key of possibleKeys
-    ){
-
-        try{
-
-            const raw =
-                localStorage.getItem(key);
-
-            if(!raw){
-                continue;
-            }
-
-            const data =
-                JSON.parse(raw);
-
-            if(
-                Array.isArray(data) &&
-                data.length
-            ){
-
-                return data;
-
-            }
-
-            if(
-                data &&
-                Array.isArray(data.items) &&
-                data.items.length
-            ){
-
-                return data.items;
-
-            }
-
-        }catch(error){
-
-            console.log(error);
-
-        }
-
-    }
-
-    return [];
-
-}
-
-
-/* =====================================================
-   توحيد المنتجات
-===================================================== */
-
-function normalize(item){
-
-    return {
-
-        id:
-            item.id ??
-            item.product_id ??
-            item.productId ??
-            null,
-
-        name:
-            item.name ??
-            item.title ??
-            item.product_name ??
-            "منتج",
-
-        price:
-            Number(
-                item.price ??
-                item.sale_price ??
-                item.unit_price ??
-                0
-            ),
-
-        quantity:
-            Math.max(
-                1,
-                Number(
-                    item.quantity ??
-                    item.qty ??
-                    1
-                )
-            )
-
-    };
-
-}
-
-
-let cart =
-    loadCart().map(normalize);
-
-
-/* =====================================================
-   عرض السلة
-===================================================== */
-
-function renderCart(){
-
-    if(!cart.length){
-
-        productsBox.innerHTML =
-            "<p>السلة فارغة.</p>";
-
-        submitButton.disabled =
-            true;
+        emptyCheckout.style.display =
+            "block";
 
         return;
 
     }
 
 
-    productsBox.innerHTML =
-        "";
+    checkoutPage.style.display =
+        "block";
 
-    let total =
-        0;
-
-
-    cart.forEach(function(item){
-
-        const line =
-            item.price *
-            item.quantity;
-
-        total += line;
+    emptyCheckout.style.display =
+        "none";
 
 
-        const div =
-            document.createElement(
-                "div"
-            );
-
-        div.className =
-            "product";
+    let total = 0;
 
 
-        div.innerHTML = `
+    orderItems.innerHTML =
+        cart.map(item => {
 
-            <div>
+            const quantity =
+                Number(item.quantity || 0);
 
-                <div class="product-name">
-                    ${escapeHTML(item.name)}
+            const price =
+                Number(item.price || 0);
+
+            const itemTotal =
+                quantity * price;
+
+
+            total += itemTotal;
+
+
+            return `
+
+                <div class="order-item">
+
+                    <div class="order-item-icon">
+                        ${item.emoji || "🛒"}
+                    </div>
+
+                    <div>
+
+                        <div class="order-item-name">
+
+                            ${escapeCheckout(
+                                item.name
+                            )}
+
+                        </div>
+
+                        <div class="order-item-meta">
+
+                            ${quantity}
+                            ×
+                            ${window.formatPrice(price)}
+
+                        </div>
+
+                    </div>
+
+                    <div class="order-item-total">
+
+                        ${window.formatPrice(itemTotal)}
+
+                    </div>
+
                 </div>
 
-                <small>
-                    الكمية: ${item.quantity}
-                </small>
+            `;
 
-            </div>
-
-            <div class="price">
-                ${line.toFixed(2)} جنيه
-            </div>
-
-        `;
+        }).join("");
 
 
-        productsBox.appendChild(div);
+    orderTotal.textContent =
+        window.formatPrice(total);
 
-    });
 
-
-    totalBox.textContent =
-        total.toFixed(2);
+    window.updateCartCount();
 
 }
 
 
 /* =====================================================
-   حماية النص
+   VALIDATE PHONE
 ===================================================== */
 
-function escapeHTML(value){
+function validEgyptianPhone(phone) {
 
-    return String(value)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
+    const clean =
+        String(phone)
+            .replace(/\s+/g, "")
+            .replace(/-/g, "");
 
 
-/* =====================================================
-   رقم الطلب
-===================================================== */
-
-function createOrderNumber(){
-
-    return (
-        "BRK-" +
-        Date.now()
-        .toString()
-        .slice(-8) +
-        "-" +
-        Math.floor(
-            100 +
-            Math.random()*900
-        )
+    return /^(01)(0|1|2|5)[0-9]{8}$/.test(
+        clean
     );
 
 }
 
 
 /* =====================================================
-   الهاتف
+   SUBMIT ORDER
 ===================================================== */
 
-function validPhone(phone){
-
-    const value =
-        phone.replace(
-            /[\s\-()+]/g,
-            ""
-        );
-
-    return /^01[0125][0-9]{8}$/
-        .test(value);
-
-}
+submitOrder.addEventListener(
+    "click",
+    function() {
 
 
-/* =====================================================
-   إرسال الطلب
-===================================================== */
-
-form.addEventListener(
-    "submit",
-    async function(event){
-
-        /*
-        أهم سطر:
-        منع إعادة تحميل الصفحة
-        */
-
-        event.preventDefault();
-
-        event.stopPropagation();
-
-
-        messageBox.style.display =
-            "none";
-
-
-        /*
-        إعادة قراءة السلة
-        */
-
-        cart =
-            loadCart().map(normalize);
-
-
-        if(!cart.length){
-
-            message(
-                "السلة فارغة.",
-                "error"
-            );
+        if (
+            !checkoutForm.reportValidity()
+        ) {
 
             return;
 
         }
 
 
-        /*
-        بيانات العميل
-        */
+        const cart =
+            window.getCart();
+
+
+        if (
+            !Array.isArray(cart) ||
+            cart.length === 0
+        ) {
+
+            window.showToast(
+                "السلة فارغة"
+            );
+
+            return;
+
+        }
+
 
         const name =
             document
-            .getElementById("name")
-            .value
-            .trim();
+                .getElementById("customerName")
+                .value
+                .trim();
+
 
         const phone =
             document
-            .getElementById("phone")
-            .value
-            .trim();
+                .getElementById("customerPhone")
+                .value
+                .trim();
+
 
         const address =
             document
-            .getElementById("address")
-            .value
-            .trim();
+                .getElementById("customerAddress")
+                .value
+                .trim();
+
+
+        const area =
+            document
+                .getElementById("customerArea")
+                .value
+                .trim();
+
+
+        const deliveryTime =
+            document
+                .getElementById("deliveryTime")
+                .value
+                .trim();
+
 
         const notes =
             document
-            .getElementById("notes")
-            .value
-            .trim();
+                .getElementById("customerNotes")
+                .value
+                .trim();
 
 
-        if(name.length < 3){
+        const payment =
+            document.querySelector(
+                'input[name="paymentMethod"]:checked'
+            )?.value ||
+            "كاش عند الاستلام";
 
-            message(
-                "اكتب الاسم بالكامل.",
-                "error"
+
+        if (!validEgyptianPhone(phone)) {
+
+            window.showToast(
+                "من فضلك أدخل رقم هاتف مصري صحيح"
             );
+
+            document
+                .getElementById("customerPhone")
+                .focus();
 
             return;
 
         }
 
 
-        if(!validPhone(phone)){
+        /* =============================================
+           BUILD WHATSAPP MESSAGE
+        ============================================== */
 
-            message(
-                "رقم الهاتف غير صحيح.",
-                "error"
-            );
+        let message =
+            "🛒 *طلب جديد - مول البركة*%0A";
 
-            return;
+        message +=
+            "━━━━━━━━━━━━━━%0A";
+
+
+        message +=
+            "👤 *الاسم:* " +
+            encodeURIComponent(name) +
+            "%0A";
+
+
+        message +=
+            "📞 *الهاتف:* " +
+            encodeURIComponent(phone) +
+            "%0A";
+
+
+        message +=
+            "📍 *العنوان:* " +
+            encodeURIComponent(address) +
+            "%0A";
+
+
+        if (area) {
+
+            message +=
+                "🏘️ *المنطقة:* " +
+                encodeURIComponent(area) +
+                "%0A";
 
         }
 
 
-        if(address.length < 5){
+        if (deliveryTime) {
 
-            message(
-                "اكتب العنوان بالتفصيل.",
-                "error"
-            );
-
-            return;
+            message +=
+                "🕐 *وقت التوصيل:* " +
+                encodeURIComponent(deliveryTime) +
+                "%0A";
 
         }
 
 
-        /*
-        التحقق من Supabase
-        */
-
-        if(!supabaseClient){
-
-            message(
-                "لم يتم إعداد بيانات Supabase داخل الصفحة.",
-                "error"
-            );
-
-            return;
-
-        }
+        message +=
+            "💳 *طريقة الدفع:* " +
+            encodeURIComponent(payment) +
+            "%0A";
 
 
-        submitButton.disabled =
-            true;
-
-        submitButton.textContent =
-            "جاري تسجيل الطلب...";
+        message +=
+            "━━━━━━━━━━━━━━%0A";
 
 
-        try{
-
-            /*
-            حساب الإجمالي
-            */
-
-            let total =
-                0;
-
-            cart.forEach(function(item){
-
-                total +=
-                    item.price *
-                    item.quantity;
-
-            });
+        message +=
+            "🧺 *تفاصيل المنتجات:*%0A";
 
 
-            /*
-            رقم الطلب
-            */
+        cart.forEach(
+            function(item, index) {
 
-            const number =
-                createOrderNumber();
-
-
-            /*
-            إنشاء الطلب
-            */
-
-            const orderData = {
-
-                order_number:
-                    number,
-
-                customer_name:
-                    name,
-
-                customer_phone:
-                    phone,
-
-                customer_address:
-                    address,
-
-                payment_method:
-                    "cash",
-
-                notes:
-                    notes || null,
-
-                subtotal:
-                    total,
-
-                total:
-                    total,
-
-                status:
-                    "pending"
-
-            };
+                const itemTotal =
+                    Number(item.price || 0) *
+                    Number(item.quantity || 0);
 
 
-            const {
-                data: order,
-                error: orderError
-            } =
-                await supabaseClient
-                .from("orders")
-                .insert(orderData)
-                .select()
-                .single();
-
-
-            if(orderError){
-
-                throw orderError;
+                message +=
+                    `${index + 1}. ` +
+                    encodeURIComponent(item.name) +
+                    " × " +
+                    item.quantity +
+                    " = " +
+                    encodeURIComponent(
+                        window.formatPrice(itemTotal)
+                    ) +
+                    "%0A";
 
             }
+        );
 
 
-            if(
-                !order ||
-                !order.id
-            ){
-
-                throw new Error(
-                    "لم يتم الحصول على رقم الطلب."
-                );
-
-            }
+        message +=
+            "━━━━━━━━━━━━━━%0A";
 
 
-            /*
-            تفاصيل المنتجات
-            */
-
-            const items =
-                cart.map(function(item){
-
-                    return {
-
-                        order_id:
-                            order.id,
-
-                        product_id:
-                            item.id,
-
-                        product_name:
-                            item.name,
-
-                        quantity:
-                            item.quantity,
-
-                        price:
-                            item.price,
-
-                        total:
-                            item.price *
-                            item.quantity
-
-                    };
-
-                });
+        message +=
+            "💰 *إجمالي الطلب:* " +
+            encodeURIComponent(
+                window.formatPrice(
+                    window.getCartTotal()
+                )
+            ) +
+            "%0A";
 
 
-            const {
-                error: itemError
-            } =
-                await supabaseClient
-                .from("order_items")
-                .insert(items);
+        if (notes) {
+
+            message +=
+                "📝 *ملاحظات:* " +
+                encodeURIComponent(notes) +
+                "%0A";
+
+        }
 
 
-            if(itemError){
-
-                throw itemError;
-
-            }
+        message +=
+            "━━━━━━━━━━━━━━%0A";
 
 
-            /*
-            حفظ الطلب الأخير
-            */
+        message +=
+            "🏪 مول البركة - أولاد الجارحي";
+
+
+        /* =============================================
+           WHATSAPP URL
+        ============================================== */
+
+        const whatsappURL =
+            "https://wa.me/201119511185?text=" +
+            message;
+
+
+        /* =============================================
+           SAVE CUSTOMER DATA
+        ============================================== */
+
+        try {
 
             localStorage.setItem(
-                "albaraka_last_order",
+                "albaraka_customer",
                 JSON.stringify({
-
-                    id:
-                        order.id,
-
-                    order_number:
-                        number,
-
-                    total:
-                        total,
-
-                    customer_name:
-                        name,
-
-                    customer_phone:
-                        phone
-
+                    name: name,
+                    phone: phone,
+                    address: address,
+                    area: area
                 })
             );
 
+        } catch (error) {
 
-            /*
-            مسح السلة
-            */
-
-            [
-                "cart",
-                "albaraka_cart",
-                "shopping_cart",
-                "AlBarakaCart",
-                "cartItems"
-
-            ].forEach(function(key){
-
-                localStorage.removeItem(key);
-
-            });
-
-
-            /*
-            =========================================
-            النجاح
-            =========================================
-
-            لا يوجد reload
-            لا يوجد location
-            لا يوجد submit
-            لا يوجد redirect
-            */
-
-            checkoutScreen.style.display =
-                "none";
-
-            successScreen.style.display =
-                "block";
-
-
-            document.getElementById(
-                "orderNumber"
-            ).textContent =
-                number;
-
-
-            document.getElementById(
-                "successTotal"
-            ).textContent =
-                total.toFixed(2) +
-                " جنيه";
-
-
-            message(
-                "تم تسجيل الطلب بنجاح ✅",
-                "success"
-            );
-
-
-            window.scrollTo({
-                top:0,
-                behavior:"smooth"
-            });
-
-
-        }catch(error){
-
-            console.error(
-                "SUPABASE ERROR:",
+            console.log(
+                "تعذر حفظ بيانات العميل",
                 error
             );
 
-
-            message(
-                "تعذر تسجيل الطلب: " +
-                (
-                    error.message ||
-                    "خطأ غير معروف"
-                ),
-                "error"
-            );
-
-
-        }finally{
-
-            submitButton.disabled =
-                false;
-
-            submitButton.textContent =
-                "تأكيد الطلب";
-
         }
+
+
+        /* =============================================
+           OPEN WHATSAPP
+        ============================================== */
+
+        loadingScreen.classList.add(
+            "show"
+        );
+
+
+        submitOrder.disabled = true;
+
+
+        setTimeout(
+            function() {
+
+                window.location.href =
+                    whatsappURL;
+
+            },
+            500
+        );
 
     }
 );
 
 
 /* =====================================================
-   تشغيل
+   RESTORE CUSTOMER DATA
 ===================================================== */
 
-renderCart();
+function restoreCustomerData() {
+
+    try {
+
+        const saved =
+            localStorage.getItem(
+                "albaraka_customer"
+            );
+
+
+        if (!saved) {
+            return;
+        }
+
+
+        const customer =
+            JSON.parse(saved);
+
+
+        if (customer.name) {
+
+            document
+                .getElementById("customerName")
+                .value =
+                customer.name;
+
+        }
+
+
+        if (customer.phone) {
+
+            document
+                .getElementById("customerPhone")
+                .value =
+                customer.phone;
+
+        }
+
+
+        if (customer.address) {
+
+            document
+                .getElementById("customerAddress")
+                .value =
+                customer.address;
+
+        }
+
+
+        if (customer.area) {
+
+            document
+                .getElementById("customerArea")
+                .value =
+                customer.area;
+
+        }
+
+    } catch (error) {
+
+        console.log(
+            "تعذر استرجاع بيانات العميل",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        window.updateCartCount();
+
+        renderCheckoutOrder();
+
+        restoreCustomerData();
+
+    }
+);
 
 </script>
 
+
 </body>
+
 </html>
