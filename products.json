@@ -1,240 +1,1348 @@
-{
-  "store": {
-    "name": "مول البركة أولاد الجارحي",
-    "whatsapp": "201119511185",
-    "currency": "جنيه"
-  },
-  "categories": [
-    "خضروات",
-    "فواكه",
-    "لحوم",
-    "طيور",
-    "ماركت",
-    "عطارة",
-    "ألبان",
-    "مشروبات",
-    "منظفات"
-  ],
-  "products": [
-    {
-      "id": "p100",
-      "name": "بطيخ",
-      "price": 35,
-      "unit": "كيلو",
-      "category": "فواكه",
-      "image": "",
-      "emoji": "🍉",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "p001",
-      "name": "طماطم بلدي",
-      "price": 20,
-      "unit": "كيلو",
-      "category": "خضروات",
-      "image": "",
-      "emoji": "🍅",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "p002",
-      "name": "بطاطس",
-      "price": 25,
-      "unit": "كيلو",
-      "category": "خضروات",
-      "image": "",
-      "emoji": "🥔",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "p003",
-      "name": "خيار",
-      "price": 30,
-      "unit": "كيلو",
-      "category": "خضروات",
-      "image": "",
-      "emoji": "🥒",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "p004",
-      "name": "بصل",
-      "price": 25,
-      "unit": "كيلو",
-      "category": "خضروات",
-      "image": "",
-      "emoji": "🧅",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "p005",
-      "name": "جزر",
-      "price": 30,
-      "unit": "كيلو",
-      "category": "خضروات",
-      "image": "",
-      "emoji": "🥕",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "p006",
-      "name": "موز",
-      "price": 35,
-      "unit": "كيلو",
-      "category": "فواكه",
-      "image": "",
-      "emoji": "🍌",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "p007",
-      "name": "تفاح",
-      "price": 70,
-      "unit": "كيلو",
-      "category": "فواكه",
-      "image": "",
-      "emoji": "🍎",
-      "offer": true,
-      "active": true
-    },
-    {
-      "id": "p008",
-      "name": "برتقال",
-      "price": 30,
-      "unit": "كيلو",
-      "category": "فواكه",
-      "image": "",
-      "emoji": "🍊",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "p009",
-      "name": "فراولة",
-      "price": 80,
-      "unit": "كيلو",
-      "category": "فواكه",
-      "image": "",
-      "emoji": "🍓",
-      "offer": true,
-      "active": true
-    },
-    {
-      "id": "p010",
-      "name": "لحمة بلدي",
-      "price": 420,
-      "unit": "كيلو",
-      "category": "لحوم",
-      "image": "",
-      "emoji": "🥩",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "p011",
-      "name": "كبدة بلدي",
-      "price": 450,
-      "unit": "كيلو",
-      "category": "لحوم",
-      "image": "",
-      "emoji": "🥩",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "p012",
-      "name": "فراخ بيضاء",
-      "price": 115,
-      "unit": "كيلو",
-      "category": "طيور",
-      "image": "",
-      "emoji": "🐔",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "p013",
-      "name": "سكر",
-      "price": 35,
-      "unit": "كيلو",
-      "category": "ماركت",
-      "image": "",
-      "emoji": "🛒",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "p014",
-      "name": "أرز",
-      "price": 35,
-      "unit": "كيلو",
-      "category": "ماركت",
-      "image": "",
-      "emoji": "🍚",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "p015",
-      "name": "زيت طعام",
-      "price": 85,
-      "unit": "زجاجة",
-      "category": "ماركت",
-      "image": "",
-      "emoji": "🫗",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "p016",
-      "name": "بهارات مشكلة",
-      "price": 25,
-      "unit": "100 جرام",
-      "category": "عطارة",
-      "image": "",
-      "emoji": "🌿",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "p017",
-      "name": "لبن",
-      "price": 40,
-      "unit": "عبوة",
-      "category": "ألبان",
-      "image": "",
-      "emoji": "🥛",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "p018",
-      "name": "عصير",
-      "price": 30,
-      "unit": "عبوة",
-      "category": "مشروبات",
-      "image": "",
-      "emoji": "🧃",
-      "offer": false,
-      "active": true
-    },
-    {
-      "id": "p019",
-      "name": "مسحوق غسيل",
-      "price": 75,
-      "unit": "عبوة",
-      "category": "منظفات",
-      "image": "",
-      "emoji": "🧼",
-      "offer": false,
-      "active": true
-    }
-  ]
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>سلة المشتريات | مول البركة</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
+
+body{
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+    background:#f5f7f6;
+    color:#222;
+}
+
+button,
+input,
+textarea,
+select{
+    font-family:inherit;
+}
+
+.topbar{
+    background:#07843f;
+    min-height:110px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px 5%;
+    box-shadow:0 3px 15px rgba(0,0,0,.12);
+}
+
+.logo{
+    color:#d7a928;
+    font-size:30px;
+    font-weight:900;
+}
+
+.back-btn{
+    background:white;
+    color:#087d3e;
+    text-decoration:none;
+    border:none;
+    border-radius:15px;
+    padding:15px 28px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.page{
+    max-width:1200px;
+    margin:35px auto;
+    padding:0 18px;
+}
+
+.title{
+    text-align:center;
+    font-size:38px;
+    margin-bottom:30px;
+    font-weight:900;
+}
+
+.cart-layout{
+    display:grid;
+    grid-template-columns:1.6fr .8fr;
+    gap:25px;
+}
+
+.box{
+    background:white;
+    border-radius:22px;
+    padding:25px;
+    box-shadow:0 5px 25px rgba(0,0,0,.07);
+}
+
+.cart-item{
+    display:grid;
+    grid-template-columns:90px 1fr auto auto;
+    gap:18px;
+    align-items:center;
+    padding:18px 0;
+    border-bottom:1px solid #eee;
+}
+
+.cart-item:last-child{
+    border-bottom:none;
+}
+
+.item-image{
+    width:85px;
+    height:85px;
+    border-radius:18px;
+    background:#f2f6f3;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    font-size:42px;
+}
+
+.item-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.item-name{
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.item-price{
+    color:#07843f;
+    font-weight:bold;
+}
+
+.quantity{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:#f1f5f2;
+    border-radius:12px;
+    padding:5px;
+}
+
+.quantity button{
+    border:none;
+    background:#07843f;
+    color:white;
+    width:34px;
+    height:34px;
+    border-radius:9px;
+    font-size:22px;
+    cursor:pointer;
+}
+
+.quantity span{
+    min-width:30px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.remove{
+    border:none;
+    background:#fff0f0;
+    color:#d62828;
+    width:40px;
+    height:40px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.summary h2{
+    font-size:25px;
+    margin-bottom:20px;
+}
+
+.summary-row{
+    display:flex;
+    justify-content:space-between;
+    padding:13px 0;
+    border-bottom:1px solid #eee;
+}
+
+.total{
+    font-size:25px;
+    font-weight:900;
+    color:#07843f;
+    border:none;
+    margin-top:10px;
+}
+
+.checkout{
+    display:block;
+    width:100%;
+    margin-top:20px;
+    border:none;
+    background:#07843f;
+    color:white;
+    padding:17px;
+    border-radius:14px;
+    font-size:20px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.clear{
+    width:100%;
+    margin-top:10px;
+    border:none;
+    background:#fff0f0;
+    color:#c62828;
+    padding:14px;
+    border-radius:14px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.empty{
+    text-align:center;
+    padding:70px 20px;
+}
+
+.empty-icon{
+    font-size:80px;
+    margin-bottom:20px;
+}
+
+.empty h2{
+    font-size:28px;
+    margin-bottom:15px;
+}
+
+.shop{
+    display:inline-block;
+    margin-top:20px;
+    background:#07843f;
+    color:white;
+    padding:15px 30px;
+    border-radius:14px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.checkout-box{
+    margin-top:25px;
+}
+
+.checkout-box h2{
+    margin-bottom:20px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:7px;
+    font-weight:bold;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+    width:100%;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    outline:none;
+    font-size:16px;
+    background:white;
+}
+
+.form-group textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+.payment-title{
+    margin:20px 0 10px;
+    font-weight:bold;
+}
+
+.payment{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.payment label{
+    border:2px solid #eee;
+    border-radius:13px;
+    padding:14px;
+    cursor:pointer;
+    text-align:center;
+}
+
+.payment input{
+    display:none;
+}
+
+.payment input:checked + span{
+    color:#07843f;
+    font-weight:bold;
+}
+
+.whatsapp{
+    background:#25d366;
+}
+
+.toast{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#087d3e;
+    color:white;
+    padding:15px 20px;
+    border-radius:13px;
+    z-index:99999;
+    opacity:0;
+    transform:translateY(20px);
+    transition:.3s;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+@media(max-width:800px){
+
+    .topbar{
+        min-height:90px;
+        padding:15px;
+    }
+
+    .logo{
+        font-size:22px;
+    }
+
+    .back-btn{
+        padding:11px 15px;
+        font-size:15px;
+    }
+
+    .title{
+        font-size:29px;
+    }
+
+    .cart-layout{
+        grid-template-columns:1fr;
+    }
+
+    .cart-item{
+        grid-template-columns:70px 1fr;
+        gap:12px;
+    }
+
+    .item-image{
+        width:65px;
+        height:65px;
+        font-size:32px;
+    }
+
+    .quantity{
+        grid-column:2;
+        width:max-content;
+    }
+
+    .remove{
+        position:absolute;
+        left:25px;
+    }
+
+    .box{
+        padding:18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="logo">
+        🛒 مول البركة
+    </div>
+
+    <a href="index.html" class="back-btn">
+        ← متابعة التسوق
+    </a>
+
+</header>
+
+<main class="page">
+
+    <h1 class="title">
+        🛒 سلة المشتريات
+    </h1>
+
+    <div id="cartContent">
+
+        <!-- سيتم تحميل السلة هنا -->
+
+    </div>
+
+</main>
+
+<div id="toast" class="toast"></div>
+
+<script>
+
+"use strict";
+
+/* =====================================================
+   إعدادات المتجر
+===================================================== */
+
+const CART_KEY = "albaraka_cart";
+
+const WHATSAPP_NUMBER = "201119511185";
+
+let cart = [];
+
+
+/* =====================================================
+   تحميل السلة
+===================================================== */
+
+function loadCart(){
+
+    try{
+
+        const saved =
+            localStorage.getItem(CART_KEY);
+
+        if(!saved){
+
+            cart = [];
+
+            return;
+        }
+
+        const data =
+            JSON.parse(saved);
+
+        if(Array.isArray(data)){
+
+            cart = data;
+
+        }else{
+
+            cart = [];
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "خطأ في قراءة السلة:",
+            error
+        );
+
+        cart = [];
+    }
+
+}
+
+
+/* =====================================================
+   حفظ السلة
+===================================================== */
+
+function saveCart(){
+
+    try{
+
+        localStorage.setItem(
+            CART_KEY,
+            JSON.stringify(cart)
+        );
+
+    }catch(error){
+
+        console.error(
+            "خطأ في حفظ السلة:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   تنسيق السعر
+===================================================== */
+
+function money(value){
+
+    return Number(value || 0)
+        .toLocaleString("ar-EG")
+        + " جنيه";
+
+}
+
+
+/* =====================================================
+   حماية النص
+===================================================== */
+
+function escapeHTML(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   إجمالي الكمية
+===================================================== */
+
+function getCount(){
+
+    return cart.reduce(
+        function(total,item){
+
+            return total +
+                Number(item.quantity || 0);
+
+        },
+        0
+    );
+
+}
+
+
+/* =====================================================
+   إجمالي السعر
+===================================================== */
+
+function getTotal(){
+
+    return cart.reduce(
+        function(total,item){
+
+            return total +
+                (
+                    Number(item.price || 0) *
+                    Number(item.quantity || 0)
+                );
+
+        },
+        0
+    );
+
+}
+
+
+/* =====================================================
+   عرض السلة
+===================================================== */
+
+function renderCart(){
+
+    const container =
+        document.getElementById(
+            "cartContent"
+        );
+
+    if(!container){
+
+        return;
+    }
+
+
+    /* السلة فارغة */
+
+    if(!cart.length){
+
+        container.innerHTML = `
+
+            <div class="box empty">
+
+                <div class="empty-icon">
+                    🛒
+                </div>
+
+                <h2>
+                    السلة فارغة
+                </h2>
+
+                <p>
+                    لم تضف أي منتجات حتى الآن.
+                </p>
+
+                <a
+                    href="index.html"
+                    class="shop"
+                >
+                    ابدأ التسوق الآن
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    /* المنتجات */
+
+    let itemsHTML = "";
+
+    cart.forEach(function(item,index){
+
+        const quantity =
+            Number(item.quantity || 0);
+
+        const price =
+            Number(item.price || 0);
+
+        const total =
+            price * quantity;
+
+        let imageHTML;
+
+
+        if(item.image){
+
+            imageHTML = `
+
+                <img
+                    src="${escapeHTML(item.image)}"
+                    alt="${escapeHTML(item.name)}"
+                    onerror="
+                        this.style.display='none';
+                        this.parentElement.innerHTML='${escapeHTML(item.emoji || "🛒")}';
+                    "
+                >
+
+            `;
+
+        }else{
+
+            imageHTML =
+                escapeHTML(
+                    item.emoji || "🛒"
+                );
+
+        }
+
+
+        itemsHTML += `
+
+            <div class="cart-item">
+
+                <div class="item-image">
+                    ${imageHTML}
+                </div>
+
+                <div>
+
+                    <div class="item-name">
+                        ${escapeHTML(item.name)}
+                    </div>
+
+                    <div class="item-price">
+                        ${money(price)}
+                        /
+                        ${escapeHTML(item.unit || "قطعة")}
+                    </div>
+
+                    <div style="
+                        margin-top:8px;
+                        font-weight:bold;
+                    ">
+                        الإجمالي:
+                        ${money(total)}
+                    </div>
+
+                </div>
+
+                <div class="quantity">
+
+                    <button
+                        type="button"
+                        onclick="increaseItem('${escapeHTML(item.id)}')"
+                    >
+                        +
+                    </button>
+
+                    <span>
+                        ${quantity}
+                    </span>
+
+                    <button
+                        type="button"
+                        onclick="decreaseItem('${escapeHTML(item.id)}')"
+                    >
+                        −
+                    </button>
+
+                </div>
+
+                <button
+                    class="remove"
+                    type="button"
+                    onclick="removeItem('${escapeHTML(item.id)}')"
+                >
+                    🗑️
+                </button>
+
+            </div>
+
+        `;
+
+    });
+
+
+    container.innerHTML = `
+
+        <div class="cart-layout">
+
+            <section class="box">
+
+                ${itemsHTML}
+
+            </section>
+
+
+            <aside>
+
+                <div class="box summary">
+
+                    <h2>
+                        ملخص الطلب
+                    </h2>
+
+                    <div class="summary-row">
+
+                        <span>
+                            عدد المنتجات
+                        </span>
+
+                        <strong>
+                            ${getCount()}
+                        </strong>
+
+                    </div>
+
+                    <div class="summary-row">
+
+                        <span>
+                            قيمة المنتجات
+                        </span>
+
+                        <strong>
+                            ${money(getTotal())}
+                        </strong>
+
+                    </div>
+
+                    <div class="summary-row total">
+
+                        <span>
+                            الإجمالي
+                        </span>
+
+                        <strong>
+                            ${money(getTotal())}
+                        </strong>
+
+                    </div>
+
+                    <button
+                        class="checkout"
+                        onclick="showCheckout()"
+                    >
+                        إكمال الطلب
+                    </button>
+
+                    <button
+                        class="clear"
+                        onclick="clearCart()"
+                    >
+                        🗑️ إفراغ السلة
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="checkoutBox"
+                    class="box checkout-box"
+                    style="display:none"
+                >
+
+                    <h2>
+                        بيانات العميل
+                    </h2>
+
+                    <div class="form-group">
+
+                        <label>
+                            الاسم بالكامل
+                        </label>
+
+                        <input
+                            id="customerName"
+                            type="text"
+                            placeholder="اكتب اسمك"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            رقم الهاتف
+                        </label>
+
+                        <input
+                            id="customerPhone"
+                            type="tel"
+                            placeholder="01xxxxxxxxx"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            العنوان بالتفصيل
+                        </label>
+
+                        <textarea
+                            id="customerAddress"
+                            placeholder="القرية - الشارع - رقم المنزل"
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="payment-title">
+                        طريقة الدفع
+                    </div>
+
+                    <div class="payment">
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="cash"
+                                checked
+                            >
+
+                            <span>
+                                💵 كاش عند الاستلام
+                            </span>
+
+                        </label>
+
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="visa"
+                            >
+
+                            <span>
+                                💳 فيزا
+                            </span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="form-group"
+                         style="margin-top:15px">
+
+                        <label>
+                            ملاحظات الطلب
+                        </label>
+
+                        <textarea
+                            id="customerNotes"
+                            placeholder="أي ملاحظات إضافية..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <button
+                        class="checkout whatsapp"
+                        onclick="sendOrder()"
+                    >
+                        📲 إرسال الطلب عبر واتساب
+                    </button>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   زيادة منتج
+===================================================== */
+
+function increaseItem(id){
+
+    const item =
+        cart.find(function(product){
+
+            return String(product.id) === String(id);
+
+        });
+
+    if(!item){
+
+        return;
+    }
+
+    item.quantity =
+        Number(item.quantity || 0) + 1;
+
+    saveCart();
+
+    renderCart();
+
+}
+
+
+/* =====================================================
+   تقليل منتج
+===================================================== */
+
+function decreaseItem(id){
+
+    const item =
+        cart.find(function(product){
+
+            return String(product.id) === String(id);
+
+        });
+
+    if(!item){
+
+        return;
+    }
+
+    item.quantity =
+        Number(item.quantity || 0) - 1;
+
+
+    if(item.quantity <= 0){
+
+        cart =
+            cart.filter(function(product){
+
+                return String(product.id)
+                    !== String(id);
+
+            });
+
+    }
+
+    saveCart();
+
+    renderCart();
+
+}
+
+
+/* =====================================================
+   حذف منتج
+===================================================== */
+
+function removeItem(id){
+
+    cart =
+        cart.filter(function(item){
+
+            return String(item.id)
+                !== String(id);
+
+        });
+
+    saveCart();
+
+    renderCart();
+
+    showToast(
+        "تم حذف المنتج"
+    );
+
+}
+
+
+/* =====================================================
+   تفريغ السلة
+===================================================== */
+
+function clearCart(){
+
+    if(!cart.length){
+
+        showToast(
+            "السلة فارغة"
+        );
+
+        return;
+    }
+
+
+    const confirmDelete =
+        confirm(
+            "هل تريد إفراغ السلة بالكامل؟"
+        );
+
+
+    if(!confirmDelete){
+
+        return;
+    }
+
+
+    cart = [];
+
+    saveCart();
+
+    renderCart();
+
+    showToast(
+        "تم إفراغ السلة"
+    );
+
+}
+
+
+/* =====================================================
+   إظهار نموذج إكمال الطلب
+===================================================== */
+
+function showCheckout(){
+
+    if(!cart.length){
+
+        showToast(
+            "السلة فارغة"
+        );
+
+        return;
+    }
+
+
+    const box =
+        document.getElementById(
+            "checkoutBox"
+        );
+
+    if(box){
+
+        box.style.display =
+            "block";
+
+        box.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
+
+    }
+
+}
+
+
+/* =====================================================
+   إرسال الطلب إلى واتساب
+===================================================== */
+
+function sendOrder(){
+
+    if(!cart.length){
+
+        showToast(
+            "السلة فارغة"
+        );
+
+        return;
+    }
+
+
+    const name =
+        document.getElementById(
+            "customerName"
+        ).value.trim();
+
+
+    const phone =
+        document.getElementById(
+            "customerPhone"
+        ).value.trim();
+
+
+    const address =
+        document.getElementById(
+            "customerAddress"
+        ).value.trim();
+
+
+    const notes =
+        document.getElementById(
+            "customerNotes"
+        ).value.trim();
+
+
+    const paymentElement =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        );
+
+
+    const payment =
+        paymentElement
+            ? paymentElement.value
+            : "cash";
+
+
+    if(!name){
+
+        showToast(
+            "من فضلك اكتب الاسم"
+        );
+
+        return;
+    }
+
+
+    if(!phone){
+
+        showToast(
+            "من فضلك اكتب رقم الهاتف"
+        );
+
+        return;
+    }
+
+
+    if(!address){
+
+        showToast(
+            "من فضلك اكتب العنوان"
+        );
+
+        return;
+    }
+
+
+    let message =
+        "🛒 *طلب جديد - مول البركة أولاد الجارحي*";
+
+    message += "\n\n";
+
+    message +=
+        "👤 الاسم: " +
+        name;
+
+    message +=
+        "\n📞 الهاتف: " +
+        phone;
+
+    message +=
+        "\n📍 العنوان: " +
+        address;
+
+    message +=
+        "\n💳 الدفع: " +
+        (
+            payment === "visa"
+                ? "فيزا"
+                : "كاش عند الاستلام"
+        );
+
+
+    message +=
+        "\n\n🧺 *المنتجات:*";
+
+
+    cart.forEach(function(item,index){
+
+        const quantity =
+            Number(item.quantity || 0);
+
+        const price =
+            Number(item.price || 0);
+
+        const total =
+            price * quantity;
+
+
+        message +=
+            "\n" +
+            (index + 1) +
+            ". " +
+            item.name +
+            " × " +
+            quantity +
+            " = " +
+            total +
+            " جنيه";
+
+    });
+
+
+    message +=
+        "\n\n💰 *إجمالي الطلب: " +
+        getTotal() +
+        " جنيه*";
+
+
+    if(notes){
+
+        message +=
+            "\n📝 ملاحظات: " +
+            notes;
+
+    }
+
+
+    message +=
+        "\n\n🏪 مول البركة أولاد الجارحي";
+
+
+    const whatsappURL =
+        "https://wa.me/" +
+        WHATSAPP_NUMBER +
+        "?text=" +
+        encodeURIComponent(message);
+
+
+    window.location.href =
+        whatsappURL;
+
+}
+
+
+/* =====================================================
+   رسالة
+===================================================== */
+
+function showToast(text){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+    if(!toast){
+
+        return;
+    }
+
+
+    toast.textContent =
+        text;
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+
+    window.toastTimer =
+        setTimeout(function(){
+
+            toast.classList.remove(
+                "show"
+            );
+
+        },2500);
+
+}
+
+
+/* =====================================================
+   بدء الصفحة
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        /*
+         * مهم جدًا:
+         * صفحة السلة لا تقوم بتحميل products.json.
+         * هي تقرأ السلة مباشرة من localStorage.
+         */
+
+        loadCart();
+
+        renderCart();
+
+    }
+);
+
+
+/* =====================================================
+   جعل الدوال متاحة
+===================================================== */
+
+window.increaseItem =
+    increaseItem;
+
+window.decreaseItem =
+    decreaseItem;
+
+window.removeItem =
+    removeItem;
+
+window.clearCart =
+    clearCart;
+
+window.showCheckout =
+    showCheckout;
+
+window.sendOrder =
+    sendOrder;
+
+</script>
+
+</body>
+</html>
