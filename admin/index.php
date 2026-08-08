@@ -1,1230 +1,797 @@
 <?php
+declare(strict_types=1);
+
+session_start();
 
 /*
 |--------------------------------------------------------------------------
-| Al Baraka Mall
-| Admin Dashboard
-|--------------------------------------------------------------------------
-| File:
-| admin/index.php
+| حماية لوحة الإدارة
 |--------------------------------------------------------------------------
 */
 
-require_once __DIR__ . '/../config/config.php';
-require_once __DIR__ . '/../config/auth.php';
+if (empty($_SESSION['admin_logged_in'])) {
+    header('Location: login.php');
+    exit;
+}
 
-
-/*
-|--------------------------------------------------------------------------
-| Admin Authentication
-|--------------------------------------------------------------------------
-*/
-
-requireAdminLogin();
-
-
-/*
-|--------------------------------------------------------------------------
-| Page Data
-|--------------------------------------------------------------------------
-*/
-
-$pageTitle =
-    'لوحة التحكم | مول البركة';
-
-
-$adminName =
-    $_SESSION['admin_name']
-    ?? 'المدير';
-
-
-/*
-|--------------------------------------------------------------------------
-| CSRF Token
-|--------------------------------------------------------------------------
-*/
-
-$csrfToken =
-    $_SESSION['csrf_token']
-    ?? '';
-
+$adminName = $_SESSION['admin_name'] ?? 'مدير مول البركة';
+$adminRole = $_SESSION['admin_role'] ?? 'manager';
 ?>
 <!DOCTYPE html>
-
-<html
-    lang="ar"
-    dir="rtl"
->
+<html lang="ar" dir="rtl">
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta name="viewport"
+      content="width=device-width,initial-scale=1.0">
 
-    <meta
-        name="robots"
-        content="noindex,nofollow"
-    >
+<meta name="theme-color"
+      content="#087f3f">
 
-    <meta
-        name="csrf-token"
-        content="<?= htmlspecialchars(
-            $csrfToken,
-            ENT_QUOTES,
-            'UTF-8'
-        ) ?>"
-    >
+<title>لوحة التحكم | مول البركة</title>
 
-    <title>
-        <?= htmlspecialchars(
-            $pageTitle,
-            ENT_QUOTES,
-            'UTF-8'
-        ) ?>
-    </title>
+<style>
 
-
-    <!-- Dashboard CSS -->
-
-    <link
-        rel="stylesheet"
-        href="/admin/assets/css/dashboard.css"
-    >
-
-</head>
-
-
-<body>
-
-
-<!--
-|--------------------------------------------------------------------------
-| Dashboard Layout
-|--------------------------------------------------------------------------
--->
-
-<div
-    class="admin-layout"
-    id="adminLayout"
->
-
-
-    <!--
-    |--------------------------------------------------------------------------
-    | Sidebar
-    |--------------------------------------------------------------------------
-    -->
-
-    <aside
-        class="admin-sidebar"
-        id="adminSidebar"
-    >
-
-        <div
-            class="sidebar-brand"
-        >
-
-            <div
-                class="brand-logo"
-            >
-                البركة
-            </div>
-
-            <div
-                class="brand-text"
-            >
-
-                <strong>
-                    مول البركة
-                </strong>
-
-                <span>
-                    لوحة الإدارة
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <nav
-            class="sidebar-nav"
-        >
-
-            <a
-                href="/admin/"
-                class="nav-item active"
-            >
-                <span>
-                    الرئيسية
-                </span>
-            </a>
-
-
-            <a
-                href="/admin/orders.php"
-                class="nav-item"
-            >
-                <span>
-                    الطلبات
-                </span>
-            </a>
-
-
-            <a
-                href="/admin/products.php"
-                class="nav-item"
-            >
-                <span>
-                    المنتجات
-                </span>
-            </a>
-
-
-            <a
-                href="/admin/categories.php"
-                class="nav-item"
-            >
-                <span>
-                    الأقسام
-                </span>
-            </a>
-
-
-            <a
-                href="/admin/customers.php"
-                class="nav-item"
-            >
-                <span>
-                    العملاء
-                </span>
-            </a>
-
-
-            <a
-                href="/admin/settings.php"
-                class="nav-item"
-            >
-                <span>
-                    الإعدادات
-                </span>
-            </a>
-
-
-            <div
-                class="nav-divider"
-            ></div>
-
-
-            <a
-                href="/"
-                class="nav-item"
-                target="_blank"
-                rel="noopener"
-            >
-                <span>
-                    زيارة الموقع
-                </span>
-            </a>
-
-
-            <a
-                href="/admin/logout.php"
-                class="nav-item nav-danger"
-            >
-                <span>
-                    تسجيل الخروج
-                </span>
-            </a>
-
-        </nav>
-
-    </aside>
-
-
-    <!--
-    |--------------------------------------------------------------------------
-    | Main
-    |--------------------------------------------------------------------------
-    -->
-
-    <main
-        class="admin-main"
-    >
-
-
-        <!-- Header -->
-
-        <header
-            class="admin-header"
-        >
-
-            <button
-                type="button"
-                class="menu-button"
-                id="menuButton"
-                aria-label="فتح القائمة"
-            >
-                ☰
-            </button>
-
-
-            <div
-                class="header-title"
-            >
-
-                <h1>
-                    لوحة التحكم
-                </h1>
-
-                <p>
-                    مرحبًا <?= htmlspecialchars(
-                        $adminName,
-                        ENT_QUOTES,
-                        'UTF-8'
-                    ) ?>
-                </p>
-
-            </div>
-
-
-            <div
-                class="header-actions"
-            >
-
-                <span
-                    class="admin-badge"
-                >
-                    مدير
-                </span>
-
-            </div>
-
-        </header>
-
-
-        <!-- Content -->
-
-        <section
-            class="dashboard-content"
-        >
-
-
-            <!-- Loading -->
-
-            <div
-                id="dashboardLoading"
-                class="dashboard-loading"
-            >
-                جاري تحميل البيانات...
-            </div>
-
-
-            <!-- Error -->
-
-            <div
-                id="dashboardError"
-                class="dashboard-error"
-                hidden
-            ></div>
-
-
-            <!-- Statistics -->
-
-            <div
-                class="stats-grid"
-                id="statsGrid"
-            >
-
-                <article
-                    class="stat-card"
-                >
-
-                    <span>
-                        المبيعات
-                    </span>
-
-                    <strong
-                        id="totalSales"
-                    >
-                        0
-                    </strong>
-
-                    <small>
-                        جنيه
-                    </small>
-
-                </article>
-
-
-                <article
-                    class="stat-card"
-                >
-
-                    <span>
-                        الطلبات
-                    </span>
-
-                    <strong
-                        id="totalOrders"
-                    >
-                        0
-                    </strong>
-
-                    <small>
-                        إجمالي الطلبات
-                    </small>
-
-                </article>
-
-
-                <article
-                    class="stat-card"
-                >
-
-                    <span>
-                        المنتجات
-                    </span>
-
-                    <strong
-                        id="totalProducts"
-                    >
-                        0
-                    </strong>
-
-                    <small>
-                        المنتجات النشطة
-                    </small>
-
-                </article>
-
-
-                <article
-                    class="stat-card"
-                >
-
-                    <span>
-                        المخزون المنخفض
-                    </span>
-
-                    <strong
-                        id="lowStock"
-                    >
-                        0
-                    </strong>
-
-                    <small>
-                        يحتاج مراجعة
-                    </small>
-
-                </article>
-
-            </div>
-
-
-            <!--
-            |--------------------------------------------------------------------------
-            | Quick Actions
-            |--------------------------------------------------------------------------
-            -->
-
-            <div
-                class="section-card"
-            >
-
-                <div
-                    class="section-header"
-                >
-
-                    <div>
-
-                        <h2>
-                            إجراءات سريعة
-                        </h2>
-
-                        <p>
-                            إدارة المتجر بسرعة
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="quick-actions"
-                >
-
-                    <a
-                        href="/admin/orders.php"
-                        class="quick-action"
-                    >
-                        إدارة الطلبات
-                    </a>
-
-
-                    <a
-                        href="/admin/products.php?action=create"
-                        class="quick-action"
-                    >
-                        إضافة منتج
-                    </a>
-
-
-                    <a
-                        href="/admin/categories.php"
-                        class="quick-action"
-                    >
-                        إدارة الأقسام
-                    </a>
-
-                </div>
-
-            </div>
-
-
-            <!--
-            |--------------------------------------------------------------------------
-            | Recent Orders
-            |--------------------------------------------------------------------------
-            -->
-
-            <div
-                class="section-card"
-            >
-
-                <div
-                    class="section-header"
-                >
-
-                    <div>
-
-                        <h2>
-                            أحدث الطلبات
-                        </h2>
-
-                        <p>
-                            آخر الطلبات الواردة
-                        </p>
-
-                    </div>
-
-
-                    <a
-                        href="/admin/orders.php"
-                        class="section-link"
-                    >
-                        عرض الكل
-                    </a>
-
-                </div>
-
-
-                <div
-                    class="table-wrapper"
-                >
-
-                    <table
-                        class="admin-table"
-                    >
-
-                        <thead>
-
-                            <tr>
-
-                                <th>
-                                    الطلب
-                                </th>
-
-                                <th>
-                                    العميل
-                                </th>
-
-                                <th>
-                                    الإجمالي
-                                </th>
-
-                                <th>
-                                    الحالة
-                                </th>
-
-                                <th>
-                                    التاريخ
-                                </th>
-
-                            </tr>
-
-                        </thead>
-
-
-                        <tbody
-                            id="recentOrders"
-                        >
-
-                            <tr>
-
-                                <td
-                                    colspan="5"
-                                >
-                                    جاري التحميل...
-                                </td>
-
-                            </tr>
-
-                        </tbody>
-
-                    </table>
-
-                </div>
-
-            </div>
-
-
-            <!--
-            |--------------------------------------------------------------------------
-            | Low Stock
-            |--------------------------------------------------------------------------
-            -->
-
-            <div
-                class="section-card"
-            >
-
-                <div
-                    class="section-header"
-                >
-
-                    <div>
-
-                        <h2>
-                            المخزون المنخفض
-                        </h2>
-
-                        <p>
-                            منتجات تحتاج إلى إعادة تخزين
-                        </p>
-
-                    </div>
-
-
-                    <a
-                        href="/admin/products.php?filter=low-stock"
-                        class="section-link"
-                    >
-                        عرض المنتجات
-                    </a>
-
-                </div>
-
-
-                <div
-                    class="table-wrapper"
-                >
-
-                    <table
-                        class="admin-table"
-                    >
-
-                        <thead>
-
-                            <tr>
-
-                                <th>
-                                    المنتج
-                                </th>
-
-                                <th>
-                                    SKU
-                                </th>
-
-                                <th>
-                                    المخزون
-                                </th>
-
-                                <th>
-                                    الحالة
-                                </th>
-
-                            </tr>
-
-                        </thead>
-
-
-                        <tbody
-                            id="lowStockProducts"
-                        >
-
-                            <tr>
-
-                                <td
-                                    colspan="4"
-                                >
-                                    جاري التحميل...
-                                </td>
-
-                            </tr>
-
-                        </tbody>
-
-                    </table>
-
-                </div>
-
-            </div>
-
-
-        </section>
-
-    </main>
-
-</div>
-
-
-<!--
-|--------------------------------------------------------------------------
-| Dashboard JavaScript
-|--------------------------------------------------------------------------
--->
-
-<script>
-
-'use strict';
-
-
-const csrfToken =
-    document
-        .querySelector(
-            'meta[name="csrf-token"]'
-        )
-        ?.getAttribute(
-            'content'
-        )
-        || '';
-
-
-const loading =
-    document.getElementById(
-        'dashboardLoading'
-    );
-
-
-const errorBox =
-    document.getElementById(
-        'dashboardError'
-    );
-
-
-/*
-|--------------------------------------------------------------------------
-| API Request
-|--------------------------------------------------------------------------
-*/
-
-async function apiRequest(
-    url,
-    options = {}
-) {
-
-    const response =
-        await fetch(
-            url,
-            {
-
-                credentials:
-                    'same-origin',
-
-                ...options,
-
-                headers: {
-
-                    'Accept':
-                        'application/json',
-
-                    ...(options.headers || {})
-
-                }
-
-            }
-        );
-
-
-    const data =
-        await response.json()
-            .catch(
-                () => null
-            );
-
-
-    if (
-        !response.ok ||
-        !data ||
-        data.success !== true
-    ) {
-
-        throw new Error(
-            data?.message ||
-            'حدث خطأ أثناء الاتصال بالخادم.'
-        );
-
-    }
-
-
-    return data;
-
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-
-/*
-|--------------------------------------------------------------------------
-| Format Currency
-|--------------------------------------------------------------------------
-*/
-
-function formatCurrency(
-    value
-) {
-
-    return new Intl.NumberFormat(
-        'ar-EG',
-        {
-
-            minimumFractionDigits:
-                2,
-
-            maximumFractionDigits:
-                2
-
-        }
-    ).format(
-        Number(value || 0)
-    );
-
+html{
+    scroll-behavior:smooth;
 }
 
+body{
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
 
-/*
-|--------------------------------------------------------------------------
-| Order Status
-|--------------------------------------------------------------------------
-*/
-
-function orderStatusLabel(
-    status
-) {
-
-    const labels = {
-
-        pending:
-            'قيد الانتظار',
-
-        confirmed:
-            'مؤكد',
-
-        preparing:
-            'جاري التجهيز',
-
-        out_for_delivery:
-            'خرج للتوصيل',
-
-        delivered:
-            'تم التسليم',
-
-        cancelled:
-            'ملغي'
-
-    };
-
-
-    return (
-        labels[status]
-        || status
-        || '-'
-    );
-
+    background:#f4f7f6;
+    color:#17221d;
+    min-height:100vh;
 }
 
+/* =========================
+   SIDEBAR
+========================= */
 
-/*
-|--------------------------------------------------------------------------
-| Load Statistics
-|--------------------------------------------------------------------------
-*/
+.sidebar{
 
-async function loadStats() {
+    position:fixed;
 
-    const data =
-        await apiRequest(
-            '/api/v1/dashboard/stats.php'
+    top:0;
+    right:0;
+
+    width:270px;
+    height:100vh;
+
+    background:
+        linear-gradient(
+            180deg,
+            #087f3f,
+            #056b35
         );
 
+    color:white;
 
-    const stats =
-        data.data
-        || data.result
-        || {};
+    z-index:1000;
 
+    padding:22px 15px;
 
-    document.getElementById(
-        'totalSales'
-    ).textContent =
-        formatCurrency(
-            stats.sales
-            ?? stats.total_sales
-            ?? 0
-        );
+    overflow-y:auto;
 
+    box-shadow:
+        -8px 0 30px rgba(0,0,0,.12);
 
-    document.getElementById(
-        'totalOrders'
-    ).textContent =
-        Number(
-            stats.orders
-            ?? stats.total_orders
-            ?? 0
-        );
-
-
-    document.getElementById(
-        'totalProducts'
-    ).textContent =
-        Number(
-            stats.products
-            ?? stats.total_products
-            ?? 0
-        );
-
-
-    document.getElementById(
-        'lowStock'
-    ).textContent =
-        Number(
-            stats.low_stock
-            ?? 0
-        );
-
+    transition:.3s;
 }
 
+.brand{
 
-/*
-|--------------------------------------------------------------------------
-| Load Recent Orders
-|--------------------------------------------------------------------------
-*/
+    display:flex;
+    align-items:center;
 
-async function loadRecentOrders() {
+    gap:12px;
 
-    const data =
-        await apiRequest(
-            '/api/v1/orders/list.php?per_page=5'
-        );
+    padding:10px 8px 25px;
 
+    border-bottom:
+        1px solid rgba(255,255,255,.15);
 
-    const orders =
-        data.data?.orders
-        || [];
-
-
-    const tbody =
-        document.getElementById(
-            'recentOrders'
-        );
-
-
-    if (
-        orders.length === 0
-    ) {
-
-        tbody.innerHTML =
-            `
-            <tr>
-                <td colspan="5">
-                    لا توجد طلبات حتى الآن.
-                </td>
-            </tr>
-            `;
-
-        return;
-
-    }
-
-
-    tbody.innerHTML =
-        orders
-            .map(
-                order => `
-
-                    <tr>
-
-                        <td>
-                            #${escapeHtml(
-                                order.order_number
-                            )}
-                        </td>
-
-                        <td>
-                            ${escapeHtml(
-                                order.customer?.name
-                                || '-'
-                            )}
-                        </td>
-
-                        <td>
-                            ${formatCurrency(
-                                order.financial?.total
-                                || 0
-                            )}
-                            جنيه
-                        </td>
-
-                        <td>
-
-                            <span
-                                class="status-badge status-${escapeHtml(
-                                    order.status
-                                )}"
-                            >
-                                ${escapeHtml(
-                                    orderStatusLabel(
-                                        order.status
-                                    )
-                                )}
-                            </span>
-
-                        </td>
-
-                        <td>
-                            ${escapeHtml(
-                                order.created_at
-                                || '-'
-                            )}
-                        </td>
-
-                    </tr>
-
-                `
-            )
-            .join('');
-
+    margin-bottom:18px;
 }
 
+.brand-icon{
 
-/*
-|--------------------------------------------------------------------------
-| Load Low Stock
-|--------------------------------------------------------------------------
-*/
+    width:50px;
+    height:50px;
 
-async function loadLowStock() {
+    border-radius:16px;
 
-    const data =
-        await apiRequest(
-            '/api/v1/dashboard/low-stock.php?limit=5'
-        );
+    background:white;
 
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-    const products =
-        data.data?.products
-        || [];
-
-
-    const tbody =
-        document.getElementById(
-            'lowStockProducts'
-        );
-
-
-    if (
-        products.length === 0
-    ) {
-
-        tbody.innerHTML =
-            `
-            <tr>
-                <td colspan="4">
-                    لا توجد منتجات منخفضة المخزون.
-                </td>
-            </tr>
-            `;
-
-        return;
-
-    }
-
-
-    tbody.innerHTML =
-        products
-            .map(
-                product => `
-
-                    <tr>
-
-                        <td>
-                            ${escapeHtml(
-                                product.name
-                                || '-'
-                            )}
-                        </td>
-
-                        <td>
-                            ${escapeHtml(
-                                product.sku
-                                || '-'
-                            )}
-                        </td>
-
-                        <td>
-                            ${Number(
-                                product.stock
-                                || 0
-                            )}
-                        </td>
-
-                        <td>
-
-                            <span
-                                class="status-badge status-low"
-                            >
-                                ${
-                                    Number(
-                                        product.stock
-                                        || 0
-                                    ) <= 0
-                                        ? 'نفد المخزون'
-                                        : 'مخزون منخفض'
-                                }
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-                `
-            )
-            .join('');
-
+    font-size:27px;
 }
 
+.brand-text h2{
 
-/*
-|--------------------------------------------------------------------------
-| HTML Escape
-|--------------------------------------------------------------------------
-*/
+    font-size:19px;
+    font-weight:900;
+}
 
-function escapeHtml(
-    value
-) {
+.brand-text span{
 
-    return String(
-        value ?? ''
-    )
-        .replace(
-            /&/g,
-            '&amp;'
-        )
-        .replace(
-            /</g,
-            '&lt;'
-        )
-        .replace(
-            />/g,
-            '&gt;'
-        )
-        .replace(
-            /"/g,
-            '&quot;'
-        )
-        .replace(
-            /'/g,
-            '&#039;'
+    display:block;
+
+    font-size:11px;
+
+    opacity:.75;
+
+    margin-top:4px;
+}
+
+.menu-title{
+
+    font-size:11px;
+
+    color:rgba(255,255,255,.6);
+
+    padding:
+        12px
+        12px
+        8px;
+}
+
+.nav-link{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    width:100%;
+
+    padding:13px 14px;
+
+    margin:4px 0;
+
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:13px;
+
+    font-size:14px;
+
+    transition:.2s;
+}
+
+.nav-link:hover{
+
+    background:
+        rgba(255,255,255,.12);
+
+    transform:translateX(-2px);
+}
+
+.nav-link.active{
+
+    background:white;
+
+    color:#087f3f;
+
+    font-weight:900;
+
+    box-shadow:
+        0 6px 18px rgba(0,0,0,.12);
+}
+
+.nav-icon{
+
+    width:30px;
+
+    text-align:center;
+
+    font-size:19px;
+}
+
+.logout{
+
+    margin-top:20px;
+
+    border-top:
+        1px solid rgba(255,255,255,.15);
+
+    padding-top:18px;
+}
+
+.logout a{
+
+    color:#fff;
+
+    text-decoration:none;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:13px;
+
+    border-radius:13px;
+
+    background:
+        rgba(180,0,0,.18);
+}
+
+.logout a:hover{
+
+    background:
+        rgba(180,0,0,.3);
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+
+    margin-right:270px;
+
+    min-height:100vh;
+
+    transition:.3s;
+}
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar{
+
+    height:76px;
+
+    background:white;
+
+    border-bottom:
+        1px solid #e8ecea;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:
+        0 28px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:500;
+}
+
+.page-title h1{
+
+    font-size:22px;
+
+    color:#123d2b;
+
+    font-weight:900;
+}
+
+.page-title p{
+
+    color:#84918b;
+
+    font-size:12px;
+
+    margin-top:5px;
+}
+
+.top-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+}
+
+.icon-btn{
+
+    width:42px;
+    height:42px;
+
+    border:1px solid #e4e9e7;
+
+    background:white;
+
+    border-radius:12px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    text-decoration:none;
+
+    color:#333;
+}
+
+.icon-btn:hover{
+
+    border-color:#087f3f;
+
+    color:#087f3f;
+}
+
+.admin-profile{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:
+        5px 10px;
+
+    background:#f5f8f6;
+
+    border-radius:14px;
+}
+
+.avatar{
+
+    width:38px;
+    height:38px;
+
+    border-radius:12px;
+
+    background:#087f3f;
+
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-weight:bold;
+}
+
+.profile-text strong{
+
+    display:block;
+
+    font-size:13px;
+}
+
+.profile-text span{
+
+    display:block;
+
+    font-size:10px;
+
+    color:#839089;
+
+    margin-top:2px;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+
+    padding:28px;
+
+    max-width:1500px;
+
+    margin:auto;
+}
+
+/* =========================
+   WELCOME
+========================= */
+
+.welcome{
+
+    background:
+        linear-gradient(
+            135deg,
+            #087f3f,
+            #0b9a4c
         );
 
+    color:white;
+
+    border-radius:22px;
+
+    padding:28px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    margin-bottom:25px;
+
+    box-shadow:
+        0 12px 35px rgba(8,127,63,.18);
+
+    position:relative;
+
+    overflow:hidden;
 }
 
+.welcome:after{
 
-/*
-|--------------------------------------------------------------------------
-| Mobile Menu
-|--------------------------------------------------------------------------
-*/
+    content:"🛒";
 
-document
-    .getElementById(
-        'menuButton'
-    )
-    ?.addEventListener(
-        'click',
-        function () {
+    position:absolute;
 
-            document
-                .getElementById(
-                    'adminLayout'
-                )
-                ?.classList.toggle(
-                    'sidebar-open'
-                );
+    left:30px;
 
-        }
-    );
+    bottom:-25px;
 
+    font-size:120px;
 
-/*
-|--------------------------------------------------------------------------
-| Load Dashboard
-|--------------------------------------------------------------------------
-*/
-
-async function loadDashboard() {
-
-    try {
-
-        loading.hidden =
-            false;
-
-        errorBox.hidden =
-            true;
-
-
-        await Promise.all([
-
-            loadStats(),
-
-            loadRecentOrders(),
-
-            loadLowStock()
-
-        ]);
-
-
-        loading.hidden =
-            true;
-
-
-    } catch (error) {
-
-        loading.hidden =
-            true;
-
-        errorBox.textContent =
-            error.message;
-
-        errorBox.hidden =
-            false;
-
-    }
-
+    opacity:.10;
 }
 
+.welcome h2{
 
-loadDashboard();
+    font-size:27px;
 
-</script>
-<script src="/admin/assets/js/dashboard.js"></script>
+    margin-bottom:9px;
+}
 
-</body>
+.welcome p{
 
-</html>
+    font-size:13px;
+
+    opacity:.88;
+}
+
+.welcome-date{
+
+    background:
+        rgba(255,255,255,.12);
+
+    padding:14px 18px;
+
+    border-radius:15px;
+
+    font-size:13px;
+
+    position:relative;
+
+    z-index:2;
+}
+
+/* =========================
+   STATISTICS
+========================= */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:18px;
+
+    margin-bottom:25px;
+}
+
+.stat-card{
+
+    background:white;
+
+    border-radius:19px;
+
+    padding:21px;
+
+    border:
+        1px solid #e9eeeb;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.04);
+
+    transition:.2s;
+}
+
+.stat-card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 12px 25px rgba(0,0,0,.08);
+}
+
+.stat-top{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:17px;
+}
+
+.stat-icon{
+
+    width:48px;
+    height:48px;
+
+    border-radius:15px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:23px;
+
+    background:#eaf8f0;
+}
+
+.stat-label{
+
+    color:#78847e;
+
+    font-size:12px;
+}
+
+.stat-value{
+
+    font-size:25px;
+
+    font-weight:900;
+
+    color:#183d2c;
+}
+
+.stat-note{
+
+    font-size:10px;
+
+    color:#88958f;
+
+    margin-top:7px;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.dashboard-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1.5fr 1fr;
+
+    gap:20px;
+}
+
+.card{
+
+    background:white;
+
+    border:
+        1px solid #e9eeeb;
+
+    border-radius:20px;
+
+    padding:22px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.04);
+}
+
+.card-header{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:20px;
+}
+
+.card-header h3{
+
+    font-size:17px;
+
+    color:#183d2c;
+}
+
+.card-header a{
+
+    color:#087f3f;
+
+    text-decoration:none;
+
+    font-size:12px;
+
+    font-weight:bold;
+}
+
+/* =========================
+   QUICK ACTIONS
+========================= */
+
+.actions{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:12px;
+}
+
+.action{
+
+    text-decoration:none;
+
+    color:#183d2c;
+
+    border:
+        1px solid #edf0ee;
+
+    border-radius:15px;
+
+    padding:17px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    transition:.2s;
+
+    background:#fbfcfb;
+}
+
+.action:hover{
+
+    background:#f0faf4;
+
+    border-color:#b8dfc8;
+
+    transform:translateY(-2px);
+}
+
+.action-icon{
+
+    width:44px;
+    height:44px;
+
+    border-radius:13px;
+
+    background:#eaf8f0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:21px;
+}
+
+.action strong{
+
+    display:block;
+
+    font-size:13px;
+
+    margin-bottom:4px;
+}
+
+.action span{
+
+    display:block;
+
+    color:#87928d;
+
+    font-size:10px;
+}
+
+/* =========================
+   STATUS
+========================= */
+
+.status-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+}
+
+.status-item{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:13px;
+
+    border-radius:13px;
+
+    background:#f8faf9;
+}
+
+.status-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.status-dot{
+
+    width:10px;
+    height:10px;
+
+    border-radius:50%;
+
+    background:#21a366;
+}
+
+.status-name{
+
+    font-size:12px;
+
+    font-weight:bold;
+}
+
+.status-count{
+
+    font-size:13px;
+
+    font-weight:900;
+
+    color:#087f3f;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+
+    text-align:center;
+
+    padding:30px 10px 15px;
+
+    color:#9aa49f
