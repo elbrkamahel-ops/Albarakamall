@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>مول البركة | تسوق الخضروات والفواكه واللحوم والماركت</title>
+    <title>مول البركة | كل احتياجات بيتك</title>
 
     <meta name="description"
-          content="مول البركة للخضروات والفواكه واللحوم والدواجن والماركت. تسوق احتياجات بيتك بسهولة.">
+        content="مول البركة للخضروات والفواكه واللحوم والدواجن والماركت">
 
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -17,42 +17,85 @@
 
 <!-- ================= HEADER ================= -->
 
-<header class="top">
+<header class="main-header">
 
-    <div class="wrap head">
+    <div class="header-top wrap">
 
         <!-- LOGO -->
 
-        <a href="index.html" class="brand">
-            <b>البركة</b>
-            <span>مول البركة</span>
+        <a href="index.html" class="main-logo">
+
+            <div class="logo-icon">
+                البركة
+            </div>
+
+            <div class="logo-text">
+                <strong>مول البركة</strong>
+                <small>كل احتياجات بيتك</small>
+            </div>
+
         </a>
+
 
         <!-- SEARCH -->
 
-        <input
-            id="q"
-            type="search"
-            placeholder="ابحث عن خضروات، فاكهة، لحوم، ماركت..."
-            aria-label="البحث عن المنتجات"
-        >
+        <div class="main-search">
 
-        <!-- CART -->
+            <input
+                id="q"
+                type="search"
+                placeholder="ماذا تبحث اليوم؟"
+            >
 
-        <a href="cart.html" class="cart-link">
-            🛒 السلة
-            <span id="count">0</span>
-        </a>
+            <button onclick="goSearch()">
+                🔍
+            </button>
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="header-actions">
+
+            <a href="login.html" class="account">
+
+                <span>👤</span>
+
+                <div>
+                    <small>مرحباً بك</small>
+                    <strong>تسجيل الدخول</strong>
+                </div>
+
+            </a>
+
+
+            <a href="cart.html" class="cart-button">
+
+                🛒
+
+                <span>
+                    السلة
+                </span>
+
+                <b id="count">
+                    0
+                </b>
+
+            </a>
+
+        </div>
 
     </div>
 
+
     <!-- NAVIGATION -->
 
-    <nav>
+    <nav class="main-nav">
 
-        <div class="wrap">
+        <div class="wrap nav-inner">
 
-            <a href="index.html">
+            <a href="index.html" class="active">
                 الرئيسية
             </a>
 
@@ -65,23 +108,19 @@
             </a>
 
             <a href="shop.html?cat=meat">
-                🥩 لحوم وجزارة
+                🥩 اللحوم والجزارة
             </a>
 
             <a href="shop.html?cat=chicken">
-                🐔 دواجن وطيور
+                🐔 الدواجن والطيور
             </a>
 
             <a href="shop.html?cat=market">
-                🛒 ماركت
+                🛒 الماركت
             </a>
 
-            <a href="shop.html?sale=1">
+            <a href="shop.html?sale=1" class="offer-link">
                 🔥 العروض
-            </a>
-
-            <a href="login.html">
-                👤 تسجيل الدخول
             </a>
 
         </div>
@@ -95,260 +134,390 @@
 
 <main>
 
-    <!-- HERO -->
 
-    <section class="hero wrap">
+<!-- HERO -->
 
-        <div>
+<section class="home-hero wrap">
 
-            <small>
-                🛍️ تسوق أسهل • جودة أفضل
-            </small>
+    <div class="hero-content">
 
-            <h1>
-                كل احتياجات بيتك
-                <br>
-                <strong>في مول البركة</strong>
-            </h1>
+        <span class="hero-label">
+            🛍️ مول البركة أونلاين
+        </span>
 
-            <p>
-                خضروات وفاكهة طازجة، لحوم مختارة،
-                دواجن وطيور، جزارة وماركت.
-                كل ما تحتاجه في مكان واحد.
-            </p>
+        <h1>
 
-            <a href="shop.html" class="btn">
+            كل احتياجات
+            <br>
+
+            <span>بيتك في مكان واحد</span>
+
+        </h1>
+
+        <p>
+            اطلب خضروات وفاكهة طازجة،
+            لحوم، دواجن، جزارة ومستلزمات
+            الماركت بكل سهولة.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="shop.html" class="primary-button">
                 ابدأ التسوق الآن
+                ←
+            </a>
+
+            <a href="shop.html?sale=1" class="secondary-button">
+                🔥 شاهد العروض
             </a>
 
         </div>
 
-        <div class="hero-art">
+    </div>
 
-            🥬 🍎
-            <br>
-            🥩 🐔
-            <br>
-            🛒
+
+    <div class="hero-visual">
+
+        <div class="floating-card card-one">
+            🥬
+            <span>خضروات طازجة</span>
+        </div>
+
+        <div class="floating-card card-two">
+            🍎
+            <span>فاكهة مختارة</span>
+        </div>
+
+        <div class="main-food">
+
+            🥬
+            🍎
+            🥩
+            🐔
 
         </div>
 
-    </section>
+        <div class="delivery-badge">
+
+            🚚
+
+            <div>
+                <strong>توصيل للمنزل</strong>
+                <small>بسهولة وسرعة</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 
-    <!-- ================= CATEGORIES ================= -->
+<!-- ================= FEATURES ================= -->
 
-    <section class="wrap">
+<section class="features wrap">
 
-        <div class="section-title">
+    <div class="feature">
+
+        <div class="feature-icon">
+            🚚
+        </div>
+
+        <div>
+            <strong>توصيل للمنزل</strong>
+            <small>اطلب ويوصلك للبيت</small>
+        </div>
+
+    </div>
+
+
+    <div class="feature">
+
+        <div class="feature-icon">
+            🥬
+        </div>
+
+        <div>
+            <strong>منتجات طازجة</strong>
+            <small>اختيار يومي بعناية</small>
+        </div>
+
+    </div>
+
+
+    <div class="feature">
+
+        <div class="feature-icon">
+            🛡️
+        </div>
+
+        <div>
+            <strong>جودة مضمونة</strong>
+            <small>نهتم بكل طلب</small>
+        </div>
+
+    </div>
+
+
+    <div class="feature">
+
+        <div class="feature-icon">
+            💵
+        </div>
+
+        <div>
+            <strong>دفع عند الاستلام</strong>
+            <small>ادفع عند وصول طلبك</small>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CATEGORIES ================= -->
+
+<section class="wrap home-section">
+
+    <div class="section-heading">
+
+        <div>
+
+            <span>
+                اكتشف منتجاتنا
+            </span>
 
             <h2>
                 تسوق حسب القسم
             </h2>
 
-            <a href="shop.html">
-                عرض الكل →
-            </a>
-
         </div>
 
+        <a href="shop.html">
+            عرض الكل →
+        </a>
 
-        <div class="cats">
-
-            <a href="shop.html?cat=vegetables">
-
-                <span>
-                    🥬
-                </span>
-
-                <b>
-                    خضروات وفاكهة
-                </b>
-
-            </a>
+    </div>
 
 
-            <a href="shop.html?cat=meat">
-
-                <span>
-                    🥩
-                </span>
-
-                <b>
-                    لحوم وجزارة
-                </b>
-
-            </a>
+    <div class="home-categories">
 
 
-            <a href="shop.html?cat=chicken">
+        <a href="shop.html?cat=vegetables"
+           class="category vegetable">
 
-                <span>
-                    🐔
-                </span>
-
-                <b>
-                    دواجن وطيور
-                </b>
-
-            </a>
-
-
-            <a href="shop.html?cat=market">
-
-                <span>
-                    🛒
-                </span>
-
-                <b>
-                    الماركت
-                </b>
-
-            </a>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= PRODUCTS ================= -->
-
-    <section class="wrap">
-
-        <div class="section-title">
-
-            <h2>
-                ⭐ الأكثر طلبًا
-            </h2>
-
-            <a href="shop.html">
-                كل المنتجات →
-            </a>
-
-        </div>
-
-        <!-- المنتجات يتم تحميلها بواسطة JavaScript -->
-
-        <div
-            id="products"
-            class="products">
-        </div>
-
-    </section>
-
-
-    <!-- ================= INFORMATION ================= -->
-
-    <section class="wrap">
-
-        <div class="info-strip">
-
-            <div class="info-box">
-
-                <strong>
-                    🚚 توصيل للمنزل
-                </strong>
-
-                <span>
-                    اطلب منتجاتك وتوصلك للبيت
-                </span>
-
+            <div class="category-icon">
+                🥬
             </div>
-
-
-            <div class="info-box">
-
-                <strong>
-                    🥬 منتجات طازجة
-                </strong>
-
-                <span>
-                    اختيار يومي للمنتجات
-                </span>
-
-            </div>
-
-
-            <div class="info-box">
-
-                <strong>
-                    🛡️ جودة مضمونة
-                </strong>
-
-                <span>
-                    نهتم بجودة طلبك
-                </span>
-
-            </div>
-
-
-            <div class="info-box">
-
-                <strong>
-                    💵 دفع عند الاستلام
-                </strong>
-
-                <span>
-                    ادفع عند وصول طلبك
-                </span>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= OFFERS ================= -->
-
-    <section class="wrap">
-
-        <div
-            class="hero"
-            style="min-height:220px;"
-        >
 
             <div>
-
-                <small>
-                    🔥 عروض مول البركة
-                </small>
-
-                <h2>
-                    وفر أكثر عند التسوق
-                </h2>
+                <h3>
+                    خضروات وفاكهة
+                </h3>
 
                 <p>
-                    اكتشف أحدث المنتجات والعروض المتاحة.
+                    طازة يومياً
                 </p>
-
-                <a
-                    href="shop.html?sale=1"
-                    class="btn"
-                >
-                    شاهد العروض
-                </a>
-
             </div>
 
-            <div class="hero-art">
-                🛒 💰 🎁
+            <span class="arrow">
+                ←
+            </span>
+
+        </a>
+
+
+        <a href="shop.html?cat=meat"
+           class="category meat">
+
+            <div class="category-icon">
+                🥩
             </div>
+
+            <div>
+                <h3>
+                    اللحوم والجزارة
+                </h3>
+
+                <p>
+                    جودة واختيار
+                </p>
+            </div>
+
+            <span class="arrow">
+                ←
+            </span>
+
+        </a>
+
+
+        <a href="shop.html?cat=chicken"
+           class="category chicken">
+
+            <div class="category-icon">
+                🐔
+            </div>
+
+            <div>
+                <h3>
+                    الدواجن والطيور
+                </h3>
+
+                <p>
+                    طازة ومختارة
+                </p>
+            </div>
+
+            <span class="arrow">
+                ←
+            </span>
+
+        </a>
+
+
+        <a href="shop.html?cat=market"
+           class="category market">
+
+            <div class="category-icon">
+                🛒
+            </div>
+
+            <div>
+                <h3>
+                    الماركت
+                </h3>
+
+                <p>
+                    كل مستلزمات البيت
+                </p>
+            </div>
+
+            <span class="arrow">
+                ←
+            </span>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= OFFER ================= -->
+
+<section class="offer-banner wrap">
+
+    <div class="offer-text">
+
+        <span>
+            🔥 عروض مول البركة
+        </span>
+
+        <h2>
+            وفر أكثر مع عروضنا
+        </h2>
+
+        <p>
+            اكتشف المنتجات والعروض المتاحة الآن.
+        </p>
+
+        <a href="shop.html?sale=1">
+            اكتشف العروض
+            ←
+        </a>
+
+    </div>
+
+
+    <div class="offer-visual">
+
+        🛒
+        🍎
+        🥩
+        🎁
+
+    </div>
+
+</section>
+
+
+<!-- ================= PRODUCTS ================= -->
+
+<section class="wrap home-section">
+
+    <div class="section-heading">
+
+        <div>
+
+            <span>
+                اختياراتنا لك
+            </span>
+
+            <h2>
+                الأكثر طلباً
+            </h2>
 
         </div>
 
-    </section>
+        <a href="shop.html">
+            كل المنتجات →
+        </a>
+
+    </div>
+
+
+    <div
+        id="products"
+        class="products">
+    </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="cta-section wrap">
+
+    <div>
+
+        <span>
+            🛒 مول البركة
+        </span>
+
+        <h2>
+            جاهز تبدأ التسوق؟
+        </h2>
+
+        <p>
+            اختار منتجاتك وأضفها إلى السلة
+            واطلبها بسهولة.
+        </p>
+
+        <a href="shop.html">
+            تسوق الآن
+            ←
+        </a>
+
+    </div>
+
+</section>
+
 
 </main>
 
 
 <!-- ================= FOOTER ================= -->
 
-<footer>
+<footer class="main-footer">
 
     <div class="wrap footer-grid">
 
-        <div>
+
+        <div class="footer-about">
+
+            <div class="footer-logo">
+                البركة
+            </div>
 
             <h3>
                 مول البركة
@@ -365,42 +534,59 @@
 
         <div>
 
-            <h3>
-                روابط مهمة
-            </h3>
+            <h4>
+                روابط سريعة
+            </h4>
 
-            <p>
-                <a href="index.html">
-                    الرئيسية
-                </a>
-            </p>
+            <a href="index.html">
+                الرئيسية
+            </a>
 
-            <p>
-                <a href="shop.html">
-                    المنتجات
-                </a>
-            </p>
+            <a href="shop.html">
+                المنتجات
+            </a>
 
-            <p>
-                <a href="cart.html">
-                    سلة التسوق
-                </a>
-            </p>
+            <a href="cart.html">
+                سلة التسوق
+            </a>
 
-            <p>
-                <a href="login.html">
-                    تسجيل الدخول
-                </a>
-            </p>
+            <a href="login.html">
+                تسجيل الدخول
+            </a>
 
         </div>
 
 
         <div>
 
-            <h3>
+            <h4>
+                الأقسام
+            </h4>
+
+            <a href="shop.html?cat=vegetables">
+                خضروات وفاكهة
+            </a>
+
+            <a href="shop.html?cat=meat">
+                لحوم وجزارة
+            </a>
+
+            <a href="shop.html?cat=chicken">
+                دواجن وطيور
+            </a>
+
+            <a href="shop.html?cat=market">
+                ماركت
+            </a>
+
+        </div>
+
+
+        <div>
+
+            <h4>
                 تواصل معنا
-            </h3>
+            </h4>
 
             <p>
                 📞 01119511185
@@ -414,15 +600,46 @@
 
         </div>
 
+
+    </div>
+
+
+    <div class="copyright">
+
+        © 2026 مول البركة — جميع الحقوق محفوظة
+
     </div>
 
 </footer>
 
 
-<!-- ================= JAVASCRIPT ================= -->
-
 <script src="assets/js/app.js"></script>
 
-</body>
 
-</html>
+<script>
+
+function goSearch(){
+
+    const input = document.getElementById("q");
+
+    const value = input.value.trim();
+
+    if(value){
+
+        window.location.href =
+            "shop.html?search=" +
+            encodeURIComponent(value);
+
+    }else{
+
+        window.location.href =
+            "shop.html";
+
+    }
+
+}
+
+</script>
+
+</body>
+    </html>
