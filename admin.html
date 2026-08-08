@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>لوحة التحكم | البركة مول</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .admin-page {
+            padding: 30px 0 60px;
+        }
+
+        .admin-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .admin-header h1 {
+            font-size: 27px;
+        }
+
+        .admin-header p {
+            color: #777;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid #e7e7e7;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .stat-icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .stat-card span {
+            color: #777;
+            font-size: 12px;
+        }
+
+        .stat-card strong {
+            display: block;
+            font-size: 24px;
+            margin-top: 5px;
+            color: #00843d;
+        }
+
+        .admin-section {
+            background: white;
+            border: 1px solid #e7e7e7;
+            border-radius: 14px;
+            padding: 22px;
+            margin-bottom: 22px;
+        }
+
+        .admin-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .admin-section-header h2 {
+            font-size: 20px;
+        }
+
+        .admin-button {
+            border: 0;
+            background: #00843d;
+            color: white;
+            border-radius: 7px;
+            padding: 10px 17px;
+            font-family: inherit;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .admin-button:hover {
+            background: #006b31;
+        }
+
+        .admin-button.danger {
+            background: #c62828;
+        }
+
+        .admin-button.gray {
+            background: #666;
+        }
+
+        .admin-form {
+            display: none;
+            background: #f7faf8;
+            border: 1px solid #e2ebe5;
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 20px;
+        }
+
+        .admin-form.show {
+            display: block;
+        }
+
+        .admin-form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 13px;
+        }
+
+        .admin-field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .admin-field.full {
+            grid-column: 1 / -1;
+        }
+
+        .admin-field label {
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .admin-field input,
+        .admin-field select {
+            height: 42px;
+            border: 1px solid #ddd;
+            border-radius: 7px;
+            padding: 0 10px;
+            font-family: inherit;
+            outline: none;
+        }
+
+        .admin-field input:focus,
+        .admin-field select:focus {
+            border-color: #00843d;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .products-table,
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .products-table th,
+        .products-table td,
+        .orders-table th,
+        .orders-table td {
+            padding: 12px 9px;
+            border-bottom: 1px solid #eee;
+            text-align: right;
+            font-size: 12px;
+        }
+
+        .products-table th,
+        .orders-table th {
+            background: #f7f8f7;
+            font-weight: bold;
+        }
+
+        .product-admin-image {
+            width: 45px;
+            height: 45px;
+            display: grid;
+            place-items: center;
+            background: #f1f6f2;
+            border-radius: 8px;
+            font-size: 25px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .small-button {
+            border: 0;
+            border-radius: 5px;
+            padding: 6px 9px;
+            font-family: inherit;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .small-button.edit {
+            background: #e8f3ec;
+            color: #00843d;
+        }
+
+        .small-button.delete {
+            background: #ffeded;
+            color: #c62828;
+        }
+
+        .order-status {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 20px;
+            background: #eaf7ef;
+            color: #00843d;
+            font-size: 10px;
+        }
+
+        .no-data {
+            text-align: center;
+            color: #888;
+            padding: 30px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 900px) {
+            .admin-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .products-table,
+            .orders-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .admin-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .admin-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .admin-section {
+                padding: 15px;
+            }
+
+            .admin-form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-field.full {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="top-bar">
+    <div class="container top-bar-inner">
+        <div class="top-right">
+            <span>🛠️ لوحة تحكم البركة مول</span>
+        </div>
+
+        <div class="top-left">
+            <span>📞 01119511185</span>
+        </div>
+    </div>
+</div>
+
+
+<header class="main-header">
+
+    <div class="container header-main">
+
+        <a href="index.html" class="logo">
+
+            <div class="logo-symbol">🛒</div>
+
+            <div class="logo-text">
+                <strong>البركة</strong>
+                <small>مول</small>
+            </div>
+
+        </a>
+
+        <a href="index.html" class="account-button">
+            <span class="account-icon">🏠</span>
+
+            <span class="account-text">
+                <small>العودة إلى</small>
+                <strong>المتجر</strong>
+            </span>
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="admin-page">
+
+    <div class="container">
+
+        <div class="admin-header">
+
+            <div>
+                <h1>لوحة التحكم 🛠️</h1>
+
+                <p>
+                    إدارة المنتجات والطلبات في البركة مول
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- STATISTICS -->
+
+        <div class="admin-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">📦</div>
+
+                <span>المنتجات</span>
+
+                <strong id="productsCount">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">🛒</div>
+
+                <span>الطلبات</span>
+
+                <strong id="ordersCount">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">👥</div>
+
+                <span>العملاء</span>
+
+                <strong id="usersCount">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">💰</div>
+
+                <span>إجمالي المبيعات</span>
+
+                <strong id="salesTotal">
+                    0 ج.م
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCTS -->
+
+        <section class="admin-section">
+
+            <div class="admin-section-header">
+
+                <h2>
+                    📦 المنتجات
+                </h2>
+
+                <button
+                    class="admin-button"
+                    id="showProductForm"
+                >
+                    + إضافة منتج
+                </button>
+
+            </div>
+
+
+            <div
+                class="admin-form"
+                id="productForm"
+            >
+
+                <form id="addProductForm">
+
+                    <div class="admin-form-grid">
+
+                        <div class="admin-field">
+
+                            <label>
+                                اسم المنتج
+                            </label>
+
+                            <input
+                                id="productName"
+                                type="text"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="admin-field">
+
+                            <label>
+                                السعر
+                            </label>
+
+                            <input
+                                id="productPrice"
+                                type="number"
+                                min="0"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="admin-field">
+
+                            <label>
+                                السعر القديم
+                            </label>
+
+                            <input
+                                id="productOldPrice"
+                                type="number"
+                                min="0"
+                            >
+
+                        </div>
+
+
+                        <div class="admin-field">
+
+                            <label>
+                                الوحدة
+                            </label>
+
+                            <input
+                                id="productUnit"
+                                type="text"
+                                placeholder="للكيلو"
+                            >
+
+                        </div>
+
+
+                        <div class="admin-field">
+
+                            <label>
+                                القسم
+                            </label>
+
+                            <select id="productCategory">
+
+                                <option value="grocery">
+                                    بقالة
+                                </option>
+
+                                <option value="vegetables">
+                                    خضروات وفاكهة
+                                </option>
+
+                                <option value="meat">
+                                    لحوم
+                                </option>
+
+                                <option value="chicken">
+                                    دواجن
+                                </option>
+
+                                <option value="dairy">
+                                    ألبان
+                                </option>
+
+                                <option value="drinks">
+                                    مشروبات
+                                </option>
+
+                                <option value="cleaning">
+                                    منظفات
+                                </option>
+
+                                <option value="bakery">
+                                    مخبوزات
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="admin-field">
+
+                            <label>
+                                رمز المنتج
+                            </label>
+
+                            <input
+                                id="productImage"
+                                type="text"
+                                placeholder="🍎"
+                            >
+
+                        </div>
+
+
+                        <div class="admin-field">
+
+                            <label>
+                                التقييم
+                            </label>
+
+                            <input
+                                id="productRating"
+                                type="number"
+                                min="1"
+                                max="5"
+                                step="0.1"
+                                value="5"
+                            >
+
+                        </div>
+
+
+                        <div class="admin-field">
+
+                            <label>
+                                نوع العرض
+                            </label>
+
+                            <select id="productBadge">
+
+                                <option value="">
+                                    بدون عرض
+                                </option>
+
+                                <option value="عرض">
+                                    عرض
+                                </option>
+
+                                <option value="خصم">
+                                    خصم
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            type="submit"
+                            class="admin-button"
+                        >
+                            حفظ المنتج
+                        </button>
+
+                        <button
+                            type="button"
+                            class="admin-button gray"
+                            id="cancelProduct"
+                        >
+                            إلغاء
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <div id="productsTableContainer"></div>
+
+        </section>
+
+
+        <!-- ORDERS -->
+
+        <section class="admin-section">
+
+            <div class="admin-section-header">
+
+                <h2>
+                    🛍️ الطلبات
+                </h2>
+
+            </div>
+
+
+            <div id="ordersTableContainer"></div>
+
+        </section>
+
+
+        <!-- USERS -->
+
+        <section class="admin-section">
+
+            <div class="admin-section-header">
+
+                <h2>
+                    👥 العملاء المسجلون
+                </h2>
+
+            </div>
+
+
+            <div id="usersTableContainer"></div>
+
+        </section>
+
+
+    </div>
+
+</main>
+
+
+<footer class="footer">
+
+    <div class="footer-bottom">
+
+        <div class="container">
+
+            <span>
+                © 2026 البركة مول
+            </span>
+
+            <span>
+                لوحة التحكم
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script>
+
+/* ==========================================
+   PRODUCTS
+========================================== */
+
+const defaultProducts = [
+
+    {
+        id: 1,
+        name: "أرز فاخر 1 كيلو",
+        category: "grocery",
+        categoryName: "بقالة",
+        price: 35,
+        oldPrice: 42,
+        unit: "للكيلو",
+        image: "🍚",
+        rating: 4.8,
+        badge: "خصم"
+    },
+
+    {
+        id: 2,
+        name: "طماطم طازجة",
+        category: "vegetables",
+        categoryName: "خضروات وفاكهة",
+        price: 25,
+        oldPrice: 30,
+        unit: "للكيلو",
+        image: "🍅",
+        rating: 4.9,
+        badge: "عرض"
+    },
+
+    {
+        id: 3,
+        name: "تفاح أحمر",
+        category: "vegetables",
+        categoryName: "خضروات وفاكهة",
+        price: 65,
+        oldPrice: 75,
+        unit: "للكيلو",
+        image: "🍎",
+        rating: 4.8,
+        badge: "خصم"
+    },
+
+    {
+        id: 4,
+        name: "موز طازج",
+        category: "vegetables",
+        categoryName: "خضروات وفاكهة",
+        price: 35,
+        oldPrice: 40,
+        unit: "للكيلو",
+        image: "🍌",
+        rating: 4.7,
+        badge: ""
+    },
+
+    {
+        id: 5,
+        name: "برتقال طازج",
+        category: "vegetables",
+        categoryName: "خضروات وفاكهة",
+        price: 30,
+        oldPrice: 38,
+        unit: "للكيلو",
+        image: "🍊",
+        rating: 4.7,
+        badge: "عرض"
+    },
+
+    {
+        id: 6,
+        name: "لحمة بقري طازجة",
+        category: "meat",
+        categoryName: "اللحوم",
+        price: 390,
+        oldPrice: 430,
+        unit: "للكيلو",
+        image: "🥩",
+        rating: 4.9,
+        badge: "خصم"
+    },
+
+    {
+        id: 7,
+        name: "فراخ كاملة",
+        category: "chicken",
+        categoryName: "دواجن",
+        price: 145,
+        oldPrice: 160,
+        unit: "للكيلو",
+        image: "🍗",
+        rating: 4.8,
+        badge: "عرض"
+    },
+
+    {
+        id: 8,
+        name: "لبن كامل الدسم",
+        category: "dairy",
+        categoryName: "ألبان",
+        price: 38,
+        oldPrice: 42,
+        unit: "1 لتر",
+        image: "🥛",
+        rating: 4.8,
+        badge: ""
+    }
+
+];
+
+
+let products =
+    JSON.parse(
+        localStorage.getItem(
+            "albarakaProducts"
+        )
+    ) || defaultProducts;
+
+
+/* ==========================================
+   USERS & ORDERS
+========================================== */
+
+let users =
+    JSON.parse(
+        localStorage.getItem(
+            "albarakaUsers"
+        )
+    ) || [];
+
+
+let orders =
+    JSON.parse(
+        localStorage.getItem(
+            "albarakaOrders"
+        )
+    ) || [];
+
+
+/* ==========================================
+   ELEMENTS
+========================================== */
+
+const productForm =
+    document.getElementById(
+        "productForm"
+    );
+
+const addProductForm =
+    document.getElementById(
+        "addProductForm"
+    );
+
+
+/* ==========================================
+   SHOW FORM
+========================================== */
+
+document
+    .getElementById("showProductForm")
+    .addEventListener(
+        "click",
+        () => {
+
+            productForm.classList.add(
+                "show"
+            );
+
+        }
+    );
+
+
+/* ==========================================
+   CANCEL FORM
+========================================== */
+
+document
+    .getElementById("cancelProduct")
+    .addEventListener(
+        "click",
+        () => {
+
+            productForm.classList.remove(
+                "show"
+            );
+
+            addProductForm.reset();
+
+        }
+    );
+
+
+/* ==========================================
+   ADD PRODUCT
+========================================== */
+
+addProductForm.addEventListener(
+    "submit",
+    event => {
+
+        event.preventDefault();
+
+
+        const category =
+            document.getElementById(
+                "productCategory"
+            ).value;
+
+
+        const categoryNames = {
+
+            grocery: "بقالة",
+
+            vegetables:
+                "خضروات وفاكهة",
+
+            meat: "لحوم",
+
+            chicken: "دواجن",
+
+            dairy: "ألبان",
+
+            drinks: "مشروبات",
+
+            cleaning: "منظفات",
+
+            bakery: "مخبوزات"
+
+        };
+
+
+        const newProduct = {
+
+            id: Date.now(),
+
+            name:
+                document.getElementById(
+                    "productName"
+                ).value.trim(),
+
+            category,
+
+            categoryName:
+                categoryNames[category],
+
+            price:
+                Number(
+                    document.getElementById(
+                        "productPrice"
+                    ).value
+                ),
+
+            oldPrice:
+                Number(
+                    document.getElementById(
+                        "productOldPrice"
+                    ).value
+                ) || 0,
+
+            unit:
+                document.getElementById(
