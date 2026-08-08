@@ -1223,7 +1223,7 @@ async function loadDashboard() {
 loadDashboard();
 
 </script>
-
+<script src="/admin/assets/js/dashboard.js"></script>
 
 </body>
 
