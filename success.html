@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    تم تسجيل الطلب - مول البركة
+</title>
+
+<style>
+
+body {
+
+    margin: 0;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eefaf3,
+            #ffffff
+        );
+
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+
+}
+
+.box {
+
+    width:
+        calc(100% - 40px);
+
+    max-width: 500px;
+
+    background: white;
+
+    padding: 35px 25px;
+
+    border-radius: 25px;
+
+    text-align: center;
+
+    box-shadow:
+        0 10px 40px
+        rgba(0,0,0,.10);
+
+}
+
+.icon {
+
+    width: 80px;
+
+    height: 80px;
+
+    margin: auto;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #e7f8ee;
+
+    color: #087f3e;
+
+    font-size: 45px;
+
+}
+
+h1 {
+
+    color: #087f3e;
+
+}
+
+.order-number {
+
+    margin-top: 20px;
+
+    padding: 18px;
+
+    border-radius: 15px;
+
+    background: #effaf4;
+
+    color: #087f3e;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+}
+
+a {
+
+    display: block;
+
+    margin-top: 25px;
+
+    padding: 16px;
+
+    border-radius: 15px;
+
+    background: #087f3e;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<div class="icon">
+    ✓
+</div>
+
+<h1>
+    تم تسجيل طلبك بنجاح
+</h1>
+
+<p>
+    شكرًا لتسوقك من مول البركة
+</p>
+
+<div
+    class="order-number"
+    id="orderNumber"
+>
+    رقم الطلب
+</div>
+
+<a href="/">
+    العودة إلى المتجر
+</a>
+
+</div>
+
+
+<script>
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const order =
+    params.get("order");
+
+
+if (order) {
+
+    document.getElementById(
+        "orderNumber"
+    ).innerHTML =
+        "رقم الطلب: " +
+        order;
+
+}
+
+</script>
+
+</body>
+
+</html>
