@@ -1,0 +1,229 @@
+{
+  "store": {
+    "name": "مول البركة أولاد الجارحي",
+    "whatsapp": "201119511185",
+    "currency": "جنيه"
+  },
+  "categories": [
+    "خضروات",
+    "فواكه",
+    "لحوم",
+    "طيور",
+    "ماركت",
+    "عطارة",
+    "ألبان",
+    "مشروبات",
+    "منظفات"
+  ],
+  "products": [
+    {
+      "id": "p001",
+      "name": "طماطم بلدي",
+      "price": 20,
+      "unit": "كيلو",
+      "category": "خضروات",
+      "image": "",
+      "emoji": "🍅",
+      "offer": false,
+      "active": true
+    },
+    {
+      "id": "p002",
+      "name": "بطاطس",
+      "price": 25,
+      "unit": "كيلو",
+      "category": "خضروات",
+      "image": "",
+      "emoji": "🥔",
+      "offer": false,
+      "active": true
+    },
+    {
+      "id": "p003",
+      "name": "خيار",
+      "price": 30,
+      "unit": "كيلو",
+      "category": "خضروات",
+      "image": "",
+      "emoji": "🥒",
+      "offer": false,
+      "active": true
+    },
+    {
+      "id": "p004",
+      "name": "بصل",
+      "price": 25,
+      "unit": "كيلو",
+      "category": "خضروات",
+      "image": "",
+      "emoji": "🧅",
+      "offer": false,
+      "active": true
+    },
+    {
+      "id": "p005",
+      "name": "جزر",
+      "price": 30,
+      "unit": "كيلو",
+      "category": "خضروات",
+      "image": "",
+      "emoji": "🥕",
+      "offer": false,
+      "active": true
+    },
+    {
+      "id": "p006",
+      "name": "موز",
+      "price": 35,
+      "unit": "كيلو",
+      "category": "فواكه",
+      "image": "",
+      "emoji": "🍌",
+      "offer": false,
+      "active": true
+    },
+    {
+      "id": "p007",
+      "name": "تفاح",
+      "price": 70,
+      "unit": "كيلو",
+      "category": "فواكه",
+      "image": "",
+      "emoji": "🍎",
+      "offer": true,
+      "active": true
+    },
+    {
+      "id": "p008",
+      "name": "برتقال",
+      "price": 30,
+      "unit": "كيلو",
+      "category": "فواكه",
+      "image": "",
+      "emoji": "🍊",
+      "offer": false,
+      "active": true
+    },
+    {
+      "id": "p009",
+      "name": "فراولة",
+      "price": 80,
+      "unit": "كيلو",
+      "category": "فواكه",
+      "image": "",
+      "emoji": "🍓",
+      "offer": true,
+      "active": true
+    },
+    {
+      "id": "p010",
+      "name": "لحمة بلدي",
+      "price": 420,
+      "unit": "كيلو",
+      "category": "لحوم",
+      "image": "",
+      "emoji": "🥩",
+      "offer": false,
+      "active": true
+    },
+    {
+      "id": "p011",
+      "name": "كبدة بلدي",
+      "price": 450,
+      "unit": "كيلو",
+      "category": "لحوم",
+      "image": "",
+      "emoji": "🥩",
+      "offer": false,
+      "active": true
+    },
+    {
+      "id": "p012",
+      "name": "فراخ بيضاء",
+      "price": 115,
+      "unit": "كيلو",
+      "category": "طيور",
+      "image": "",
+      "emoji": "🐔",
+      "offer": false,
+      "active": true
+    },
+    {
+      "id": "p013",
+      "name": "سكر",
+      "price": 35,
+      "unit": "كيلو",
+      "category": "ماركت",
+      "image": "",
+      "emoji": "🛒",
+      "offer": false,
+      "active": true
+    },
+    {
+      "id": "p014",
+      "name": "أرز",
+      "price": 35,
+      "unit": "كيلو",
+      "category": "ماركت",
+      "image": "",
+      "emoji": "🍚",
+      "offer": false,
+      "active": true
+    },
+    {
+      "id": "p015",
+      "name": "زيت طعام",
+      "price": 85,
+      "unit": "زجاجة",
+      "category": "ماركت",
+      "image": "",
+      "emoji": "🫗",
+      "offer": false,
+      "active": true
+    },
+    {
+      "id": "p016",
+      "name": "بهارات مشكلة",
+      "price": 25,
+      "unit": "100 جرام",
+      "category": "عطارة",
+      "image": "",
+      "emoji": "🌿",
+      "offer": false,
+      "active": true
+    },
+    {
+      "id": "p017",
+      "name": "لبن",
+      "price": 40,
+      "unit": "عبوة",
+      "category": "ألبان",
+      "image": "",
+      "emoji": "🥛",
+      "offer": false,
+      "active": true
+    },
+    {
+      "id": "p018",
+      "name": "عصير",
+      "price": 30,
+      "unit": "عبوة",
+      "category": "مشروبات",
+      "image": "",
+      "emoji": "🧃",
+      "offer": false,
+      "active": true
+    },
+    {
+      "id": "p019",
+      "name": "مسحوق غسيل",
+      "price": 75,
+      "unit": "عبوة",
+      "category": "منظفات",
+      "image": "",
+      "emoji": "🧼",
+      "offer": false,
+      "active": true
+    }
+  ]
+    }
