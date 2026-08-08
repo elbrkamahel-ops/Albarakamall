@@ -6,6 +6,8 @@
 
   <title>إتمام الطلب - مول البركة</title>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <style>
     * {
       box-sizing: border-box;
@@ -13,51 +15,52 @@
 
     body {
       margin: 0;
-      font-family: Arial, Tahoma, sans-serif;
-      background: #f5f7f8;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f5f7f6;
       color: #222;
     }
 
-    .header {
-      background: #fff;
-      padding: 22px 15px;
+    header {
+      background: white;
+      padding: 25px 15px;
       text-align: center;
-      box-shadow: 0 2px 15px rgba(0,0,0,.08);
+      box-shadow: 0 2px 10px rgba(0,0,0,.08);
     }
 
-    .logo {
+    header h1 {
+      margin: 0;
+      color: #16833f;
       font-size: 32px;
-      font-weight: bold;
-      color: #168344;
-      margin-bottom: 8px;
     }
 
-    .subtitle {
+    header p {
+      margin: 10px 0 0;
       color: #777;
       font-size: 18px;
     }
 
     .container {
-      width: min(950px, 94%);
-      margin: 25px auto 50px;
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 15px;
     }
 
     .box {
       background: white;
       border-radius: 18px;
-      padding: 22px;
-      margin-bottom: 20px;
-      box-shadow: 0 5px 25px rgba(0,0,0,.06);
+      padding: 25px;
+      box-shadow: 0 5px 25px rgba(0,0,0,.08);
     }
 
     h2 {
       margin-top: 0;
-      color: #168344;
+      color: #16833f;
     }
 
     label {
       display: block;
-      margin: 14px 0 7px;
+      margin-top: 15px;
+      margin-bottom: 7px;
       font-weight: bold;
     }
 
@@ -67,16 +70,16 @@
       width: 100%;
       padding: 14px;
       border: 1px solid #ddd;
-      border-radius: 12px;
+      border-radius: 10px;
       font-size: 16px;
+      font-family: inherit;
       outline: none;
-      background: #fff;
     }
 
     input:focus,
     textarea:focus,
     select:focus {
-      border-color: #168344;
+      border-color: #16833f;
     }
 
     textarea {
@@ -84,619 +87,607 @@
       resize: vertical;
     }
 
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      padding: 14px 0;
-      border-bottom: 1px solid #eee;
-    }
-
-    .cart-item:last-child {
-      border-bottom: 0;
-    }
-
-    .item-name {
+    .total {
+      margin-top: 25px;
+      padding: 18px;
+      background: #f0faf4;
+      border-radius: 12px;
+      font-size: 22px;
       font-weight: bold;
+      color: #16833f;
+      text-align: center;
     }
 
-    .item-details {
-      color: #777;
-      margin-top: 5px;
-      font-size: 14px;
-    }
-
-    .price {
-      color: #168344;
-      font-weight: bold;
-      white-space: nowrap;
-    }
-
-    .total-box {
-      display: flex;
-      justify-content: space-between;
-      padding-top: 18px;
-      margin-top: 10px;
-      border-top: 2px solid #eee;
-      font-size: 21px;
-      font-weight: bold;
-    }
-
-    .submit-btn {
+    button {
       width: 100%;
       border: 0;
-      background: #168344;
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 12px;
+      background: #16833f;
       color: white;
-      padding: 17px;
-      border-radius: 14px;
       font-size: 19px;
       font-weight: bold;
       cursor: pointer;
-      margin-top: 10px;
     }
 
-    .submit-btn:hover {
-      background: #106b35;
+    button:hover {
+      background: #116b34;
     }
 
-    .submit-btn:disabled {
-      background: #aaa;
+    button:disabled {
+      opacity: .6;
       cursor: not-allowed;
     }
 
     .message {
       display: none;
-      padding: 18px;
-      border-radius: 14px;
-      margin-bottom: 20px;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 12px;
       text-align: center;
       font-weight: bold;
     }
 
     .success {
-      background: #e8f8ee;
-      color: #117238;
-      border: 1px solid #a9dfbd;
+      display: block;
+      background: #e9f8ef;
+      color: #16833f;
     }
 
     .error {
-      background: #fff0f0;
-      color: #b42318;
-      border: 1px solid #f1b4b0;
-    }
-
-    .loading {
-      text-align: center;
-      padding: 30px;
-      color: #777;
-      font-size: 18px;
-    }
-
-    .order-number {
-      font-size: 26px;
-      color: #168344;
-      margin: 15px 0;
-    }
-
-    .empty {
-      text-align: center;
-      padding: 35px 15px;
-      color: #777;
-    }
-
-    .back-btn {
       display: block;
-      text-align: center;
-      text-decoration: none;
-      color: #168344;
-      margin-top: 15px;
-      font-weight: bold;
+      background: #fff0f0;
+      color: #c62828;
     }
 
-    @media (max-width: 600px) {
-      .logo {
-        font-size: 27px;
-      }
-
-      .box {
-        padding: 17px;
-      }
-
-      .cart-item {
-        align-items: flex-start;
-      }
+    .back {
+      display: block;
+      margin-top: 15px;
+      text-align: center;
+      color: #16833f;
+      text-decoration: none;
     }
   </style>
 </head>
 
 <body>
 
-<header class="header">
-  <div class="logo">مول البركة</div>
-  <div class="subtitle">إتمام الطلب</div>
+<header>
+  <h1>مول البركة</h1>
+  <p>إتمام الطلب</p>
 </header>
 
-<main class="container">
+<div class="container">
 
-  <!-- رسالة الخطأ -->
-  <div id="errorMessage" class="message error"></div>
+  <div class="box">
 
-  <!-- رسالة النجاح -->
-  <div id="successMessage" class="message success">
-    <div>✅ تم تسجيل طلبك بنجاح</div>
-
-    <div class="order-number">
-      رقم الطلب:
-      <span id="orderNumber"></span>
-    </div>
-
-    <div>
-      سيتم تجهيز طلبك والتواصل معك قريبًا.
-    </div>
-
-    <a href="index.html" class="back-btn">
-      العودة إلى المتجر
-    </a>
-  </div>
-
-  <!-- بيانات العميل -->
-  <section class="box" id="checkoutFormBox">
-
-    <h2>بيانات العميل</h2>
+    <h2>بيانات التوصيل</h2>
 
     <form id="checkoutForm">
 
-      <label for="customerName">الاسم بالكامل *</label>
+      <label>الاسم بالكامل</label>
       <input
         type="text"
         id="customerName"
-        name="customerName"
         placeholder="اكتب اسمك"
         required
       >
 
-      <label for="phone">رقم الهاتف *</label>
+      <label>رقم الهاتف</label>
       <input
         type="tel"
         id="phone"
-        name="phone"
         placeholder="01xxxxxxxxx"
         required
       >
 
-      <label for="address">العنوان *</label>
+      <label>العنوان</label>
       <textarea
         id="address"
-        name="address"
         placeholder="اكتب العنوان بالتفصيل"
         required
       ></textarea>
 
-      <label for="city">المدينة / المنطقة</label>
+      <label>المدينة / المنطقة</label>
       <input
         type="text"
         id="city"
-        name="city"
-        placeholder="المدينة أو المنطقة"
+        placeholder="مثال: القاهرة"
+        required
       >
 
-      <label for="paymentMethod">طريقة الدفع</label>
-
-      <select id="paymentMethod" name="paymentMethod">
+      <label>طريقة الدفع</label>
+      <select id="paymentMethod">
         <option value="الدفع عند الاستلام">الدفع عند الاستلام</option>
       </select>
 
-      <label for="notes">ملاحظات إضافية</label>
-
+      <label>ملاحظات إضافية</label>
       <textarea
         id="notes"
-        name="notes"
-        placeholder="أي ملاحظات خاصة بالطلب"
+        placeholder="أي ملاحظات على الطلب..."
       ></textarea>
 
-      <button
-        type="submit"
-        id="submitButton"
-        class="submit-btn"
-      >
-        تأكيد الطلب
+      <div class="total">
+        الإجمالي:
+        <span id="total">0</span>
+        جنيه
+      </div>
+
+      <button type="submit" id="submitBtn">
+        تأكيد وإتمام الطلب
       </button>
 
     </form>
 
-  </section>
+    <div id="message" class="message"></div>
 
-  <!-- السلة -->
-  <section class="box">
+    <a href="shop.html" class="back">
+      ← العودة إلى المتجر
+    </a>
 
-    <h2>مراجعة الطلب</h2>
+  </div>
 
-    <div id="cartContainer">
-      <div class="loading">
-        جاري تحميل السلة...
-      </div>
-    </div>
-
-  </section>
-
-</main>
-
-
-<!--
-===========================================================
-SUPABASE
-===========================================================
--->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<!-- ملف Supabase الموجود عندك في المشروع -->
-<script src="supabase.js"></script>
-
+</div>
 
 <script>
 
-/*
-===========================================================
-مول البركة - CHECKOUT
-===========================================================
-*/
+  /* ==============================
+     SUPABASE
+  ============================== */
+
+  const SUPABASE_URL =
+    "https://YOUR-PROJECT.supabase.co";
+
+  const SUPABASE_ANON_KEY =
+    "YOUR-ANON-KEY";
+
+  const supabaseClient =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_ANON_KEY
+    );
 
 
-/* ---------------------------------------------------------
-   الحصول على Supabase Client
---------------------------------------------------------- */
+  /* ==============================
+     CART
+  ============================== */
 
-let db = null;
+  function getCart() {
 
+    const possibleKeys = [
+      "cart",
+      "cartItems",
+      "shoppingCart",
+      "albaraka_cart"
+    ];
 
-/*
-  نحاول استخدام العميل الموجود أصلًا في supabase.js
-  بأكثر من اسم شائع.
-*/
+    for (const key of possibleKeys) {
 
-if (window.supabaseClient) {
-  db = window.supabaseClient;
-}
+      try {
 
-else if (window.supabaseClientInstance) {
-  db = window.supabaseClientInstance;
-}
+        const value = localStorage.getItem(key);
 
-else if (window.sb) {
-  db = window.sb;
-}
+        if (!value) continue;
 
+        const parsed = JSON.parse(value);
 
-/*
-===========================================================
-إذا لم يجد العميل، حاول استخدام إعدادات عامة
-===========================================================
-*/
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
+        }
 
-if (!db && window.SUPABASE_URL && window.SUPABASE_ANON_KEY) {
+        if (
+          parsed &&
+          typeof parsed === "object" &&
+          Object.keys(parsed).length > 0
+        ) {
+          return parsed;
+        }
 
-  db = window.supabase.createClient(
-    window.SUPABASE_URL,
-    window.SUPABASE_ANON_KEY
-  );
-
-}
-
-
-/*
-===========================================================
-عناصر الصفحة
-===========================================================
-*/
-
-const cartContainer =
-  document.getElementById("cartContainer");
-
-const checkoutForm =
-  document.getElementById("checkoutForm");
-
-const submitButton =
-  document.getElementById("submitButton");
-
-const errorMessage =
-  document.getElementById("errorMessage");
-
-const successMessage =
-  document.getElementById("successMessage");
-
-const checkoutFormBox =
-  document.getElementById("checkoutFormBox");
-
-const orderNumberElement =
-  document.getElementById("orderNumber");
-
-
-/*
-===========================================================
-السلة
-===========================================================
-*/
-
-let cart = [];
-
-
-/*
-===========================================================
-إظهار الخطأ
-===========================================================
-*/
-
-function showError(message) {
-
-  errorMessage.textContent = message;
-
-  errorMessage.style.display = "block";
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-}
-
-
-/*
-===========================================================
-إخفاء الخطأ
-===========================================================
-*/
-
-function hideError() {
-
-  errorMessage.style.display = "none";
-}
-
-
-/*
-===========================================================
-البحث عن السلة في LocalStorage
-===========================================================
-*/
-
-function loadCart() {
-
-  const possibleKeys = [
-    "cart",
-    "Cart",
-    "shoppingCart",
-    "shopping_cart",
-    "albaraka_cart",
-    "AlbarakaCart",
-    "cartItems",
-    "cart_items"
-  ];
-
-  let found = null;
-
-  for (const key of possibleKeys) {
-
-    const value = localStorage.getItem(key);
-
-    if (!value) continue;
-
-    try {
-
-      const parsed = JSON.parse(value);
-
-      if (Array.isArray(parsed)) {
-        found = parsed;
-        break;
+      } catch (error) {
+        console.log("Cart read error:", error);
       }
+    }
 
-      if (
-        parsed &&
-        Array.isArray(parsed.items)
-      ) {
-        found = parsed.items;
-        break;
-      }
+    return [];
+  }
 
-      if (
-        parsed &&
-        Array.isArray(parsed.cart)
-      ) {
-        found = parsed.cart;
-        break;
-      }
 
-    } catch (e) {
+  /* ==============================
+     CALCULATE TOTAL
+  ============================== */
 
-      console.log(
-        "تعذر قراءة السلة:",
-        key,
-        e
-      );
+  function calculateTotal(cart) {
+
+    let total = 0;
+
+    if (Array.isArray(cart)) {
+
+      cart.forEach(item => {
+
+        const price =
+          Number(
+            item.price ??
+            item.product_price ??
+            item.unit_price ??
+            0
+          );
+
+        const quantity =
+          Number(
+            item.quantity ??
+            item.qty ??
+            item.count ??
+            1
+          );
+
+        total += price * quantity;
+
+      });
+
+    } else {
+
+      Object.values(cart).forEach(item => {
+
+        if (typeof item === "number") {
+          return;
+        }
+
+        const price =
+          Number(
+            item.price ??
+            item.product_price ??
+            item.unit_price ??
+            0
+          );
+
+        const quantity =
+          Number(
+            item.quantity ??
+            item.qty ??
+            item.count ??
+            1
+          );
+
+        total += price * quantity;
+
+      });
 
     }
-  }
 
-  return found || [];
-}
-
-
-/*
-===========================================================
-تحويل رقم
-===========================================================
-*/
-
-function numberValue(value) {
-
-  const n = Number(value);
-
-  if (Number.isFinite(n)) {
-    return n;
-  }
-
-  return 0;
-}
-
-
-/*
-===========================================================
-اسم المنتج
-===========================================================
-*/
-
-function getProductName(item) {
-
-  return (
-    item.product_name ||
-    item.productName ||
-    item.name ||
-    item.title ||
-    "منتج"
-  );
-}
-
-
-/*
-===========================================================
-سعر المنتج
-===========================================================
-*/
-
-function getProductPrice(item) {
-
-  return numberValue(
-    item.price ??
-    item.product_price ??
-    item.productPrice ??
-    item.unit_price ??
-    0
-  );
-}
-
-
-/*
-===========================================================
-كمية المنتج
-===========================================================
-*/
-
-function getProductQuantity(item) {
-
-  const quantity =
-    item.quantity ??
-    item.qty ??
-    item.count ??
-    1;
-
-  const q = parseInt(quantity);
-
-  if (!Number.isFinite(q) || q < 1) {
-    return 1;
-  }
-
-  return q;
-}
-
-
-/*
-===========================================================
-معرف المنتج
-===========================================================
-*/
-
-function getProductId(item) {
-
-  return (
-    item.product_id ??
-    item.productId ??
-    item.id ??
-    null
-  );
-}
-
-
-/*
-===========================================================
-حساب الإجمالي
-===========================================================
-*/
-
-function calculateTotal() {
-
-  let total = 0;
-
-  cart.forEach(item => {
-
-    const price =
-      getProductPrice(item);
-
-    const quantity =
-      getProductQuantity(item);
-
-    total += price * quantity;
-
-  });
-
-  return Number(total.toFixed(2));
-}
-
-
-/*
-===========================================================
-عرض السلة
-===========================================================
-*/
-
-function renderCart() {
-
-  if (!cart.length) {
-
-    cartContainer.innerHTML = `
-      <div class="empty">
-        السلة فارغة.
-        <br><br>
-        <a href="shop.html" class="back-btn">
-          العودة إلى المتجر
-        </a>
-      </div>
-    `;
-
-    submitButton.disabled = true;
-
-    return;
+    return total;
   }
 
 
-  submitButton.disabled = false;
+  /* ==============================
+     SHOW TOTAL
+  ============================== */
+
+  const cart = getCart();
+
+  const total = calculateTotal(cart);
+
+  document.getElementById("total").textContent =
+    total.toFixed(2);
 
 
-  let html = "";
+  /* ==============================
+     FORM SUBMIT
+  ============================== */
 
-  cart.forEach(item => {
+  document
+    .getElementById("checkoutForm")
+    .addEventListener("submit", async function(event) {
 
-    const name =
-      getProductName(item);
+      event.preventDefault();
 
-    const price =
-      getProductPrice(item);
+      const button =
+        document.getElementById("submitBtn");
 
-    const quantity =
-      getProductQuantity(item);
+      const message =
+        document.getElementById("message");
 
-    const subtotal =
-      price * quantity;
+      button.disabled = true;
+
+      button.textContent =
+        "جاري تسجيل الطلب...";
+
+      message.className = "message";
+      message.textContent = "";
 
 
-    html += `
-      <div class="cart-item">
+      try {
 
-        <div>
+        /* ==========================
+           CHECK CART
+        ========================== */
 
-          <div class="item-name">
-            ${escapeHtml(name)}
-          </div>
+        if (!cart || (
+          Array.isArray(cart)
+            ? cart.length === 0
+            : Object.keys(cart).length === 0
+        )) {
 
-          <div class="item-details">
-            الكمية: ${quantity}
-            ×
-            ${price.toFixed(
+          throw new Error(
+            "السلة فارغة، أضف منتجات أولاً."
+          );
+
+        }
+
+
+        /* ==========================
+           FORM DATA
+        ========================== */
+
+        const customerName =
+          document
+            .getElementById("customerName")
+            .value
+            .trim();
+
+        const phone =
+          document
+            .getElementById("phone")
+            .value
+            .trim();
+
+        const address =
+          document
+            .getElementById("address")
+            .value
+            .trim();
+
+        const city =
+          document
+            .getElementById("city")
+            .value
+            .trim();
+
+        const paymentMethod =
+          document
+            .getElementById("paymentMethod")
+            .value;
+
+        const notes =
+          document
+            .getElementById("notes")
+            .value
+            .trim();
+
+
+        if (!customerName ||
+            !phone ||
+            !address ||
+            !city) {
+
+          throw new Error(
+            "من فضلك أكمل جميع بيانات التوصيل."
+          );
+
+        }
+
+
+        /* ==========================
+           CREATE ORDER NUMBER
+        ========================== */
+
+        const orderNumber =
+          "BRK-" +
+          Date.now();
+
+
+        /* ==========================
+           INSERT ORDER
+           يستخدم الأعمدة الظاهرة
+           في جدول orders
+        ========================== */
+
+        const orderData = {
+
+          customer_name:
+            customerName,
+
+          phone:
+            phone,
+
+          address:
+            address,
+
+          city:
+            city,
+
+          total:
+            total,
+
+          status:
+            "جديد"
+
+        };
+
+
+        /*
+          نحاول أولاً إدخال البيانات
+          الأساسية الموجودة في جدول orders.
+        */
+
+        const {
+          data: order,
+          error: orderError
+        } = await supabaseClient
+          .from("orders")
+          .insert(orderData)
+          .select()
+          .single();
+
+
+        if (orderError) {
+
+          console.error(
+            "ORDER ERROR:",
+            orderError
+          );
+
+          throw new Error(
+            "تعذر تسجيل الطلب في قاعدة البيانات: " +
+            orderError.message
+          );
+
+        }
+
+
+        /* ==========================
+           GET ORDER ID
+        ========================== */
+
+        const orderId = order.id;
+
+
+        /* ==========================
+           INSERT ORDER ITEMS
+        ========================== */
+
+        const items = [];
+
+        if (Array.isArray(cart)) {
+
+          cart.forEach(item => {
+
+            const productId =
+              String(
+                item.id ??
+                item.product_id ??
+                ""
+              );
+
+            const productName =
+              String(
+                item.name ??
+                item.product_name ??
+                "منتج"
+              );
+
+            const price =
+              Number(
+                item.price ??
+                item.product_price ??
+                item.unit_price ??
+                0
+              );
+
+            const quantity =
+              Number(
+                item.quantity ??
+                item.qty ??
+                item.count ??
+                1
+              );
+
+            items.push({
+
+              order_id:
+                orderId,
+
+              product_id:
+                productId,
+
+              product_name:
+                productName,
+
+              quantity:
+                quantity,
+
+              price:
+                price
+
+            });
+
+          });
+
+        }
+
+
+        if (items.length > 0) {
+
+          const {
+            error: itemsError
+          } = await supabaseClient
+            .from("order_items")
+            .insert(items);
+
+
+          if (itemsError) {
+
+            console.error(
+              "ITEMS ERROR:",
+              itemsError
+            );
+
+            /*
+              لا نعتبر الطلب فاشلاً هنا
+              لأن سجل orders تم إنشاؤه بالفعل.
+            */
+
+          }
+
+        }
+
+
+        /* ==========================
+           SUCCESS
+        ========================== */
+
+        message.className =
+          "message success";
+
+        message.innerHTML =
+          "✅ تم تسجيل طلبك بنجاح<br><br>" +
+          "رقم الطلب: <strong>" +
+          orderNumber +
+          "</strong><br><br>" +
+          "سيتم التواصل معك لتأكيد الطلب.";
+
+
+        button.textContent =
+          "تم تسجيل الطلب ✓";
+
+
+        /* ==========================
+           EMPTY CART
+        ========================== */
+
+        localStorage.removeItem("cart");
+        localStorage.removeItem("cartItems");
+        localStorage.removeItem("shoppingCart");
+        localStorage.removeItem("albaraka_cart");
+
+
+        document
+          .getElementById("checkoutForm")
+          .reset();
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        message.className =
+          "message error";
+
+        message.textContent =
+          "❌ " +
+          error.message;
+
+
+        button.disabled = false;
+
+        button.textContent =
+          "تأكيد وإتمام الطلب";
+
+      }
+
+    });
+
+</script>
+
+</body>
+</html>
