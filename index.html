@@ -1,50 +1,963 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>متجر كارفور المتطور</title>
-  <link rel="stylesheet" href="styles.css" />
-  <script defer src="products.js"></script>
-  <script defer src="cart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>مول البركة أولاد الجارحي | خضروات وفواكه ولحوم وماركت</title>
+
+    <meta name="description"
+          content="مول البركة أولاد الجارحي - خضروات وفواكه ولحوم وطيور وماركت وعطارة">
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- ملف المنتجات والمنطق الحالي -->
+    <script defer src="app.js"></script>
+    <script defer src="cart.js"></script>
 </head>
+
 <body>
-  <header>
-    <h1>متجر كارفور</h1>
-    <nav>
-      <button class="category-btn active" data-category="all">الكل</button>
-      <button class="category-btn" data-category="vegetables">الخضروات</button>
-      <button class="category-btn" data-category="fruits">الفواكه</button>
-      <button class="category-btn" data-category="meats">اللحوم</button>
-      <button class="category-btn" data-category="poultry">الطيور</button>
-      <button class="category-btn" data-category="spices">العطارة</button>
+
+<!-- ================= TOP BAR ================= -->
+
+<div class="top-bar">
+    <div class="container top-bar-inner">
+
+        <div>
+            🚚 توصيل سريع حتى باب المنزل
+        </div>
+
+        <div>
+            💳 كاش أو فيزا &nbsp; | &nbsp; 📱 اطلب عبر واتساب
+        </div>
+
+    </div>
+</div>
+
+
+<!-- ================= HEADER ================= -->
+
+<header class="main-header">
+
+    <div class="container header-main">
+
+        <!-- LOGO -->
+
+        <a href="index.html" class="logo">
+
+            <div class="logo-symbol">
+                🛒
+            </div>
+
+            <div class="logo-text">
+
+                <strong>مول البركة</strong>
+
+                <small>
+                    أولاد الجارحي
+                </small>
+
+            </div>
+
+        </a>
+
+
+        <!-- LOCATION -->
+
+        <button class="location-button" type="button">
+
+            <span class="location-icon">
+                📍
+            </span>
+
+            <span class="location-content">
+
+                <small>
+                    التوصيل إلى
+                </small>
+
+                <strong>
+                    أولاد الجارحي
+                </strong>
+
+            </span>
+
+        </button>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-wrapper">
+
+            <input
+                id="searchInput"
+                type="search"
+                placeholder="ابحث عن خضروات، فواكه، لحوم، ماركت..."
+                autocomplete="off"
+            >
+
+            <button
+                id="searchButton"
+                type="button"
+                aria-label="بحث"
+            >
+                🔍
+            </button>
+
+        </div>
+
+
+        <!-- ACCOUNT -->
+
+        <a href="login.html" class="account-button">
+
+            <span class="account-icon">
+                👤
+            </span>
+
+            <span class="account-text">
+
+                <small>
+                    أهلاً بك
+                </small>
+
+                <strong>
+                    تسجيل الدخول
+                </strong>
+
+            </span>
+
+        </a>
+
+
+        <!-- CART -->
+
+        <a href="cart.html" class="cart-button">
+
+            <span class="cart-icon">
+                🛒
+            </span>
+
+            <span class="cart-text">
+
+                <small>
+                    سلة التسوق
+                </small>
+
+                <strong>
+                    0 ج.م
+                </strong>
+
+            </span>
+
+            <span
+                id="cartCount"
+                class="cart-count"
+            >
+                0
+            </span>
+
+        </a>
+
+    </div>
+
+
+    <!-- MOBILE SEARCH -->
+
+    <div class="mobile-search">
+
+        <div class="container">
+
+            <div class="search-wrapper">
+
+                <input
+                    id="mobileSearchInput"
+                    type="search"
+                    placeholder="ابحث عن منتج..."
+                >
+
+                <button
+                    id="mobileSearchButton"
+                    type="button"
+                >
+                    🔍
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="main-nav">
+
+        <div class="container nav-inner">
+
+            <button
+                class="categories-button"
+                type="button"
+            >
+                ☰
+                جميع الأقسام
+            </button>
+
+            <div class="nav-links">
+
+                <a
+                    href="#"
+                    class="active"
+                >
+                    الرئيسية
+                </a>
+
+                <a href="#categories">
+                    الأقسام
+                </a>
+
+                <a href="#offers">
+                    🔥 العروض
+                </a>
+
+                <a href="#products">
+                    المنتجات
+                </a>
+
+                <a href="checkout.html">
+                    إتمام الطلب
+                </a>
+
+            </div>
+
+            <div class="nav-offer">
+                🎁 عروض يومية وأسعار مميزة
+            </div>
+
+        </div>
+
     </nav>
-    <div class="cart" id="cart-container">
-      <button id="cart-btn">سلة التسوق (<span id="cart-count">0</span>)</button>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<main>
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="hero-card">
+
+            <div class="hero-content">
+
+                <span class="hero-badge">
+                    🛍️ تسوق بسهولة من مول البركة
+                </span>
+
+                <h1>
+                    كل احتياجات بيتك
+                    <br>
+
+                    <strong>
+                        في مكان واحد
+                    </strong>
+                </h1>
+
+                <p>
+                    خضروات وفواكه طازجة، لحوم، طيور،
+                    ماركت وعطارة، بأسعار مناسبة
+                    وتوصيل حتى باب البيت.
+                </p>
+
+                <div class="hero-actions">
+
+                    <a
+                        href="#products"
+                        class="primary-button"
+                    >
+                        🛒 ابدأ التسوق
+                    </a>
+
+                    <a
+                        href="#categories"
+                        class="secondary-button"
+                    >
+                        تصفح الأقسام
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-products">
+
+                <div class="hero-circle">
+
+                    <div class="hero-cart">
+                        🛒
+                    </div>
+
+                    <div class="hero-product hp-1">
+                        🍎
+                    </div>
+
+                    <div class="hero-product hp-2">
+                        🥩
+                    </div>
+
+                    <div class="hero-product hp-3">
+                        🥬
+                    </div>
+
+                    <div class="hero-product hp-4">
+                        🐔
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
-  </header>
 
-  <main>
-    <section id="products-container" class="products-grid"></section>
-  </main>
+</section>
 
-  <div id="cart-modal" class="modal hidden">
-    <div class="modal-content">
-      <span id="close-cart" class="close">&times;</span>
-      <h2>سلة التسوق</h2>
-      <ul id="cart-items"></ul>
-      <p>المجموع: <span id="total-price">0</span> جنيه</p>
 
-      <h3>طرق الدفع</h3>
-      <div class="payment-options">
-        <button id="pay-cash-btn" class="pay-btn">الدفع كاش عند الاستلام</button>
-        <button id="pay-wallet-btn" class="pay-btn">الدفع عبر المحفظة (محاكاة)</button>
-        <button id="pay-whatsapp-btn" class="pay-btn">تحويل الطلب على واتساب</button>
-      </div>
+<!-- ================= FEATURES ================= -->
+
+<section class="quick-features">
+
+    <div class="container">
+
+        <div class="features-grid">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🚚
+                </div>
+
+                <div>
+                    <strong>
+                        توصيل سريع
+                    </strong>
+
+                    <span>
+                        حتى باب المنزل
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🥬
+                </div>
+
+                <div>
+                    <strong>
+                        منتجات طازجة
+                    </strong>
+
+                    <span>
+                        اختيار يومي
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    💳
+                </div>
+
+                <div>
+                    <strong>
+                        دفع مرن
+                    </strong>
+
+                    <span>
+                        كاش أو فيزا
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📱
+                </div>
+
+                <div>
+                    <strong>
+                        دعم واتساب
+                    </strong>
+
+                    <span>
+                        تواصل معنا بسهولة
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
-  </div>
 
-  <div id="overlay" class="hidden"></div>
+</section>
+
+
+<!-- ================= CATEGORIES ================= -->
+
+<section
+    id="categories"
+    class="section"
+>
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <div>
+
+                <span class="section-label">
+                    تسوق حسب القسم
+                </span>
+
+                <h2>
+                    أقسام مول البركة
+                </h2>
+
+            </div>
+
+            <a
+                href="#products"
+                class="view-all"
+            >
+                عرض المنتجات ←
+            </a>
+
+        </div>
+
+
+        <div class="categories-grid">
+
+            <button
+                class="category-card"
+                data-category="vegetables"
+                type="button"
+            >
+
+                <div class="category-image">
+                    🥬
+                </div>
+
+                <strong>
+                    خضروات
+                </strong>
+
+                <span>
+                    طازجة يوميًا
+                </span>
+
+            </button>
+
+
+            <button
+                class="category-card"
+                data-category="vegetables"
+                type="button"
+            >
+
+                <div class="category-image">
+                    🍎
+                </div>
+
+                <strong>
+                    فواكه
+                </strong>
+
+                <span>
+                    أفضل الاختيارات
+                </span>
+
+            </button>
+
+
+            <button
+                class="category-card"
+                data-category="meat"
+                type="button"
+            >
+
+                <div class="category-image">
+                    🥩
+                </div>
+
+                <strong>
+                    اللحوم
+                </strong>
+
+                <span>
+                    لحوم طازجة
+                </span>
+
+            </button>
+
+
+            <button
+                class="category-card"
+                data-category="chicken"
+                type="button"
+            >
+
+                <div class="category-image">
+                    🐔
+                </div>
+
+                <strong>
+                    الطيور
+                </strong>
+
+                <span>
+                    دواجن طازجة
+                </span>
+
+            </button>
+
+
+            <button
+                class="category-card"
+                data-category="grocery"
+                type="button"
+            >
+
+                <div class="category-image">
+                    🛒
+                </div>
+
+                <strong>
+                    ماركت
+                </strong>
+
+                <span>
+                    كل احتياجاتك
+                </span>
+
+            </button>
+
+
+            <button
+                class="category-card"
+                type="button"
+            >
+
+                <div class="category-image">
+                    🌿
+                </div>
+
+                <strong>
+                    عطارة
+                </strong>
+
+                <span>
+                    توابل وأعشاب
+                </span>
+
+            </button>
+
+
+            <button
+                class="category-card"
+                data-category="dairy"
+                type="button"
+            >
+
+                <div class="category-image">
+                    🥛
+                </div>
+
+                <strong>
+                    ألبان
+                </strong>
+
+                <span>
+                    منتجات يومية
+                </span>
+
+            </button>
+
+
+            <button
+                class="category-card"
+                data-category="drinks"
+                type="button"
+            >
+
+                <div class="category-image">
+                    🧃
+                </div>
+
+                <strong>
+                    مشروبات
+                </strong>
+
+                <span>
+                    باردة ومنعشة
+                </span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= OFFERS ================= -->
+
+<section
+    id="offers"
+    class="section offers-section"
+>
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <div>
+
+                <span class="section-label">
+                    لا تفوت الفرصة
+                </span>
+
+                <h2>
+                    عروض مول البركة 🔥
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="offers-grid">
+
+            <div class="offer-card offer-one">
+
+                <div class="offer-content">
+
+                    <span>
+                        عروض اليوم
+                    </span>
+
+                    <h3>
+                        خضروات وفواكه
+                    </h3>
+
+                    <strong>
+                        أسعار مميزة
+                    </strong>
+
+                    <a href="#products">
+                        تسوق الآن ←
+                    </a>
+
+                </div>
+
+                <div class="offer-emoji">
+                    🍎🥬🍊
+                </div>
+
+            </div>
+
+
+            <div class="offer-card offer-two">
+
+                <div class="offer-content">
+
+                    <span>
+                        عروض خاصة
+                    </span>
+
+                    <h3>
+                        لحوم وطيور
+                    </h3>
+
+                    <strong>
+                        جودة تستحق الثقة
+                    </strong>
+
+                    <a href="#products">
+                        اكتشف العروض ←
+                    </a>
+
+                </div>
+
+                <div class="offer-emoji">
+                    🥩🐔
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PRODUCTS ================= -->
+
+<section
+    id="products"
+    class="section"
+>
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <div>
+
+                <span class="section-label">
+                    منتجاتنا
+                </span>
+
+                <h2>
+                    تسوق منتجات مول البركة
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="product-tabs">
+
+            <button
+                class="product-tab active"
+                data-category="all"
+                type="button"
+            >
+                الكل
+            </button>
+
+            <button
+                class="product-tab"
+                data-category="vegetables"
+                type="button"
+            >
+                🥬 خضروات وفواكه
+            </button>
+
+            <button
+                class="product-tab"
+                data-category="meat"
+                type="button"
+            >
+                🥩 لحوم
+            </button>
+
+            <button
+                class="product-tab"
+                data-category="chicken"
+                type="button"
+            >
+                🐔 طيور
+            </button>
+
+            <button
+                class="product-tab"
+                data-category="grocery"
+                type="button"
+            >
+                🛒 ماركت
+            </button>
+
+            <button
+                class="product-tab"
+                data-category="dairy"
+                type="button"
+            >
+                🥛 ألبان
+            </button>
+
+            <button
+                class="product-tab"
+                data-category="drinks"
+                type="button"
+            >
+                🧃 مشروبات
+            </button>
+
+        </div>
+
+
+        <div
+            id="productsGrid"
+            class="products-grid"
+        ></div>
+
+
+        <div
+            id="noProducts"
+            class="no-products"
+            hidden
+        >
+            <div>
+                🔍
+            </div>
+
+            <h3>
+                لم نجد منتجات مطابقة
+            </h3>
+
+            <p>
+                جرّب البحث باسم منتج آخر.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= WHATSAPP ================= -->
+
+<a
+    href="https://wa.me/"
+    class="whatsapp-float"
+    target="_blank"
+    rel="noopener"
+    aria-label="تواصل معنا عبر واتساب"
+>
+    <span>
+        💬
+    </span>
+
+    <strong>
+        واتساب
+    </strong>
+</a>
+
+
+<!-- ================= TOAST ================= -->
+
+<div
+    id="toast"
+    class="toast"
+    role="status"
+    aria-live="polite"
+>
+
+    <span id="toastMessage"></span>
+
+</div>
+
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-main">
+
+            <div>
+
+                <div class="footer-logo">
+                    🛒 مول البركة
+                </div>
+
+                <p>
+                    أولاد الجارحي
+                </p>
+
+                <p>
+                    خضروات وفواكه • لحوم • طيور
+                    • ماركت • عطارة
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    التسوق
+                </h3>
+
+                <a href="#categories">
+                    الأقسام
+                </a>
+
+                <a href="#offers">
+                    العروض
+                </a>
+
+                <a href="#products">
+                    المنتجات
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    خدمة العملاء
+                </h3>
+
+                <a href="checkout.html">
+                    إتمام الطلب
+                </a>
+
+                <a href="#">
+                    سياسة الخصوصية
+                </a>
+
+                <a href="#">
+                    تواصل معنا
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 مول البركة أولاد الجارحي
+            </span>
+
+            <span>
+                جميع الحقوق محفوظة
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
 
 </body>
 </html>
