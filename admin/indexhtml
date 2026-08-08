@@ -21,7 +21,7 @@
 
     <link
         rel="stylesheet"
-        href="assets/css/admin.css"
+        href="admin.css"
     >
 
 </head>
