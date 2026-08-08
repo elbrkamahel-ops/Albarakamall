@@ -1,173 +1,732 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#087f3f">
 
-    <title>مول البركة | أولاد الجارحي</title>
+<title>تسجيل الدخول | مول البركة</title>
 
-    <meta name="description"
-          content="مول البركة أولاد الجارحي - خضروات وفواكه ولحوم وطيور وماركت وعطارة">
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
-    <link rel="stylesheet" href="style.css">
+:root{
+    --green:#087f3f;
+    --green-dark:#056632;
+    --light:#f4f8f6;
+    --text:#17221d;
+    --muted:#7b8781;
+    --border:#e3e9e5;
+    --white:#fff;
+    --red:#d93025;
+}
+
+body{
+    min-height:100vh;
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            #dff5e8 0,
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 85%,
+            #dff5e8 0,
+            transparent 30%
+        ),
+        #f5f8f6;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+/* الخلفية */
+
+.page{
+    width:100%;
+    max-width:1080px;
+    min-height:650px;
+    background:#fff;
+    border-radius:28px;
+    overflow:hidden;
+    box-shadow:
+        0 25px 70px
+        rgba(20,50,35,.13);
+    display:grid;
+    grid-template-columns:1fr 1fr;
+}
+
+/* الجانب الأخضر */
+
+.brand-side{
+    background:
+        linear-gradient(
+            145deg,
+            #056632,
+            #087f3f 55%,
+            #0dbb5e
+        );
+    color:#fff;
+    padding:55px;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    overflow:hidden;
+}
+
+.brand-side::before{
+    content:"";
+    position:absolute;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    background:
+        rgba(255,255,255,.07);
+    top:-130px;
+    right:-120px;
+}
+
+.brand-side::after{
+    content:"";
+    position:absolute;
+    width:280px;
+    height:280px;
+    border-radius:50%;
+    background:
+        rgba(255,255,255,.06);
+    bottom:-120px;
+    left:-100px;
+}
+
+.brand-content{
+    position:relative;
+    z-index:2;
+}
+
+.logo{
+    width:82px;
+    height:82px;
+    border-radius:25px;
+    background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.25);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:42px;
+    margin-bottom:25px;
+    box-shadow:
+        0 15px 35px
+        rgba(0,0,0,.12);
+}
+
+.brand-side h1{
+    font-size:34px;
+    margin-bottom:12px;
+}
+
+.brand-side .subtitle{
+    font-size:15px;
+    line-height:1.9;
+    opacity:.9;
+    max-width:390px;
+}
+
+.features{
+    margin-top:35px;
+    display:flex;
+    flex-direction:column;
+    gap:13px;
+}
+
+.feature{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:12px;
+}
+
+.feature-icon{
+    width:34px;
+    height:34px;
+    border-radius:10px;
+    background:rgba(255,255,255,.13);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* نموذج الدخول */
+
+.login-side{
+    padding:55px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.login-box{
+    width:100%;
+    max-width:400px;
+}
+
+.mobile-logo{
+    display:none;
+}
+
+.login-box h2{
+    font-size:27px;
+    color:var(--text);
+    margin-bottom:9px;
+}
+
+.login-description{
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.8;
+    margin-bottom:28px;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+label{
+    display:block;
+    color:#34423a;
+    font-size:11px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.input-wrap{
+    position:relative;
+}
+
+.input-icon{
+    position:absolute;
+    right:14px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:17px;
+}
+
+input{
+    width:100%;
+    height:51px;
+    border:1px solid var(--border);
+    border-radius:13px;
+    background:#fafcfb;
+    padding:
+        0 44px
+        0 45px;
+    outline:none;
+    font-family:inherit;
+    font-size:12px;
+    color:var(--text);
+    transition:.2s;
+}
+
+input:focus{
+    background:#fff;
+    border-color:#5cb980;
+    box-shadow:
+        0 0 0 4px
+        rgba(8,127,63,.08);
+}
+
+input::placeholder{
+    color:#aab3ae;
+}
+
+.password-toggle{
+    position:absolute;
+    left:12px;
+    top:50%;
+    transform:translateY(-50%);
+    border:0;
+    background:transparent;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.form-options{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:5px 0 22px;
+}
+
+.remember{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    font-size:10px;
+    color:#657169;
+    cursor:pointer;
+}
+
+.remember input{
+    width:15px;
+    height:15px;
+    padding:0;
+    accent-color:var(--green);
+}
+
+.forgot{
+    color:var(--green);
+    text-decoration:none;
+    font-size:10px;
+    font-weight:bold;
+}
+
+.login-button{
+    width:100%;
+    height:52px;
+    border:0;
+    border-radius:14px;
+    background:
+        linear-gradient(
+            135deg,
+            #087f3f,
+            #0dbb5e
+        );
+    color:#fff;
+    font-family:inherit;
+    font-size:13px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:
+        0 10px 25px
+        rgba(8,127,63,.22);
+    transition:.2s;
+}
+
+.login-button:hover{
+    transform:translateY(-1px);
+    box-shadow:
+        0 13px 30px
+        rgba(8,127,63,.28);
+}
+
+.login-button:active{
+    transform:translateY(0);
+}
+
+.message{
+    display:none;
+    padding:11px 13px;
+    border-radius:10px;
+    margin-bottom:15px;
+    font-size:10px;
+    line-height:1.7;
+}
+
+.message.error{
+    display:block;
+    background:#fff0ef;
+    color:var(--red);
+    border:1px solid #ffd6d2;
+}
+
+.message.success{
+    display:block;
+    background:#ecf9f1;
+    color:#087f3f;
+    border:1px solid #c9ead5;
+}
+
+.demo{
+    margin-top:22px;
+    padding:13px;
+    background:#f5f9f6;
+    border:1px solid #e1ece5;
+    border-radius:12px;
+    text-align:center;
+    color:#758179;
+    font-size:9px;
+    line-height:1.8;
+}
+
+.footer{
+    margin-top:22px;
+    text-align:center;
+    color:#a0aaa5;
+    font-size:8px;
+}
+
+/* الهاتف */
+
+@media(max-width:800px){
+
+    body{
+        padding:12px;
+    }
+
+    .page{
+        display:block;
+        min-height:auto;
+        max-width:500px;
+        border-radius:22px;
+    }
+
+    .brand-side{
+        display:none;
+    }
+
+    .login-side{
+        min-height:650px;
+        padding:35px 25px;
+    }
+
+    .mobile-logo{
+        display:flex;
+        width:68px;
+        height:68px;
+        border-radius:20px;
+        background:
+            linear-gradient(
+                135deg,
+                #087f3f,
+                #0dbb5e
+            );
+        color:#fff;
+        align-items:center;
+        justify-content:center;
+        font-size:32px;
+        margin:0 auto 20px;
+        box-shadow:
+            0 12px 28px
+            rgba(8,127,63,.2);
+    }
+
+    .login-box h2{
+        text-align:center;
+        font-size:23px;
+    }
+
+    .login-description{
+        text-align:center;
+    }
+}
+</style>
 </head>
 
 <body>
 
-<!-- ================= TOP BAR ================= -->
+<div class="page">
 
-<div class="topbar">
+    <!-- الجانب التعريفي -->
 
-    <div>
-        🚚 توصيل سريع حتى باب المنزل
-    </div>
+    <section class="brand-side">
 
-    <div>
-        💳 كاش أو فيزا
-    </div>
+        <div class="brand-content">
 
-    <div>
-        💬 واتساب: 01119511185
-    </div>
+            <div class="logo">
+                🛒
+            </div>
+
+            <h1>
+                مول البركة
+            </h1>
+
+            <div class="subtitle">
+                أولاد الجارحي
+                <br>
+                نظام إدارة المتجر الإلكتروني
+            </div>
+
+            <div class="features">
+
+                <div class="feature">
+                    <div class="feature-icon">📦</div>
+                    إدارة المنتجات والمخزون
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">🧾</div>
+                    متابعة وإدارة الطلبات
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">👥</div>
+                    إدارة العملاء
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">📈</div>
+                    التقارير والإحصائيات
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- الدخول -->
+
+    <section class="login-side">
+
+        <div class="login-box">
+
+            <div class="mobile-logo">
+                🛒
+            </div>
+
+            <h2>
+                تسجيل الدخول
+            </h2>
+
+            <p class="login-description">
+                أدخل بيانات مدير المتجر للوصول إلى لوحة التحكم.
+            </p>
+
+            <div
+                id="message"
+                class="message"
+            ></div>
+
+            <form
+                id="loginForm"
+                autocomplete="on"
+            >
+
+                <div class="form-group">
+
+                    <label for="username">
+                        اسم المستخدم
+                    </label>
+
+                    <div class="input-wrap">
+
+                        <span class="input-icon">
+                            👤
+                        </span>
+
+                        <input
+                            id="username"
+                            name="username"
+                            type="text"
+                            placeholder="أدخل اسم المستخدم"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        كلمة المرور
+                    </label>
+
+                    <div class="input-wrap">
+
+                        <span class="input-icon">
+                            🔒
+                        </span>
+
+                        <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            placeholder="أدخل كلمة المرور"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="togglePassword()"
+                            aria-label="إظهار كلمة المرور"
+                        >
+                            👁️
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-options">
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            id="remember"
+                        >
+
+                        تذكرني
+
+                    </label>
+
+                    <a
+                        href="#"
+                        class="forgot"
+                        onclick="forgotPassword(event)"
+                    >
+                        نسيت كلمة المرور؟
+                    </a>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-button"
+                    id="loginButton"
+                >
+                    دخول لوحة التحكم
+                </button>
+
+            </form>
+
+
+            <div class="demo">
+                🔐 نظام دخول آمن
+                <br>
+                سيتم ربط الحساب ببيانات الإدارة الفعلية في الخطوة التالية.
+            </div>
+
+
+            <div class="footer">
+                © 2026 مول البركة أولاد الجارحي
+            </div>
+
+        </div>
+
+    </section>
 
 </div>
 
 
-<!-- ================= HEADER ================= -->
+<script>
 
-<header class="header">
+function togglePassword(){
 
-    <a href="index.html" class="brand">
+    const input =
+        document.getElementById("password");
 
-        <div class="brand-mark">
-            ب
-        </div>
+    const button =
+        document.querySelector(".password-toggle");
 
-        <div class="brand-text">
+    if(input.type === "password"){
 
-            <strong>
-                مول البركة
-            </strong>
+        input.type = "text";
+        button.textContent = "🙈";
 
-            <small>
-                أولاد الجارحي
-            </small>
+    }else{
 
-        </div>
+        input.type = "password";
+        button.textContent = "👁️";
 
-    </a>
+    }
 
-
-    <!-- SEARCH -->
-
-    <div class="search-box">
-
-        <span class="search-icon">
-            🔍
-        </span>
-
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="ابحث عن منتج..."
-            autocomplete="off"
-        >
-
-    </div>
+}
 
 
-    <!-- CHECKOUT -->
+function showMessage(text,type){
 
-    <a href="checkout.html" class="header-account">
+    const message =
+        document.getElementById("message");
 
-        👤
+    message.textContent = text;
 
-        <span>
-            إتمام الطلب
-        </span>
+    message.className =
+        "message " + type;
 
-    </a>
-
-
-    <!-- CART -->
-
-    <a href="cart.html" class="cart-button">
-
-        🛒
-
-        <span>
-            السلة
-        </span>
-
-        <b id="cartCount">
-            0
-        </b>
-
-    </a>
-
-</header>
+}
 
 
-<!-- ================= NAVIGATION ================= -->
+function forgotPassword(event){
 
-<nav class="main-nav">
+    event.preventDefault();
 
-    <a
-        href="#home"
-        class="active"
-    >
-        الرئيسية
-    </a>
+    showMessage(
+        "استعادة كلمة المرور سيتم ربطها بنظام الإدارة في الخطوة التالية.",
+        "error"
+    );
 
-    <a href="#categories">
-        الأقسام
-    </a>
-
-    <a href="#offers">
-        🔥 العروض
-    </a>
-
-    <a href="#products">
-        المنتجات
-    </a>
-
-    <a href="cart.html">
-        🛒 السلة
-    </a>
-
-</nav>
+}
 
 
-<main>
+document
+.getElementById("loginForm")
+.addEventListener("submit",function(event){
 
+    event.preventDefault();
 
-<!-- ================= HERO ================= -->
+    const username =
+        document
+        .getElementById("username")
+        .value
+        .trim();
 
-<section
-    class="hero"
-    id="home"
->
+    const password =
+        document
+        .getElementById("password")
+        .value;
 
-    <div class="hero-content">
+    const button =
+        document.getElementById("loginButton");
 
-        <div class="hero-badge">
-            ⭐ تسوق محلي بسهولة
-        </div>
+    if(!username || !password){
 
+        showMessage(
+            "من فضلك أدخل اسم المستخدم وكلمة المرور.",
+            "error"
+        );
 
-        <h1>
+        return;
+    }
 
-            كل احتياجات بيتك
+    /*
+       ملاحظة:
+       هذه واجهة تسجيل الدخول فقط.
+       لا نضع كلمة مرور حقيقية داخل JavaScript
+       لأن ذلك غير آمن.
+       سيتم ربطها بنظام تسجيل دخول حقيقي
+       في الخطوة الخاصة بالخادم.
+    */
 
-            <strong>
-                في مكان واحد
-            </strong>
+    button.disabled = true;
 
-        </h1>
+    button.textContent =
+        "جاري التحقق...";
 
+    setTimeout(function(){
 
-        <p>
+        button.disabled = false;
 
-            خضروات وفواكه طازجة،
-            لحوم وطيور،
-            مار
+        button.textContent =
+            "دخول لوحة التحكم";
+
+        showMessage(
+            "واجهة تسجيل الدخول جاهزة. سنربطها الآن بنظام الدخول الآمن.",
+            "success"
+        );
+
+    },800);
+
+});
+
+</script>
+
+</body>
+</html>
