@@ -1,111 +1,642 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>مول البركة | تسوق كل احتياجات بيتك</title>
+    <title>مول البركة | كل احتياجات بيتك</title>
 
-<meta name="description"
-content="مول البركة للخضروات والفواكه واللحوم والدواجن والماركت">
+    <meta name="description"
+          content="مول البركة للخضروات والفواكه واللحوم والدواجن والطيور والماركت والجزارة">
 
-<<link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-<body>
+        body {
+            font-family: Arial, Tahoma, sans-serif;
+            background: #f5f6f7;
+            color: #222;
+            line-height: 1.6;
+        }
 
-<!-- TOP BAR -->
-<div class="top-bar">
-    <div class="container top-bar-inner">
-        <span>🚚 توصيل طلباتك حتى باب البيت</span>
-        <span>📞 خدمة العملاء: 01119511185</span>
-    </div>
-</div>
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
 
-<!-- HEADER -->
-<header class="header">
+        /* ===== TOP BAR ===== */
 
-    <div class="container header-main">
+        .top-bar {
+            background: #087f3f;
+            color: white;
+            font-size: 13px;
+            padding: 8px 20px;
+        }
 
-        <!-- LOGO -->
-        <a href="index.html" class="logo">
-            <div class="logo-symbol">البركة</div>
+        .top-inner {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
 
-            <div class="logo-name">
-                <strong>مول البركة</strong>
-                <small>كل احتياجات بيتك</small>
-            </div>
-        </a>
+        /* ===== HEADER ===== */
 
+        header {
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,.08);
+        }
 
-        <!-- SEARCH -->
-        <div class="search-box">
+        .header-main {
+            max-width: 1200px;
+            margin: auto;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
 
-            <input
-                id="q"
-                type="search"
-                placeholder="ابحث عن منتج أو قسم..."
-            >
+        .logo {
+            min-width: 190px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-            <button onclick="goSearch()">
-                🔍
-            </button>
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: #087f3f;
+            color: #ffd400;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 27px;
+        }
 
-        </div>
+        .logo-text strong {
+            display: block;
+            font-size: 23px;
+            color: #087f3f;
+        }
 
+        .logo-text span {
+            color: #777;
+            font-size: 12px;
+        }
 
-        <!-- ACCOUNT -->
-        <a href="login.html" class="header-account">
+        .search {
+            flex: 1;
+            display: flex;
+            background: #f3f4f5;
+            border: 1px solid #ddd;
+            border-radius: 9px;
+            overflow: hidden;
+            height: 46px;
+        }
 
-            <span class="account-icon">👤</span>
+        .search input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            outline: none;
+            padding: 0 15px;
+            font-size: 15px;
+        }
 
-            <div>
-                <small>مرحباً بك</small>
-                <strong>تسجيل الدخول</strong>
-            </div>
+        .search button {
+            width: 55px;
+            border: none;
+            background: #ffd400;
+            font-size: 20px;
+        }
 
-        </a>
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
+        .action {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 9px;
+            padding: 9px 12px;
+            font-size: 13px;
+            white-space: nowrap;
+        }
 
-        <!-- CART -->
-        <a href="cart.html" class="header-cart">
+        .action:hover {
+            border-color: #087f3f;
+            color: #087f3f;
+        }
 
-            <span class="cart-icon">🛒</span>
+        .cart {
+            position: relative;
+        }
 
-            <div>
-                <small>عربة التسوق</small>
-                <strong>السلة</strong>
-            </div>
+        .cart-count {
+            position: absolute;
+            top: -7px;
+            right: -7px;
+            background: #e31d1a;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 11px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-            <b id="count">0</b>
+        /* ===== NAV ===== */
 
-        </a>
+        .nav {
+            background: #087f3f;
+            color: white;
+        }
 
-    </div>
+        .nav-inner {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            overflow-x: auto;
+        }
 
+        .nav a {
+            padding: 13px 18px;
+            white-space: nowrap;
+            font-size: 14px;
+        }
 
-    <!-- NAVIGATION -->
-    <div class="navigation">
+        .nav a:hover {
+            background: #066832;
+        }
 
-        <div class="container nav-inner">
+        .nav .special {
+            color: #ffd400;
+            font-weight: bold;
+        }
 
-            <a href="shop.html" class="categories-button">
-                ☰ جميع الأقسام
-            </a>
+        /* ===== HERO ===== */
 
-            <a href="index.html" class="active">
-                الرئيسية
-            </a>
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
 
-            <a href="shop.html">
-                المنتجات
-            </a>
+        .hero {
+            margin-top: 25px;
+            min-height: 330px;
+            border-radius: 18px;
+            overflow: hidden;
+            background:
+                linear-gradient(90deg, rgba(0,80,40,.95), rgba(0,128,64,.65)),
+                linear-gradient(135deg, #087f3f, #35a95f);
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 45px;
+            position: relative;
+        }
 
-            <a href="shop.html?cat=vegetables">
-                خضروات وفاكهة
-            </a>
+        .hero:after {
+            content: "🛒";
+            position: absolute;
+            left: 50px;
+            bottom: 10px;
+            font-size: 170px;
+            opacity: .15;
+        }
 
-            <a href="shop.html?cat=meat">
+        .hero-content {
+            max-width: 650px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero small {
+            color: #ffd400;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .hero h1 {
+            font-size: clamp(34px, 5vw, 58px);
+            margin: 10px 0;
+        }
+
+        .hero p {
+            font-size: 18px;
+            opacity: .95;
+            margin-bottom: 25px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 8px;
+            padding: 13px 25px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .btn-yellow {
+            background: #ffd400;
+            color: #222;
+        }
+
+        .btn-white {
+            background: white;
+            color: #087f3f;
+        }
+
+        /* ===== FEATURES ===== */
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 20px 0 35px;
+        }
+
+        .feature {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.05);
+        }
+
+        .feature-icon {
+            font-size: 29px;
+        }
+
+        .feature strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .feature span {
+            color: #777;
+            font-size: 12px;
+        }
+
+        /* ===== SECTION ===== */
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .section-title {
+            font-size: 25px;
+            color: #222;
+        }
+
+        .section-title span {
+            color: #087f3f;
+        }
+
+        .view-all {
+            color: #087f3f;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* ===== CATEGORIES ===== */
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+        }
+
+        .category {
+            background: white;
+            border-radius: 14px;
+            padding: 22px 15px;
+            text-align: center;
+            border: 1px solid #eee;
+            transition: .2s;
+        }
+
+        .category:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,.1);
+        }
+
+        .category-icon {
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 58px;
+        }
+
+        .category h3 {
+            margin-top: 10px;
+            color: #087f3f;
+            font-size: 17px;
+        }
+
+        .category p {
+            color: #888;
+            font-size: 12px;
+        }
+
+        /* ===== PRODUCTS ===== */
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .product {
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid #eee;
+            transition: .2s;
+            position: relative;
+        }
+
+        .product:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,.1);
+        }
+
+        .product-image {
+            height: 190px;
+            background: #f4f6f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-category {
+            font-size: 11px;
+            color: #888;
+        }
+
+        .product h3 {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        .product-price {
+            color: #087f3f;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .product-price small {
+            font-size: 11px;
+            color: #777;
+        }
+
+        .add-cart {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            background: #087f3f;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-weight: bold;
+        }
+
+        .add-cart:hover {
+            background: #066832;
+        }
+
+        /* ===== OFFER ===== */
+
+        .offer {
+            background: linear-gradient(135deg, #ffd400, #ffea63);
+            border-radius: 18px;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .offer h2 {
+            font-size: 30px;
+        }
+
+        .offer p {
+            margin-top: 5px;
+        }
+
+        .offer-icon {
+            font-size: 100px;
+        }
+
+        /* ===== FOOTER ===== */
+
+        footer {
+            background: #123b28;
+            color: white;
+            margin-top: 50px;
+        }
+
+        .footer-main {
+            max-width: 1200px;
+            margin: auto;
+            padding: 45px 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 35px;
+        }
+
+        footer h3 {
+            color: #ffd400;
+            margin-bottom: 15px;
+        }
+
+        footer p,
+        footer a {
+            color: #d8e5dd;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        footer a:hover {
+            color: #ffd400;
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,.12);
+            padding: 15px 20px;
+            text-align: center;
+            color: #b8c8bf;
+            font-size: 12px;
+        }
+
+        /* ===== MOBILE ===== */
+
+        @media (max-width: 900px) {
+
+            .header-main {
+                flex-wrap: wrap;
+            }
+
+            .logo {
+                min-width: auto;
+            }
+
+            .search {
+                order: 3;
+                flex-basis: 100%;
+            }
+
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .categories {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-main {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .top-inner {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .header-main {
+                padding: 12px;
+                gap: 10px;
+            }
+
+            .logo-text strong {
+                font-size: 19px;
+            }
+
+            .header-actions .login {
+                display: none;
+            }
+
+            .nav a {
+                padding: 11px 13px;
+                font-size: 13px;
+            }
+
+            .container {
+                padding: 0 12px;
+            }
+
+            .hero {
+                min-height: 390px;
+                padding: 30px 22px;
+            }
+
+            .hero h1 {
+                font-size: 35px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .features {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+
+            .feature {
+                padding: 12px 8px;
+            }
+
+            .feature-icon {
+                font-size: 23px;
+            }
+
+            .feature strong {
+                font-size: 12px;
+            }
+
+            .categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .product-image {
+                height: 140px;
+                font-size: 60px;
+            }
+
+            .product-info {
+                padding: 10px;
+            }
+
+            .product h3 {
+                font-size: 14px;
+            }
+
+            .product-price {
+                font-size: 17px;
+            }
+
+            .offer {
+                padding: 22px;
+            }
+
+            .offer            <a href="shop.html?cat=meat">
                 اللحوم والجزارة
             </a>
 
