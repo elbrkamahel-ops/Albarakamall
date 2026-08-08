@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color"
+          content="#00843d">
+
+    <title>سلة المشتريات | البركة مول</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+    <style>
+
+        .cart-page {
+            padding: 35px 0 60px;
+        }
+
+        .cart-title {
+            margin-bottom: 25px;
+        }
+
+        .cart-title span {
+            color: #00843d;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .cart-title h1 {
+            font-size: 30px;
+            margin-top: 5px;
+        }
+
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .cart-items {
+            background: white;
+            border: 1px solid #e7e7e7;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 100px 1fr auto;
+            gap: 18px;
+            align-items: center;
+            padding: 18px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item:last-child {
+            border-bottom: 0;
+        }
+
+        .cart-item-image {
+            width: 100px;
+            height: 100px;
+            display: grid;
+            place-items: center;
+            background: #f3f8f4;
+            border-radius: 12px;
+            font-size: 55px;
+        }
+
+        .cart-item-name {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-unit {
+            color: #888;
+            font-size: 12px;
+        }
+
+        .cart-item-price {
+            color: #00843d;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .quantity-control button {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 7px;
+            font-size: 18px;
+        }
+
+        .quantity-control button:hover {
+            background: #00843d;
+            color: white;
+            border-color: #00843d;
+        }
+
+        .quantity-value {
+            min-width: 25px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .cart-item-total {
+            color: #222;
+            font-size: 17px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .remove-item {
+            border: 0;
+            background: transparent;
+            color: #d33;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        .summary {
+            background: white;
+            border: 1px solid #e7e7e7;
+            border-radius: 14px;
+            padding: 22px;
+            position: sticky;
+            top: 120px;
+        }
+
+        .summary h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+
+        .summary-row.total {
+            border-top: 1px solid #eee;
+            margin-top: 10px;
+            padding-top: 18px;
+            font-size: 19px;
+            font-weight: bold;
+        }
+
+        .summary-row.total strong {
+            color: #00843d;
+        }
+
+        .checkout-button {
+            width: 100%;
+            min-height: 50px;
+            margin-top: 18px;
+            border: 0;
+            border-radius: 8px;
+            background: #00843d;
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .checkout-button:hover {
+            background: #006b31;
+        }
+
+        .continue-shopping {
+            display: block;
+            text-align: center;
+            color: #00843d;
+            font-size: 13px;
+            margin-top: 15px;
+        }
+
+        .empty-cart {
+            background: white;
+            border: 1px solid #e7e7e7;
+            border-radius: 14px;
+            padding: 70px 20px;
+            text-align: center;
+        }
+
+        .empty-cart-icon {
+            font-size: 70px;
+            margin-bottom: 15px;
+        }
+
+        .empty-cart h2 {
+            margin-bottom: 8px;
+        }
+
+        .empty-cart p {
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 22px;
+        }
+
+        .shop-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #00843d;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 800px) {
+
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .summary {
+                position: static;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .cart-page {
+                padding: 20px 0 40px;
+            }
+
+            .cart-title h1 {
+                font-size: 24px;
+            }
+
+            .cart-item {
+                grid-template-columns: 75px 1fr;
+                gap: 12px;
+            }
+
+            .cart-item-image {
+                width: 75px;
+                height: 75px;
+                font-size: 40px;
+            }
+
+            .cart-item-total {
+                grid-column: 2;
+                text-align: right;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<!-- TOP BAR -->
+
+<div class="top-bar">
+
+    <div class="container top-bar-inner">
+
+        <div class="top-right">
+            <span>
+                🚚 توصيل سريع حتى باب منزلك
+            </span>
+        </div>
+
+        <div class="top-left">
+            <span>
+                📞 01119511185
+            </span>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- HEADER -->
+
+<header class="main-header">
+
+    <div class="container header-main">
+
+        <a href="index.html"
+           class="logo">
+
+            <div class="logo-symbol">
+                🛒
+            </div>
+
+            <div class="logo-text">
+
+                <strong>
+                    البركة
+                </strong>
+
+                <small>
+                    مول
+                </small>
+
+            </div>
+
+        </a>
+
+
+        <div class="search-wrapper">
+
+            <input
+                id="searchInput"
+                type="search"
+                placeholder="ابحث عن منتج..."
+            >
+
+            <button
+                id="searchButton"
+                type="button"
+            >
+                🔍
+            </button>
+
+        </div>
+
+
+        <a href="login.html"
+           class="account-button">
+
+            <span class="account-icon">
+                👤
+            </span>
+
+            <span class="account-text">
+
+                <small>
+                    مرحبًا بك
+                </small>
+
+                <strong>
+                    تسجيل الدخول
+                </strong>
+
+            </span>
+
+        </a>
+
+
+        <a href="cart.html"
+           class="cart-button">
+
+            <span class="cart-icon">
+                🛒
+            </span>
+
+            <span class="cart-text">
+
+                <small>
+                    سلة المشتريات
+                </small>
+
+                <strong id="headerCartTotal">
+                    0 ج.م
+                </strong>
+
+            </span>
+
+            <span id="cartCount"
+                  class="cart-count">
+                0
+            </span>
+
+        </a>
+
+    </div>
+
+
+    <nav class="main-nav">
+
+        <div class="container nav-inner">
+
+            <a href="index.html"
+               class="categories-button">
+                ← العودة للمتجر
+            </a>
+
+            <div class="nav-links">
+
+                <a href="index.html">
+                    الرئيسية
+                </a>
+
+                <a href="index.html#offers">
+                    العروض 🔥
+                </a>
+
+                <a href="index.html#categories">
+                    الأقسام
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+<!-- CART -->
+
+<main class="cart-page">
+
+    <div class="container">
+
+        <div class="cart-title">
+
+            <span>
+                البركة مول
+            </span>
+
+            <h1>
+                سلة المشتريات 🛒
+            </h1>
+
+        </div>
+
+
+        <div id="cartContent">
+
+            <!-- سيتم بناء السلة بواسطة JavaScript -->
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+    <div class="container footer-grid">
+
+        <div class="footer-column footer-about">
+
+            <a href="index.html"
+               class="footer-logo">
+
+                🛒 البركة مول
+
+            </a>
+
+            <p>
+                كل احتياجات بيتك في مكان واحد.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                المتجر
+            </h3>
+
+            <a href="index.html">
+                الرئيسية
+            </a>
+
+            <a href="index.html#products">
+                المنتجات
+            </a>
+
+            <a href="index.html#offers">
+                العروض
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                خدمة العملاء
+            </h3>
+
+            <a href="#">
+                تواصل معنا
+            </a>
+
+            <a href="#">
+                الأسئلة الشائعة
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                تواصل معنا
+            </h3>
+
+            <p>
+                📞 01119511185
+            </p>
+
+            <p>
+                📍 مصر
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <div class="container">
+
+            <span>
+                © 2026 البركة مول
+            </span>
+
+            <span>
+                جميع الحقوق محفوظة
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script>
+
+    let cart =
+        JSON.parse(
+            localStorage.getItem("albarakaCart")
+        ) || [];
+
+
+    const cartContent =
+        document.getElementById(
+            "cartContent"
+        );
+
+
+    function formatPrice(price) {
+
+        return Number(price)
+            .toLocaleString("ar-EG")
+            + " ج.م";
+
+    }
+
+
+    function saveCart() {
+
+        localStorage.setItem(
+            "albarakaCart",
+            JSON.stringify(cart)
+        );
+
+    }
+
+
+    function renderCart() {
+
+        if (!cartContent) {
+            return;
+        }
+
+
+        if (cart.length === 0) {
+
+            cartContent.innerHTML = `
+
+                <div class="empty-cart">
+
+                    <div class="empty-cart-icon">
+                        🛒
+                    </div>
+
+                    <h2>
+                        السلة فارغة
+                    </h2>
+
+                    <p>
+                        لم تضف أي منتجات إلى السلة بعد.
+                    </p>
+
+                    <a
+                        href="index.html#products"
+                        class="shop-button"
+                    >
+                        ابدأ التسوق
+                    </a>
+
+                </div>
+
+            `;
+
+            updateHeader();
+
+            return;
+
+        }
+
+
+        let subtotal = 0;
+
+        let totalItems = 0;
+
+
+        cart.forEach(item => {
+
+            subtotal +=
+                item.price *
+                item.quantity;
+
+            totalItems +=
+                item.quantity;
+
+        });
+
+
+        const delivery =
+            subtotal >= 300
+                ? 0
+                : 25;
+
+
+        const total =
+            subtotal + delivery;
+
+
+        cartContent.innerHTML = `
+
+            <div class="cart-layout">
+
+
+                <div class="cart-items">
+
+                    ${cart.map(item => `
+
+                        <div
+                            class="cart-item"
+                            data-id="${item.id}"
+                        >
+
+                            <div class="cart-item-image">
+                                ${item.image}
+                            </div>
+
+
+                            <div>
+
+                                <h3 class="cart-item-name">
+                                    ${item.name}
+                                </h3>
+
+                                <div class="cart-item-unit">
+                                    ${item.unit}
+                                </div>
+
+                                <div class="cart-item-price">
+                                    ${formatPrice(item.price)}
+                                </div>
+
+
+                                <div class="quantity-control">
+
+                                    <button
+                                        type="button"
+                                        onclick="changeQuantity(${item.id}, -1)"
+                                    >
+                                        −
+                                    </button>
+
+                                    <span class="quantity-value">
+                                        ${item.quantity}
+                                    </span>
+
+                                    <button
+                                        type="button"
+                                        onclick="changeQuantity(${item.id}, 1)"
+                                    >
+                                        +
+                                    </button>
+
+                                </div>
+
+
+                                <button
+                                    type="button"
+                                    class="remove-item"
+                                    onclick="removeItem(${item.id})"
+                                >
+                                    حذف المنتج
+                                </button>
+
+                            </div>
+
+
+                            <div class="cart-item-total">
+                                ${formatPrice(
+                                    item.price *
+                                    item.quantity
+                                )}
+                            </div>
+
+                        </div>
+
+                    `).join("")}
+
+                </div>
+
+
+                <aside class="summary">
+
+                    <h2>
+                        ملخص الطلب
+                    </h2>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            عدد المنتجات
+                        </span>
+
+                        <strong>
+                            ${totalItems}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            المنتجات
+                        </span>
+
+                        <strong>
+                            ${formatPrice(subtotal)}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            التوصيل
+                        </span>
+
+                        <strong>
+
+                            ${
+                                delivery === 0
+                                ? "مجاني"
+                                : formatPrice(delivery)
+                            }
+
+                        </strong>
+
+                    </div>
+
+
+                    ${
+                        delivery > 0
+                        ?
+                        `
+                        <p style="
+                            color:#00843d;
+                            font-size:11px;
+                            margin-top:5px;
+                        ">
+                            أضف منتجات بقيمة
+                            ${formatPrice(300 - subtotal)}
+                            للحصول على توصيل مجاني.
+                        </p>
+                        `
+                        :
+                        ""
+                    }
+
+
+                    <div class="summary-row total">
+
+                        <span>
+                            الإجمالي
+                        </span>
+
+                        <strong>
+                            ${formatPrice(total)}
+                        </strong>
+
+                    </div>
+
+
+                    <button
+                        class="checkout-button"
+                        type="button"
+                        onclick="goToCheckout()"
+                    >
+                        متابعة لإتمام الطلب
+                    </button>
+
+
+                    <a
+                        href="index.html#products"
+                        class="continue-shopping"
+                    >
+                        ← متابعة التسوق
+                    </a>
+
+                </aside>
+
+            </div>
+
+        `;
+
+
+        updateHeader();
+
+    }
+
+
+    function changeQuantity(
+        id,
+        change
+    ) {
+
+        const item =
+            cart.find(
+                product =>
+                    product.id === id
+            );
+
+
+        if (!item) {
+            return;
+        }
+
+
+        item.quantity += change;
+
+
+        if (item.quantity <= 0) {
+
+            cart =
+                cart.filter(
+                    product =>
+                        product.id !== id
+                );
+
+        }
+
+
+        saveCart();
+
+        renderCart();
+
+    }
+
+
+    function removeItem(id) {
+
+        cart =
+            cart.filter(
+                item =>
+                    item.id !== id
+            );
+
+
+        saveCart();
+
+        renderCart();
+
+    }
+
+
+    function updateHeader() {
+
+        const count =
+            cart.reduce(
+                (sum, item) =>
+                    sum + item.quantity,
+                0
+            );
+
+
+        const total =
+            cart.reduce(
+                (sum, item) =>
+                    sum +
+                    item.price *
+                    item.quantity,
+                0
+            );
+
+
+        const countElement =
+            document.getElementById(
+                "cartCount"
+            );
+
+
+        const totalElement =
+            document.getElementById(
+                "headerCartTotal"
+            );
+
+
+        if (countElement) {
+            countElement.textContent =
+                count;
+        }
+
+
+        if (totalElement) {
+
+            totalElement.textContent =
+                formatPrice(total);
+
+        }
+
+    }
+
+
+    function goToCheckout() {
+
+        if (cart.length === 0) {
+            return;
+        }
+
+
+        window.location.href =
+            "checkout.html";
+
+    }
+
+
+    renderCart();
+
+</script>
+
+</body>
+
+  </html>
