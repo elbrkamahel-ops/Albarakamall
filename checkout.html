@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>إتمام الطلب | البركة مول</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .checkout-page {
+            padding: 35px 0 60px;
+        }
+
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 22px;
+            align-items: start;
+        }
+
+        .checkout-card,
+        .order-summary {
+            background: #fff;
+            border: 1px solid #e7e7e7;
+            border-radius: 14px;
+            padding: 24px;
+        }
+
+        .checkout-card h1,
+        .order-summary h2 {
+            margin-bottom: 22px;
+        }
+
+        .form-section {
+            margin-bottom: 28px;
+        }
+
+        .form-section h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            min-height: 45px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px 12px;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #00843d;
+        }
+
+        .payment-options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid #ddd;
+            border-radius: 9px;
+            padding: 14px;
+            cursor: pointer;
+        }
+
+        .payment-option:has(input:checked) {
+            border-color: #00843d;
+            background: #f0faf4;
+        }
+
+        .payment-option input {
+            accent-color: #00843d;
+        }
+
+        .payment-icon {
+            font-size: 25px;
+        }
+
+        .payment-text strong,
+        .payment-text span {
+            display: block;
+        }
+
+        .payment-text span {
+            color: #777;
+            font-size: 11px;
+        }
+
+        .order-summary {
+            position: sticky;
+            top: 120px;
+        }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-item-image {
+            width: 50px;
+            height: 50px;
+            display: grid;
+            place-items: center;
+            background: #f2f7f3;
+            border-radius: 8px;
+            font-size: 28px;
+        }
+
+        .order-item-info {
+            flex: 1;
+        }
+
+        .order-item-info strong {
+            display: block;
+            font-size: 12px;
+        }
+
+        .order-item-info span {
+            color: #777;
+            font-size: 11px;
+        }
+
+        .order-item-price {
+            color: #00843d;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .checkout-total {
+            margin-top: 18px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 7px 0;
+            font-size: 13px;
+        }
+
+        .total-row.final {
+            font-size: 19px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .total-row.final strong {
+            color: #00843d;
+        }
+
+        .place-order {
+            width: 100%;
+            min-height: 52px;
+            border: 0;
+            border-radius: 8px;
+            background: #00843d;
+            color: #fff;
+            font-weight: bold;
+            font-size: 15px;
+            margin-top: 18px;
+        }
+
+        .place-order:hover {
+            background: #006b31;
+        }
+
+        .secure-note {
+            text-align: center;
+            color: #777;
+            font-size: 11px;
+            margin-top: 12px;
+        }
+
+        .empty-checkout {
+            text-align: center;
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 14px;
+            padding: 60px 20px;
+        }
+
+        .empty-checkout div {
+            font-size: 60px;
+        }
+
+        .empty-checkout a {
+            display: inline-block;
+            margin-top: 18px;
+            background: #00843d;
+            color: #fff;
+            padding: 11px 22px;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 800px) {
+            .checkout-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+                position: static;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .checkout-page {
+                padding: 20px 0 40px;
+            }
+
+            .checkout-card,
+            .order-summary {
+                padding: 16px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="top-bar">
+    <div class="container top-bar-inner">
+        <div class="top-right">
+            <span>🚚 توصيل سريع حتى باب منزلك</span>
+        </div>
+
+        <div class="top-left">
+            <span>📞 01119511185</span>
+        </div>
+    </div>
+</div>
+
+
+<header class="main-header">
+
+    <div class="container header-main">
+
+        <a href="index.html" class="logo">
+            <div class="logo-symbol">🛒</div>
+
+            <div class="logo-text">
+                <strong>البركة</strong>
+                <small>مول</small>
+            </div>
+        </a>
+
+        <div class="search-wrapper">
+            <input
+                type="search"
+                placeholder="ابحث عن منتج..."
+            >
+
+            <button type="button">
+                🔍
+            </button>
+        </div>
+
+        <a href="login.html" class="account-button">
+            <span class="account-icon">👤</span>
+
+            <span class="account-text">
+                <small>مرحبًا بك</small>
+                <strong>تسجيل الدخول</strong>
+            </span>
+        </a>
+
+        <a href="cart.html" class="cart-button">
+            <span class="cart-icon">🛒</span>
+
+            <span class="cart-text">
+                <small>سلة المشتريات</small>
+                <strong id="headerTotal">0 ج.م</strong>
+            </span>
+
+            <span class="cart-count" id="headerCount">
+                0
+            </span>
+        </a>
+
+    </div>
+
+    <nav class="main-nav">
+
+        <div class="container nav-inner">
+
+            <a href="cart.html" class="categories-button">
+                ← العودة للسلة
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">الرئيسية</a>
+                <a href="index.html#offers">العروض 🔥</a>
+                <a href="index.html#categories">الأقسام</a>
+            </div>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+<main class="checkout-page">
+
+    <div class="container">
+
+        <div id="checkoutContent"></div>
+
+    </div>
+
+</main>
+
+
+<footer class="footer">
+
+    <div class="container footer-grid">
+
+        <div class="footer-column footer-about">
+
+            <a href="index.html" class="footer-logo">
+                🛒 البركة مول
+            </a>
+
+            <p>
+                كل احتياجات بيتك في مكان واحد.
+            </p>
+
+        </div>
+
+        <div class="footer-column">
+            <h3>المتجر</h3>
+            <a href="index.html">الرئيسية</a>
+            <a href="index.html#products">المنتجات</a>
+            <a href="index.html#offers">العروض</a>
+        </div>
+
+        <div class="footer-column">
+            <h3>خدمة العملاء</h3>
+            <a href="#">تواصل معنا</a>
+            <a href="#">الأسئلة الشائعة</a>
+        </div>
+
+        <div class="footer-column">
+            <h3>تواصل معنا</h3>
+            <p>📞 01119511185</p>
+            <p>📍 مصر</p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+        <div class="container">
+            <span>© 2026 البركة مول</span>
+            <span>جميع الحقوق محفوظة</span>
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script>
+
+const cart =
+    JSON.parse(
+        localStorage.getItem("albarakaCart")
+    ) || [];
+
+
+const content =
+    document.getElementById(
+        "checkoutContent"
+    );
+
+
+function price(value) {
+
+    return Number(value)
+        .toLocaleString("ar-EG")
+        + " ج.م";
+
+}
+
+
+function updateHeader() {
+
+    const count =
+        cart.reduce(
+            (sum, item) =>
+                sum + item.quantity,
+            0
+        );
+
+    const total =
+        cart.reduce(
+            (sum, item) =>
+                sum +
+                item.price *
+                item.quantity,
+            0
+        );
+
+    document.getElementById(
+        "headerCount"
+    ).textContent = count;
+
+    document.getElementById(
+        "headerTotal"
+    ).textContent = price(total);
+}
+
+
+function renderCheckout() {
+
+    if (cart.length === 0) {
+
+        content.innerHTML = `
+
+            <div class="empty-checkout">
+
+                <div>🛒</div>
+
+                <h2>
+                    السلة فارغة
+                </h2>
+
+                <p>
+                    أضف منتجات أولاً قبل إتمام الطلب.
+                </p>
+
+                <a href="index.html#products">
+                    العودة للتسوق
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    const subtotal =
+        cart.reduce(
+            (sum, item) =>
+                sum +
+                item.price *
+                item.quantity,
+            0
+        );
+
+
+    const delivery =
+        subtotal >= 300
+            ? 0
+            : 25;
+
+
+    const total =
+        subtotal + delivery;
+
+
+    content.innerHTML = `
+
+        <div class="checkout-layout">
+
+
+            <section class="checkout-card">
+
+                <h1>
+                    إتمام الطلب
+                </h1>
+
+
+                <form
+                    id="checkoutForm"
+                >
+
+
+                    <div class="form-section">
+
+                        <h2>
+                            📍 بيانات التوصيل
+                        </h2>
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+
+                                <label>
+                                    الاسم بالكامل *
+                                </label>
+
+                                <input
+                                    id="fullName"
+                                    type="text"
+                                    placeholder="اكتب اسمك"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    رقم الهاتف *
+                                </label>
+
+                                <input
+                                    id="phone"
+                                    type="tel"
+                                    placeholder="01xxxxxxxxx"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    المحافظة *
+                                </label>
+
+                                <select
+                                    id="governorate"
+                                    required
+                                >
+
+                                    <option value="">
+                                        اختر المحافظة
+                                    </option>
+
+                                    <option>
+                                        القاهرة
+                                    </option>
+
+                                    <option>
+                                        الجيزة
+                                    </option>
+
+                                    <option>
+                                        القليوبية
+                                    </option>
+
+                                    <option>
+                                        الإسكندرية
+                                    </option>
+
+                                    <option>
+                                        الشرقية
+                                    </option>
+
+                                    <option>
+                                        الدقهلية
+                                    </option>
+
+                                    <option>
+                                        البحيرة
+                                    </option>
+
+                                    <option>
+                                        الغربية
+                                    </option>
+
+                                    <option>
+                                        المنوفية
+                                    </option>
+
+                                    <option>
+                                        أخرى
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    المدينة *
+                                </label>
+
+                                <input
+                                    id="city"
+                                    type="text"
+                                    placeholder="المدينة"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group full">
+
+                                <label>
+                                    العنوان بالتفصيل *
+                                </label>
+
+                                <textarea
+                                    id="address"
+                                    placeholder="اسم الشارع، رقم المنزل، الدور..."
+                                    required
+                                ></textarea>
+
+                            </div>
+
+
+                            <div class="form-group full">
+
+                                <label>
+                                    ملاحظات الطلب
+                                </label>
+
+                                <textarea
+                                    id="notes"
+                                    placeholder="أي ملاحظات إضافية..."
+                                ></textarea>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-section">
+
+                        <h2>
+                            💳 طريقة الدفع
+                        </h2>
+
+
+                        <div class="payment-options">
+
+
+                            <label class="payment-option">
+
+                                <input
+                                    type="radio"
+                                    name="payment"
+                                    value="cash"
+                                    checked
+                                >
+
+                                <span class="payment-icon">
+                                    💵
+                                </span>
+
+                                <span class="payment-text">
+
+                                    <strong>
+                                        الدفع عند الاستلام
+                                    </strong>
+
+                                    <span>
+                                        ادفع عند وصول الطلب
+                                    </span>
+
+                                </span>
+
+                            </label>
+
+
+                            <label class="payment-option">
+
+                                <input
+                                    type="radio"
+                                    name="payment"
+                                    value="card"
+                                >
+
+                                <span class="payment-icon">
+                                    💳
+                                </span>
+
+                                <span class="payment-text">
+
+                                    <strong>
+                                        بطاقة بنكية
+                                    </strong>
+
+                                    <span>
+                                        سيتم ربط بوابة الدفع لاحقًا
+                                    </span>
+
+                                </span>
+
+                            </label>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="place-order"
+                    >
+                        تأكيد الطلب — ${price(total)}
+                    </button>
+
+
+                    <div class="secure-note">
+                        🔒 بياناتك محفوظة ولن يتم مشاركتها
+                    </div>
+
+                </form>
+
+            </section>
+
+
+            <aside class="order-summary">
+
+                <h2>
+                    ملخص الطلب
+                </h2>
+
+
+                <div>
+
+                    ${cart.map(item => `
+
+                        <div class="order-item">
+
+                            <div class="order-item-image">
+                                ${item.image}
+                            </div>
+
+                            <div class="order-item-info">
+
+                                <strong>
+                                    ${item.name}
+                                </strong>
+
+                                <span>
+                                    الكمية: ${item.quantity}
+                                </span>
+
+                            </div>
+
+                            <div class="order-item-price">
+                                ${price(
+                                    item.price *
+                                    item.quantity
+                                )}
+                            </div>
+
+                        </div>
+
+                    `).join("")}
+
+                </div>
+
+
+                <div class="checkout-total">
+
+                    <div class="total-row">
+
+                        <span>
+                            المنتجات
+                        </span>
+
+                        <strong>
+                            ${price(subtotal)}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="total-row">
+
+                        <span>
+                            التوصيل
+                        </span>
+
+                        <strong>
+                            ${
+                                delivery === 0
+                                ? "مجاني"
+                                : price(delivery)
+                            }
+                        </strong>
+
+                    </div>
+
+
+                    <div class="total-row final">
+
+                        <span>
+                            الإجمالي
+                        </span>
+
+                        <strong>
+                            ${price(total)}
+  </strong>
