@@ -1,111 +1,411 @@
-/* =========================================================
-   ALBARAKA MALL
-   style.css
-   تصميم متجر مول البركة
-   ========================================================= */
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{
+    box-sizing:border-box;
 }
 
-:root {
-  --primary: #087443;
-  --primary-dark: #045331;
-  --primary-light: #e9f8f0;
-  --accent: #f5b51b;
-  --danger: #d93636;
-  --text: #17231d;
-  --muted: #718078;
-  --white: #ffffff;
-  --bg: #f7faf8;
-  --border: #e3ebe6;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
-  --radius: 18px;
+:root{
+    --green:#087443;
+    --green-dark:#055b35;
+    --green-light:#eaf7f0;
+    --orange:#f5a400;
+    --red:#e53935;
+    --text:#17221d;
+    --muted:#6f7b75;
+    --border:#e4e9e6;
+    --bg:#f6f7f6;
+    --white:#fff;
 }
 
-html {
-  scroll-behavior: smooth;
+html{
+    scroll-behavior:smooth;
 }
 
-body {
-  font-family:
-    Tahoma,
-    Arial,
-    sans-serif;
-
-  direction: rtl;
-
-  background: var(--bg);
-
-  color: var(--text);
-
-  line-height: 1.6;
-
-  min-height: 100vh;
+body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Tahoma,Arial,sans-serif;
 }
 
-body.cart-open {
-  overflow: hidden;
+a{
+    color:inherit;
+    text-decoration:none;
 }
 
 button,
-input,
-select {
-  font-family: inherit;
+input{
+    font-family:inherit;
 }
 
-button {
-  cursor: pointer;
-  border: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-img {
-  max-width: 100%;
-  display: block;
+.container{
+    width:min(1220px,calc(100% - 30px));
+    margin:auto;
 }
 
 
-/* =========================================================
-   CONTAINER
-   ========================================================= */
+/* ================= TOP BAR ================= */
 
-.container {
-  width: min(1180px, calc(100% - 32px));
-  margin: auto;
+.top-bar{
+    background:#f1f5f2;
+    border-bottom:1px solid var(--border);
+    font-size:12px;
+    color:#52605a;
+}
+
+.top-bar-inner{
+    min-height:34px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
 
-/* =========================================================
-   TOP BAR
-   ========================================================= */
+/* ================= HEADER ================= */
 
-.top-bar {
-  background: var(--primary-dark);
-  color: #fff;
-  font-size: 13px;
+.header{
+    background:#fff;
 }
 
-.top-bar .container {
-  min-height: 38px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 15px;
+.header-main{
+    min-height:86px;
+    display:flex;
+    align-items:center;
+    gap:25px;
 }
 
-.top-info {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+
+/* LOGO */
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    min-width:205px;
+}
+
+.logo-symbol{
+    width:58px;
+    height:58px;
+    border-radius:16px;
+    background:var(--green);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:13px;
+    font-weight:900;
+    box-shadow:0 6px 18px rgba(8,116,67,.2);
+}
+
+.logo-name{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+.logo-name strong{
+    font-size:20px;
+}
+
+.logo-name small{
+    color:var(--muted);
+    font-size:11px;
+}
+
+
+/* SEARCH */
+
+.search-box{
+    flex:1;
+    height:48px;
+    display:flex;
+    border:2px solid var(--green);
+    border-radius:10px;
+    overflow:hidden;
+    background:#fff;
+}
+
+.search-box input{
+    flex:1;
+    border:0;
+    outline:0;
+    padding:0 17px;
+    font-size:14px;
+    background:#fff;
+}
+
+.search-box button{
+    width:58px;
+    border:0;
+    background:var(--green);
+    color:#fff;
+    cursor:pointer;
+    font-size:20px;
+}
+
+.search-box button:hover{
+    background:var(--green-dark);
+}
+
+
+/* ACCOUNT */
+
+.header-account,
+.header-cart{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    position:relative;
+    white-space:nowrap;
+}
+
+.header-account small,
+.header-cart small{
+    display:block;
+    color:#7b8580;
+    font-size:10px;
+    margin-bottom:3px;
+}
+
+.header-account strong,
+.header-cart strong{
+    font-size:13px;
+}
+
+.account-icon,
+.cart-icon{
+    width:40px;
+    height:40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:var(--green-light);
+    font-size:19px;
+}
+
+.header-cart b{
+    position:absolute;
+    right:-7px;
+    top:-8px;
+    min-width:19px;
+    height:19px;
+    padding:2px 5px;
+    border-radius:20px;
+    background:var(--orange);
+    color:#fff;
+    text-align:center;
+    font-size:10px;
+}
+
+
+/* ================= NAVIGATION ================= */
+
+.navigation{
+    background:var(--green);
+    color:#fff;
+}
+
+.nav-inner{
+    min-height:48px;
+    display:flex;
+    align-items:center;
+    gap:0;
+    overflow:auto;
+}
+
+.nav-inner a{
+    height:48px;
+    display:flex;
+    align-items:center;
+    padding:0 17px;
+    font-size:13px;
+    font-weight:700;
+    white-space:nowrap;
+    transition:.2s;
+}
+
+.nav-inner a:hover,
+.nav-inner a.active{
+    background:var(--green-dark);
+}
+
+.categories-button{
+    background:var(--green-dark);
+}
+
+.nav-inner .offers{
+    color:#ffe37b;
+}
+
+
+/* ================= HERO ================= */
+
+.hero-section{
+    min-height:390px;
+    margin-top:20px;
+    border-radius:20px;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:relative;
+    background:
+        linear-gradient(
+            110deg,
+            #e9f8ef 0%,
+            #f4fbf6 55%,
+            #fff4d6 100%
+        );
+}
+
+.hero-content{
+    width:54%;
+    padding:50px 55px;
+    position:relative;
+    z-index:2;
+}
+
+.hero-label{
+    display:inline-block;
+    padding:8px 13px;
+    border-radius:20px;
+    background:#fff;
+    color:var(--green);
+    font-size:12px;
+    font-weight:900;
+    box-shadow:0 4px 15px rgba(0,0,0,.05);
+}
+
+.hero-content h1{
+    font-size:44px;
+    line-height:1.35;
+    margin:18px 0 12px;
+}
+
+.hero-content h1 span{
+    color:var(--green);
+}
+
+.hero-content p{
+    color:#64716a;
+    max-width:570px;
+    line-height:2;
+    font-size:15px;
+}
+
+.hero-actions{
+    display:flex;
+    gap:10px;
+    margin-top:25px;
+}
+
+.primary-btn,
+.outline-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:45px;
+    padding:0 22px;
+    border-radius:9px;
+    font-weight:900;
+    font-size:13px;
+}
+
+.primary-btn{
+    color:#fff;
+    background:var(--green);
+}
+
+.primary-btn:hover{
+    background:var(--green-dark);
+}
+
+.outline-btn{
+    background:#fff;
+    border:1px solid #d9e3dd;
+}
+
+.hero-points{
+    display:flex;
+    gap:18px;
+    margin-top:23px;
+    color:#536159;
+    font-size:11px;
+    font-weight:700;
+}
+
+.hero-products{
+    width:46%;
+    height:390px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.hero-circle{
+    width:285px;
+    height:285px;
+    border-radius:50%;
+    background:#d7eedf;
+    position:absolute;
+}
+
+.hero-shopping{
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:#fff;
+    position:relative;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:90px;
+    box-shadow:0 20px 50px rgba(0,0,0,.08);
+}
+
+.food{
+    position:absolute;
+    z-index:3;
+    font-size:58px;
+    filter:drop-shadow(0 8px 7px rgba(0,0,0,.12));
+}
+
+.food-1{
+    top:60px;
+    right:70px;
+}
+
+.food-2{
+    top:105px;
+    left:55px;
+}
+
+.food-3{
+    bottom:55px;
+    right:60px;
+}
+
+.food-4{
+    bottom:85px;
+    left:75px;
+}
+
+
+/* ================= BENEFITS ================= */
+
+.benefits{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    background:#fff;
+    margin-top:16px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    overflow:hidden;
+}
+
+.benef  flex-wrap: wrap;
 }
 
 
