@@ -1,3 +1,4 @@
+
 name: Build Mol Albaraka APK
 
 on:
@@ -17,16 +18,29 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      - name: Extract Android project
+        run: |
+          mkdir -p android-project
+          unzip -q ./*.zip -d android-project
+
+      - name: Find Android project
+        run: |
+          PROJECT_DIR=$(dirname "$(find android-project -type f \( -name settings.gradle -o -name settings.gradle.kts \) | head -n 1)")
+          echo "PROJECT_DIR=$PROJECT_DIR" >> "$GITHUB_ENV"
+          echo "Android project: $PROJECT_DIR"
+
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
 
       - name: Build APK
-        run: gradle --no-daemon :app:assembleDebug
+        run: |
+          cd "$PROJECT_DIR"
+          gradle --no-daemon :app:assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: Mol-Albaraka-APK
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: '${{ env.PROJECT_DIR }}/app/build/outputs/apk/debug/app-debug.apk'
