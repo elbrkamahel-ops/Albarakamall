@@ -1,8 +1,11 @@
-
 name: Build Mol Albaraka APK
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - "**.zip"
+      - ".github/workflows/build-android.yml"
 
 jobs:
   build:
@@ -16,31 +19,78 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: "17"
+          cache: gradle
+
+      - name: Find Android ZIP
+        id: zip
+        shell: bash
+        run: |
+          set -e
+
+          ZIP_FILE="$(find . -maxdepth 1 -type f -iname '*.zip' | head -n 1)"
+
+          if [ -z "$ZIP_FILE" ]; then
+            echo "ERROR: No Android ZIP file found in repository root."
+            exit 1
+          fi
+
+          echo "Found ZIP: $ZIP_FILE"
+          echo "zip_file=$ZIP_FILE" >> "$GITHUB_OUTPUT"
 
       - name: Extract Android project
+        shell: bash
         run: |
+          set -e
+
+          rm -rf android-project
           mkdir -p android-project
-          unzip -q ./*.zip -d android-project
 
-      - name: Find Android project
+          unzip -q "${{ steps.zip.outputs.zip_file }}" -d android-project
+
+          echo "Extracted files:"
+          find android-project -maxdepth 3 -type f | head -100
+
+      - name: Find Gradle project
+        id: project
+        shell: bash
         run: |
-          PROJECT_DIR=$(dirname "$(find android-project -type f \( -name settings.gradle -o -name settings.gradle.kts \) | head -n 1)")
-          echo "PROJECT_DIR=$PROJECT_DIR" >> "$GITHUB_ENV"
-          echo "Android project: $PROJECT_DIR"
+          set -e
 
-      - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.9'
+          SETTINGS_FILE="$(find android-project \
+            -type f \
+              -name 'settings.gradle' \
+              -o -name 'settings.gradle.kts' \
+            \
+            -print -quit)"
 
-      - name: Build APK
+          if [ -z "$SETTINGS_FILE" ]; then
+            echo "ERROR: settings.gradle or settings.gradle.kts was not found."
+            echo "ZIP contents:"
+            find android-project -maxdepth 5 -type f
+            exit 1
+          fi
+
+          PROJECT_DIR="$(dirname "$SETTINGS_FILE")"
+
+          echo "Android project found at:"
+          echo "$PROJECT_DIR"
+
+          echo "project_dir=$PROJECT_DIR" >> "$GITHUB_OUTPUT"
+
+      - name: Check Android project
+        shell: bash
         run: |
-          cd "$PROJECT_DIR"
-          gradle --no-daemon :app:assembleDebug
+          set -e
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: Mol-Albaraka-APK
-          path: '${{ env.PROJECT_DIR }}/app/build/outputs/apk/debug/app-debug.apk'
+          cd "${{ steps.project.outputs.project_dir }}"
+
+          echo "Project directory:"
+          pwd
+
+          echo
+          echo "Project files:"
+          ls -la
+
+          echo
+          echo "Grad
